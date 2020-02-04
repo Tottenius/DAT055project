@@ -1,6 +1,5 @@
 package viewer;
 
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,22 +15,18 @@ public class Asset extends JLabel {
 	private int y;
 	private String path;
 	private ImageIcon icon;
-
-	
-	public int getSize1() {
-		return size;
-	}
 	
     public Asset(int x, int y, String path) {
         this.x = x;
         this.y = y;
-        this.setBounds(x, y, getSize1(), getSize1());
+        this.setBounds(x, y, size, size);
         loadImage(path);
     }
     
     private void loadImage(String path) {
     	BufferedImage bImg = null;
     	Image resizeImg;
+    	// Try to load image
 		try {
     	     bImg = ImageIO.read(new File(path));
     	} catch (IOException e) {
