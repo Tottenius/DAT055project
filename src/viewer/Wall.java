@@ -10,18 +10,14 @@ import javax.swing.ImageIcon;
 
 public class Wall extends Asset{
 	
-    private ImageIcon image;
-    private BufferedImage img;
-    private Image resizeImg;
+	private static final String path = "src/assets/wall.png";
 
     public Wall(int x, int y) {
-        super(x, y);
-        initWall();
-      //  System.out.println( "x = " + x +" y = " + y );
+        super(x, y, path);
     }
     
 
-
+/*
 	private void initWall() {
     	
 		//load image
@@ -42,4 +38,5 @@ public class Wall extends Asset{
       
         
     }
+    */
 }
