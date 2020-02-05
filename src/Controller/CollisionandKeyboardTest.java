@@ -52,7 +52,7 @@ public class CollisionandKeyboardTest extends JPanel  {
      frame.pack();
      frame.setLocationRelativeTo(null);
  
-     //adding the keylistener
+     //adding the keylisteners
      frame.addKeyListener(new keyLis());
      frame.setFocusable(true);
     
