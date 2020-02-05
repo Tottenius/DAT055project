@@ -8,7 +8,7 @@ public class Player extends Asset {
 	
 	private Image img;
 	
-	public Player(int x, int y, String path) {
+	public Player(int x, int y) {
 		super(x, y, path);
 		
 	}

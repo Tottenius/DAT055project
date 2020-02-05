@@ -36,6 +36,7 @@ public class GamePanel extends JPanel{
     Wall wall = new Wall( x, y);
     Tile tile = new Tile( x, y);
     Treasure treasure = new Treasure( x, y);
+    Player player = new Player(x,y);
     
     public void readInlevel( String path) {
         //System.out.println("current working directory is: " + System.getProperty("user.dir"));
@@ -53,6 +54,13 @@ public class GamePanel extends JPanel{
 		for (int i = 0; i < level.length(); i++){
 			//System.out.println(level.charAt(i));
 		    assetSymbol = level.charAt(i);    
+		    
+		  //Load in player asset
+		    if( assetSymbol == 'p') {
+				g.drawImage(player.getImage(), x, y,this);
+				 x= x+ SPACE;
+			   }
+		    
 		    //Load in wall assets
 		   if( assetSymbol == '#') {
 			   g.drawImage(wall.getImage(), x, y,this);
@@ -115,11 +123,15 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_W:
                 	
                     System.out.println("Moved Up");
-                    StringBuilder leveltemp = new StringBuilder(level);
-                    leveltemp.setCharAt(0, 't');
-                    level =  leveltemp.toString();
+                    
+                    PlayerMoveUp();
+                    
+                    //vi flyttar detta till egen metod 
+                 //   StringBuilder leveltemp = new StringBuilder(level);
+                  //  leveltemp.setCharAt(0, 't');
+                  //  level =  leveltemp.toString();
                     //System.out.println(level);
-                    repaint();
+                  //  repaint();
                     
                     
                     
@@ -199,6 +211,39 @@ public class GamePanel extends JPanel{
             //repaint(); // TO redraw everything because we have moved something, we will repaint even if nothing happens but not that big of a deal 
         }	
 	}
+	
+	// Usefull method give us the location of the player at any current time
+	private int PlayerLocation() {
+		
+		for (int i = 0; i < level.length(); i++){
+		
+			if(level.charAt(i) == 'p') 
+				return i;
+			
+		}
+		return 0 ; //this mean player can never be at zero but we can change this later
+	}
+	
+	//work on this after cordinate system has been done by tor bara en ful test 
+	private void PlayerMoveUp(){
+		
+		//System.out.println(level.length());
+		int firstplayerpos = PlayerLocation();
+          
+		StringBuilder leveltemp = new StringBuilder(level);
+          char temp = level.charAt(firstplayerpos -36); //here is where we would check what is forward of him, posfsible a chest or pushing something
+          leveltemp.setCharAt(firstplayerpos - 36, 'p'); //36 is not always right NEEDS TO BE FIXED GENERALLISED TO A FORMULA
+          level =  leveltemp.toString();
+          leveltemp.setCharAt(firstplayerpos, temp);
+          level =  leveltemp.toString();
+         // System.out.println(level);
+          repaint();
+		
+		
+		
+		
+	}
+	
 /*
  * 
  * 
