@@ -32,6 +32,10 @@ public class GamePanel extends JPanel{
     //level paths
     String level = "";
     String level1 = "src/levels/level1.txt";
+    //Our assets
+    Wall wall = new Wall( x, y);
+    Tile tile = new Tile( x, y);
+    Treasure treasure = new Treasure( x, y);
     
     public void readInlevel( String path) {
         //System.out.println("current working directory is: " + System.getProperty("user.dir"));
@@ -44,23 +48,24 @@ public class GamePanel extends JPanel{
       }
 
 	private void initWorld(Graphics g) {
+		System.out.println("Hej initWorld");
 
 		for (int i = 0; i < level.length(); i++){
 			//System.out.println(level.charAt(i));
 		    assetSymbol = level.charAt(i);    
 		    //Load in wall assets
 		   if( assetSymbol == '#') {
-			   g.drawImage(new Wall( x, y).getImage(), x, y,this);
+			   g.drawImage(wall.getImage(), x, y,this);
 			   x= x+ SPACE;
 		   }
 		   //Load in tile assets
 		   else if( assetSymbol == ' ') {
-			   g.drawImage(new Tile( x, y).getImage(), x, y,this);
+			   g.drawImage(tile.getImage(), x, y,this);
 			   x= x+ SPACE;
 		   }
 		   //Load in treasures
 		   else if( assetSymbol == 't') {
-			   g.drawImage(new Treasure( x, y).getImage(), x, y,this);
+			   g.drawImage(treasure.getImage(), x, y,this);
 			   x= x+ SPACE;
 		   }
 		   // new row of Assets
@@ -70,6 +75,8 @@ public class GamePanel extends JPanel{
 		   }
 			   
 		}
+		y = 0;
+		x= 0;
 
     }
 	/*
@@ -82,8 +89,9 @@ public class GamePanel extends JPanel{
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        System.out.println("vi kommer hit igen och igen");
         initWorld(g);
+        
     }
 	
 	
@@ -107,6 +115,13 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_W:
                 	
                     System.out.println("Moved Up");
+                    StringBuilder leveltemp = new StringBuilder(level);
+                    leveltemp.setCharAt(0, 't');
+                    level =  leveltemp.toString();
+                    //System.out.println(level);
+                    repaint();
+                    
+                    
                     
                     //test
                    // ball1.move(10,10);
@@ -181,7 +196,7 @@ public class GamePanel extends JPanel{
             }
             System.out.println("inside repaint");
             //System.out.println(ball1.giveX());
-            repaint(); // TO redraw everything because we have moved something, we will repaint even if nothing happens but not that big of a deal 
+            //repaint(); // TO redraw everything because we have moved something, we will repaint even if nothing happens but not that big of a deal 
         }	
 	}
 /*

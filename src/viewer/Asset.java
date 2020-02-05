@@ -46,6 +46,7 @@ public class Asset {
     
     private void loadImage(String path) {
     	//try to get image
+    	Image imgTemp;
     	img = null;
     	try {
     		img = ImageIO.read(new File(path));
@@ -54,8 +55,8 @@ public class Asset {
     		e.printStackTrace();
 		}
     	// den går till sig själv, kanske inte går
-    	img = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
-    	
+    	imgTemp = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
+    	img = imgTemp;
     }
     
     
