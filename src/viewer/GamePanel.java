@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -85,11 +87,146 @@ public class GamePanel extends JPanel{
     }
 	
 	
+	private class keyLis extends KeyAdapter{
+	
+		
+		public void keyPressed(KeyEvent e) {
+
+			System.out.println("inside keylist class");
+			
+       //If game is completed then keyInputs are ignored
+        /*	if (Completed) {   
+                return;
+            }*/
+
+            int input = e.getKeyCode();
+
+            switch (input) {
+                
+                case KeyEvent.VK_UP:
+                case KeyEvent.VK_W:
+                	
+                    System.out.println("Moved Up");
+                    
+                    //test
+                   // ball1.move(10,10);
+                    
+                	
+                /*	 if (checkCollisions()) {    //if we collied with wall or other object than do nothing
+                    return;
+                } */
+                
+                	// player.move(); 				//Method to move character if no collision
+                    
+                    break;
+                    
+                    
+                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_S:
+   
+                    System.out.println("Moved Down");
+
+                	
+                	/* if (checkCollisions()) {    //if we collied with wall or other object than do nothing
+                    return;
+                } */
+                
+                	// player.move(); 			//Method to move character if no collision
+                    
+                    break;
+                    
+                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_D:	
+                   
+                	System.out.println("Moved right");
+
+                	
+                 /*    if (checkCollisions()) {    //if we collied with wall or other object than do nothing
+                    return;
+                }
+                */
+                	// player.move();			//Method to move character if no collision
+                    
+                    break;
+                    
+                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_A:
+                	
+                  System.out.println("Moved Left");
+                	
+                /*	 if (checkCollisions()) {    //if we collied with wall or other object than do nothing
+                        return;
+                    } */
+                    
+                	// player.move(); 			//Method to move character if no collision
+                    
+                    break;
+                    
+                case KeyEvent.VK_X: 		 //Change x to be button to reset level, most intuitively 'R'
+                    
+                  
+                	// resetLevel(); 		//Written resetLevel Method
+                    
+                    break;
+                    
+                case KeyEvent.VK_ESCAPE: 		//Esc button
+                	 
+                	//openMenu(); 			  //Possible method to open menu
+                	
+                	break;
+                    
+                    
+                default:
+                    break;
+            }
+            System.out.println("inside repaint");
+            //System.out.println(ball1.giveX());
+            repaint(); // TO redraw everything because we have moved something, we will repaint even if nothing happens but not that big of a deal 
+        }	
+	}
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * */
+        
+        /*
+    private boolean checkCollisions() {
+
+        Rectangle rectangle1 = player.getBounds(); // player and objects need an getBounds method 
+
+        for (Player player : players) {
+            
+            Rectangle rectangle2 = object.getBounds();
+
+            if (rectangle1.intersects(rectangle2) ) {
+                
+            	return true; //A collison will happen!
+            }
+        }
+    }
+
+	
+    //This method can be shared by all actors, players and objects, add to main class/interface etc..
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
+    */
+   
+	
 	public GamePanel(){
 		this.setPreferredSize(new Dimension ( width, height));
 		this.setLayout(null);
 		readInlevel(level1);
 		this.setVisible(true);
+		//adding the keylistener
+	    this.addKeyListener(new keyLis());
+	    this.setFocusable(true);
 	
 		
 	}
