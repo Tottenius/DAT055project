@@ -7,7 +7,64 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+public class Asset {
 
+	private final static int size = 20;
+    private int x = 0;
+    private int y = 0;
+    private String path;
+    private Image img;
+
+
+    public Asset(int x, int y, String path) {
+        this.x = x;
+        this.y = y;
+        loadImage(path);
+    }
+
+    public int giveX() {
+
+        return x;
+    }
+
+    public int giveY() {
+
+        return y;
+    }
+    
+    public void setX(int x) {
+        this.x = x;
+    }
+    
+    public void setY(int y) {
+        this.y = y;
+    }
+    
+    public Image getImage() {
+    	return img;
+    }
+    
+    private void loadImage(String path) {
+    	//try to get image
+    	img = null;
+    	try {
+    		img = ImageIO.read(new File(path));
+    		}
+    	catch (IOException e) {
+    		e.printStackTrace();
+		}
+    	// den går till sig själv, kanske inte går
+    	img = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
+    	
+    }
+    
+    
+    	
+    	
+    
+}
+
+/*
 public class Asset extends JLabel {
 	
 	private final static int size = 20;
@@ -22,6 +79,8 @@ public class Asset extends JLabel {
         this.setBounds(x, y, size, size);
         loadImage(path);
     }
+    
+    
     
     private void loadImage(String path) {
     	BufferedImage bImg = null;
@@ -45,3 +104,4 @@ public class Asset extends JLabel {
 
 	
 }
+*/

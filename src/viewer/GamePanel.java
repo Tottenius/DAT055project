@@ -12,9 +12,13 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 public class GamePanel extends JPanel{
 
-	
+	// list with assets
+	private ArrayList<Asset> assets;
 	private static final int width = 640;
 	private static final int height = 480;
 	// Size of an asset
@@ -28,7 +32,7 @@ public class GamePanel extends JPanel{
     String level1 = "src/levels/level1.txt";
     
     public void readInlevel( String path) {
-        System.out.println("current working directory is: " + System.getProperty("user.dir"));
+        //System.out.println("current working directory is: " + System.getProperty("user.dir"));
         try {
             level = new String(Files.readAllBytes(Paths.get(path)));
         }
@@ -37,45 +41,57 @@ public class GamePanel extends JPanel{
         }
       }
 
-	private void init() {
-		this.setPreferredSize(new Dimension ( width, height));
-		this.setLayout(null);
-		
+	private void initWorld(Graphics g) {
+
 		for (int i = 0; i < level.length(); i++){
 			//System.out.println(level.charAt(i));
 		    assetSymbol = level.charAt(i);    
 		    //Load in wall assets
 		   if( assetSymbol == '#') {
-			   this.add(new Wall(x, y)).setLocation(x, y);
-			   x = x + SPACE;
+			   g.drawImage(new Wall( x, y).getImage(), x, y,this);
+			   x= x+ SPACE;
 		   }
 		   //Load in tile assets
 		   else if( assetSymbol == ' ') {
-			  // assets.add( new Tile(x, y));
-			   this.add(new Tile(x, y)).setLocation(x, y);
-			   x = x + SPACE;
+			   g.drawImage(new Tile( x, y).getImage(), x, y,this);
+			   x= x+ SPACE;
 		   }
 		   //Load in treasures
 		   else if( assetSymbol == 't') {
-			  // assets.add( new Tile(x, y));
-			   this.add(new Treasure(x, y)).setLocation(x, y);
-			   x = x + SPACE;
+			   g.drawImage(new Treasure( x, y).getImage(), x, y,this);
+			   x= x+ SPACE;
 		   }
 		   // new row of Assets
 		   else if (assetSymbol =='\n') {
 			   y = y + SPACE;
 			   x = 0;
 		   }
-
 			   
 		}
+
+    }
+	/*
+	private void moveObject(int x, int y) {
+		int pos = x %((width/SPACE))+ y%(height/SPACE);
 		
-		this.setVisible(true);
+		
+	}
+	*/
+	@Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        initWorld(g);
     }
 	
+	
 	public GamePanel(){
+		this.setPreferredSize(new Dimension ( width, height));
+		this.setLayout(null);
 		readInlevel(level1);
-		init();
+		this.setVisible(true);
+	
+		
 	}
 
 }
