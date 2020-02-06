@@ -25,7 +25,7 @@ public class GamePanel extends JPanel{
 		LEFT,
 		RIGHT
 	}
-
+	//test
 	// list with assets
 	private ArrayList<Asset> assets;
 	private static final int width = 640;
