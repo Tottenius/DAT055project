@@ -18,6 +18,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class GamePanel extends JPanel{
+	//Directions
+	private enum Direction{
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT
+	}
 
 	// list with assets
 	private ArrayList<Asset> assets;
@@ -124,7 +131,7 @@ public class GamePanel extends JPanel{
                 	
                     System.out.println("Moved Up");
                     
-                    PlayerMoveUp();
+                    moveDirection(Direction.UP, 'p');
                     
                     //vi flyttar detta till egen metod 
                  //   StringBuilder leveltemp = new StringBuilder(level);
@@ -152,6 +159,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_S:
    
                     System.out.println("Moved Down");
+                    moveDirection(Direction.DOWN, 'p');
 
                 	
                 	/* if (checkCollisions()) {    //if we collied with wall or other object than do nothing
@@ -166,6 +174,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_D:	
                    
                 	System.out.println("Moved right");
+                	moveDirection(Direction.RIGHT, 'p');
 
                 	
                  /*    if (checkCollisions()) {    //if we collied with wall or other object than do nothing
@@ -180,6 +189,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_A:
                 	
                   System.out.println("Moved Left");
+                  moveDirection(Direction.LEFT, 'p');
                 	
                 /*	 if (checkCollisions()) {    //if we collied with wall or other object than do nothing
                         return;
@@ -222,6 +232,47 @@ public class GamePanel extends JPanel{
 			
 		}
 		return 0 ; //this mean player can never be at zero but we can change this later
+	}
+	
+	private void moveDirection( Direction direction, char a) {
+		// Right now just player pos
+		int firstplayerpos = PlayerLocation();
+		if(direction == Direction.UP ) {
+			level = moveObeject( level, a, firstplayerpos - (width/SPACE)-4, firstplayerpos );
+			
+		}
+		if(direction == Direction.DOWN ) {
+			level = moveObeject( level, a, firstplayerpos + (width/SPACE)-4, firstplayerpos );
+			
+		}
+		if(direction == Direction.LEFT ) {
+			level = moveObeject( level, a, firstplayerpos - 1, firstplayerpos );
+			
+		}
+		if(direction == Direction.RIGHT ) {
+			level = moveObeject( level, a, firstplayerpos + 1, firstplayerpos );
+			
+		}
+		repaint();
+		
+		
+	}
+	
+	//For moving movable objects and players
+	private String moveObeject(String s, char asset, int newPos, int oldPos) {
+		char temp = s.charAt(newPos);
+		String tempString = s;
+		if(temp != '#') {
+			StringBuilder leveltemp = new StringBuilder(s);
+			//Asset at new pos
+			leveltemp.setCharAt(newPos, asset);
+			//Old asset at objects former pos
+			leveltemp.setCharAt(oldPos,temp);
+			// rebuild to string
+			tempString =  leveltemp.toString();
+		}
+		
+		return tempString;
 	}
 	
 	//work on this after cordinate system has been done by tor bara en ful test 
