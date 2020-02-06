@@ -94,13 +94,8 @@ public class GamePanel extends JPanel{
 		x= 0;
 
     }
-	/*
-	private void moveObject(int x, int y) {
-		int pos = x %((width/SPACE))+ y%(height/SPACE);
-		
-		
-	}
-	*/
+
+	
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -132,26 +127,7 @@ public class GamePanel extends JPanel{
                     System.out.println("Moved Up");
                     
                     moveDirection(Direction.UP, 'p');
-                    
-                    //vi flyttar detta till egen metod 
-                 //   StringBuilder leveltemp = new StringBuilder(level);
-                  //  leveltemp.setCharAt(0, 't');
-                  //  level =  leveltemp.toString();
-                    //System.out.println(level);
-                  //  repaint();
-                    
-                    
-                    
-                    //test
-                   // ball1.move(10,10);
-                    
-                	
-                /*	 if (checkCollisions()) {    //if we collied with wall or other object than do nothing
-                    return;
-                } */
                 
-                	// player.move(); 				//Method to move character if no collision
-                    
                     break;
                     
                     
@@ -217,8 +193,6 @@ public class GamePanel extends JPanel{
                     break;
             }
             System.out.println("inside repaint");
-            //System.out.println(ball1.giveX());
-            //repaint(); // TO redraw everything because we have moved something, we will repaint even if nothing happens but not that big of a deal 
         }	
 	}
 	
@@ -275,61 +249,7 @@ public class GamePanel extends JPanel{
 		return tempString;
 	}
 	
-	//work on this after cordinate system has been done by tor bara en ful test 
-	private void PlayerMoveUp(){
-		
-		//System.out.println(level.length());
-		int firstplayerpos = PlayerLocation();
-          
-		StringBuilder leveltemp = new StringBuilder(level);
-          char temp = level.charAt(firstplayerpos -36); //here is where we would check what is forward of him, posfsible a chest or pushing something
-          leveltemp.setCharAt(firstplayerpos - 36, 'p'); //36 is not always right NEEDS TO BE FIXED GENERALLISED TO A FORMULA
-          level =  leveltemp.toString();
-          leveltemp.setCharAt(firstplayerpos, temp);
-          level =  leveltemp.toString();
-         // System.out.println(level);
-          repaint();
-		
-		
-		
-		
-	}
-	
-/*
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * */
-        
-        /*
-    private boolean checkCollisions() {
 
-        Rectangle rectangle1 = player.getBounds(); // player and objects need an getBounds method 
-
-        for (Player player : players) {
-            
-            Rectangle rectangle2 = object.getBounds();
-
-            if (rectangle1.intersects(rectangle2) ) {
-                
-            	return true; //A collison will happen!
-            }
-        }
-    }
-
-	
-    //This method can be shared by all actors, players and objects, add to main class/interface etc..
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
-    }
-    */
-   
-	
 	public GamePanel(){
 		this.setPreferredSize(new Dimension ( width, height));
 		this.setLayout(null);
@@ -337,9 +257,7 @@ public class GamePanel extends JPanel{
 		this.setVisible(true);
 		//adding the keylistener
 	    this.addKeyListener(new keyLis());
-	    this.setFocusable(true);
-	
+	    this.setFocusable(true);	
 		
 	}
-
 }
