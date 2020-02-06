@@ -56,7 +56,7 @@ public class GamePanel extends JPanel{
       }
 
 	private void initWorld(Graphics g) {
-		System.out.println("Hej initWorld");
+		//System.out.println("Hej initWorld");
 
 		for (int i = 0; i < level.length(); i++){
 			//System.out.println(level.charAt(i));
@@ -83,6 +83,8 @@ public class GamePanel extends JPanel{
 			   g.drawImage(treasure.getImage(), x, y,this);
 			   x= x+ SPACE;
 		   }
+		   
+		   
 		   // new row of Assets
 		   else if (assetSymbol =='\n') {
 			   y = y + SPACE;
@@ -99,7 +101,7 @@ public class GamePanel extends JPanel{
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        System.out.println("vi kommer hit igen och igen");
+        //System.out.println("vi kommer hit igen och igen");
         initWorld(g);
         
     }
@@ -110,7 +112,7 @@ public class GamePanel extends JPanel{
 		
 		public void keyPressed(KeyEvent e) {
 
-			System.out.println("inside keylist class");
+			//System.out.println("inside keylist class");
 			
        //If game is completed then keyInputs are ignored
         /*	if (Completed) {   
@@ -192,7 +194,7 @@ public class GamePanel extends JPanel{
                 default:
                     break;
             }
-            System.out.println("inside repaint");
+            //System.out.println("inside repaint");
         }	
 	}
 	
@@ -216,7 +218,7 @@ public class GamePanel extends JPanel{
 			
 		}
 		if(direction == Direction.DOWN ) {
-			level = moveObeject( level, a, firstplayerpos + (width/SPACE)-4, firstplayerpos );
+			level = moveObeject( level, a, firstplayerpos + (width/SPACE)+4, firstplayerpos );
 			
 		}
 		if(direction == Direction.LEFT ) {
@@ -236,7 +238,7 @@ public class GamePanel extends JPanel{
 	private String moveObeject(String s, char asset, int newPos, int oldPos) {
 		char temp = s.charAt(newPos);
 		String tempString = s;
-		if(temp != '#') {
+		if(temp != '#' && temp != 't') {
 			StringBuilder leveltemp = new StringBuilder(s);
 			//Asset at new pos
 			leveltemp.setCharAt(newPos, asset);
@@ -244,6 +246,16 @@ public class GamePanel extends JPanel{
 			leveltemp.setCharAt(oldPos,temp);
 			// rebuild to string
 			tempString =  leveltemp.toString();
+		}
+		
+		//interacting with a chest, giving items etc TBD
+		if(temp == 't') {
+			
+		System.out.println("interacting with a chest");
+		
+		//chaning animation to open chest
+		
+		Treasure.OpenTreasure();
 		}
 		
 		return tempString;
