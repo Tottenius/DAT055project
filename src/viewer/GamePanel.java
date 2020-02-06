@@ -31,7 +31,7 @@ public class GamePanel extends JPanel{
 		LEFT,
 		RIGHT
 	}
-	//test
+	
 	// list with assets
 	private ArrayList<Asset> assets;
 	private static final int width = 640;
@@ -49,6 +49,7 @@ public class GamePanel extends JPanel{
     Wall wall = new Wall( x, y);
     Tile tile = new Tile( x, y);
     Treasure treasure = new Treasure( x, y);
+    Treasure openedtreasure = new Treasure(x,y,treasure.getOpenTreasurePath());
     Player player = new Player(x,y);
     
     public void readInlevel( String path) {
@@ -90,6 +91,11 @@ public class GamePanel extends JPanel{
 			   x= x+ SPACE;
 		   }
 		   
+		   //Load in opened treasures
+		   else if( assetSymbol == 'o') {
+			   g.drawImage(openedtreasure.getImage(), x, y,this);
+			   x= x+ SPACE;
+		   }
 		   
 		   // new row of Assets
 		   else if (assetSymbol =='\n') {
@@ -223,7 +229,7 @@ public class GamePanel extends JPanel{
 	private String moveObeject(String s, char asset, int newPos, int oldPos) {
 		char temp = s.charAt(newPos);
 		String tempString = s;
-		if(temp != '#' && temp != 't') {
+		if(temp != '#' && temp != 't' && temp!= 'o') { //remove o if we changed how opening treasure works
 			StringBuilder leveltemp = new StringBuilder(s);
 			//Asset at new pos
 			leveltemp.setCharAt(newPos, asset);
@@ -233,16 +239,19 @@ public class GamePanel extends JPanel{
 			tempString =  leveltemp.toString();
 		}
 		
-		//interacting with a chest, giving items etc TBD
+		//interacting with a chest, giving items etc TBD 'o' = opened chest
 		if(temp == 't') {
 			
 		System.out.println("interacting with a chest");
+		StringBuilder leveltemp = new StringBuilder(s);
+		leveltemp.setCharAt(newPos, 'o'); //replace t with o representing treasure is now opened at specific location
+		tempString =  leveltemp.toString();
 		
-		//chaning animation to open chest
+		//Treasure.OpenTreasure(level,newPos);
 		
-		Treasure.OpenTreasure();
+		
 		}
-		
+		System.out.println(tempString);
 		return tempString;
 	}
 	
