@@ -216,7 +216,7 @@ public class GamePanel extends JPanel{
 			
 		}
 		if(direction == Direction.DOWN ) {
-			level = moveObeject( level, a, firstplayerpos + (width/SPACE)-4, firstplayerpos );
+			level = moveObeject( level, a, firstplayerpos + (width/SPACE)+4, firstplayerpos );
 			
 		}
 		if(direction == Direction.LEFT ) {
@@ -236,7 +236,7 @@ public class GamePanel extends JPanel{
 	private String moveObeject(String s, char asset, int newPos, int oldPos) {
 		char temp = s.charAt(newPos);
 		String tempString = s;
-		if(temp != '#') {
+		if(temp != '#' && temp != 't') {
 			StringBuilder leveltemp = new StringBuilder(s);
 			//Asset at new pos
 			leveltemp.setCharAt(newPos, asset);
