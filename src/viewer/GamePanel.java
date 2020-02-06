@@ -73,7 +73,7 @@ public class GamePanel extends JPanel{
 			   g.drawImage(wall.getImage(), x, y,this);
 			   x= x+ SPACE;
 		   }
-		   //Load in tile assets
+		   //Load in tile assetst
 		   else if( assetSymbol == ' ') {
 			   g.drawImage(tile.getImage(), x, y,this);
 			   x= x+ SPACE;
