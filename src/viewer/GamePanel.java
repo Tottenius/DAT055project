@@ -32,6 +32,7 @@ public class GamePanel extends JPanel{
 		RIGHT
 	}
 	
+	
 	// list with assets
 	private ArrayList<Asset> assets;
 	private static final int width = 640;
@@ -80,7 +81,7 @@ public class GamePanel extends JPanel{
 			   g.drawImage(wall.getImage(), x, y,this);
 			   x= x+ SPACE;
 		   }
-		   //Load in tile assetst
+		   //Load in tile assets
 		   else if( assetSymbol == ' ') {
 			   g.drawImage(tile.getImage(), x, y,this);
 			   x= x+ SPACE;
@@ -190,7 +191,8 @@ public class GamePanel extends JPanel{
 	}
 	
 	// Usefull method give us the location of the player at any current time
-	private int PlayerLocation() {
+	// Might have to be changed if there exists more then one kind of asset that we want to move
+	private int assetLocation(char a) {
 		
 		for (int i = 0; i < level.length(); i++){
 		
@@ -203,7 +205,7 @@ public class GamePanel extends JPanel{
 	
 	private void moveDirection( Direction direction, char a) {
 		// Right now just player pos
-		int firstplayerpos = PlayerLocation();
+		int firstplayerpos = assetLocation(a);
 		if(direction == Direction.UP ) {
 			level = moveObeject( level, a, firstplayerpos - (width/SPACE)-4, firstplayerpos );
 			
@@ -263,7 +265,8 @@ public class GamePanel extends JPanel{
 		this.setVisible(true);
 		//adding the keylistener
 	    this.addKeyListener(new keyLis());
-	    this.setFocusable(true);	
+	    this.setFocusable(true);
+	    this.revalidate();
 		
 	}
 }
