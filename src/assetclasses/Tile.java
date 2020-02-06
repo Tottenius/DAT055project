@@ -1,4 +1,4 @@
-package viewer;
+package assetclasses;
 
 public class Tile extends Asset{
 	//test

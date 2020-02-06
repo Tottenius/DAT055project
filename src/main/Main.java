@@ -1,4 +1,4 @@
-package grupp10;
+package main;
 
 import viewer.GameWindowTemp;
 

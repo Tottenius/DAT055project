@@ -1,20 +1,14 @@
-package viewer;
+package assetclasses;
 
-import java.awt.Image;
 
 public class Player extends Asset {
 
 	private static final String path = "src/assets/PlayerModel.png";
 	
-	private Image img;
 	
 	public Player(int x, int y) {
 		super(x, y, path);
 		
 	}
-	
-    public void movePlayer(int x, int y) {
-    	
-    }
 
 }

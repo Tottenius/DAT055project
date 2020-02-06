@@ -14,6 +14,12 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import assetclasses.Asset;
+import assetclasses.Player;
+import assetclasses.Tile;
+import assetclasses.Treasure;
+import assetclasses.Wall;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -106,7 +112,6 @@ public class GamePanel extends JPanel{
         
     }
 	
-	
 	private class keyLis extends KeyAdapter{
 	
 		
@@ -138,13 +143,6 @@ public class GamePanel extends JPanel{
    
                     System.out.println("Moved Down");
                     moveDirection(Direction.DOWN, 'p');
-
-                	
-                	/* if (checkCollisions()) {    //if we collied with wall or other object than do nothing
-                    return;
-                } */
-                
-                	// player.move(); 			//Method to move character if no collision
                     
                     break;
                     
@@ -153,14 +151,7 @@ public class GamePanel extends JPanel{
                    
                 	System.out.println("Moved right");
                 	moveDirection(Direction.RIGHT, 'p');
-
                 	
-                 /*    if (checkCollisions()) {    //if we collied with wall or other object than do nothing
-                    return;
-                }
-                */
-                	// player.move();			//Method to move character if no collision
-                    
                     break;
                     
                 case KeyEvent.VK_LEFT:
@@ -168,16 +159,10 @@ public class GamePanel extends JPanel{
                 	
                   System.out.println("Moved Left");
                   moveDirection(Direction.LEFT, 'p');
-                	
-                /*	 if (checkCollisions()) {    //if we collied with wall or other object than do nothing
-                        return;
-                    } */
-                    
-                	// player.move(); 			//Method to move character if no collision
                     
                     break;
                     
-                case KeyEvent.VK_X: 		 //Change x to be button to reset level, most intuitively 'R'
+                case KeyEvent.VK_R: 		 //reset level
                     
                   
                 	// resetLevel(); 		//Written resetLevel Method
