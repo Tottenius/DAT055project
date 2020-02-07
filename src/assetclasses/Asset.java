@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 public abstract class Asset {
 
+	//dawdf
 	private final static int size = 20;
     private int x = 0;
     private int y = 0;
