@@ -31,7 +31,7 @@ public class GamePanel extends JPanel{
 		LEFT,
 		RIGHT
 	}
-	private Direction d = Direction.UP;
+	private Direction d = Direction.RIGHT;
 	//test
 	// list with assets
 	private ArrayList<Asset> assets;
@@ -45,7 +45,7 @@ public class GamePanel extends JPanel{
     private char assetSymbol;
     //level paths
     String level = "";
-    String level1 = "src/levels/level1.txt";
+    String level1 = "src/levels/level2.txt";
     //Our assets
     Wall wall = new Wall( x, y);
     Tile tile = new Tile( x, y);
@@ -76,15 +76,15 @@ public class GamePanel extends JPanel{
 				 x= x+ SPACE;
 			   }
 		    if( assetSymbol == 'p' && d == Direction.RIGHT) {
-				g.drawImage(player.getImageAtPos(1), x, y,this);
+				g.drawImage(player.getImageAtPos(3), x, y,this);
 				 x= x+ SPACE;
 			   }
 		    if( assetSymbol == 'p' && d == Direction.UP) {
-				g.drawImage(player.getImageAtPos(2), x, y,this);
+				g.drawImage(player.getImageAtPos(1), x, y,this);
 				 x= x+ SPACE;
 			   }
 		    if( assetSymbol == 'p' && d == Direction.DOWN) {
-				g.drawImage(player.getImageAtPos(2), x, y,this);
+				g.drawImage(player.getImageAtPos(0), x, y,this);
 				 x= x+ SPACE;
 			   }
 		    
