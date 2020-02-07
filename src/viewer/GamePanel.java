@@ -31,12 +31,12 @@ public class GamePanel extends JPanel{
 		LEFT,
 		RIGHT
 	}
-	
+	private Direction d = Direction.UP;
 	//test
 	// list with assets
 	private ArrayList<Asset> assets;
-	private static final int width = 640;
-	private static final int height = 480;
+	private static final int WIDTH = 640;
+	private static final int HEIGHT = 480;
 	// Size of an asset
 	private static final int SPACE = 20;
 	// Starting position
@@ -71,8 +71,20 @@ public class GamePanel extends JPanel{
 		    assetSymbol = level.charAt(i);    
 		    
 		  //Load in player asset
-		    if( assetSymbol == 'p') {
-				g.drawImage(player.getImage(), x, y,this);
+		    if( assetSymbol == 'p' && d == Direction.LEFT) {
+				g.drawImage(player.getImageAtPos(2), x, y,this);
+				 x= x+ SPACE;
+			   }
+		    if( assetSymbol == 'p' && d == Direction.RIGHT) {
+				g.drawImage(player.getImageAtPos(1), x, y,this);
+				 x= x+ SPACE;
+			   }
+		    if( assetSymbol == 'p' && d == Direction.UP) {
+				g.drawImage(player.getImageAtPos(2), x, y,this);
+				 x= x+ SPACE;
+			   }
+		    if( assetSymbol == 'p' && d == Direction.DOWN) {
+				g.drawImage(player.getImageAtPos(2), x, y,this);
 				 x= x+ SPACE;
 			   }
 		    
@@ -121,8 +133,7 @@ public class GamePanel extends JPanel{
 	
 	private class keyLis extends KeyAdapter{
 	
-		
-		public void keyPressed(KeyEvent e) {
+		public void keyPressed(KeyEvent e) {	
 
 			//System.out.println("inside keylist class");
 			
@@ -139,7 +150,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_W:
                 	
                     System.out.println("Moved Up");
-                    
+                    d = Direction.UP;
                     moveDirection(Direction.UP, 'p');
                 
                     break;
@@ -149,6 +160,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_S:
    
                     System.out.println("Moved Down");
+                    d = Direction.DOWN;
                     moveDirection(Direction.DOWN, 'p');
                     
                     break;
@@ -157,6 +169,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_D:	
                    
                 	System.out.println("Moved right");
+                	 d = Direction.RIGHT;
                 	moveDirection(Direction.RIGHT, 'p');
                 	
                     break;
@@ -165,6 +178,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_A:
                 	
                   System.out.println("Moved Left");
+                  d = Direction.LEFT;
                   moveDirection(Direction.LEFT, 'p');
                     
                     break;
@@ -207,11 +221,11 @@ public class GamePanel extends JPanel{
 		// Right now just player pos
 		int firstplayerpos = assetLocation(a);
 		if(direction == Direction.UP ) {
-			level = moveObeject( level, a, firstplayerpos - (width/SPACE)-4, firstplayerpos );
+			level = moveObeject( level, a, firstplayerpos - (WIDTH/SPACE)-4, firstplayerpos );
 			
 		}
 		if(direction == Direction.DOWN ) {
-			level = moveObeject( level, a, firstplayerpos + (width/SPACE)+4, firstplayerpos );
+			level = moveObeject( level, a, firstplayerpos + (WIDTH/SPACE)+4, firstplayerpos );
 			
 		}
 		if(direction == Direction.LEFT ) {
@@ -259,7 +273,7 @@ public class GamePanel extends JPanel{
 	
 
 	public GamePanel(){
-		this.setPreferredSize(new Dimension ( width, height));
+		this.setPreferredSize(new Dimension ( WIDTH, HEIGHT));
 		this.setLayout(null);
 		readInlevel(level1);
 		this.setVisible(true);

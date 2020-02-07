@@ -40,7 +40,7 @@ public class PlayState implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button1) {
-			System.out.println("Wlecome");
+			System.out.println("Welcome");
 		}
 		
 		if (e.getSource() == button2) {

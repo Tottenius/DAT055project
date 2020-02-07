@@ -4,7 +4,9 @@ package assetclasses;
 public class Treasure extends Asset{
 	//test
 	private static boolean TreasureIsOpen = false;
+	//closed treasure
 	private final static  String path = "src/assets/closedtreasure.png";
+	//open treas
 	private final static  String path2 = "src/assets/openedtreasure.png";
 	
 
