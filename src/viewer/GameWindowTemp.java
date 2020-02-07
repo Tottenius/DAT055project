@@ -9,10 +9,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 import button.PlayState;
 
-public class GameWindowTemp extends JFrame{
+public class GameWindowTemp extends JFrame {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	// La till knappar och storlek  för rutan så jag kunde leka lite med en meny. Men det uppstod komplikationer
 	final static int HEIGHT = 640;
@@ -20,21 +26,27 @@ public class GameWindowTemp extends JFrame{
 	private JButton start = new JButton("Start");
 	private JButton quit = new JButton("Quit");
 	
+
+	//start.setFocusable(false);
+	//quit.setFocusable(false);
+	
 	public GameWindowTemp(){
+	
 		/*
 		this.getContentPane().setLayout(new GridLayout());
 		this.getContentPane().setPreferredSize(new Dimension ( HEIGHT, WIDTH));
 		this.getContentPane().add(start);
+
 		this.getContentPane().add(quit);
-		addAllActionListners();
+		addAllActionListners(); 
 		*/
+		
+		
 		this.add(new GamePanel());
 		
 		this.pack();		
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		
-
 		
 	}
 	

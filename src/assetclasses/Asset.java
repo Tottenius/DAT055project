@@ -7,12 +7,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-public class Asset {
+public abstract class Asset {
 
 	private final static int size = 20;
     private int x = 0;
     private int y = 0;
-    private String path;
     private Image img;
 
 
@@ -20,24 +19,6 @@ public class Asset {
         this.x = x;
         this.y = y;
         loadImage(path);
-    }
-
-    public int giveX() {
-
-        return x;
-    }
-
-    public int giveY() {
-
-        return y;
-    }
-    
-    public void setX(int x) {
-        this.x = x;
-    }
-    
-    public void setY(int y) {
-        this.y = y;
     }
     
     public Image getImage() {

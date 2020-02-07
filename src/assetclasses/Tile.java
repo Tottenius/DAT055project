@@ -7,4 +7,5 @@ public class Tile extends Asset{
     public Tile(int x, int y) {
         super(x, y, path);
     }
+    
 }
