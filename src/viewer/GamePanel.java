@@ -1,17 +1,13 @@
 package viewer;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import assetclasses.Asset;
@@ -20,10 +16,13 @@ import assetclasses.Tile;
 import assetclasses.Treasure;
 import assetclasses.Wall;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 public class GamePanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//Directions
 	private enum Direction{
 		UP,
@@ -31,7 +30,7 @@ public class GamePanel extends JPanel{
 		LEFT,
 		RIGHT
 	}
-	private Direction d = Direction.RIGHT;
+	private Direction direction = Direction.RIGHT;
 	//test
 	// list with assets
 	private ArrayList<Asset> assets;
@@ -71,19 +70,19 @@ public class GamePanel extends JPanel{
 		    assetSymbol = level.charAt(i);    
 		    
 		  //Load in player asset
-		    if( assetSymbol == 'p' && d == Direction.LEFT) {
+		    if( assetSymbol == 'p' && direction == Direction.LEFT) {
 				g.drawImage(player.getImageAtPos(2), x, y,this);
 				 x= x+ SPACE;
 			   }
-		    if( assetSymbol == 'p' && d == Direction.RIGHT) {
+		    if( assetSymbol == 'p' && direction == Direction.RIGHT) {
 				g.drawImage(player.getImageAtPos(3), x, y,this);
 				 x= x+ SPACE;
 			   }
-		    if( assetSymbol == 'p' && d == Direction.UP) {
+		    if( assetSymbol == 'p' && direction == Direction.UP) {
 				g.drawImage(player.getImageAtPos(1), x, y,this);
 				 x= x+ SPACE;
 			   }
-		    if( assetSymbol == 'p' && d == Direction.DOWN) {
+		    if( assetSymbol == 'p' && direction == Direction.DOWN) {
 				g.drawImage(player.getImageAtPos(0), x, y,this);
 				 x= x+ SPACE;
 			   }
@@ -150,7 +149,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_W:
                 	
                     System.out.println("Moved Up");
-                    d = Direction.UP;
+                    direction = Direction.UP;
                     moveDirection(Direction.UP, 'p');
                 
                     break;
@@ -160,7 +159,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_S:
    
                     System.out.println("Moved Down");
-                    d = Direction.DOWN;
+                    direction = Direction.DOWN;
                     moveDirection(Direction.DOWN, 'p');
                     
                     break;
@@ -169,7 +168,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_D:	
                    
                 	System.out.println("Moved right");
-                	 d = Direction.RIGHT;
+                	direction = Direction.RIGHT;
                 	moveDirection(Direction.RIGHT, 'p');
                 	
                     break;
@@ -178,7 +177,7 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_A:
                 	
                   System.out.println("Moved Left");
-                  d = Direction.LEFT;
+                  direction = Direction.LEFT;
                   moveDirection(Direction.LEFT, 'p');
                     
                     break;
