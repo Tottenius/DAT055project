@@ -50,6 +50,7 @@ public class GameWindowTemp extends JFrame {
 		this.pack();		
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
 	
@@ -65,35 +66,5 @@ public class GameWindowTemp extends JFrame {
 		State = STATE.MENU;
 	
 }
-	
-	/*
-	//Försökt att göra så att man startar spelet på en knapp. Men keylistners för spelet funkar inte när man genererar GamePanel såhär av någon anledning....
-	private void addAllActionListners() {
-		start.addActionListener(
-	            new ActionListener() {
-	                public void actionPerformed(ActionEvent e) {
-	                	getContentPane().removeAll();
-	                	getContentPane().add(new GamePanel());
-	                	getContentPane().revalidate();
-	                }
-	            }
-	        );
-		quit.addActionListener(
-	            new ActionListener() {
-	                public void actionPerformed(ActionEvent e) {
-	                	System.exit(0);
-	                }
-	            }
-	        );
-	}
-	
-	/*
-	this.getContentPane().setLayout(new GridLayout());
-	this.getContentPane().setPreferredSize(new Dimension ( HEIGHT, WIDTH));
-	this.getContentPane().add(start);
-
-	this.getContentPane().add(quit);
-	addAllActionListners(); 
-	*/
-	
 }
+	
