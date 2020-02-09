@@ -14,6 +14,12 @@ import javax.swing.JPanel;
 
 public class Menu extends JPanel  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	public JButton StartButton = new JButton("Start");
 	public JButton OptionsButton = new JButton("Options");
 	public JButton QuitButton = new JButton("Quit");
