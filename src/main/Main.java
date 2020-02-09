@@ -13,9 +13,5 @@ public class Main {
     	    	new GameWindowTemp();
     	    }
     	  });
-		
-		
-		//new GameWindowTemp();
 	}
-
 }

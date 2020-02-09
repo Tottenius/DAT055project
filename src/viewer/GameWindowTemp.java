@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
 
@@ -27,13 +30,18 @@ public class GameWindowTemp extends JFrame {
 	
 	private static STATE State = STATE.MENU;
 	private Menu menu;
-	
-	// La till knappar och storlek  för rutan så jag kunde leka lite med en meny. Men det uppstod komplikationer
-	final static int HEIGHT = 640;
-	final static int WIDTH = 480;
-//	private JButton start = new JButton("Start");
-//	private JButton quit = new JButton("Quit");
 
+    // create a menubar
+	private JMenuBar menubar = new JMenuBar();
+
+    // create a menu 
+	private JMenu jmenu = new JMenu("Help"); 
+    
+    // Menu items 
+    static JMenuItem m1, m2, m3; 
+
+	//final static int HEIGHT = 640;
+	//final static int WIDTH = 480;
 	
 	public GameWindowTemp(){
 
@@ -47,6 +55,9 @@ public class GameWindowTemp extends JFrame {
 		this.add(new GamePanel());
 		}
 		
+		//Adding menubar
+		SetUpMenubar();
+		
 		this.pack();		
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -54,17 +65,32 @@ public class GameWindowTemp extends JFrame {
 		
 	}
 	
+	public void SetUpMenubar() {
+		
+		// create menuitems 
+        m1 = new JMenuItem("Guides"); 
+        m2 = new JMenuItem("Support"); 
+        m3 = new JMenuItem("Playbetteritsthateasy"); 
+  
+        // add menu items to menu 
+        jmenu.add(m1); 
+        jmenu.add(m2); 
+        jmenu.add(m3); 
+        
+        //add menu to menubar
+        menubar.add(jmenu);
+        
+        //add menubar
+        this.setJMenuBar(menubar);
+	}
 	
 	public static void SetStateGame(){
-		
-			State = STATE.GAME;
-		
+			State = STATE.GAME;	
 	}
 	
 	public static void SetStateMenu(){
 		
-		State = STATE.MENU;
-	
+		State = STATE.MENU;	
 }
 }
 	
