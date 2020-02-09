@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-import button.PlayState;
+
 
 public class GameWindowTemp extends JFrame {
 	
@@ -25,7 +25,7 @@ public class GameWindowTemp extends JFrame {
 		GAME
 	};
 	
-	private STATE State = STATE.MENU;
+	private static STATE State = STATE.MENU;
 	private Menu menu;
 	
 	// La till knappar och storlek  för rutan så jag kunde leka lite med en meny. Men det uppstod komplikationer
@@ -36,12 +36,11 @@ public class GameWindowTemp extends JFrame {
 
 	
 	public GameWindowTemp(){
-		menu = new Menu();
-		
+
 		if (State == STATE.MENU) { 
-		this.add(menu);
+			menu = new Menu();
+			this.add(menu);
 		}
-		
 		
 		//if gamestate is Game then we start the game;
 		if (State == STATE.GAME) { 
@@ -53,6 +52,20 @@ public class GameWindowTemp extends JFrame {
 		this.setVisible(true);
 		
 	}
+	
+	
+	public static void SetStateGame(){
+		
+			State = STATE.GAME;
+		
+	}
+	
+	public static void SetStateMenu(){
+		
+		State = STATE.MENU;
+	
+}
+	
 	/*
 	//Försökt att göra så att man startar spelet på en knapp. Men keylistners för spelet funkar inte när man genererar GamePanel såhär av någon anledning....
 	private void addAllActionListners() {
