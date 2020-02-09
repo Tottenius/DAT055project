@@ -80,10 +80,11 @@ public class Menu extends JPanel implements ActionListener {
         if (action.equals("Start")) {
             System.out.println("Start Button pressed!");
             GameWindowTemp.SetStateGame();
-           new GameWindowTemp();
+           new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
         }
         else if (action.equals("Quit")) {
             System.out.println("Quit Button pressed!");
+            System.exit(0);
         }
     }
 	
