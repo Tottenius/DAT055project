@@ -14,7 +14,8 @@ public class IntroScreen {
 
 public static void main(String[] args) throws MalformedURLException {
 		
-		JWindow window = new JWindow();
+	/*	
+	JWindow window = new JWindow();
 		window.getContentPane().add(
 		    new JLabel("", new ImageIcon(new URL("https://i.imgur.com/fVefx9v.gif")), SwingConstants.CENTER)); //intro screen maybe use splashscreen class instead
 		window.setBounds(400, 100, 1200, 800);
@@ -24,7 +25,7 @@ public static void main(String[] args) throws MalformedURLException {
 		} catch (InterruptedException e) {
 		    e.printStackTrace();
 		}
-		window.dispose();
+		window.dispose(); */
 		
 		new GameWindowTemp();
 	}
