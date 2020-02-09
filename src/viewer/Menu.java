@@ -9,8 +9,8 @@ import java.awt.Graphics2D;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-
-
+//OBS
+// blir lite duplicring med GamePanel och att ha draw function i denna aswell finns antagigen bättre sätt att göra detta men som grund testa detta
 
 public class Menu extends JPanel  {
 
