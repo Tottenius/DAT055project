@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import viewer.GameSettings;
 public abstract class Asset {
 
-	private final static int size = 20;
+	private final static int size = GameSettings.getAssetsize();
 	private int position;
     private Image img;
     private ArrayList<Image> images = new ArrayList<Image>();

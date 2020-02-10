@@ -38,7 +38,7 @@ public class GamePanel extends JPanel{
 	 private static final int WIDTH = GameSettings.getWidth();
 	 private static final int HEIGHT = GameSettings.getHeight();
 	// Size of an asset
-	private static final int SPACE = 20;
+	private static final int SPACE = GameSettings.getAssetsize();
 	// Starting position
     private int position = 0;
     private int x = 0;
