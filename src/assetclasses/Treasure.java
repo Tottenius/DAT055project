@@ -11,15 +11,15 @@ public class Treasure extends Asset{
 	
 
 	
-    public Treasure(int x, int y) {
+    public Treasure(int position) {
       
-    	super(x, y, path);
+    	super(position, path);
         
     }
     
-    public Treasure(int x, int y, String path) {
+    public Treasure(int position, String path) {
         
-    	super(x, y, path);
+    	super(position, path);
         
     }  
     

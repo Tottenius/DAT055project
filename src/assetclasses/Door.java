@@ -5,8 +5,8 @@ public class Door extends Asset {
 
 	private static final String path = "src/assets/tile.png";
 	
-	public Door(int x, int y) {
-		super(x, y, path);
+	public Door(int position) {
+		super(position, path);
 		// TODO Auto-generated constructor stub
 	}
 

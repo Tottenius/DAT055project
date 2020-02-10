@@ -11,15 +11,13 @@ import javax.swing.*;
 public abstract class Asset {
 
 	private final static int size = 20;
-    private int x = 0;
-    private int y = 0;
+	private int position;
     private Image img;
     private ArrayList<Image> images = new ArrayList<Image>();
 
 
-    public Asset(int x, int y, String path) {
-        this.x = x;
-        this.y = y;
+    public Asset(int position, String path) {
+        this.setPosition(position);
         loadImage(path);
     }
     
@@ -47,6 +45,14 @@ public abstract class Asset {
     	System.out.println(img);
     	images.add(img);
     }
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
     
     
     	
