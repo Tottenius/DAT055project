@@ -7,7 +7,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -24,6 +28,8 @@ public class Menu extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;	
 	
+	private static final String path = "src/assets/MenuBackground.jpg";
+	
 	JButton StartButton = new JButton("Start");
 	 JButton OptionsButton = new JButton("Options");
 	 JButton QuitButton = new JButton("Quit"); 
@@ -31,14 +37,20 @@ public class Menu extends JPanel implements ActionListener {
 	
 	 public void render(Graphics g) {
 		
-		this.setBackground(Color.BLACK);
-		this.setPreferredSize(new Dimension(500,500));
-		
 		Graphics2D g2d = (Graphics2D) g;
 		Font fnto = new Font("Century Gothic", Font.BOLD, 50);
 		g.setFont(fnto);
 		g.setColor(Color.RED);
-		g.drawString("WELCOME TO OUR GAME", 200 , 100); //change to Gamepanel.width and height later		
+		g.drawString("WELCOME TO OUR GAME", 200 , 100); //change to Gamepanel.width and height later
+		
+		//Read in background image
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		g.drawImage(image,0,0,null);
 	}
 	
 	 
@@ -68,7 +80,7 @@ public class Menu extends JPanel implements ActionListener {
         add(OptionsButton);
         add(QuitButton);
         
-        this.setPreferredSize(new Dimension(900,900));
+        this.setPreferredSize(new Dimension(1280,720));
  
     }
     
