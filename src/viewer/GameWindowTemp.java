@@ -38,10 +38,10 @@ public class GameWindowTemp extends JFrame {
 	private JMenu jmenu = new JMenu("Help"); 
     
     // Menu items 
-    static JMenuItem m1, m2, m3; 
+    static JMenuItem m1, m2, m3, m4; 
 
-	//final static int HEIGHT = 640;
-	//final static int WIDTH = 480;
+    // local reference to it self
+    private GameWindowTemp window = this;
 	
 	public GameWindowTemp(){
 
@@ -53,6 +53,8 @@ public class GameWindowTemp extends JFrame {
 		//if gamestate is Game then we start the game;
 		if (State == STATE.GAME) { 
 		this.add(new GamePanel());
+		System.out.println("hej är vi här");
+
 		}
 		
 		//Adding menubar
@@ -70,12 +72,39 @@ public class GameWindowTemp extends JFrame {
 		// create menuitems 
         m1 = new JMenuItem("Guides"); 
         m2 = new JMenuItem("Support"); 
-        m3 = new JMenuItem("Playbetteritsthateasy"); 
+        m3 = new JMenuItem("Restart");
+        m4 = new JMenuItem("Quit to main menu");
+        
+        // Add listeners to buttons
+        // Går nog att göra dessa på ett snyggare sätt, var mest för test
+        //Restart the game
+        m3.addActionListener(new ActionListener() { 
+  		  public void actionPerformed(ActionEvent e) { 
+	            System.out.println("Restart");
+	            GameWindowTemp.SetStateGame();
+	            window.dispose();
+	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+			  } 
+			} 
+	 );
+        //Return to the main menu
+        m4.addActionListener(new ActionListener() { 
+  		  public void actionPerformed(ActionEvent e) { 
+	            System.out.println("Go to main menu pressed");
+	            GameWindowTemp.SetStateMenu();
+	            window.dispose();
+	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+			  } 
+			} 
+	 );
   
         // add menu items to menu 
         jmenu.add(m1); 
         jmenu.add(m2); 
-        jmenu.add(m3); 
+        jmenu.add(m3);
+        jmenu.add(m4);
+        
+        
         
         //add menu to menubar
         menubar.add(jmenu);

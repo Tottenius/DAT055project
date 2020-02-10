@@ -14,14 +14,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 
 
 //OBS
 // blir lite duplicring med GamePanel och att ha draw function i denna aswell finns antagigen bättre sätt att göra detta men som grund testa detta
 
-public class Menu extends JPanel implements ActionListener {
+public class Menu extends JPanel {
 
 	/**
 	 * 
@@ -30,9 +32,14 @@ public class Menu extends JPanel implements ActionListener {
 	
 	private static final String path = "src/assets/MenuBackground.jpg";
 	
-	JButton StartButton = new JButton("Start");
+	 JButton StartButton = new JButton("Start");
 	 JButton OptionsButton = new JButton("Options");
-	 JButton QuitButton = new JButton("Quit"); 
+	 JButton QuitButton = new JButton("Quit");
+	 //En lokal variabel för den här menyn. Kunde inte komma åt den i de anonyma actionlistnersen annars.
+	 private Menu menu = this;
+	 // Window size
+	 private static final int WIDTH = GameSettings.getWidth();
+	 private static final int HEIGHT = GameSettings.getHeight();
 	
 	
 	 public void render(Graphics g) {
@@ -65,23 +72,10 @@ public class Menu extends JPanel implements ActionListener {
     	//this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     	this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     	   	
-        //set action listeners for buttons
-    	 StartButton.addActionListener((java.awt.event.ActionListener) this);
-    	 OptionsButton.addActionListener((java.awt.event.ActionListener) this);
-    	 QuitButton.addActionListener((java.awt.event.ActionListener) this);
-        
-    	//customazation  	 
-    	 ButtonCustomazation(StartButton);
-    	 ButtonCustomazation(OptionsButton);
-    	 ButtonCustomazation(QuitButton);
-	 
-    	 //add buttons to the panel
-        add(StartButton);
-        add(OptionsButton);
-        add(QuitButton);
-        
-        this.setPreferredSize(new Dimension(1280,720));
- 
+        //Add buttons width actionListeners
+    	addButtons();
+        //Set menu size
+        this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
     }
     
     public void ButtonCustomazation(JButton button) {
@@ -94,20 +88,45 @@ public class Menu extends JPanel implements ActionListener {
 
     	
     }
- 
-    public void actionPerformed(ActionEvent e) {
-        String action = e.getActionCommand();
-        if (action.equals("Start")) {
-            System.out.println("Start Button pressed!");
-            GameWindowTemp.SetStateGame();
-           new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
-        }
-        else if (action.equals("Quit")) {
-            System.out.println("Quit Button pressed!");
-            System.exit(0);
-        }
+ 	// Add anonymous actionsListners to buttons. Easier because we don't need lot's of if cases
+    private void addButtons() {
+   	 StartButton.addActionListener(new ActionListener() { 
+		  public void actionPerformed(ActionEvent e) { 
+	            System.out.println("Start Button pressed!");
+	            GameWindowTemp.SetStateGame();
+	            SwingUtilities.getWindowAncestor(menu).dispose();
+	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+			  } 
+			} 
+	 );
+	 
+	 OptionsButton.addActionListener(new ActionListener() { 
+ 		  public void actionPerformed(ActionEvent e) { 
+	            System.out.println("Start Button pressed!");
+	            System.out.println("Quit Button pressed!");
+	            System.exit(0);
+			  } 
+			} 
+ 	 );
+	 
+	 QuitButton.addActionListener(new ActionListener() { 
+		  public void actionPerformed(ActionEvent e) { 
+           System.out.println("Start Button pressed!");
+           System.out.println("Quit Button pressed!");
+           System.exit(0);
+		  } 
+		} 
+	 );
+   
+	//customazation  	 
+	 ButtonCustomazation(StartButton);
+	 ButtonCustomazation(OptionsButton);
+	 ButtonCustomazation(QuitButton);
+
+	 //add buttons to the panel
+	 add(StartButton);
+	 add(OptionsButton);
+	 add(QuitButton);
     }
-	
-	
 	
 }
