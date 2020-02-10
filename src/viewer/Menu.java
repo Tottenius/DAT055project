@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,11 +20,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
-
-
-//OBS
-// blir lite duplicring med GamePanel och att ha draw function i denna aswell finns antagigen bättre sätt att göra detta men som grund testa detta
 
 public class Menu extends JPanel {
 
@@ -48,8 +47,7 @@ public class Menu extends JPanel {
 		Graphics2D g2d = (Graphics2D) g;
 		Font fnto = new Font("Century Gothic", Font.BOLD, 50);
 		g.setFont(fnto);
-		g.setColor(Color.RED);
-		g.drawString("WELCOME TO OUR GAME", 200 , 100); //change to Gamepanel.width and height later
+		g.setColor(Color.BLACK);
 		
 		//Read in background image
 		Image img = null;
@@ -59,6 +57,8 @@ public class Menu extends JPanel {
 			e.printStackTrace();
 		}
 		g.drawImage(img,0,0,null);
+		
+		g.drawString("WELCOME TO OUR GAME", GameSettings.getWidth() / 4, GameSettings.getHeight() / 3); 
 	}
 	
 	 
@@ -71,8 +71,8 @@ public class Menu extends JPanel {
     public Menu() {
     	
     	//this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-    	this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-    	   	
+    	this.setLayout(new GridBagLayout());  	
+    	
         //Add buttons width actionListeners
     	addButtons();
         //Set menu size
@@ -82,10 +82,11 @@ public class Menu extends JPanel {
     public void ButtonCustomazation(JButton button) {
     	
     	//customazation
-    	button.setBackground(Color.GREEN);
+    	button.setBackground(Color.CYAN);
     	button.setAlignmentX(this.CENTER_ALIGNMENT);
     	button.setAlignmentY(this.CENTER_ALIGNMENT);   	 
-    	button.setMaximumSize(new Dimension(200, 120));
+    	button.setPreferredSize(new Dimension(150, 100));
+    	button.setFont(new Font("Century Gothic", Font.BOLD, 18));
 
     	
     }
