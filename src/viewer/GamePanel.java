@@ -34,23 +34,26 @@ public class GamePanel extends JPanel{
 	//test
 	// list with assets
 	private ArrayList<Asset> assets;
-	private static final int WIDTH = 640;
-	private static final int HEIGHT = 480;
+	//Window size
+	 private static final int WIDTH = GameSettings.getWidth();
+	 private static final int HEIGHT = GameSettings.getHeight();
 	// Size of an asset
 	private static final int SPACE = 20;
 	// Starting position
+    private int position = 0;
     private int x = 0;
     private int y = 0;
+    // Symbol
     private char assetSymbol;
     //level paths
     String level = "";
     String level1 = "src/levels/level2.txt";
     //Our assets
-    Wall wall = new Wall( x, y);
-    Tile tile = new Tile( x, y);
-    Treasure treasure = new Treasure( x, y);
-    Treasure openedtreasure = new Treasure(x,y,treasure.getOpenTreasurePath());
-    Player player = new Player(x,y);
+    Wall wall = new Wall( position);
+    Tile tile = new Tile( position);
+    Treasure treasure = new Treasure( position);
+    Treasure openedtreasure = new Treasure(position,treasure.getOpenTreasurePath());
+    Player player = new Player(position);
     
     public void readInlevel( String path) {
         //System.out.println("current working directory is: " + System.getProperty("user.dir"));
