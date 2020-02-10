@@ -33,7 +33,7 @@ public class GamePanel extends JPanel{
 	private Direction direction = Direction.RIGHT;
 	//test
 	// list with assets
-	private ArrayList<Asset> assets;
+	private ArrayList<Asset> assets = new ArrayList<Asset>();
 	//Window size
 	 private static final int WIDTH = GameSettings.getWidth();
 	 private static final int HEIGHT = GameSettings.getHeight();
@@ -45,15 +45,11 @@ public class GamePanel extends JPanel{
     private int y = 0;
     // Symbol
     private char assetSymbol;
+    private Asset asset;
     //level paths
     String level = "";
     String level1 = "src/levels/level2.txt";
     //Our assets
-    Wall wall = new Wall( position);
-    Tile tile = new Tile( position);
-    Treasure treasure = new Treasure( position);
-    Treasure openedtreasure = new Treasure(position,treasure.getOpenTreasurePath());
-    Player player = new Player(position);
     
     public void readInlevel( String path) {
         //System.out.println("current working directory is: " + System.getProperty("user.dir"));
@@ -63,16 +59,88 @@ public class GamePanel extends JPanel{
         catch (IOException e) {
           e.printStackTrace();
         }
+        for(int i = 0; i< level.length(); i++ ) {
+        	if (level.charAt(i)== '#') {
+        		assets.add(new Wall(i));
+        	}
+        	else if(level.charAt(i) == ' ') {
+        		assets.add(new Tile(i));
+        	}
+ 		   //Load in treasures
+ 		   else if( level.charAt(i) == 't') {
+ 			  assets.add(new Treasure(i));
+ 		   }
+ 		   
+ 		   //Load in opened treasures
+ 		   else if( level.charAt(i) == 'o') {
+ 			  assets.add(new Treasure(i));
+ 		   }
+ 		   else if( level.charAt(i) == 'p' ) {
+ 			  assets.add(new Player(i));
+			
+			   }   	
+        }
       }
 
 	private void initWorld(Graphics g) {
 		//System.out.println("Hej initWorld");
 
-		for (int i = 0; i < level.length(); i++){
+		for (int i = 0; i < assets.size(); i++){
 			//System.out.println(level.charAt(i));
-		    assetSymbol = level.charAt(i);    
+		    //assetSymbol = level.charAt(i);  
+			asset = assets.get(i);
+		  // Time for a new row?
+		    if(x == WIDTH){
+		    	x = 0;
+		    	y = y + SPACE;
+		    }
+		    if( asset instanceof Player && direction == Direction.LEFT) {
+		    	asset.getImageAtPos(2);
+				g.drawImage(asset.getImage(), x, y,this);
+				System.out.println("vi försöker göra en gubbe");
+				 x= x+ SPACE;
+			   }
+		    if( asset instanceof Player && direction == Direction.RIGHT) {
+		    	asset.getImageAtPos(3);
+				g.drawImage(asset.getImage(), x, y,this);
+				 x= x+ SPACE;
+			   }
+		    if( asset instanceof Player && direction == Direction.UP) {
+		    	asset.getImageAtPos(1);
+				g.drawImage(asset.getImage(), x, y,this);
+				 x= x+ SPACE;
+			   }
+		    if( asset instanceof Player && direction == Direction.DOWN) {
+		    	asset.getImageAtPos(0);
+				g.drawImage(asset.getImage(), x, y,this);
+				 x= x+ SPACE;
+			   }
 		    
+		    //Load in wall assets
+		   if( asset instanceof Wall) {
+			   //System.out.println("Vi försöker göra en wall");
+			   g.drawImage(asset.getImage(), x, y,this);
+			   x= x+ SPACE;
+		   }
+		   //Load in tile assets
+		   else if( asset instanceof Tile) {
+			   g.drawImage(asset.getImage(), x, y,this);
+			   x= x+ SPACE;
+		   }
+		   //Load in treasures
+		   else if( asset instanceof Treasure) {
+			   
+			   g.drawImage(asset.getImage(), x, y,this);
+			   x= x+ SPACE;
+		   }
+		   
+		   //Load in opened treasures
+		  // else if( asset instanceof Treasure) {
+		//	   g.drawImage(openedtreasure.getImage(), x, y,this);
+		//	   x= x+ SPACE;
+		 //  }
 		  //Load in player asset
+		    /*
 		    if( assetSymbol == 'p' && direction == Direction.LEFT) {
 				g.drawImage(player.getImageAtPos(2), x, y,this);
 				 x= x+ SPACE;
@@ -111,12 +179,7 @@ public class GamePanel extends JPanel{
 			   g.drawImage(openedtreasure.getImage(), x, y,this);
 			   x= x+ SPACE;
 		   }
-		   
-		   // new row of Assets
-		   else if (assetSymbol =='\n') {
-			   y = y + SPACE;
-			   x = 0;
-		   }
+		   */
 			   
 		}
 		y = 0;
@@ -208,11 +271,18 @@ public class GamePanel extends JPanel{
 	
 	// Usefull method give us the location of the player at any current time
 	// Might have to be changed if there exists more then one kind of asset that we want to move
-	private int assetLocation(char a) {
-		
+	private int assetLocation() {
+	/*	
 		for (int i = 0; i < level.length(); i++){
 		
 			if(level.charAt(i) == 'p') 
+				return i;
+			
+		}
+		*/
+		for (int i = 0; i < assets.size(); i++){
+			
+			if(assets.get(i) instanceof Player) 
 				return i;
 			
 		}
@@ -221,30 +291,52 @@ public class GamePanel extends JPanel{
 	
 	private void moveDirection( Direction direction, char a) {
 		// Right now just player pos
-		int firstplayerpos = assetLocation(a);
+		int firstplayerpos = assetLocation();
+		Asset movingAsset = assets.get(firstplayerpos);
+		Asset swapAsset = null;
+		int up = firstplayerpos - (WIDTH/SPACE);
+		int down = firstplayerpos + (WIDTH/SPACE);
+		int left = firstplayerpos -1;
+		int right = firstplayerpos + 1;
+		
+		int dir = 0;
+		
 		if(direction == Direction.UP ) {
-			level = moveObeject( level, a, firstplayerpos - (WIDTH/SPACE)-4, firstplayerpos );
-			
+				dir = up;
 		}
-		if(direction == Direction.DOWN ) {
-			level = moveObeject( level, a, firstplayerpos + (WIDTH/SPACE)+4, firstplayerpos );
+		if(direction == Direction.DOWN ) {		
+				dir = down;
 			
 		}
 		if(direction == Direction.LEFT ) {
-			level = moveObeject( level, a, firstplayerpos - 1, firstplayerpos );
-			
+				dir = left;
 		}
 		if(direction == Direction.RIGHT ) {
-			level = moveObeject( level, a, firstplayerpos + 1, firstplayerpos );
+				dir = right;
 			
 		}
+		
+		// Alla interaktioner med assets
+		swapAsset = assets.get(dir);
+		if (swapAsset instanceof Tile) {
+			assets.set(dir, movingAsset ).setPosition(firstplayerpos);
+			assets.set(firstplayerpos, swapAsset ).setPosition(dir);
+		}
+		if (swapAsset instanceof Treasure) {
+			((Treasure) swapAsset).openTreasure();
+		}
+
+		
+		
 		repaint();
 		
 		
 	}
 	
+	/*
 	//For moving movable objects and players
 	private String moveObeject(String s, char asset, int newPos, int oldPos) {
+		
 		char temp = s.charAt(newPos);
 		String tempString = s;
 		if(temp != '#' && temp != 't' && temp!= 'o') { //remove o if we changed how opening treasure works
@@ -255,8 +347,9 @@ public class GamePanel extends JPanel{
 			leveltemp.setCharAt(oldPos,temp);
 			// rebuild to string
 			tempString =  leveltemp.toString();
+			
 		}
-		
+	
 		//interacting with a chest, giving items etc TBD 'o' = opened chest
 		if(temp == 't') {
 			
@@ -272,8 +365,7 @@ public class GamePanel extends JPanel{
 		System.out.println(tempString);
 		return tempString;
 	}
-	
-
+	*/
 	public GamePanel(){
 		this.setPreferredSize(new Dimension ( WIDTH, HEIGHT));
 		this.setLayout(null);

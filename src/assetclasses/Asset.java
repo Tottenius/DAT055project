@@ -1,14 +1,11 @@
 package assetclasses;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-
 import viewer.GameSettings;
 public abstract class Asset {
 
@@ -16,19 +13,22 @@ public abstract class Asset {
 	private int position;
     private Image img;
     private ArrayList<Image> images = new ArrayList<Image>();
+    private String name; 
 
 
     public Asset(int position, String path) {
         this.setPosition(position);
         loadImage(path);
+        this.name = name;
+        
     }
     
     public Image getImage() {
     	return img;
     }
     
-    public Image getImageAtPos(int i) {
-    	return images.get(i);
+    public void getImageAtPos(int i) {
+    	img = images.get(i);
     }
     
     public void loadImage(String path) {

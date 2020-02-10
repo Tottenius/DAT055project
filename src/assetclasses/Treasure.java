@@ -6,28 +6,33 @@ public class Treasure extends Asset{
 	private static boolean TreasureIsOpen = false;
 	//closed treasure
 	private final static  String path = "src/assets/closedtreasure.png";
-	//open treas
+	//open treasure
 	private final static  String path2 = "src/assets/openedtreasure.png";
+	//Open bool
+	private boolean isOpen= false;
 	
 
 	
     public Treasure(int position) {
       
     	super(position, path);
+    	super.loadImage(path2);
+    	super.getImageAtPos(0);
         
     }
     
-    public Treasure(int position, String path) {
-        
-    	super(position, path);
-        
-    }  
-    
-    public String getOpenTreasurePath() { 
-    	
-    	return path2;
-    	//TreasureIsOpen = true;    	
+    public void openTreasure() { 	
+    	super.getImageAtPos(1);  	
+    	isOpen = true;    	
     }
     
+    public void closeTreasure() { 	
+    	super.getImageAtPos(0);
+    	isOpen = false;      	
+    }
+    
+    public boolean treasureIsOpen() {
+    	return isOpen;
+    }
     
 }
