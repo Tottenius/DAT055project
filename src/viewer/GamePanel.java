@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
+import Controller.PlayerController;
 import assetclasses.Asset;
 import assetclasses.Player;
 import assetclasses.Tile;
@@ -24,7 +25,7 @@ public class GamePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	//Directions
-	private enum Direction{
+	public enum Direction{
 		UP,
 		DOWN,
 		LEFT,
@@ -33,7 +34,7 @@ public class GamePanel extends JPanel{
 	private Direction direction = Direction.RIGHT;
 	//test
 	// list with assets
-	private ArrayList<Asset> assets = new ArrayList<Asset>();
+	private static ArrayList<Asset> assets = new ArrayList<Asset>();
 	//Window size
 	 private static final int WIDTH = GameSettings.getWidth();
 	 private static final int HEIGHT = GameSettings.getHeight();
@@ -49,7 +50,18 @@ public class GamePanel extends JPanel{
     //level paths
     String level = "";
     String level1 = "src/levels/level2.txt";
-    //Our assets
+    
+    //Players
+    PlayerController player1;
+    
+    //Reach assets in controller
+    public static ArrayList<Asset> getAssetList(){
+    	return assets;
+    }
+    public static void setAssetList( ArrayList<Asset> assetList){
+    	assets = assetList;
+    }
+
     
     public void readInlevel( String path) {
         //System.out.println("current working directory is: " + System.getProperty("user.dir"));
@@ -153,15 +165,17 @@ public class GamePanel extends JPanel{
 		public void keyPressed(KeyEvent e) {	
 
             int input = e.getKeyCode();
-
+            System.out.println("vi försöker måla om");
             switch (input) {
+            	
                 
                 case KeyEvent.VK_UP:
                 case KeyEvent.VK_W:
                 	
                     System.out.println("Moved Up");
                     direction = Direction.UP;
-                    moveDirection(Direction.UP, 'p');
+                    player1.moveDirection(Direction.UP);
+                   // moveDirection(Direction.UP);
                 
                     break;
                     
@@ -171,7 +185,8 @@ public class GamePanel extends JPanel{
    
                     System.out.println("Moved Down");
                     direction = Direction.DOWN;
-                    moveDirection(Direction.DOWN, 'p');
+                    player1.moveDirection(Direction.DOWN);
+                   // moveDirection(Direction.DOWN);
                     
                     break;
                     
@@ -180,7 +195,8 @@ public class GamePanel extends JPanel{
                    
                 	System.out.println("Moved right");
                 	direction = Direction.RIGHT;
-                	moveDirection(Direction.RIGHT, 'p');
+                	player1.moveDirection(Direction.RIGHT);
+                	//moveDirection(Direction.RIGHT);
                 	
                     break;
                     
@@ -189,7 +205,8 @@ public class GamePanel extends JPanel{
                 	
                   System.out.println("Moved Left");
                   direction = Direction.LEFT;
-                  moveDirection(Direction.LEFT, 'p');
+                  player1.moveDirection(Direction.LEFT);
+                 // moveDirection(Direction.LEFT);
                     
                     break;
                     
@@ -210,67 +227,10 @@ public class GamePanel extends JPanel{
                 default:
                     break;
             }
-            //System.out.println("inside repaint");
+            repaint();
         }	
 	}
-	
-	// Usefull method give us the location of the player at any current time
-	// Might have to be changed if there exists more then one kind of asset that we want to move
-	private int assetLocation() {
-
-		for (int i = 0; i < assets.size(); i++){
-			
-			if(assets.get(i) instanceof Player) 
-				return i;
-			
-		}
-		return 0 ; //this mean player can never be at zero but we can change this later
-	}
-	
-	private void moveDirection( Direction direction, char a) {
-		// Right now just player pos
-		int firstplayerpos = assetLocation();
-		Asset movingAsset = assets.get(firstplayerpos);
-		Asset swapAsset = null;
-		int up = firstplayerpos - (WIDTH/SPACE);
-		int down = firstplayerpos + (WIDTH/SPACE);
-		int left = firstplayerpos -1;
-		int right = firstplayerpos + 1;
-		
-		int dir = 0;
-		
-		if(direction == Direction.UP ) {
-				dir = up;
-		}
-		if(direction == Direction.DOWN ) {		
-				dir = down;
-			
-		}
-		if(direction == Direction.LEFT ) {
-				dir = left;
-		}
-		if(direction == Direction.RIGHT ) {
-				dir = right;
-			
-		}
-		
-		// Alla interaktioner med assets
-		swapAsset = assets.get(dir);
-		if (swapAsset instanceof Tile) {
-			assets.set(dir, movingAsset ).setPosition(firstplayerpos);
-			assets.set(firstplayerpos, swapAsset ).setPosition(dir);
-		}
-		if (swapAsset instanceof Treasure) {
-			((Treasure) swapAsset).openTreasure();
-		}
-
-		
-		
-		repaint();
-		
-		
-	}
-	
+ 	
 	public GamePanel(){
 		this.setPreferredSize(new Dimension ( WIDTH, HEIGHT));
 		this.setLayout(null);
@@ -280,6 +240,7 @@ public class GamePanel extends JPanel{
 	    this.addKeyListener(new keyLis());
 	    this.setFocusable(true);
 	    this.revalidate();
+	    player1 = new PlayerController(direction);
 		
 	}
 }

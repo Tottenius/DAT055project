@@ -85,7 +85,7 @@ public class Menu extends JPanel {
     	button.setBackground(Color.CYAN);
     	button.setAlignmentX(this.CENTER_ALIGNMENT);
     	button.setAlignmentY(this.CENTER_ALIGNMENT);   	 
-    	button.setPreferredSize(new Dimension(150, 100));
+    	button.setPreferredSize(new Dimension(GameSettings.getWidth()/6, GameSettings.getHeight()/6));
     	button.setFont(new Font("Century Gothic", Font.BOLD, 18));
 
     	
