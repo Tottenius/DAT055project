@@ -23,7 +23,7 @@ public class GamePanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private GamePanel theGamePanel = this;
 	//Directions
 	public enum Direction{
 		UP,
@@ -31,8 +31,11 @@ public class GamePanel extends JPanel{
 		LEFT,
 		RIGHT
 	}
-	private Direction direction = Direction.RIGHT;
-	//test
+	private static Direction direction = Direction.RIGHT;
+	//get direction
+	public static Direction getDirection() {
+		return direction;
+	}
 	// list with assets
 	private static ArrayList<Asset> assets = new ArrayList<Asset>();
 	//Window size
@@ -52,14 +55,36 @@ public class GamePanel extends JPanel{
     String level1 = "src/levels/level2.txt";
     
     //Players
-    PlayerController player1;
-    
+    private PlayerController player1;
+    private PlayerController player2;
+    //Player threads
+    private Thread player1Thread;
+    private Thread player2Thread;
     //Reach assets in controller
     public static ArrayList<Asset> getAssetList(){
     	return assets;
     }
     public static void setAssetList( ArrayList<Asset> assetList){
     	assets = assetList;
+    }
+    
+    private void howManyPlayers(int amount) {
+    	if (amount == 1) {
+    		player1 = new PlayerController(direction, 45);
+    		player1Thread = new Thread(player1);
+    		player1Thread.start();
+			
+    	}
+       	if (amount == 2) {
+    		player1 = new PlayerController(direction, 45);
+       		player2 = new PlayerController(direction, 46);
+    		player1Thread = new Thread(player1);
+    		player2Thread = new Thread(player2);
+    		player1Thread.start();
+    		player2Thread.start();
+			}
+    		
+  
     }
 
     
@@ -109,7 +134,7 @@ public class GamePanel extends JPanel{
 		    if( asset instanceof Player && direction == Direction.LEFT) {
 		    	asset.getImageAtPos(2);
 				g.drawImage(asset.getImage(), x, y,this);
-				System.out.println("vi försöker göra en gubbe");
+				//System.out.println("vi försöker göra en gubbe");
 				 x= x+ SPACE;
 			   }
 		    if( asset instanceof Player && direction == Direction.RIGHT) {
@@ -162,10 +187,10 @@ public class GamePanel extends JPanel{
 	
 	private class keyLis extends KeyAdapter{
 	
-		public void keyPressed(KeyEvent e) {	
+		public void keyPressed(KeyEvent e) {
 
             int input = e.getKeyCode();
-            System.out.println("vi försöker måla om");
+            //System.out.println("vi försöker måla om");
             switch (input) {
             	
                 
@@ -174,7 +199,7 @@ public class GamePanel extends JPanel{
                 	
                     System.out.println("Moved Up");
                     direction = Direction.UP;
-                    player1.moveDirection(Direction.UP);
+                    //player1.moveDirection(Direction.UP);
                    // moveDirection(Direction.UP);
                 
                     break;
@@ -185,7 +210,7 @@ public class GamePanel extends JPanel{
    
                     System.out.println("Moved Down");
                     direction = Direction.DOWN;
-                    player1.moveDirection(Direction.DOWN);
+                   // player1.moveDirection(Direction.DOWN);
                    // moveDirection(Direction.DOWN);
                     
                     break;
@@ -195,18 +220,18 @@ public class GamePanel extends JPanel{
                    
                 	System.out.println("Moved right");
                 	direction = Direction.RIGHT;
-                	player1.moveDirection(Direction.RIGHT);
+                	//player1.moveDirection(Direction.RIGHT);
                 	//moveDirection(Direction.RIGHT);
                 	
                     break;
                     
                 case KeyEvent.VK_LEFT:
                 case KeyEvent.VK_A:
-                	
-                  System.out.println("Moved Left");
-                  direction = Direction.LEFT;
-                  player1.moveDirection(Direction.LEFT);
-                 // moveDirection(Direction.LEFT);
+                	System.out.println("Moved Left");
+                	direction = Direction.LEFT;
+                	System.out.println(player1Thread.getName());
+                	// player1.moveDirection(Direction.LEFT);
+                	// moveDirection(Direction.LEFT);
                     
                     break;
                     
@@ -227,6 +252,8 @@ public class GamePanel extends JPanel{
                 default:
                     break;
             }
+   
+
             repaint();
         }	
 	}
@@ -240,7 +267,8 @@ public class GamePanel extends JPanel{
 	    this.addKeyListener(new keyLis());
 	    this.setFocusable(true);
 	    this.revalidate();
-	    player1 = new PlayerController(direction);
+	    howManyPlayers(2);
 		
 	}
+
 }

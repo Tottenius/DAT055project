@@ -22,6 +22,7 @@ public class GameWindowTemp extends JFrame {
 		GAME
 	};
 	
+	// create states
 	private static STATE State = STATE.MENU;
 	private Menu menu;
 
@@ -45,7 +46,7 @@ public class GameWindowTemp extends JFrame {
 		}
 		
 		//if gamestate is Game then we start the game;
-		if (State == STATE.GAME) { 
+		if (State == STATE.GAME) {
 		this.add(new GamePanel());
 		System.out.println("hej är vi här");
 
