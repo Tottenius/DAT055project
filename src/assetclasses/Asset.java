@@ -13,13 +13,13 @@ public abstract class Asset {
 	private int position;
     private Image img;
     private ArrayList<Image> images = new ArrayList<Image>();
-    private String name; 
+     
 
 
     public Asset(int position, String path) {
         this.setPosition(position);
         loadImage(path);
-        this.name = name;
+        
         
     }
     

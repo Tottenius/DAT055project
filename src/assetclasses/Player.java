@@ -9,9 +9,6 @@ public class Player extends Asset {
 	private static final String right = "src/assets/PlayerRight.png";
 	
 
-	
-	
-	
 	public Player(int position) {
 		super(position, down);
 		super.loadImage(up);

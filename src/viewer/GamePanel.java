@@ -133,53 +133,6 @@ public class GamePanel extends JPanel{
 			   g.drawImage(asset.getImage(), x, y,this);
 			   x= x+ SPACE;
 		   }
-		   
-		   //Load in opened treasures
-		  // else if( asset instanceof Treasure) {
-		//	   g.drawImage(openedtreasure.getImage(), x, y,this);
-		//	   x= x+ SPACE;
-		 //  }
-		  //Load in player asset
-		    /*
-		    if( assetSymbol == 'p' && direction == Direction.LEFT) {
-				g.drawImage(player.getImageAtPos(2), x, y,this);
-				 x= x+ SPACE;
-			   }
-		    if( assetSymbol == 'p' && direction == Direction.RIGHT) {
-				g.drawImage(player.getImageAtPos(3), x, y,this);
-				 x= x+ SPACE;
-			   }
-		    if( assetSymbol == 'p' && direction == Direction.UP) {
-				g.drawImage(player.getImageAtPos(1), x, y,this);
-				 x= x+ SPACE;
-			   }
-		    if( assetSymbol == 'p' && direction == Direction.DOWN) {
-				g.drawImage(player.getImageAtPos(0), x, y,this);
-				 x= x+ SPACE;
-			   }
-		    
-		    //Load in wall assets
-		   if( assetSymbol == '#') {
-			   g.drawImage(wall.getImage(), x, y,this);
-			   x= x+ SPACE;
-		   }
-		   //Load in tile assets
-		   else if( assetSymbol == ' ') {
-			   g.drawImage(tile.getImage(), x, y,this);
-			   x= x+ SPACE;
-		   }
-		   //Load in treasures
-		   else if( assetSymbol == 't') {
-			   g.drawImage(treasure.getImage(), x, y,this);
-			   x= x+ SPACE;
-		   }
-		   
-		   //Load in opened treasures
-		   else if( assetSymbol == 'o') {
-			   g.drawImage(openedtreasure.getImage(), x, y,this);
-			   x= x+ SPACE;
-		   }
-		   */
 			   
 		}
 		y = 0;
@@ -191,7 +144,6 @@ public class GamePanel extends JPanel{
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //System.out.println("vi kommer hit igen och igen");
         initWorld(g);
         
     }
@@ -199,13 +151,6 @@ public class GamePanel extends JPanel{
 	private class keyLis extends KeyAdapter{
 	
 		public void keyPressed(KeyEvent e) {	
-
-			//System.out.println("inside keylist class");
-			
-       //If game is completed then keyInputs are ignored
-        /*	if (Completed) {   
-                return;
-            }*/
 
             int input = e.getKeyCode();
 
@@ -272,14 +217,7 @@ public class GamePanel extends JPanel{
 	// Usefull method give us the location of the player at any current time
 	// Might have to be changed if there exists more then one kind of asset that we want to move
 	private int assetLocation() {
-	/*	
-		for (int i = 0; i < level.length(); i++){
-		
-			if(level.charAt(i) == 'p') 
-				return i;
-			
-		}
-		*/
+
 		for (int i = 0; i < assets.size(); i++){
 			
 			if(assets.get(i) instanceof Player) 
@@ -333,39 +271,6 @@ public class GamePanel extends JPanel{
 		
 	}
 	
-	/*
-	//For moving movable objects and players
-	private String moveObeject(String s, char asset, int newPos, int oldPos) {
-		
-		char temp = s.charAt(newPos);
-		String tempString = s;
-		if(temp != '#' && temp != 't' && temp!= 'o') { //remove o if we changed how opening treasure works
-			StringBuilder leveltemp = new StringBuilder(s);
-			//Asset at new pos
-			leveltemp.setCharAt(newPos, asset);
-			//Old asset at objects former pos
-			leveltemp.setCharAt(oldPos,temp);
-			// rebuild to string
-			tempString =  leveltemp.toString();
-			
-		}
-	
-		//interacting with a chest, giving items etc TBD 'o' = opened chest
-		if(temp == 't') {
-			
-		System.out.println("interacting with a chest");
-		StringBuilder leveltemp = new StringBuilder(s);
-		leveltemp.setCharAt(newPos, 'o'); //replace t with o representing treasure is now opened at specific location
-		tempString =  leveltemp.toString();
-		
-		//Treasure.OpenTreasure(level,newPos);
-		
-		
-		}
-		System.out.println(tempString);
-		return tempString;
-	}
-	*/
 	public GamePanel(){
 		this.setPreferredSize(new Dimension ( WIDTH, HEIGHT));
 		this.setLayout(null);
