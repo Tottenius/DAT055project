@@ -82,6 +82,7 @@ public class GamePanel extends JPanel{
     		player2Thread = new Thread(player2);
     		player1Thread.start();
     		player2Thread.start();
+    		
 			}
     		
   
@@ -186,8 +187,10 @@ public class GamePanel extends JPanel{
     }
 	
 	private class keyLis extends KeyAdapter{
-	
+
 		public void keyPressed(KeyEvent e) {
+			 repaint();
+			PlayerController.sem.release();
 
             int input = e.getKeyCode();
             //System.out.println("vi försöker måla om");
@@ -252,7 +255,6 @@ public class GamePanel extends JPanel{
                 default:
                     break;
             }
-   
 
             repaint();
         }	
@@ -267,7 +269,7 @@ public class GamePanel extends JPanel{
 	    this.addKeyListener(new keyLis());
 	    this.setFocusable(true);
 	    this.revalidate();
-	    howManyPlayers(2);
+	    howManyPlayers(1);
 		
 	}
 

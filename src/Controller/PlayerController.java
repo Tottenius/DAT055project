@@ -79,23 +79,27 @@ public class PlayerController extends AssetController implements Runnable  {
 		
 	}
 	
-	static Semaphore sem = new Semaphore(1);
+	public static Semaphore sem = new Semaphore(0, true);
 	@Override
-	public void run() {
-		//while(true) {
-			sem.tryAcquire();
-			//Direction dire = GamePanel.getDirection();
-			moveDirection(GamePanel.getDirection());
-			sem.release();
+	public synchronized void run() {
+		while(true) {
+			
 			try {
-				Thread.sleep(500);
+				sem.acquire();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		//}
-	}
+				
+				moveDirection(GamePanel.getDirection());
+				try {
+					wait(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	}	
 
 
 }
