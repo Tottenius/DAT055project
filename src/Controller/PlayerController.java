@@ -12,7 +12,7 @@ import viewer.GamePanel.Direction;
 
 
 public class PlayerController extends AssetController implements Runnable  {
-	
+	//test
 	private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Player player;
 	private PlayerController me = this;
