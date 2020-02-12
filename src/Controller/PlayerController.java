@@ -84,7 +84,7 @@ public class PlayerController extends AssetController implements Runnable  {
 	public void run() {
 		//while(true) {
 			sem.tryAcquire();
-			Direction dire = GamePanel.getDirection();
+			//Direction dire = GamePanel.getDirection();
 			moveDirection(GamePanel.getDirection());
 			sem.release();
 			try {
