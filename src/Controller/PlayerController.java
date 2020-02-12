@@ -7,7 +7,7 @@ import assetclasses.Tile;
 import assetclasses.Treasure;
 import viewer.GamePanel;
 import viewer.GamePanel.Direction;
-
+//s
 public class PlayerController extends AssetController implements Runnable  {
 	//test
 	private static ArrayList<Asset> assets = GamePanel.getAssetList();

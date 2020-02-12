@@ -264,7 +264,7 @@ public class GamePanel extends JPanel{
                 default:
                     break;
             }
-
+//s
             repaint();
         }	
 	}
