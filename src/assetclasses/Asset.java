@@ -4,9 +4,9 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import viewer.GameSettings;
+
 public abstract class Asset {
 
 	private final static int size = GameSettings.getAssetsize();
@@ -14,13 +14,9 @@ public abstract class Asset {
     private Image img;
     private ArrayList<Image> images = new ArrayList<Image>();
      
-
-
     public Asset(int position, String path) {
         this.setPosition(position);
-        loadImage(path);
-        
-        
+        loadImage(path);      
     }
     
     public Image getImage() {
@@ -54,10 +50,5 @@ public abstract class Asset {
 
 	public void setPosition(int position) {
 		this.position = position;
-	}
-    
-    
-    	
-    	
-    
+	}   
 }

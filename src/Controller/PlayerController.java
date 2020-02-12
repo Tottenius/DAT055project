@@ -1,8 +1,6 @@
 package Controller;
 
 import java.util.ArrayList;
-import java.util.concurrent.Semaphore;
-
 import assetclasses.Asset;
 import assetclasses.Player;
 import assetclasses.Tile;
@@ -10,13 +8,10 @@ import assetclasses.Treasure;
 import viewer.GamePanel;
 import viewer.GamePanel.Direction;
 
-
 public class PlayerController extends AssetController implements Runnable  {
 	
 	private static ArrayList<Asset> assets = GamePanel.getAssetList();
-	private Player player;
-	private PlayerController me = this;
-	
+	private Player player;	
 	
 	public PlayerController(Direction direction, int pos) {
 		super(direction, assets, pos);
@@ -43,15 +38,11 @@ public class PlayerController extends AssetController implements Runnable  {
 		}
 		if (swapAsset instanceof Treasure) {
 			((Treasure) swapAsset).openTreasure();
-		}
-		
-		
+		}	
 	}
 	
 	@Override
 	public void run() {			
 		//moveDirection(GamePanel.getDirection());
 	}	
-
-
 }

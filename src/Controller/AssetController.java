@@ -1,11 +1,7 @@
 package Controller;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
 import assetclasses.Asset;
-import viewer.GamePanel;
 import viewer.GamePanel.Direction;
 import viewer.GameSettings;
 
@@ -33,5 +29,4 @@ public abstract class AssetController {
 	protected void setPosition(int pos) {
 		position = pos;
 	}
-
 }

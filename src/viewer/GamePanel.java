@@ -23,13 +23,12 @@ public class GamePanel extends JPanel{
 	//Window size
 	 private static final int WIDTH = GameSettings.getWidth();
 	 private static final int HEIGHT = GameSettings.getHeight();
-		// Size of an asset
-		private static final int SIZE = GameSettings.getAssetsize();
+	 // Size of an asset
+	 private static final int SIZE = GameSettings.getAssetsize();
 	 // Serial
-	private static final long serialVersionUID = 1L;
-	private GamePanel theGamePanel = this;
-	//Directions
-	public enum Direction{
+	 private static final long serialVersionUID = 1L;
+	 //Directions
+	 public enum Direction{
 		UP(0, -(WIDTH/SIZE)),
 		DOWN(0, (WIDTH/SIZE)),
 		LEFT(-1, 0),
@@ -59,11 +58,10 @@ public class GamePanel extends JPanel{
 	private static ArrayList<Asset> assets = new ArrayList<Asset>();
 
 	// Starting position
-    private int position = 0;
     private int x = 0;
     private int y = 0;
-    // Symbol
-    private char assetSymbol;
+    
+    // Symbols
     private Asset asset;
     //level paths
     String level = "";
@@ -97,8 +95,7 @@ public class GamePanel extends JPanel{
     		enemy1 = new EnemyController(direction, 55);
     		enemy1Thread = new Thread(enemy1);
     		enemy1Thread.start();
-    		*/
-			
+    		*/		
     	}
        	if (amount == 2) {
     		player1 = new PlayerController(direction, 45);
@@ -107,13 +104,9 @@ public class GamePanel extends JPanel{
     		player2Thread = new Thread(player2);
     		player1Thread.start();
     		player2Thread.start();
-    		
 			}
-    		
-  
     }
-
-    
+  
     public void readInlevel( String path) {
         //System.out.println("current working directory is: " + System.getProperty("user.dir"));
         try {
@@ -140,7 +133,6 @@ public class GamePanel extends JPanel{
  		   }
  		   else if( level.charAt(i) == 'p' ) {
  			  assets.add(new Player(i));
-			
 			   }   	
         }
       }
@@ -195,20 +187,16 @@ public class GamePanel extends JPanel{
 			   
 			   g.drawImage(asset.getImage(), x, y,this);
 			   x= x+ SIZE;
-		   }
-			   
+		   }	   
 		}
 		y = 0;
 		x= 0;
-
     }
-
 	
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        initWorld(g);
-        
+        initWorld(g);     
     }
 	
 	private class keyLis extends KeyAdapter{
@@ -219,8 +207,7 @@ public class GamePanel extends JPanel{
             int input = e.getKeyCode();
             //System.out.println("vi försöker måla om");
             switch (input) {
-            	
-                
+            	            
                 case KeyEvent.VK_UP:
                 case KeyEvent.VK_W:
                 	
@@ -229,8 +216,7 @@ public class GamePanel extends JPanel{
                     player1.moveDirection(Direction.UP);
                    // moveDirection(Direction.UP);
                 
-                    break;
-                    
+                    break;               
                     
                 case KeyEvent.VK_DOWN:
                 case KeyEvent.VK_S:
@@ -274,8 +260,7 @@ public class GamePanel extends JPanel{
                 	//openMenu(); 			  //Possible method to open menu
                 	
                 	break;
-                    
-                    
+                                       
                 default:
                     break;
             }
@@ -296,5 +281,4 @@ public class GamePanel extends JPanel{
 	    howManyPlayers(1);
 		
 	}
-
 }
