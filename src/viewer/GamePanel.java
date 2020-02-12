@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
+import Controller.EnemyController;
 import Controller.PlayerController;
 import assetclasses.Asset;
 import assetclasses.Player;
@@ -19,17 +20,29 @@ import assetclasses.Wall;
 
 
 public class GamePanel extends JPanel{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private GamePanel theGamePanel = this;
 	//Directions
 	public enum Direction{
-		UP,
-		DOWN,
-		LEFT,
-		RIGHT
+		UP(0, -1),
+		DOWN(0, 1),
+		LEFT(-1, 0),
+		RIGHT(1, 0);
+		private final int yDelta;
+		private final int xDelta;
+		
+		Direction(int xDelta, int yDelta) {
+			this.xDelta = xDelta;
+			this.yDelta = yDelta;
+		}
+		
+		public int getXDelta() {
+			return this.xDelta;
+		}
+		
+		public int getYDelta() {
+			return this.yDelta;
+		}
 	}
 	private static Direction direction = Direction.RIGHT;
 	//get direction
@@ -42,7 +55,7 @@ public class GamePanel extends JPanel{
 	 private static final int WIDTH = GameSettings.getWidth();
 	 private static final int HEIGHT = GameSettings.getHeight();
 	// Size of an asset
-	private static final int SPACE = GameSettings.getAssetsize();
+	private static final int SIZE = GameSettings.getAssetsize();
 	// Starting position
     private int position = 0;
     private int x = 0;
@@ -57,6 +70,11 @@ public class GamePanel extends JPanel{
     //Players
     private PlayerController player1;
     private PlayerController player2;
+    
+    //Enemys
+    private EnemyController enemy1;
+    //Enemy threads
+    private Thread enemy1Thread;
     //Player threads
     private Thread player1Thread;
     private Thread player2Thread;
@@ -73,6 +91,9 @@ public class GamePanel extends JPanel{
     		player1 = new PlayerController(direction, 45);
     		player1Thread = new Thread(player1);
     		player1Thread.start();
+    		enemy1 = new EnemyController(direction, 55);
+    		enemy1Thread = new Thread(enemy1);
+    		enemy1Thread.start();
 			
     	}
        	if (amount == 2) {
@@ -130,46 +151,46 @@ public class GamePanel extends JPanel{
 		  // Time for a new row?
 		    if(x == WIDTH){
 		    	x = 0;
-		    	y = y + SPACE;
+		    	y = y + SIZE;
 		    }
 		    if( asset instanceof Player && direction == Direction.LEFT) {
 		    	asset.getImageAtPos(2);
 				g.drawImage(asset.getImage(), x, y,this);
 				//System.out.println("vi försöker göra en gubbe");
-				 x= x+ SPACE;
+				 x= x+ SIZE;
 			   }
 		    if( asset instanceof Player && direction == Direction.RIGHT) {
 		    	asset.getImageAtPos(3);
 				g.drawImage(asset.getImage(), x, y,this);
-				 x= x+ SPACE;
+				 x= x+ SIZE;
 			   }
 		    if( asset instanceof Player && direction == Direction.UP) {
 		    	asset.getImageAtPos(1);
 				g.drawImage(asset.getImage(), x, y,this);
-				 x= x+ SPACE;
+				 x= x+ SIZE;
 			   }
 		    if( asset instanceof Player && direction == Direction.DOWN) {
 		    	asset.getImageAtPos(0);
 				g.drawImage(asset.getImage(), x, y,this);
-				 x= x+ SPACE;
+				 x= x+ SIZE;
 			   }
 		    
 		    //Load in wall assets
 		   if( asset instanceof Wall) {
 			   //System.out.println("Vi försöker göra en wall");
 			   g.drawImage(asset.getImage(), x, y,this);
-			   x= x+ SPACE;
+			   x= x+ SIZE;
 		   }
 		   //Load in tile assets
 		   else if( asset instanceof Tile) {
 			   g.drawImage(asset.getImage(), x, y,this);
-			   x= x+ SPACE;
+			   x= x+ SIZE;
 		   }
 		   //Load in treasures
 		   else if( asset instanceof Treasure) {
 			   
 			   g.drawImage(asset.getImage(), x, y,this);
-			   x= x+ SPACE;
+			   x= x+ SIZE;
 		   }
 			   
 		}
@@ -190,7 +211,6 @@ public class GamePanel extends JPanel{
 
 		public void keyPressed(KeyEvent e) {
 			 repaint();
-			PlayerController.sem.release();
 
             int input = e.getKeyCode();
             //System.out.println("vi försöker måla om");
