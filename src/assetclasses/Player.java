@@ -6,7 +6,7 @@ public class Player extends Asset {
 	private static final String up = "src/assets/PlayerUp.png";
 	private static final String left = "src/assets/PlayerLeft.png";
 	private static final String right = "src/assets/PlayerRight.png";
-	//s
+
 	private int hp = 5;
 
 	public Player(int position) {

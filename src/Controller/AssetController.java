@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import assetclasses.Asset;
 import viewer.GamePanel.Direction;
 import viewer.GameSettings;
-//s
+
 public abstract class AssetController {
 	
 	protected final static int WIDTH = GameSettings.getWidth();

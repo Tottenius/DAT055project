@@ -26,7 +26,7 @@ public abstract class Asset {
     public void getImageAtPos(int i) {
     	img = images.get(i);
     }
-    //s
+    
     public void loadImage(String path) {
     	//try to get image
     	Image imgTemp;
