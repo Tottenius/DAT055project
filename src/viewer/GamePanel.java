@@ -266,8 +266,19 @@ public class GamePanel extends JPanel{
             }
 
             repaint();
+            
         }	
 	}
+	
+	public void moveenemy() {
+		enemy1 = new EnemyController(direction, 55);
+		enemy1.moveDirection();
+		repaint();
+		
+		
+		
+	}
+	
  	
 	public GamePanel(){
 		this.setPreferredSize(new Dimension ( WIDTH, HEIGHT));
