@@ -31,8 +31,8 @@ public class EnemyController extends AssetController implements Runnable  {
 		System.out.println(enemyPos);
 		Asset movingAsset = assets.get(enemyPos);
 		Asset swapAsset = null;
-		int up = enemyPos - (WIDTH/SPACE);
-		int down = enemyPos + (WIDTH/SPACE);
+		int up = enemyPos - (WIDTH/SIZE);
+		int down = enemyPos + (WIDTH/SIZE);
 		int left = enemyPos -1;
 		int right = enemyPos + 1;
 		

@@ -20,12 +20,18 @@ import assetclasses.Wall;
 
 
 public class GamePanel extends JPanel{
+	//Window size
+	 private static final int WIDTH = GameSettings.getWidth();
+	 private static final int HEIGHT = GameSettings.getHeight();
+		// Size of an asset
+		private static final int SIZE = GameSettings.getAssetsize();
+	 // Serial
 	private static final long serialVersionUID = 1L;
 	private GamePanel theGamePanel = this;
 	//Directions
 	public enum Direction{
-		UP(0, -1),
-		DOWN(0, 1),
+		UP(0, -(WIDTH/SIZE)),
+		DOWN(0, (WIDTH/SIZE)),
 		LEFT(-1, 0),
 		RIGHT(1, 0);
 		private final int yDelta;
@@ -51,11 +57,7 @@ public class GamePanel extends JPanel{
 	}
 	// list with assets
 	private static ArrayList<Asset> assets = new ArrayList<Asset>();
-	//Window size
-	 private static final int WIDTH = GameSettings.getWidth();
-	 private static final int HEIGHT = GameSettings.getHeight();
-	// Size of an asset
-	private static final int SIZE = GameSettings.getAssetsize();
+
 	// Starting position
     private int position = 0;
     private int x = 0;
@@ -91,9 +93,11 @@ public class GamePanel extends JPanel{
     		player1 = new PlayerController(direction, 45);
     		player1Thread = new Thread(player1);
     		player1Thread.start();
+    		/*
     		enemy1 = new EnemyController(direction, 55);
     		enemy1Thread = new Thread(enemy1);
     		enemy1Thread.start();
+    		*/
 			
     	}
        	if (amount == 2) {
@@ -222,7 +226,7 @@ public class GamePanel extends JPanel{
                 	
                     System.out.println("Moved Up");
                     direction = Direction.UP;
-                    //player1.moveDirection(Direction.UP);
+                    player1.moveDirection(Direction.UP);
                    // moveDirection(Direction.UP);
                 
                     break;
@@ -233,7 +237,7 @@ public class GamePanel extends JPanel{
    
                     System.out.println("Moved Down");
                     direction = Direction.DOWN;
-                   // player1.moveDirection(Direction.DOWN);
+                    player1.moveDirection(Direction.DOWN);
                    // moveDirection(Direction.DOWN);
                     
                     break;
@@ -243,7 +247,7 @@ public class GamePanel extends JPanel{
                    
                 	System.out.println("Moved right");
                 	direction = Direction.RIGHT;
-                	//player1.moveDirection(Direction.RIGHT);
+                	player1.moveDirection(Direction.RIGHT);
                 	//moveDirection(Direction.RIGHT);
                 	
                     break;
@@ -253,7 +257,7 @@ public class GamePanel extends JPanel{
                 	System.out.println("Moved Left");
                 	direction = Direction.LEFT;
                 	System.out.println(player1Thread.getName());
-                	// player1.moveDirection(Direction.LEFT);
+                	 player1.moveDirection(Direction.LEFT);
                 	// moveDirection(Direction.LEFT);
                     
                     break;

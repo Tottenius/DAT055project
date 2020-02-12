@@ -23,54 +23,23 @@ public class PlayerController extends AssetController implements Runnable  {
 		player = new Player(pos);
 		assets.set(pos,player);
 	}
-/*
-	private int assetLocation() {
 
-		for (int i = 0; i < assets.size(); i++){
-			
-			if(assets.get(i) instanceof Player) 
-
-				return i;
-			
-		}
-		return 0 ; //this mean player can never be at zero but we can change this later
-	}
-	*/
 	public void moveDirection( Direction direction) {
 		// Right now just player pos
-		int firstplayerpos = super.getPosition();
-		System.out.println(firstplayerpos);
+		int oldPlayerPos = super.getPosition();
+		System.out.println(oldPlayerPos);
 		System.out.println(direction);
-		Asset movingAsset = assets.get(firstplayerpos);
+		Asset movingAsset = assets.get(oldPlayerPos);
 		Asset swapAsset = null;
-		int up = firstplayerpos - (WIDTH/SPACE);
-		int down = firstplayerpos + (WIDTH/SPACE);
-		int left = firstplayerpos -1;
-		int right = firstplayerpos + 1;
-		
-		int dir = 0;
-		
-		if(direction == Direction.UP ) {
-				dir = up;
-		}
-		if(direction == Direction.DOWN ) {		
-				dir = down;
-			
-		}
-		if(direction == Direction.LEFT ) {
-				dir = left;
-		}
-		if(direction == Direction.RIGHT ) {
-				dir = right;
-			
-		}
+		 
+		int newPlayerPos = oldPlayerPos + GamePanel.getDirection().getXDelta() +  GamePanel.getDirection().getYDelta();
 		
 		// Alla interaktioner med assets
-		swapAsset = assets.get(dir);
+		swapAsset = assets.get(newPlayerPos);
 		if (swapAsset instanceof Tile) {
-			assets.set(dir, movingAsset ).setPosition(firstplayerpos);
-			assets.set(firstplayerpos, swapAsset ).setPosition(dir);
-			super.setPosition(dir);
+			assets.set(newPlayerPos, movingAsset ).setPosition(oldPlayerPos);
+			assets.set(oldPlayerPos, swapAsset ).setPosition(newPlayerPos);
+			super.setPosition(newPlayerPos);
 		}
 		if (swapAsset instanceof Treasure) {
 			((Treasure) swapAsset).openTreasure();

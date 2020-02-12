@@ -13,7 +13,7 @@ public abstract class AssetController {
 	
 	protected final static int WIDTH = GameSettings.getWidth();
 	protected final static int HEIGHT = GameSettings.getHeight();
-	protected final static int SPACE = GameSettings.getAssetsize();
+	protected final static int SIZE = GameSettings.getAssetsize();
 	//Position
 	protected int position;
 	//Dirction
