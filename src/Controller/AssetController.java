@@ -9,7 +9,7 @@ import viewer.GamePanel;
 import viewer.GamePanel.Direction;
 import viewer.GameSettings;
 
-public abstract class AssetController implements Runnable {
+public abstract class AssetController {
 	
 	protected final static int WIDTH = GameSettings.getWidth();
 	protected final static int HEIGHT = GameSettings.getHeight();

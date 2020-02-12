@@ -11,7 +11,7 @@ import viewer.GamePanel;
 import viewer.GamePanel.Direction;
 
 
-public class PlayerController extends AssetController  {
+public class PlayerController extends AssetController implements Runnable  {
 	
 	private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Player player;
@@ -82,19 +82,19 @@ public class PlayerController extends AssetController  {
 	static Semaphore sem = new Semaphore(1);
 	@Override
 	public void run() {
-		while(true) {
+		//while(true) {
 			sem.tryAcquire();
 			Direction dire = GamePanel.getDirection();
 			moveDirection(GamePanel.getDirection());
 			sem.release();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-		}
+		//}
 	}
 
 
