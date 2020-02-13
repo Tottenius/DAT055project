@@ -8,6 +8,7 @@ import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Tile;
 import assetclasses.Treasure;
+import main.Main;
 import viewer.GamePanel;
 import viewer.GamePanel.Direction;
 
@@ -15,48 +16,67 @@ public class EnemyController extends AssetController implements Runnable  {
 	
 	private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Enemy enemy;
-	private int steps = 4;
+	//True is going to the right
+	private boolean goingToTheRight = true;
+	//Enemy direction, behöver fixas mer med
+	private static Direction enemyD = GamePanel.Direction.LEFT;
 	
 	
-	public EnemyController(Direction direction, int pos) {
-		super(direction, assets, pos);
+	public EnemyController(int pos) {
+		super(enemyD, assets, pos);
 		enemy = new Enemy(pos);
-		assets.set(pos,enemy);
+		assets.add(enemy);
 	}
 
 	
 	public void moveDirection() {
 		// Right now just player pos
-		int enemyPos = super.getPosition();
-		System.out.println(enemyPos);
-		Asset movingAsset = assets.get(enemyPos);
-		Asset swapAsset = null;
-		int up = enemyPos - (WIDTH/SIZE);
-		int down = enemyPos + (WIDTH/SIZE);
-		int left = enemyPos -1;
-		int right = enemyPos + 1;
+		int oldEnemyPos = super.getPosition();
+		int newEnemyPos = 0;
+		//System.out.println(oldEnemyPos);
+		Asset enemy = assets.get(oldEnemyPos);
+		Asset newEnemyLocation = null;
+			// Going to the right
+			if(goingToTheRight) {
+				newEnemyPos = oldEnemyPos + 1;
+				newEnemyLocation = assets.get(newEnemyPos);
+			}
+			// Going to the left
+			else {
+				newEnemyPos = oldEnemyPos - 1;
+				newEnemyLocation = assets.get(newEnemyPos);
+			}
+			// Alla interaktioner med assets
 		
-		if (steps > 0) {
-			swapAsset = assets.get(left);
-			assets.set(left, movingAsset);
-			assets.set(enemyPos, swapAsset);
-			steps--;
-		}
-		if (steps < 0) {
-			swapAsset = assets.get(right);
-			assets.set(left, movingAsset);
-			assets.set(enemyPos, swapAsset);
-			steps--;
-		}
-		
+			if (newEnemyLocation instanceof Tile) {
+				assets.set(newEnemyPos, enemy ).setPosition(oldEnemyPos);
+				assets.set(oldEnemyPos, newEnemyLocation ).setPosition(newEnemyPos);
+				super.setPosition(newEnemyPos);
+			}
+			else  {
+				goingToTheRight = !goingToTheRight;
+			
+			}
+
+			
 		
 		
 	}
 	
-	//public static Semaphore sem = new Semaphore(0, true);
 	@Override
-	public synchronized void run() {
-
+	public void run() {
+		while(Main.isRunning) {
+			
+			moveDirection();
+			try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
 	}	
 
 }

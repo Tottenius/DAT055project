@@ -13,13 +13,15 @@ import javax.swing.JPanel;
 import Controller.EnemyController;
 import Controller.PlayerController;
 import assetclasses.Asset;
+import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Tile;
 import assetclasses.Treasure;
 import assetclasses.Wall;
+import main.Main;
 
 
-public class GamePanel extends JPanel{
+public class GamePanel extends JPanel implements Runnable{
 	//Window size
 	 private static final int WIDTH = GameSettings.getWidth();
 	 private static final int HEIGHT = GameSettings.getHeight();
@@ -27,6 +29,17 @@ public class GamePanel extends JPanel{
 	 private static final int SIZE = GameSettings.getAssetsize();
 	 // Serial
 	 private static final long serialVersionUID = 1L;
+	 // NewKeyPressedBool
+	 private static boolean isKeyPressed = false;
+	 
+	 public static boolean isKeyPressed() {
+		return isKeyPressed;
+	 }
+	 public static void setKeyPressed(boolean isKeyPressed) {
+		 GamePanel.isKeyPressed = isKeyPressed;
+	 }
+
+		
 	 //Directions
 	 public enum Direction{
 		UP(0, -(WIDTH/SIZE)),
@@ -91,11 +104,10 @@ public class GamePanel extends JPanel{
     		//player1 = new PlayerController( 45);
     		player1Thread = new Thread(player1);
     		player1Thread.start();
-    		/*
-    		enemy1 = new EnemyController(direction, 55);
+    		// startar enemyn kanske fel ställen men på test
     		enemy1Thread = new Thread(enemy1);
     		enemy1Thread.start();
-    		*/		
+    			
     	}
        	if (amount == 2) {
     		player1 = new PlayerController( 45);
@@ -117,7 +129,7 @@ public class GamePanel extends JPanel{
           e.printStackTrace();
         }
         for(int i = 0; i< level.length(); i++ ) {
-        	System.out.println(i);
+        	
         	if (level.charAt(i)== '#') {
         		assets.add(new Wall(posInList));
         		posInList++;
@@ -143,6 +155,11 @@ public class GamePanel extends JPanel{
  			   posInList++;
  			  //assets.add(new Player(i));
 			}   	
+  		   //Load in enemies
+ 		   	else if( level.charAt(i) == 'e') {
+ 			  enemy1 = new EnemyController( posInList);
+ 			  posInList++;
+ 		   	}
         }
       }
 
@@ -158,6 +175,7 @@ public class GamePanel extends JPanel{
 		    	x = 0;
 		    	y = y + SIZE;
 		    }
+		    // Load in player
 		    if( asset instanceof Player && direction == Direction.LEFT) {
 		    	asset.getImageAtPos(2);
 				g.drawImage(asset.getImage(), x, y,this);
@@ -179,7 +197,12 @@ public class GamePanel extends JPanel{
 				g.drawImage(asset.getImage(), x, y,this);
 				 x= x+ SIZE;
 			   }
-		    
+		    //Load in enemies
+		   if( asset instanceof Enemy) {
+			   //System.out.println("Vi försöker göra en enemy");
+			   g.drawImage(asset.getImage(), x, y,this);
+			   x= x+ SIZE;
+		   }
 		    //Load in wall assets
 		   if( asset instanceof Wall) {
 			   //System.out.println("Vi försöker göra en wall");
@@ -211,7 +234,6 @@ public class GamePanel extends JPanel{
 	private class keyLis extends KeyAdapter{
 
 		public void keyPressed(KeyEvent e) {
-			 repaint();
 
             int input = e.getKeyCode();
             //System.out.println("vi försöker måla om");
@@ -222,7 +244,7 @@ public class GamePanel extends JPanel{
                 	
                     System.out.println("Moved Up");
                     direction = Direction.UP;
-                    player1.moveDirection(Direction.UP);
+                   // player1.moveDirection(Direction.UP);
                    // moveDirection(Direction.UP);
                 
                     break;               
@@ -232,7 +254,7 @@ public class GamePanel extends JPanel{
    
                     System.out.println("Moved Down");
                     direction = Direction.DOWN;
-                    player1.moveDirection(Direction.DOWN);
+                    //player1.moveDirection(Direction.DOWN);
                    // moveDirection(Direction.DOWN);
                     
                     break;
@@ -242,7 +264,7 @@ public class GamePanel extends JPanel{
                    
                 	System.out.println("Moved right");
                 	direction = Direction.RIGHT;
-                	player1.moveDirection(Direction.RIGHT);
+                	//player1.moveDirection(Direction.RIGHT);
                 	//moveDirection(Direction.RIGHT);
                 	
                     break;
@@ -251,9 +273,6 @@ public class GamePanel extends JPanel{
                 case KeyEvent.VK_A:
                 	System.out.println("Moved Left");
                 	direction = Direction.LEFT;
-                	System.out.println(player1Thread.getName());
-                	 player1.moveDirection(Direction.LEFT);
-                	// moveDirection(Direction.LEFT);
                     
                     break;
                     
@@ -273,20 +292,12 @@ public class GamePanel extends JPanel{
                 default:
                     break;
             }
-
-            repaint();
+            isKeyPressed = true;
+            
             
         }	
 	}
 	
-	public void moveenemy() {
-		enemy1 = new EnemyController(direction, 55);
-		enemy1.moveDirection();
-		repaint();
-		
-		
-		
-	}
 	
  	
 	public GamePanel(){
@@ -301,4 +312,20 @@ public class GamePanel extends JPanel{
 	    howManyPlayers(1);
 		
 	}
+	@Override
+	public void run() {
+		while(Main.isRunning) {
+			repaint();
+			//Repaint at 60 fps
+			try {
+				Thread.sleep(1000/60);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+	}
+
 }

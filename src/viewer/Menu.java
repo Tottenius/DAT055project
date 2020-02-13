@@ -22,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
+import main.Main;
+
 
 public class Menu extends JPanel {
 
@@ -106,6 +108,7 @@ public class Menu extends JPanel {
  		  public void actionPerformed(ActionEvent e) { 
 	            System.out.println("Start Button pressed!");
 	            System.out.println("Quit Button pressed!");
+	            Main.isRunning = false;
 	            System.exit(0);
 			  } 
 			} 
@@ -115,6 +118,7 @@ public class Menu extends JPanel {
 		  public void actionPerformed(ActionEvent e) { 
            System.out.println("Start Button pressed!");
            System.out.println("Quit Button pressed!");
+           Main.isRunning = false;
            System.exit(0);
 		  } 
 		} 

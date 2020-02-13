@@ -37,6 +37,9 @@ public class GameWindowTemp extends JFrame {
 
     // local reference to it self
     private GameWindowTemp window = this;
+    
+    // GameThread
+    private Thread gameThread;
 	
 	public GameWindowTemp(){
 
@@ -47,8 +50,11 @@ public class GameWindowTemp extends JFrame {
 		
 		//if gamestate is Game then we start the game;
 		if (State == STATE.GAME) {
-		this.add(new GamePanel());
-		System.out.println("hej är vi här");
+			GamePanel gpanel = new GamePanel();
+			this.add(gpanel);
+			gameThread = new Thread(gpanel);
+			gameThread.start();
+			System.out.println("hej är vi här");
 
 		}
 		

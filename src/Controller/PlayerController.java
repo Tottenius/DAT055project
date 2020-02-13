@@ -5,6 +5,7 @@ import assetclasses.Asset;
 import assetclasses.Player;
 import assetclasses.Tile;
 import assetclasses.Treasure;
+import main.Main;
 import viewer.GamePanel;
 import viewer.GamePanel.Direction;
 
@@ -22,8 +23,8 @@ public class PlayerController extends AssetController implements Runnable  {
 	public void moveDirection( Direction direction) {
 		// Right now just player pos
 		int oldPlayerPos = super.getPosition();
-		System.out.println(oldPlayerPos);
-		System.out.println(direction);
+		//System.out.println(oldPlayerPos);
+		//System.out.println(direction);
 		Asset movingAsset = assets.get(oldPlayerPos);
 		Asset swapAsset = null;
 		 
@@ -43,6 +44,11 @@ public class PlayerController extends AssetController implements Runnable  {
 	
 	@Override
 	public void run() {			
-		//moveDirection(GamePanel.getDirection());
+		while(Main.isRunning) {
+			if(GamePanel.isKeyPressed()) {
+				moveDirection(direction);
+				GamePanel.setKeyPressed(false);
+			}
+		}
 	}	
 }
