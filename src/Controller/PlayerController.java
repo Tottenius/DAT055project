@@ -7,6 +7,7 @@ import assetclasses.Player;
 import assetclasses.Tile;
 import assetclasses.Treasure;
 import main.Main;
+import viewer.GameOverScreen;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
 import viewer.GamePanel.Direction;
@@ -16,9 +17,12 @@ public class PlayerController extends AssetController implements Runnable  {
 	private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Player player;	
 	private static boolean playerAlive;
+
 	
 	public static void playerDead() {
 		playerAlive = false;
+		//Main.isRunning = false;
+		//GWT.GameOver(); //make this better
 	}
 	
 	public PlayerController(int pos) {
@@ -59,12 +63,14 @@ public class PlayerController extends AssetController implements Runnable  {
 	}
 	
 	@Override
-	public void run() {			
-		while(GameWindowTemp.isGameState() && playerAlive) {
-			if(GamePanel.isKeyPressed()) {
-				moveDirection(direction);
-				GamePanel.setKeyPressed(false);
-			}
-		}
-	}	
+    public void run() {
+        System.out.println("Startar playertråd");
+        while(GameWindowTemp.isGameState() && playerAlive) {
+            System.out.println("kör playertråd");
+            if(GamePanel.isKeyPressed()) {
+                moveDirection(direction);
+                GamePanel.setKeyPressed(false);
+            }
+        }
+    }
 }

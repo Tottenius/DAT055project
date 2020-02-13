@@ -19,7 +19,7 @@ public class GameWindowTemp extends JFrame {
 	
 	private enum STATE{
 		MENU,
-		GAME
+		GAME,
 	};
 	// gamestate bool
 	public static boolean isGameState() {
@@ -126,5 +126,8 @@ public class GameWindowTemp extends JFrame {
 		
 		State = STATE.MENU;	
 }
+	public  void GameOver() {
+		this.add(new GameOverScreen());
+	}
 }
 	
