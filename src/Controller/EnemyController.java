@@ -23,7 +23,7 @@ public class EnemyController extends AssetController implements Runnable  {
 	
 	
 	public EnemyController(int pos) {
-		super(enemyD, assets, pos);
+		super( pos);
 		enemy = new Enemy(pos);
 		assets.add(enemy);
 	}
@@ -48,10 +48,20 @@ public class EnemyController extends AssetController implements Runnable  {
 			}
 			// Alla interaktioner med assets
 		
-			if (newEnemyLocation instanceof Tile) {
+			if (newEnemyLocation instanceof Tile ) {
+				// Den nya positionen
 				assets.set(newEnemyPos, enemy ).setPosition(oldEnemyPos);
+				// Den gamla positionen
 				assets.set(oldEnemyPos, newEnemyLocation ).setPosition(newEnemyPos);
 				super.setPosition(newEnemyPos);
+			}
+			else if (newEnemyLocation instanceof Player  ) {
+				// Den nya positionen
+				assets.set(newEnemyPos, enemy ).setPosition(oldEnemyPos);
+				// Den gamla positionen
+				assets.set(oldEnemyPos, new Tile(oldEnemyPos) ).setPosition(newEnemyPos);
+				super.setPosition(newEnemyPos);
+				PlayerController.playerDead();
 			}
 			else  {
 				goingToTheRight = !goingToTheRight;
