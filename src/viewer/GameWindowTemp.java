@@ -22,6 +22,10 @@ public class GameWindowTemp extends JFrame {
 		GAME
 	};
 	
+	public static boolean isGameState() {
+		return State == STATE.GAME;
+	}
+	
 	// create states
 	private static STATE State = STATE.MENU;
 	private Menu menu;

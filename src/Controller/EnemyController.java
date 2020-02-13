@@ -11,6 +11,7 @@ import assetclasses.Treasure;
 import main.Main;
 import viewer.GamePanel;
 import viewer.GamePanel.Direction;
+import viewer.GameWindowTemp;
 
 public class EnemyController extends AssetController implements Runnable  {
 	
@@ -20,6 +21,8 @@ public class EnemyController extends AssetController implements Runnable  {
 	private boolean goingToTheRight = true;
 	//Enemy direction, behöver fixas mer med
 	private static Direction enemyD = GamePanel.Direction.LEFT;
+	// Is it alive=
+	private boolean isAlive = true;
 	
 	
 	public EnemyController(int pos) {
@@ -75,7 +78,7 @@ public class EnemyController extends AssetController implements Runnable  {
 	
 	@Override
 	public void run() {
-		while(Main.isRunning) {
+		while(GameWindowTemp.isGameState() && isAlive ) {
 			
 			moveDirection();
 			try {

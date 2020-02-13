@@ -150,7 +150,7 @@ public class GamePanel extends JPanel implements Runnable{
  			  posInList++;
  		   	}
  		   	else if( level.charAt(i) == 'p' ) {
- 			   System.out.println(i);
+ 			   //System.out.println(i);
  			   player1 = new PlayerController( posInList);
  			   posInList++;
  			  //assets.add(new Player(i));
@@ -303,7 +303,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public GamePanel(){
 		this.setPreferredSize(new Dimension ( WIDTH, HEIGHT));
 		this.setLayout(null);
+		System.out.println("Läser in leveln");
+		//System.out.println(level);
 		readInlevel(level1);
+		System.out.println(level);
 		this.setVisible(true);
 		//adding the keylistener
 	    this.addKeyListener(new keyLis());
@@ -314,7 +317,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	@Override
 	public void run() {
-		while(Main.isRunning) {
+		while(Main.isRunning && GameWindowTemp.isGameState()) {
 			repaint();
 			//Repaint at 60 fps
 			try {

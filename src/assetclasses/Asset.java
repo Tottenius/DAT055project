@@ -40,7 +40,7 @@ public abstract class Asset {
     	// den går till sig själv, kanske inte går
     	imgTemp = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
     	img = imgTemp;
-    	System.out.println(img);
+    	//System.out.println(img);
     	images.add(img);
     }
 

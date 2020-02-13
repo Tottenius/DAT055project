@@ -8,13 +8,14 @@ import assetclasses.Tile;
 import assetclasses.Treasure;
 import main.Main;
 import viewer.GamePanel;
+import viewer.GameWindowTemp;
 import viewer.GamePanel.Direction;
 
 public class PlayerController extends AssetController implements Runnable  {
 	//test
 	private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Player player;	
-	private static boolean playerAlive = true;
+	private static boolean playerAlive;
 	
 	public static void playerDead() {
 		playerAlive = false;
@@ -24,6 +25,7 @@ public class PlayerController extends AssetController implements Runnable  {
 		super(pos);
 		player = new Player(pos);
 		assets.add(player);
+		playerAlive = true;
 	}
 
 	public void moveDirection( Direction direction) {
@@ -46,14 +48,19 @@ public class PlayerController extends AssetController implements Runnable  {
 			// Sätt controllerns position till den nya positionen
 			super.setPosition(newPlayerPos);
 		}
-		if (swapAsset instanceof Treasure) {
+		else if (swapAsset instanceof Treasure) {
 			((Treasure) swapAsset).openTreasure();
+		}
+		else if (swapAsset instanceof Enemy) {
+			// Sätt objetet vi rör oss till på playerns gamla position och ge det playerns gamla position
+			assets.set(oldPlayerPos, new Tile(oldPlayerPos) ).setPosition(newPlayerPos);
+			playerAlive = false;
 		}
 	}
 	
 	@Override
 	public void run() {			
-		while(playerAlive) {
+		while(GameWindowTemp.isGameState() && playerAlive) {
 			if(GamePanel.isKeyPressed()) {
 				moveDirection(direction);
 				GamePanel.setKeyPressed(false);
