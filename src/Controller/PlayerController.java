@@ -12,7 +12,7 @@ import viewer.GameWindowTemp;
 import viewer.GamePanel.Direction;
 
 public class PlayerController extends AssetController implements Runnable  {
-	//test
+	//tes
 	private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Player player;	
 	private static boolean playerAlive;
