@@ -21,11 +21,7 @@ import main.Main;
 
 public class GameOverScreen extends JPanel {
 
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;	
-		
+		private static final long serialVersionUID = 1L;		
 		private static final String path = "src/assets/GameOverScreen.jpg";
 		
 		 JButton RestartButton = new JButton("Restart");
@@ -38,7 +34,6 @@ public class GameOverScreen extends JPanel {
 		 
 		 //En lokal variabel för den här menyn. Kunde inte komma åt den i de anonyma actionlistnersen annars.
 		 private GameOverScreen GameOver = this;
-		
 		
 		 public void render(Graphics g) {
 			
@@ -54,12 +49,10 @@ public class GameOverScreen extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			g.drawImage(img,0,0,null);
-			
+			g.drawImage(img,0,0,null);	
 			g.drawString("WELCOME TO OUR GAME", GameSettings.getWidth() / 4, GameSettings.getHeight() / 3); 
 		}
-		
-		 
+			 
 		@Override
 		public void paintComponent(Graphics g) {
 	        super.paintComponent(g);
@@ -68,9 +61,7 @@ public class GameOverScreen extends JPanel {
 		
 	    public GameOverScreen() {
 	    	
-	    	//this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-	    	this.setLayout(new GridBagLayout());  	
-	    	
+	    	this.setLayout(new GridBagLayout());  		    	
 	        //Add buttons width actionListeners
 	    	addButtons();
 	        //Set menu size
@@ -85,7 +76,6 @@ public class GameOverScreen extends JPanel {
 	    	button.setAlignmentY(this.CENTER_ALIGNMENT);   	 
 	    	button.setPreferredSize(new Dimension(GameSettings.getWidth()/6, GameSettings.getHeight()/6));
 	    	button.setFont(new Font("Century Gothic", Font.BOLD, 18));
-
 	    	
 	    }
 	 	// Add anonymous actionsListners to buttons. Easier because we don't need lot's of if cases

@@ -7,15 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.SwingUtilities;
-
-
 
 public class GameWindowTemp extends JFrame {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private enum STATE{
@@ -78,8 +72,7 @@ public class GameWindowTemp extends JFrame {
 		this.pack();		
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	}
 	
 	public void SetUpMenubar() {
@@ -117,9 +110,7 @@ public class GameWindowTemp extends JFrame {
         jmenu.add(m1); 
         jmenu.add(m2); 
         jmenu.add(m3);
-        jmenu.add(m4);
-        
-        
+        jmenu.add(m4);      
         
         //add menu to menubar
         menubar.add(jmenu);
@@ -138,8 +129,7 @@ public class GameWindowTemp extends JFrame {
 }
 	
 	public static void SetDeathScreenState() {
-		State = STATE.DEATHSCREEN;
-		
+		State = STATE.DEATHSCREEN;		
 	}
 	
 	public  void GameOver() {

@@ -19,18 +19,14 @@ public class EnemyController extends AssetController implements Runnable  {
 	private Enemy enemy;
 	//True is going to the right
 	private boolean goingToTheRight = true;
-	//Enemy direction, behöver fixas mer med
-	private static Direction enemyD = GamePanel.Direction.LEFT;
-	// Is it alive=
+	// Is the enemy alive?
 	private boolean isAlive = true;
-	
 	
 	public EnemyController(int pos) {
 		super( pos);
 		enemy = new Enemy(pos);
 		assets.add(enemy);
 	}
-
 	
 	public void moveDirection() {
 		// Right now just player pos
@@ -39,18 +35,20 @@ public class EnemyController extends AssetController implements Runnable  {
 		//System.out.println(oldEnemyPos);
 		Asset enemy = assets.get(oldEnemyPos);
 		Asset newEnemyLocation = null;
+			
 			// Going to the right
 			if(goingToTheRight) {
 				newEnemyPos = oldEnemyPos + 1;
 				newEnemyLocation = assets.get(newEnemyPos);
 			}
+			
 			// Going to the left
 			else {
 				newEnemyPos = oldEnemyPos - 1;
 				newEnemyLocation = assets.get(newEnemyPos);
 			}
+			
 			// Alla interaktioner med assets
-		
 			if (newEnemyLocation instanceof Tile ) {
 				// Den nya positionen
 				assets.set(newEnemyPos, enemy ).setPosition(oldEnemyPos);
@@ -68,28 +66,19 @@ public class EnemyController extends AssetController implements Runnable  {
 			}
 			else  {
 				goingToTheRight = !goingToTheRight;
-			
-			}
-
-			
-		
-		
+			}		
 	}
 	
 	@Override
 	public void run() {
-		while(GameWindowTemp.isGameState() && isAlive ) {
-			
+		while(GameWindowTemp.isGameState() && isAlive ) {		
 			moveDirection();
 			try {
 				Thread.sleep(300);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			
-			
+			}		
 		}
 	}	
-
 }

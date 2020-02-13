@@ -131,6 +131,5 @@ public class Menu extends JPanel {
 	 add(StartButton);
 	 add(OptionsButton);
 	 add(QuitButton);
-    }
-	
+    }	
 }

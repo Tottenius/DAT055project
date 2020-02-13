@@ -13,7 +13,7 @@ import viewer.GameWindowTemp;
 import viewer.GamePanel.Direction;
 
 public class PlayerController extends AssetController implements Runnable  {
-	//testa
+
 	private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Player player;	
 	private static boolean playerAlive;
@@ -33,6 +33,7 @@ public class PlayerController extends AssetController implements Runnable  {
 	}
 
 	public void moveDirection( Direction direction) {
+		
 		// Right now just player pos
 		int oldPlayerPos = super.getPosition();
 		//System.out.println(oldPlayerPos);

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import viewer.GameSettings;
 
+//Abstract Asset class that is used by all assets in the game
 public abstract class Asset {
 
 	private final static int size = GameSettings.getAssetsize();
@@ -19,16 +20,18 @@ public abstract class Asset {
         loadImage(path);      
     }
     
+    //returns the image
     public Image getImage() {
     	return img;
     }
-    
+  
+    //get an image at an specified location in our asset array
     public void getImageAtPos(int i) {
     	img = images.get(i);
     }
-    
+   
+    //load in an image
     public void loadImage(String path) {
-    	//try to get image
     	Image imgTemp;
     	
     	try {
@@ -37,17 +40,19 @@ public abstract class Asset {
     	catch (IOException e) {
     		e.printStackTrace();
 		}
-    	// den går till sig själv, kanske inte går
+    	
+    	//Scaling the image so all images loaded in are the same size 
     	imgTemp = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
     	img = imgTemp;
-    	//System.out.println(img);
     	images.add(img);
     }
-
+ 
+    //get the array location for a specified image 
 	public int getPosition() {
 		return position;
 	}
-
+	
+	//set the array location for a specified image 
 	public void setPosition(int position) {
 		this.position = position;
 	}   

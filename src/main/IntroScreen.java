@@ -29,5 +29,4 @@ public static void main(String[] args) throws MalformedURLException {
 		
 		new GameWindowTemp();
 	}
-
 }

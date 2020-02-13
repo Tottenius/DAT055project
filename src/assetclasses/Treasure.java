@@ -1,6 +1,5 @@
 package assetclasses;
 
-
 public class Treasure extends Asset{
 	//test
 	private static boolean TreasureIsOpen = false;
@@ -11,14 +10,11 @@ public class Treasure extends Asset{
 	//Open bool
 	private boolean isOpen= false;
 	
-
-	
     public Treasure(int position) {
       
     	super(position, path);
     	super.loadImage(path2);
-    	super.getImageAtPos(0);
-        
+    	super.getImageAtPos(0);      
     }
     
     public void openTreasure() { 	
@@ -33,6 +29,5 @@ public class Treasure extends Asset{
     
     public boolean treasureIsOpen() {
     	return isOpen;
-    }
-    
+    }   
 }

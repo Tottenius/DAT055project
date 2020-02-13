@@ -7,9 +7,10 @@ import viewer.GamePanel;
 import viewer.GameSettings;
 
 public abstract class AssetController {
-	// Spelplanen
-	private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	
+	//Gameboard
+	private static ArrayList<Asset> assets = GamePanel.getAssetList();
+
 	protected final static int WIDTH = GameSettings.getWidth();
 	protected final static int HEIGHT = GameSettings.getHeight();
 	protected final static int SIZE = GameSettings.getAssetsize();
@@ -17,14 +18,9 @@ public abstract class AssetController {
 	protected int position;
 	//Direction
 	protected Direction direction;
-	//Asset
-	private Asset asset;
 	
 	public AssetController( int position){
 		this.position = position;
-		//asset = assets.get(position);
-		//position = assets.getPosition();
-		//
 	}
 
 	protected int getPosition() {

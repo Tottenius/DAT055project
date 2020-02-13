@@ -1,6 +1,5 @@
 package assetclasses;
 
-
 //Spike to dodge or player will die
 public class Spikes extends Asset {
 
@@ -9,8 +8,5 @@ public class Spikes extends Asset {
 	
 	public Spikes(int position) {
 		super(position, path);
-	}
-	
-	
-
+	}	
 }

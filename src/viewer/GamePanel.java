@@ -20,9 +20,8 @@ import assetclasses.Treasure;
 import assetclasses.Wall;
 import main.Main;
 
-
 public class GamePanel extends JPanel implements Runnable{
-	// tst
+
 	//Window size
 	 private static final int WIDTH = GameSettings.getWidth();
 	 private static final int HEIGHT = GameSettings.getHeight();
@@ -39,7 +38,6 @@ public class GamePanel extends JPanel implements Runnable{
 	 public static void setKeyPressed(boolean isKeyPressed) {
 		 GamePanel.isKeyPressed = isKeyPressed;
 	 }
-
 		
 	 //Directions
 	 public enum Direction{
@@ -63,11 +61,9 @@ public class GamePanel extends JPanel implements Runnable{
 			return this.yDelta;
 		}
 	}
-	private static Direction direction = Direction.RIGHT;
-	//get direction
-	public static Direction getDirection() {
-		return direction;
-	}
+	
+	 private static Direction direction = Direction.RIGHT;
+
 	// list with assets
 	private static ArrayList<Asset> assets = new ArrayList<Asset>();
 
@@ -83,8 +79,7 @@ public class GamePanel extends JPanel implements Runnable{
     
     //Players
     private PlayerController player1;
-    private PlayerController player2;
-    
+    private PlayerController player2;  
     //Enemys
     private EnemyController enemy1;
     //Enemy threads
@@ -99,6 +94,11 @@ public class GamePanel extends JPanel implements Runnable{
     public static void setAssetList( ArrayList<Asset> assetList){
     	assets = assetList;
     }
+	 
+    //get direction
+	public static Direction getDirection() {
+		return direction;
+	}
     
     private void howManyPlayers(int amount) {
     	if (amount == 1) {
@@ -139,7 +139,7 @@ public class GamePanel extends JPanel implements Runnable{
         		assets.add(new Tile(posInList));
         		posInList++;
         	}
- 		   //Load in treasures
+ 		   	//Load in closed treasures
  		   	else if( level.charAt(i) == 't') {
  			  assets.add(new Treasure(posInList));
  			 posInList++;
@@ -151,7 +151,6 @@ public class GamePanel extends JPanel implements Runnable{
  			  posInList++;
  		   	}
  		   	else if( level.charAt(i) == 'p' ) {
- 			   //System.out.println(i);
  			   player1 = new PlayerController( posInList);
  			   posInList++;
  			  //assets.add(new Player(i));
@@ -293,13 +292,9 @@ public class GamePanel extends JPanel implements Runnable{
                 default:
                     break;
             }
-            isKeyPressed = true;
-            
-            
+            isKeyPressed = true;           
         }	
 	}
-	
-	
  	
 	public GamePanel(){
 		this.setPreferredSize(new Dimension ( WIDTH, HEIGHT));
@@ -327,9 +322,6 @@ public class GamePanel extends JPanel implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
-		
+		}			
 	}
-
 }

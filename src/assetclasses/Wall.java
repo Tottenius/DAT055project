@@ -6,6 +6,5 @@ public class Wall extends Asset{
 
     public Wall(int position) {
         super(position, path);
-    }
-    
+    }  
 }
