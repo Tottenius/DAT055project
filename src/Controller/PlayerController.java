@@ -21,8 +21,8 @@ public class PlayerController extends AssetController implements Runnable  {
 	
 	public static void playerDead() {
 		playerAlive = false;
-		//Main.isRunning = false;
-		//GWT.GameOver(); //make this better
+		GameWindowTemp.SetDeathScreenState();
+		new GameWindowTemp();
 	}
 	
 	public PlayerController(int pos) {

@@ -113,7 +113,6 @@ public class GameOverScreen extends JPanel {
 		 QuitButton.addActionListener(new ActionListener() { 
 			  public void actionPerformed(ActionEvent e) { 
 	           System.out.println("Quit Button pressed!");
-	           Main.isRunning = false;
 	           System.exit(0);
 			  } 
 			} 

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
 
 
 
@@ -20,12 +21,13 @@ public class GameWindowTemp extends JFrame {
 	private enum STATE{
 		MENU,
 		GAME,
+		DEATHSCREEN,
 	};
 	// gamestate bool
 	public static boolean isGameState() {
 		return State == STATE.GAME;
 	}
-	
+
 	// create states
 	private static STATE State = STATE.MENU;
 	private Menu menu;
@@ -44,6 +46,8 @@ public class GameWindowTemp extends JFrame {
     
     // GameThread
     private Thread gameThread;
+    
+	GamePanel gpanel = new GamePanel();
 	
 	public GameWindowTemp(){
 
@@ -54,12 +58,18 @@ public class GameWindowTemp extends JFrame {
 		
 		//if gamestate is Game then we start the game;
 		if (State == STATE.GAME) {
-			GamePanel gpanel = new GamePanel();
 			this.add(gpanel);
 			gameThread = new Thread(gpanel);
 			gameThread.start();
 			System.out.println("hej är vi här");
 
+		}
+		
+		if (State == STATE.DEATHSCREEN) { 
+			GameOverScreen gos = new GameOverScreen();
+			//window.dispose(); have to remove the game but nothing works so far
+			//SwingUtilities.getWindowAncestor(window).dispose();
+			this.add(gos);
 		}
 		
 		//Adding menubar
@@ -126,6 +136,12 @@ public class GameWindowTemp extends JFrame {
 		
 		State = STATE.MENU;	
 }
+	
+	public static void SetDeathScreenState() {
+		State = STATE.DEATHSCREEN;
+		
+	}
+	
 	public  void GameOver() {
 		this.add(new GameOverScreen());
 	}

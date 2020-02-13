@@ -106,8 +106,7 @@ public class Menu extends JPanel {
 	 
 	 OptionsButton.addActionListener(new ActionListener() { 
  		  public void actionPerformed(ActionEvent e) { 
-	            System.out.println("Start Button pressed!");
-	            System.out.println("Quit Button pressed!");
+	            System.out.println("Options Button pressed!");
 	            Main.isRunning = false;
 	            System.exit(0);
 			  } 
@@ -116,7 +115,6 @@ public class Menu extends JPanel {
 	 
 	 QuitButton.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
-           System.out.println("Start Button pressed!");
            System.out.println("Quit Button pressed!");
            Main.isRunning = false;
            System.exit(0);
