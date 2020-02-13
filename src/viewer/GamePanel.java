@@ -22,6 +22,7 @@ import main.Main;
 
 
 public class GamePanel extends JPanel implements Runnable{
+	// tst
 	//Window size
 	 private static final int WIDTH = GameSettings.getWidth();
 	 private static final int HEIGHT = GameSettings.getHeight();

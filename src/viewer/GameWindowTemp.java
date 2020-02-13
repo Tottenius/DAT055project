@@ -21,7 +21,7 @@ public class GameWindowTemp extends JFrame {
 		MENU,
 		GAME
 	};
-	
+	// gamestate bool
 	public static boolean isGameState() {
 		return State == STATE.GAME;
 	}
