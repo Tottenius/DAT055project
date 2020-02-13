@@ -88,7 +88,7 @@ public class GamePanel extends JPanel{
     
     private void howManyPlayers(int amount) {
     	if (amount == 1) {
-    		player1 = new PlayerController(direction, 45);
+    		//player1 = new PlayerController( 45);
     		player1Thread = new Thread(player1);
     		player1Thread.start();
     		/*
@@ -98,8 +98,8 @@ public class GamePanel extends JPanel{
     		*/		
     	}
        	if (amount == 2) {
-    		player1 = new PlayerController(direction, 45);
-       		player2 = new PlayerController(direction, 46);
+    		player1 = new PlayerController( 45);
+       		player2 = new PlayerController( 46);
     		player1Thread = new Thread(player1);
     		player2Thread = new Thread(player2);
     		player1Thread.start();
@@ -108,6 +108,7 @@ public class GamePanel extends JPanel{
     }
   
     public void readInlevel( String path) {
+    	int posInList = 0;
         //System.out.println("current working directory is: " + System.getProperty("user.dir"));
         try {
             level = new String(Files.readAllBytes(Paths.get(path)));
@@ -116,24 +117,32 @@ public class GamePanel extends JPanel{
           e.printStackTrace();
         }
         for(int i = 0; i< level.length(); i++ ) {
+        	System.out.println(i);
         	if (level.charAt(i)== '#') {
-        		assets.add(new Wall(i));
+        		assets.add(new Wall(posInList));
+        		posInList++;
         	}
         	else if(level.charAt(i) == ' ') {
-        		assets.add(new Tile(i));
+        		assets.add(new Tile(posInList));
+        		posInList++;
         	}
  		   //Load in treasures
- 		   else if( level.charAt(i) == 't') {
- 			  assets.add(new Treasure(i));
- 		   }
+ 		   	else if( level.charAt(i) == 't') {
+ 			  assets.add(new Treasure(posInList));
+ 			 posInList++;
+ 		   	}
  		   
  		   //Load in opened treasures
- 		   else if( level.charAt(i) == 'o') {
- 			  assets.add(new Treasure(i));
- 		   }
- 		   else if( level.charAt(i) == 'p' ) {
- 			  assets.add(new Player(i));
-			   }   	
+ 		   	else if( level.charAt(i) == 'o') {
+ 			  assets.add(new Treasure(posInList));
+ 			  posInList++;
+ 		   	}
+ 		   	else if( level.charAt(i) == 'p' ) {
+ 			   System.out.println(i);
+ 			   player1 = new PlayerController( posInList);
+ 			   posInList++;
+ 			  //assets.add(new Player(i));
+			}   	
         }
       }
 

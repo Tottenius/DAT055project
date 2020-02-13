@@ -13,10 +13,10 @@ public class PlayerController extends AssetController implements Runnable  {
 	private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Player player;	
 	
-	public PlayerController(Direction direction, int pos) {
-		super(direction, assets, pos);
+	public PlayerController(int pos) {
+		super(GamePanel.getDirection(), assets, pos);
 		player = new Player(pos);
-		assets.set(pos,player);
+		assets.add(player);
 	}
 
 	public void moveDirection( Direction direction) {

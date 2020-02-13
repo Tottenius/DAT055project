@@ -27,6 +27,6 @@ public abstract class AssetController {
 		return position;
 	}
 	protected void setPosition(int pos) {
-		position = pos;
+		this.position = pos;
 	}
 }
