@@ -72,6 +72,7 @@ public class PlayerController extends AssetController implements Runnable  {
                 moveDirection(direction);
                 GamePanel.setKeyPressed(false);
             }
+
         }
     }
 }

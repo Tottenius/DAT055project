@@ -79,12 +79,16 @@ public class GamePanel extends JPanel implements Runnable{
     
     //Players
     private PlayerController player1;
+    private ArrayList<PlayerController> players = new ArrayList<PlayerController>();
     private PlayerController player2;  
     //Enemys
     private EnemyController enemy1;
+    private ArrayList<EnemyController> enemies = new ArrayList<EnemyController>();
     //Enemy threads
     private Thread enemy1Thread;
+    private ArrayList<Thread> enemyThreads = new ArrayList<Thread>();
     //Player threads
+    private ArrayList<Thread> playerThreads = new ArrayList<Thread>();
     private Thread player1Thread;
     private Thread player2Thread;
     //Reach assets in controller
@@ -100,28 +104,24 @@ public class GamePanel extends JPanel implements Runnable{
 		return direction;
 	}
     
-    private void howManyPlayers(int amount) {
-    	if (amount == 1) {
-    		//player1 = new PlayerController( 45);
-    		player1Thread = new Thread(player1);
-    		player1Thread.start();
-    		// startar enemyn kanske fel ställen men på test
-    		enemy1Thread = new Thread(enemy1);
-    		enemy1Thread.start();
-    			
-    	}
-       	if (amount == 2) {
-    		player1 = new PlayerController( 45);
-       		player2 = new PlayerController( 46);
-    		player1Thread = new Thread(player1);
-    		player2Thread = new Thread(player2);
-    		player1Thread.start();
-    		player2Thread.start();
-			}
+    private void startInGameThreads() {   	
+    	// start player
+       	for (Thread t : playerThreads) {
+   			t.start();
+   	}    			
+       	//starts enemies
+       	for (Thread t : enemyThreads) {
+       			t.start();
+       	}
     }
   
     public void readInlevel( String path) {
+    	// pos int map
     	int posInList = 0;
+    	// pos in enemy list
+    	int enemyList = 0;
+    	// pos in player list
+    	int playerList = 0;
         //System.out.println("current working directory is: " + System.getProperty("user.dir"));
         try {
             level = new String(Files.readAllBytes(Paths.get(path)));
@@ -151,16 +151,29 @@ public class GamePanel extends JPanel implements Runnable{
  			  posInList++;
  		   	}
  		   	else if( level.charAt(i) == 'p' ) {
- 			   player1 = new PlayerController( posInList);
+ 		   	   // Make a list of all players
+ 			   players.add(new PlayerController( posInList));
+ 			   // Add threads to all players
+ 			   playerThreads.add(new Thread(players.get(playerList)));
+ 			   // Change to next pos in the player list
+ 			   playerList++;
  			   posInList++;
- 			  //assets.add(new Player(i));
 			}   	
   		   //Load in enemies
  		   	else if( level.charAt(i) == 'e') {
- 			  enemy1 = new EnemyController( posInList);
+ 		   	  // Make a list of all enemies
+ 			  enemies.add(new EnemyController( posInList));
+ 			  // Add threads to all enemies 
+ 			  enemyThreads.add(new Thread(enemies.get(enemyList)));
+ 			  //change to next pos in the enemy list
+ 			  enemyList++;
  			  posInList++;
  		   	}
         }
+        // Add enemies to the map
+       // for (EnemyController e : enemies) {
+        	
+       // }
       }
 
 	private void initWorld(Graphics g) {
@@ -308,7 +321,7 @@ public class GamePanel extends JPanel implements Runnable{
 	    this.addKeyListener(new keyLis());
 	    this.setFocusable(true);
 	    this.revalidate();
-	    howManyPlayers(1);
+	    startInGameThreads();
 		
 	}
 	@Override
