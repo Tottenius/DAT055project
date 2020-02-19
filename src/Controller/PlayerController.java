@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import assetclasses.Asset;
 import assetclasses.Enemy;
 import assetclasses.Player;
+import assetclasses.Spikes;
 import assetclasses.Tile;
 import assetclasses.Treasure;
 import viewer.GamePanel;
@@ -60,13 +61,17 @@ public class PlayerController extends AssetController implements Runnable  {
 			//assets.set(oldPlayerPos, new Tile(oldPlayerPos) ).setPosition(newPlayerPos);
 			playerDead();
 		}
+		// if spikes, die
+		else if (swapAsset instanceof Spikes) {
+			super.dieWhileMovingIntoDanger(oldPlayerPos, newPlayerPos);
+		}
 	}
 	
 	@Override
     public void run() {
         System.out.println("Startar playertråd");
         while(GameWindowTemp.isGameState() && playerAlive) {
-           // System.out.println("kör playertråd");
+            System.out.println("kör playertråd");
             if(GamePanel.isKeyPressed()) {
                 moveDirection(direction);
     			try {
