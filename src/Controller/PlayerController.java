@@ -58,12 +58,12 @@ public class PlayerController extends AssetController implements Runnable  {
 		// If enemy, kill player :(
 		else if (swapAsset instanceof Enemy) {
 			super.dieWhileMovingIntoDanger(oldPlayerPos, newPlayerPos);
-			//assets.set(oldPlayerPos, new Tile(oldPlayerPos) ).setPosition(newPlayerPos);
 			playerDead();
 		}
 		// if spikes, die
 		else if (swapAsset instanceof Spikes) {
 			super.dieWhileMovingIntoDanger(oldPlayerPos, newPlayerPos);
+			playerDead();
 		}
 	}
 	

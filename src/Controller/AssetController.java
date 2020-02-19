@@ -29,7 +29,7 @@ public abstract class AssetController {
 		setPosition(newPos);
 	}
 	
-	protected void dieWhileMovingIntoDanger(int newPos, int oldPos) {
+	protected void dieWhileMovingIntoDanger(int oldPos, int newPos) {
 		assets.set(oldPos, new Tile(oldPos) ).setPosition(newPos);
 	}
 	
