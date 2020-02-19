@@ -1,7 +1,9 @@
 package Controller;
 
 import java.util.ArrayList;
-import assetclasses.Asset;
+import java.util.List;
+
+import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Tile;
@@ -9,8 +11,6 @@ import viewer.GamePanel;
 import viewer.GameWindowTemp;
 
 public class EnemyController extends AssetController implements Runnable  {
-	
-	private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Enemy enemy;
 	//True is going to the right
 	private boolean goingToTheRight = true;
@@ -28,8 +28,8 @@ public class EnemyController extends AssetController implements Runnable  {
 		int oldEnemyPos = super.getPosition();
 		int newEnemyPos = 0;
 		//System.out.println(oldEnemyPos);
-		Asset enemy = assets.get(oldEnemyPos);
-		Asset newEnemyLocation = null;
+		AbstractAsset enemy = assets.get(oldEnemyPos);
+		AbstractAsset newEnemyLocation = null;
 			
 			// Going to the right
 			if(goingToTheRight) {

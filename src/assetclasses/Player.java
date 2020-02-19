@@ -1,6 +1,8 @@
 package assetclasses;
 
-public class Player extends Asset {
+import Controller.Direction;
+
+public class Player extends AbstractAsset {
 
 	private static final String down = "src/assets/PlayerDown.png";
 	private static final String up = "src/assets/PlayerUp.png";
@@ -9,9 +11,10 @@ public class Player extends Asset {
 
 
 	public Player(int position) {
-		super(position, down);
-		super.loadImage(up);
-		super.loadImage(left);
-		super.loadImage(right);		
+		super(position);
+		super.loadImage(up, Direction.UP);
+		super.loadImage(down,Direction.DOWN);
+		super.loadImage(left, Direction.LEFT);
+		super.loadImage(right, Direction.RIGHT);	
 	}
 }

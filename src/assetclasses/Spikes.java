@@ -1,12 +1,16 @@
 package assetclasses;
 
+import Controller.Direction;
+
 //Spike to dodge or player will die
-public class Spikes extends Asset {
+public class Spikes extends AbstractAsset {
 
 	private static final String path = "src/assets/spikes.png";
 
 	
 	public Spikes(int position) {
-		super(position, path);
+        super(position);
+        super.loadImage(path, direction.DOWN);
+        super.getImage();
 	}	
 }

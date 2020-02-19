@@ -1,6 +1,8 @@
 package assetclasses;
 
-public class Treasure extends Asset{
+import Controller.Direction;
+
+public class Treasure extends AbstractAsset{
 	//test
 	private static boolean TreasureIsOpen = false;
 	//closed treasure
@@ -10,20 +12,20 @@ public class Treasure extends Asset{
 	//Open bool
 	private boolean isOpen= false;
 	
-    public Treasure(int position) {
-      
-    	super(position, path);
-    	super.loadImage(path2);
-    	super.getImageAtPos(0);      
+    public Treasure(int position) {   
+    	super(position);
+    	super.loadImage(path, Direction.DOWN);
+    	super.loadImage(path2, Direction.UP);
+    	super.getImageAtMap(Direction.DOWN);      
     }
     
     public void openTreasure() { 	
-    	super.getImageAtPos(1);  	
+    	super.getImageAtMap(Direction.UP);  	
     	isOpen = true;    	
     }
     
     public void closeTreasure() { 	
-    	super.getImageAtPos(0);
+    	super.getImageAtMap(Direction.DOWN);
     	isOpen = false;      	
     }
     

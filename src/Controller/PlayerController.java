@@ -1,7 +1,7 @@
 package Controller;
 
 import java.util.ArrayList;
-import assetclasses.Asset;
+import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Spikes;
@@ -9,11 +9,10 @@ import assetclasses.Tile;
 import assetclasses.Treasure;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
-import viewer.GamePanel.Direction;
 
 public class PlayerController extends AssetController implements Runnable  {
 
-	private static ArrayList<Asset> assets = GamePanel.getAssetList();
+	//private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Player player;	
 	private static boolean playerAlive;
 
@@ -40,8 +39,8 @@ public class PlayerController extends AssetController implements Runnable  {
 		int oldPlayerPos = super.getPosition();
 		//System.out.println(oldPlayerPos);
 		//System.out.println(direction);
-		Asset movingAsset = assets.get(oldPlayerPos);
-		Asset swapAsset = null;
+		AbstractAsset movingAsset = assets.get(oldPlayerPos);
+		AbstractAsset swapAsset = null;
 		 
 		int newPlayerPos = oldPlayerPos + GamePanel.getDirection().getXDelta() +  GamePanel.getDirection().getYDelta();
 		
@@ -69,16 +68,17 @@ public class PlayerController extends AssetController implements Runnable  {
 	
 	@Override
     public void run() {
-        System.out.println("Startar playertråd");
+		// Kolla om det går att lösa med en kö. 
+        //System.out.println("Startar playertråd");
         while(GameWindowTemp.isGameState() && playerAlive) {
-            System.out.println("kör playertråd");
+           // System.out.println("kör playertråd");
             if(GamePanel.isKeyPressed()) {
                 moveDirection(direction);
     			try {
     				Thread.sleep(150);
     			} catch (InterruptedException e) {
-    				// TODO Auto-generated catch block
-    				e.printStackTrace();
+    				Thread.currentThread().interrupt();
+    				break;
     			}	
                 GamePanel.setKeyPressed(false);
             }

@@ -1,16 +1,15 @@
 package Controller;
 
-import java.util.ArrayList;
-import assetclasses.Asset;
+import java.util.List;
+
+import assetclasses.AbstractAsset;
 import assetclasses.Tile;
-import viewer.GamePanel.Direction;
 import viewer.GamePanel;
 import viewer.GameSettings;
 
 public abstract class AssetController {
-	
 	//Gameboard
-	private static ArrayList<Asset> assets = GamePanel.getAssetList();
+	protected List<AbstractAsset> assets =  GamePanel.getAssetList();
 
 	protected final static int WIDTH = GameSettings.getWidth();
 	protected final static int HEIGHT = GameSettings.getHeight();
@@ -20,7 +19,7 @@ public abstract class AssetController {
 	//Direction
 	protected Direction direction;
 	
-	protected void moveAsset(int newPos, int oldPos, Asset ourAsset, Asset assetTargetLocation) {
+	protected void moveAsset(int newPos, int oldPos, AbstractAsset ourAsset, AbstractAsset assetTargetLocation) {
 		// Sätt playerns positon till den nya positionen och ge objectet den nya positionen
 		assets.set(newPos, ourAsset ).setPosition(oldPos);
 		// Sätt objetet vi rör oss till på playerns gamla position och ge det playerns gamla position
@@ -33,7 +32,7 @@ public abstract class AssetController {
 		assets.set(oldPos, new Tile(oldPos) ).setPosition(newPos);
 	}
 	
-	protected void killAsset(int newPos, int oldPos, Asset ourAsset) {
+	protected void killAsset(int newPos, int oldPos, AbstractAsset ourAsset) {
 		// Den nya positionen
 		assets.set(newPos, ourAsset ).setPosition(oldPos);
 		// Den gamla positionen
