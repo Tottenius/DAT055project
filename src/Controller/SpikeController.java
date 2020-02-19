@@ -1,6 +1,7 @@
 package Controller;
 
 import assetclasses.Enemy;
+import assetclasses.Player;
 import assetclasses.Spikes;
 import assetclasses.Tile;
 import viewer.GameWindowTemp;
@@ -28,7 +29,7 @@ public class SpikeController extends AssetController implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("nu är jag en tile");
+			//System.out.println("nu är jag en tile");
 			changeAsset(position, tile);
 			
 			try {
@@ -37,9 +38,13 @@ public class SpikeController extends AssetController implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			//Fulfix player är inte längre spikes :(
+			if(assets.get(position) instanceof Player) {
+				PlayerController.playerDead();
+			}
 			changeAsset(position, spikes);
-			System.out.println("nu är jag en spike");
+			
+			//System.out.println("nu är jag en spike");
 		}
 	}
 	
