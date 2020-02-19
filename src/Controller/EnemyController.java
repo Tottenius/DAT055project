@@ -44,22 +44,16 @@ public class EnemyController extends AssetController implements Runnable  {
 			}
 			
 			// Alla interaktioner med assets
-			// Borde göras till en allmän moveTo() som kan användas för allt som rör sig. Svårläst såhär
+			// If tile, move to tile
 			if (newEnemyLocation instanceof Tile ) {
-				// Den nya positionen
-				assets.set(newEnemyPos, enemy ).setPosition(oldEnemyPos);
-				// Den gamla positionen
-				assets.set(oldEnemyPos, newEnemyLocation ).setPosition(newEnemyPos);
-				super.setPosition(newEnemyPos);
+				super.moveAsset(newEnemyPos, oldEnemyPos, enemy, newEnemyLocation);
 			}
+			// If player, kill player
 			else if (newEnemyLocation instanceof Player  ) {
-				// Den nya positionen
-				assets.set(newEnemyPos, enemy ).setPosition(oldEnemyPos);
-				// Den gamla positionen
-				assets.set(oldEnemyPos, new Tile(oldEnemyPos) ).setPosition(newEnemyPos);
-				super.setPosition(newEnemyPos);
+				super.killAsset(newEnemyPos, oldEnemyPos, enemy);
 				PlayerController.playerDead();
 			}
+			// else turn around
 			else  {
 				goingToTheRight = !goingToTheRight;
 			}		

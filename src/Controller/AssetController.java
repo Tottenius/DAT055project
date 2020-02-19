@@ -2,6 +2,7 @@ package Controller;
 
 import java.util.ArrayList;
 import assetclasses.Asset;
+import assetclasses.Tile;
 import viewer.GamePanel.Direction;
 import viewer.GamePanel;
 import viewer.GameSettings;
@@ -18,6 +19,27 @@ public abstract class AssetController {
 	protected int position;
 	//Direction
 	protected Direction direction;
+	
+	protected void moveAsset(int newPos, int oldPos, Asset ourAsset, Asset assetTargetLocation) {
+		// Sätt playerns positon till den nya positionen och ge objectet den nya positionen
+		assets.set(newPos, ourAsset ).setPosition(oldPos);
+		// Sätt objetet vi rör oss till på playerns gamla position och ge det playerns gamla position
+		assets.set(oldPos, assetTargetLocation ).setPosition(newPos);
+		// Sätt controllerns position till den nya positionen
+		setPosition(newPos);
+	}
+	
+	protected void dieWhileMovingIntoDanger(int newPos, int oldPos) {
+		assets.set(oldPos, new Tile(oldPos) ).setPosition(newPos);
+	}
+	
+	protected void killAsset(int newPos, int oldPos, Asset ourAsset) {
+		// Den nya positionen
+		assets.set(newPos, ourAsset ).setPosition(oldPos);
+		// Den gamla positionen
+		assets.set(oldPos, new Tile(oldPos) ).setPosition(newPos);
+		setPosition(newPos);
+	}
 	
 	public AssetController( int position){
 		this.position = position;

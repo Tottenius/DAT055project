@@ -46,20 +46,18 @@ public class PlayerController extends AssetController implements Runnable  {
 		
 		// Alla interaktioner med assets
 		swapAsset = assets.get(newPlayerPos);
+		// If tile, move to the tile
 		if (swapAsset instanceof Tile) {
-			// Sätt playerns positon till den nya positionen och ge objectet den nya positionen
-			assets.set(newPlayerPos, movingAsset ).setPosition(oldPlayerPos);
-			// Sätt objetet vi rör oss till på playerns gamla position och ge det playerns gamla position
-			assets.set(oldPlayerPos, swapAsset ).setPosition(newPlayerPos);
-			// Sätt controllerns position till den nya positionen
-			super.setPosition(newPlayerPos);
+			super.moveAsset(newPlayerPos, oldPlayerPos, movingAsset, swapAsset);
 		}
+		// If treasure, open treasure
 		else if (swapAsset instanceof Treasure) {
 			((Treasure) swapAsset).openTreasure();
 		}
+		// If enemy, kill player :(
 		else if (swapAsset instanceof Enemy) {
-			// Sätt objetet vi rör oss till på playerns gamla position och ge det playerns gamla position
-			assets.set(oldPlayerPos, new Tile(oldPlayerPos) ).setPosition(newPlayerPos);
+			super.dieWhileMovingIntoDanger(oldPlayerPos, newPlayerPos);
+			//assets.set(oldPlayerPos, new Tile(oldPlayerPos) ).setPosition(newPlayerPos);
 			playerDead();
 		}
 	}
