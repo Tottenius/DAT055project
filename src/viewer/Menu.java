@@ -26,7 +26,7 @@ public class Menu extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;	
 	
-	private static final String path = "src/assets/MenuBackground.jpg";
+	private static final String path = "src/assets/MenuBackground2.jpg";
 	
 	 JButton StartButton = new JButton("Start");
 	 JButton OptionsButton = new JButton("Options");
@@ -41,9 +41,9 @@ public class Menu extends JPanel {
 	 public void render(Graphics g) {
 		
 		Graphics2D g2d = (Graphics2D) g;
-		Font fnto = new Font("Century Gothic", Font.BOLD, 50);
+		Font fnto = new Font("Roboto",Font.BOLD + Font.ITALIC, 48);
 		g.setFont(fnto);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.ORANGE);
 		
 		//Read in background image
 		Image img = null;
@@ -54,7 +54,7 @@ public class Menu extends JPanel {
 		}
 		g.drawImage(img,0,0,null);
 		
-		g.drawString("WELCOME TO OUR GAME", GameSettings.getWidth() / 4, GameSettings.getHeight() / 3); 
+		g.drawString("THE LABYRINTH GAME ", GameSettings.getWidth() / 5, GameSettings.getHeight() / 3); 
 	}
 	
 	 
@@ -76,9 +76,10 @@ public class Menu extends JPanel {
     }
     
     public void ButtonCustomazation(JButton button) {
-    	
+    	final Color DARK_ORANGE = new Color(255,102,0);
     	//customazation
-    	button.setBackground(Color.CYAN);
+    	button.setBackground(DARK_ORANGE);
+    	button.setOpaque(true);
     	button.setAlignmentX(this.CENTER_ALIGNMENT);
     	button.setAlignmentY(this.CENTER_ALIGNMENT);   	 
     	button.setPreferredSize(new Dimension(GameSettings.getWidth()/6, GameSettings.getHeight()/6));
