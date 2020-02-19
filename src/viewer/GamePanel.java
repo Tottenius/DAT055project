@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import Controller.EnemyController;
 import Controller.PlayerController;
@@ -78,19 +79,25 @@ public class GamePanel extends JPanel implements Runnable{
     String level1 = "src/levels/level2.txt";
     
     //Players
-    private PlayerController player1;
-    private ArrayList<PlayerController> players = new ArrayList<PlayerController>();
-    private PlayerController player2;  
+    private  ArrayList<PlayerController> players = new ArrayList<PlayerController>();
     //Enemys
-    private EnemyController enemy1;
-    private ArrayList<EnemyController> enemies = new ArrayList<EnemyController>();
+    private  ArrayList<EnemyController> enemies = new ArrayList<EnemyController>();
     //Enemy threads
-    private Thread enemy1Thread;
-    private ArrayList<Thread> enemyThreads = new ArrayList<Thread>();
+    private  ArrayList<Thread> enemyThreads = new ArrayList<Thread>();
     //Player threads
-    private ArrayList<Thread> playerThreads = new ArrayList<Thread>();
-    private Thread player1Thread;
-    private Thread player2Thread;
+    private  ArrayList<Thread> playerThreads = new ArrayList<Thread>();
+
+    // Clear the threads and assets
+    public void clearAllGameInfo() {
+    	//reset game map
+    	assets.clear();
+    	// reset player info
+    	players.clear();
+    	//playerThreads.clear();
+    	// reset enemy info
+    	enemies.clear();
+    	enemyThreads.clear();
+    }
     //Reach assets in controller
     public static ArrayList<Asset> getAssetList(){
     	return assets;
@@ -129,6 +136,8 @@ public class GamePanel extends JPanel implements Runnable{
         catch (IOException e) {
           e.printStackTrace();
         }
+        // clear previous games if there are any
+        clearAllGameInfo();
         for(int i = 0; i< level.length(); i++ ) {
         	
         	if (level.charAt(i)== '#') {
@@ -152,9 +161,10 @@ public class GamePanel extends JPanel implements Runnable{
  		   	}
  		   	else if( level.charAt(i) == 'p' ) {
  		   	   // Make a list of all players
- 			   players.add(new PlayerController( posInList));
+ 		   		System.out.println("Making a new player therad");
+ 			   players.add(playerList, new PlayerController( posInList));
  			   // Add threads to all players
- 			   playerThreads.add(new Thread(players.get(playerList)));
+ 			   playerThreads.add(playerList, new Thread(players.get(playerList)));
  			   // Change to next pos in the player list
  			   playerList++;
  			   posInList++;
@@ -334,6 +344,11 @@ public class GamePanel extends JPanel implements Runnable{
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			// Gör en gameoverskärm om player är död
+			if(!PlayerController.isPlayerAlive()) {
+				SwingUtilities.getWindowAncestor(this).dispose();
+				new GameWindowTemp();
 			}
 		}			
 	}

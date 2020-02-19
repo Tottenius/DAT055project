@@ -1,16 +1,11 @@
 package Controller;
 
 import java.util.ArrayList;
-import java.util.concurrent.Semaphore;
-
 import assetclasses.Asset;
 import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Tile;
-import assetclasses.Treasure;
-import main.Main;
 import viewer.GamePanel;
-import viewer.GamePanel.Direction;
 import viewer.GameWindowTemp;
 
 public class EnemyController extends AssetController implements Runnable  {
@@ -49,6 +44,7 @@ public class EnemyController extends AssetController implements Runnable  {
 			}
 			
 			// Alla interaktioner med assets
+			// Borde göras till en allmän moveTo() som kan användas för allt som rör sig. Svårläst såhär
 			if (newEnemyLocation instanceof Tile ) {
 				// Den nya positionen
 				assets.set(newEnemyPos, enemy ).setPosition(oldEnemyPos);

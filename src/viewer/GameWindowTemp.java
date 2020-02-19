@@ -59,10 +59,9 @@ public class GameWindowTemp extends JFrame {
 
 		}
 		
-		if (State == STATE.DEATHSCREEN) { 
+		if (State == STATE.DEATHSCREEN) {
+			window.dispose();
 			GameOverScreen gos = new GameOverScreen();
-			//window.dispose(); have to remove the game but nothing works so far
-			//SwingUtilities.getWindowAncestor(window).dispose();
 			this.add(gos);
 		}
 		
@@ -85,12 +84,15 @@ public class GameWindowTemp extends JFrame {
         
         // Add listeners to buttons
         // Går nog att göra dessa på ett snyggare sätt, var mest för test
+        
         //Restart the game
         m3.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
 	            System.out.println("Restart");
 	            GameWindowTemp.SetStateGame();
 	            window.dispose();
+	            //Remove all game info
+	           // GamePanel.clearAllGameInfo();
 	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 			  } 
 			} 
@@ -101,6 +103,8 @@ public class GameWindowTemp extends JFrame {
 	            System.out.println("Go to main menu pressed");
 	            GameWindowTemp.SetStateMenu();
 	            window.dispose();
+	            //Remove all game info
+	            //GamePanel.clearAllGameInfo();
 	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 			  } 
 			} 

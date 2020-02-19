@@ -6,8 +6,6 @@ import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Tile;
 import assetclasses.Treasure;
-import main.Main;
-import viewer.GameOverScreen;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
 import viewer.GamePanel.Direction;
@@ -22,7 +20,10 @@ public class PlayerController extends AssetController implements Runnable  {
 	public static void playerDead() {
 		playerAlive = false;
 		GameWindowTemp.SetDeathScreenState();
-		new GameWindowTemp();
+	}
+	
+	public static boolean isPlayerAlive() {
+		return playerAlive;
 	}
 	
 	public PlayerController(int pos) {
@@ -59,7 +60,7 @@ public class PlayerController extends AssetController implements Runnable  {
 		else if (swapAsset instanceof Enemy) {
 			// Sätt objetet vi rör oss till på playerns gamla position och ge det playerns gamla position
 			assets.set(oldPlayerPos, new Tile(oldPlayerPos) ).setPosition(newPlayerPos);
-			playerAlive = false;
+			playerDead();
 		}
 	}
 	
@@ -67,9 +68,15 @@ public class PlayerController extends AssetController implements Runnable  {
     public void run() {
         System.out.println("Startar playertråd");
         while(GameWindowTemp.isGameState() && playerAlive) {
-            System.out.println("kör playertråd");
+           // System.out.println("kör playertråd");
             if(GamePanel.isKeyPressed()) {
                 moveDirection(direction);
+    			try {
+    				Thread.sleep(150);
+    			} catch (InterruptedException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}	
                 GamePanel.setKeyPressed(false);
             }
 

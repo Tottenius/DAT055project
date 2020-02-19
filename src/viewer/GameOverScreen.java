@@ -70,7 +70,7 @@ public class GameOverScreen extends JPanel {
 	    
 	    public void ButtonCustomazation(JButton button) {
 	    	
-	    	//customazation
+	    	//Customization
 	    	button.setBackground(Color.CYAN);
 	    	button.setAlignmentX(this.CENTER_ALIGNMENT);
 	    	button.setAlignmentY(this.CENTER_ALIGNMENT);   	 
@@ -83,9 +83,9 @@ public class GameOverScreen extends JPanel {
 	    	RestartButton.addActionListener(new ActionListener() { 
 			  public void actionPerformed(ActionEvent e) { 
 		            System.out.println("Rest Button pressed!");
-		            //GameWindowTemp.SetStateGame();
-		         //  SwingUtilities.getWindowAncestor(GameOver).dispose();
-		        //    new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+		            GameWindowTemp.SetStateGame();
+		            SwingUtilities.getWindowAncestor(GameOver).dispose();
+		            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 				  }  
 				} 
 		 );
