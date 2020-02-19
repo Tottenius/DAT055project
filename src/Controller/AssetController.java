@@ -40,9 +40,14 @@ public abstract class AssetController {
 		setPosition(newPos);
 	}
 	
+	protected void changeAsset(int pos, AbstractAsset newAsset) {
+		assets.set( pos, newAsset);
+	}
+	
 	public AssetController( int position){
 		this.position = position;
 	}
+	
 
 	protected int getPosition() {
 		return position;

@@ -16,6 +16,7 @@ import javax.swing.SwingUtilities;
 import Controller.Direction;
 import Controller.EnemyController;
 import Controller.PlayerController;
+import Controller.SpikeController;
 import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
 import assetclasses.Player;
@@ -61,13 +62,17 @@ public class GamePanel extends JPanel implements Runnable {
 	String level1 = "src/levels/level2.txt";
 
 	// Players
-	private ArrayList<PlayerController> players = new ArrayList<PlayerController>();
+	private List<PlayerController> players = new ArrayList<PlayerController>();
 	// Enemys
-	private ArrayList<EnemyController> enemies = new ArrayList<EnemyController>();
+	private List<EnemyController> enemies = new ArrayList<EnemyController>();
 	// Enemy threads
-	private ArrayList<Thread> enemyThreads = new ArrayList<Thread>();
+	private List<Thread> enemyThreads = new ArrayList<Thread>();
 	// Player threads
-	private ArrayList<Thread> playerThreads = new ArrayList<Thread>();
+	private List<Thread> playerThreads = new ArrayList<Thread>();
+	// Spikes
+	private List<SpikeController> spikes = new ArrayList<SpikeController>();
+	//Spike Threads
+	private List<Thread> spikeThreads = new ArrayList<Thread>();
 
 	// Clear the threads and assets
 	public void clearAllGameInfo() {
@@ -75,10 +80,14 @@ public class GamePanel extends JPanel implements Runnable {
 		assets.clear();
 		// reset player info
 		players.clear();
-		// playerThreads.clear();
+		playerThreads.clear();
 		// reset enemy info
 		enemies.clear();
 		enemyThreads.clear();
+		// Reset spikes
+		spikes.clear();
+		spikeThreads.clear();
+		
 	}
 
 	// Reach assets in controller
@@ -104,6 +113,10 @@ public class GamePanel extends JPanel implements Runnable {
 		for (Thread t : enemyThreads) {
 			t.start();
 		}
+		// starts spikes
+		for (Thread t : spikeThreads) {
+			t.start();
+		}
 	}
 
 	public void readInlevel(String path) {
@@ -113,6 +126,8 @@ public class GamePanel extends JPanel implements Runnable {
 		int enemyList = 0;
 		// pos in player list
 		int playerList = 0;
+		// pos in spike list
+		int spikeList = 0;
 		// System.out.println("current working directory is: " +
 		// System.getProperty("user.dir"));
 		try {
@@ -144,7 +159,12 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 			// Load in spikes
 			else if (level.charAt(i) == 's') {
-				assets.add(new Spikes(posInList));
+				// Make a list of all spikes
+				spikes.add(spikeList, new SpikeController(posInList));
+				// Add threads to all players
+				spikeThreads.add(spikeList, new Thread(spikes.get(spikeList)));
+				// Change to next pos in the player list
+				spikeList++;
 				posInList++;
 			} else if (level.charAt(i) == 'p') {
 				// Make a list of all players
