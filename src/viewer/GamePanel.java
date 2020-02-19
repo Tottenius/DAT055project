@@ -16,6 +16,7 @@ import Controller.PlayerController;
 import assetclasses.Asset;
 import assetclasses.Enemy;
 import assetclasses.Player;
+import assetclasses.Spikes;
 import assetclasses.Tile;
 import assetclasses.Treasure;
 import assetclasses.Wall;
@@ -159,6 +160,11 @@ public class GamePanel extends JPanel implements Runnable{
  			  assets.add(new Treasure(posInList));
  			  posInList++;
  		   	}
+ 		   	//Load in spikes
+ 		   	else if( level.charAt(i) == 's') {
+ 			  assets.add(new Spikes (posInList));
+ 			 posInList++;
+ 		   	}
  		   	else if( level.charAt(i) == 'p' ) {
  		   	   // Make a list of all players
  		   		System.out.println("Making a new player therad");
@@ -222,6 +228,11 @@ public class GamePanel extends JPanel implements Runnable{
 			   }
 		    //Load in enemies
 		   if( asset instanceof Enemy) {
+			   //System.out.println("Vi försöker göra en enemy");
+			   g.drawImage(asset.getImage(), x, y,this);
+			   x= x+ SIZE;
+		   }
+		   if( asset instanceof Spikes) {
 			   //System.out.println("Vi försöker göra en enemy");
 			   g.drawImage(asset.getImage(), x, y,this);
 			   x= x+ SIZE;
