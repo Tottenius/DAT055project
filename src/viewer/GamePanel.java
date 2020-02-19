@@ -324,6 +324,7 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 			// Gör en gameoverskärm om player är död
 			if (!PlayerController.isPlayerAlive()) {
+			
 				SwingUtilities.getWindowAncestor(this).dispose();
 				new GameWindowTemp();
 			}

@@ -1,5 +1,7 @@
 package assetclasses;
 
+import Controller.Direction;
+
 //Door to go to next room!? are we even gonna do more then 1 room?? Could ranomize what next room is or maybe make it static
 public class Door extends AbstractAsset {
 
@@ -7,7 +9,7 @@ public class Door extends AbstractAsset {
 	
 	public Door(int position) {
         super(position);
-        super.loadImage(path, direction.DOWN);
+        super.loadImage(path, Direction.DOWN);
         super.getImage();
 	}
 

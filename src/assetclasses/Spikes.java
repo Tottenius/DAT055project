@@ -10,7 +10,7 @@ public class Spikes extends AbstractAsset {
 	
 	public Spikes(int position) {
         super(position);
-        super.loadImage(path, direction.DOWN);
+        super.loadImage(path, Direction.DOWN);
         super.getImage();
 	}	
 }

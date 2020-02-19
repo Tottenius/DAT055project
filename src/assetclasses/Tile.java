@@ -1,5 +1,7 @@
 package assetclasses;
 
+import Controller.Direction;
+
 public class Tile extends AbstractAsset{
 	//test
 	private static final String path = "src/assets/tile.png";
@@ -7,7 +9,7 @@ public class Tile extends AbstractAsset{
 
     public Tile(int position) {
         super(position);
-        super.loadImage(path, direction.DOWN);
+        super.loadImage(path, Direction.DOWN);
         super.getImage();
     }
     
