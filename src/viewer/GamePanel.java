@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
+import java.util.Timer;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -26,7 +28,11 @@ import assetclasses.Treasure;
 import assetclasses.Wall;
 import main.Main;
 
-public class GamePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel {
+	// This window
+	GamePanel gamePanel = this;
+	// Level read
+	public static boolean levelRead = false;
 
 	// Window size
 	private static final int WIDTH = GameSettings.getWidth();
@@ -72,7 +78,7 @@ public class GamePanel extends JPanel implements Runnable {
 	// Spikes
 	private List<SpikeController> spikes = new ArrayList<SpikeController>();
 	//Spike Threads
-	private List<Thread> spikeThreads = new ArrayList<Thread>();
+	//private List<Thread> spikeThreads = new ArrayList<Thread>();
 
 	// Clear the threads and assets
 	public void clearAllGameInfo() {
@@ -86,8 +92,8 @@ public class GamePanel extends JPanel implements Runnable {
 		enemyThreads.clear();
 		// Reset spikes
 		spikes.clear();
-		spikeThreads.clear();
-		
+		//spikeThreads.clear();
+		levelRead = false;
 	}
 
 	// Reach assets in controller
@@ -114,9 +120,9 @@ public class GamePanel extends JPanel implements Runnable {
 			t.start();
 		}
 		// starts spikes
-		for (Thread t : spikeThreads) {
-			t.start();
-		}
+		//for (Thread t : spikeThreads) {
+		//	t.start();
+		//}
 	}
 
 	public void readInlevel(String path) {
@@ -162,7 +168,7 @@ public class GamePanel extends JPanel implements Runnable {
 				// Make a list of all spikes
 				spikes.add(spikeList, new SpikeController(posInList));
 				// Add threads to all players
-				spikeThreads.add(spikeList, new Thread(spikes.get(spikeList)));
+				//spikeThreads.add(spikeList, new Thread(spikes.get(spikeList)));
 				// Change to next pos in the player list
 				spikeList++;
 				posInList++;
@@ -181,7 +187,7 @@ public class GamePanel extends JPanel implements Runnable {
 				// Make a list of all enemies
 				enemies.add(new EnemyController(posInList));
 				// Add threads to all enemies
-				enemyThreads.add(new Thread(enemies.get(enemyList)));
+				//enemyThreads.add(new Thread(enemies.get(enemyList)));
 				// change to next pos in the enemy list
 				enemyList++;
 				posInList++;
@@ -191,6 +197,7 @@ public class GamePanel extends JPanel implements Runnable {
 		// for (EnemyController e : enemies) {
 
 		// }
+		levelRead = true;
 	}
 
 	private void initWorld(Graphics g) {
@@ -320,34 +327,36 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setLayout(null);
 		System.out.println("Läser in leveln");
 		// System.out.println(level);
-		readInlevel(level1);
-		System.out.println(level);
 		this.setVisible(true);
 		// adding the keylistener
 		this.addKeyListener(new keyLis());
 		this.setFocusable(true);
-		this.revalidate();
+		//this.revalidate();
+		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
+		b.scheduleAtFixedRate(c, 0, 1000/60);
+		readInlevel(level1);
+		System.out.println(level);
 		startInGameThreads();
 
 	}
+	
+	// Vi kör en timer istället för en busy wait
+    Timer b = new Timer();
+    
+    TimerTask c = new TimerTask() {
+        public void run() {
+        	if(GameWindowTemp.isGameState() && levelRead) {
+	        	//System.out.println("Repainting.");
+	            repaint();
+				// Gör en gameoverskärm om player är död
+        	}
 
-	@Override
-	public void run() {
-		while (Main.isRunning && GameWindowTemp.isGameState()) {
-			repaint();
-			// Repaint at 60 fps
-			try {
-				Thread.sleep(1000 / 60);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			// Gör en gameoverskärm om player är död
-			if (!PlayerController.isPlayerAlive()) {
-			
-				SwingUtilities.getWindowAncestor(this).dispose();
+        	if (!PlayerController.isPlayerAlive() && levelRead) {
+				SwingUtilities.getWindowAncestor(gamePanel).dispose();
 				new GameWindowTemp();
 			}
-		}
-	}
+        	
+        }
+    };
+
 }

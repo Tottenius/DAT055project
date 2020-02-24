@@ -1,7 +1,8 @@
 package Controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
@@ -10,7 +11,7 @@ import assetclasses.Tile;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
 
-public class EnemyController extends AssetController implements Runnable  {
+public class EnemyController extends AssetController {
 	private Enemy enemy;
 	//True is going to the right
 	private boolean goingToTheRight = true;
@@ -21,6 +22,8 @@ public class EnemyController extends AssetController implements Runnable  {
 		super( pos);
 		enemy = new Enemy(pos);
 		assets.add(enemy);
+		// Kör timerTasken b efter 300ms
+		b.scheduleAtFixedRate(c, 1000, 300);
 	}
 	
 	public void moveDirection() {
@@ -59,6 +62,19 @@ public class EnemyController extends AssetController implements Runnable  {
 			}		
 	}
 	
+    Timer b = new Timer();
+    
+    TimerTask c = new TimerTask() {
+        public void run() {
+        	if(GameWindowTemp.isGameState() && GamePanel.levelRead) {
+        		moveDirection();
+			}
+        	else if(!GameWindowTemp.isGameState() && GamePanel.levelRead) {
+        		this.cancel();
+        	}
+        }
+    };
+	/*
 	@Override
 	public void run() {
 		while(GameWindowTemp.isGameState() && isAlive ) {		
@@ -70,5 +86,6 @@ public class EnemyController extends AssetController implements Runnable  {
 				e.printStackTrace();
 			}		
 		}
-	}	
+	}
+	*/	
 }

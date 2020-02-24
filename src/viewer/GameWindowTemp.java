@@ -53,8 +53,8 @@ public class GameWindowTemp extends JFrame {
 		//if gamestate is Game then we start the game;
 		if (State == STATE.GAME) {
 			this.add(gpanel);
-			gameThread = new Thread(gpanel);
-			gameThread.start();
+			//gameThread = new Thread(gpanel);
+			//gameThread.start();
 			System.out.println("hej är vi här");
 
 		}
