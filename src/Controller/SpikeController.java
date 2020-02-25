@@ -32,7 +32,7 @@ public class SpikeController extends AssetController{
     
     TimerTask c = new TimerTask() {
         public void run() {
-        	if(GameWindowTemp.isGameState() && GamePanel.levelRead) {
+        	if(GameWindowTemp.isGameState()) {
 	        	System.out.println(assets.get(position));
 				//Fulfix player är inte längre spikes :(
 	        	

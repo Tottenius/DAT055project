@@ -37,11 +37,9 @@ public class GameWindowTemp extends JFrame {
 
     // local reference to it self
     private GameWindowTemp window = this;
+
     
-    // GameThread
-    private Thread gameThread;
-    
-	GamePanel gpanel = new GamePanel();
+
 	
 	public GameWindowTemp(){
 
@@ -52,6 +50,10 @@ public class GameWindowTemp extends JFrame {
 		
 		//if gamestate is Game then we start the game;
 		if (State == STATE.GAME) {
+			
+			new ReadInWorld();
+			//ReadInWorld.clearAllGameInfo(); need to clear ans stop threads
+			GamePanel gpanel = new GamePanel();
 			this.add(gpanel);
 			//gameThread = new Thread(gpanel);
 			//gameThread.start();
@@ -60,6 +62,7 @@ public class GameWindowTemp extends JFrame {
 		}
 		
 		if (State == STATE.DEATHSCREEN) {
+			System.out.println("am here");
 			window.dispose();
 			GameOverScreen gos = new GameOverScreen();
 			this.add(gos);
@@ -136,8 +139,10 @@ public class GameWindowTemp extends JFrame {
 		State = STATE.DEATHSCREEN;		
 	}
 	
-	public  void GameOver() {
+	/*public  void GameOver() {
 		this.add(new GameOverScreen());
 	}
+	*/
+	
 }
 	

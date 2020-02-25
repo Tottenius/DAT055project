@@ -6,10 +6,11 @@ import assetclasses.AbstractAsset;
 import assetclasses.Tile;
 import viewer.GamePanel;
 import viewer.GameSettings;
+import viewer.ReadInWorld;
 
 public abstract class AssetController {
 	//Gameboard
-	protected List<AbstractAsset> assets =  GamePanel.getAssetList();
+	protected List<AbstractAsset> assets =  ReadInWorld.getAssetList();
 
 	protected final static int WIDTH = GameSettings.getWidth();
 	protected final static int HEIGHT = GameSettings.getHeight();

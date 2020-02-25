@@ -3,6 +3,7 @@ package main;
 import javax.swing.SwingUtilities;
 
 import viewer.GameWindowTemp;
+import viewer.ReadInWorld;
 
 public class Main {
 	public static boolean isRunning;
@@ -12,6 +13,7 @@ public class Main {
     	SwingUtilities.invokeLater(new Runnable() {
     	    public void run() {
     	    	isRunning = true;
+    	    	//new ReadInWorld();
     	    	new GameWindowTemp();
     	    }
     	  });

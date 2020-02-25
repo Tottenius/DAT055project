@@ -55,32 +55,26 @@ public class GamePanel extends JPanel {
 	private static Direction direction = Direction.RIGHT;
 
 	// list with assets
-	private static List<AbstractAsset> assets = new ArrayList<AbstractAsset>();
+	//private static List<AbstractAsset> assets = new ArrayList<AbstractAsset>();
 
 	// Starting position
 	private int x = 0;
 	private int y = 0;
 
+	
 	// Symbols
 	private AbstractAsset AbstractAsset;
+	
+	
 	// level paths
 	String level = "";
 	String level1 = "src/levels/level2.txt";
 
-	// Players
-	private List<PlayerController> players = new ArrayList<PlayerController>();
-	// Enemys
-	private List<EnemyController> enemies = new ArrayList<EnemyController>();
-	// Enemy threads
-	private List<Thread> enemyThreads = new ArrayList<Thread>();
-	// Player threads
-	private List<Thread> playerThreads = new ArrayList<Thread>();
-	// Spikes
-	private List<SpikeController> spikes = new ArrayList<SpikeController>();
-	//Spike Threads
-	//private List<Thread> spikeThreads = new ArrayList<Thread>();
 
 	// Clear the threads and assets
+
+	//FIX THIS SO ITS USED
+	/*
 	public void clearAllGameInfo() {
 		// reset game map
 		assets.clear();
@@ -94,114 +88,18 @@ public class GamePanel extends JPanel {
 		spikes.clear();
 		//spikeThreads.clear();
 		levelRead = false;
-	}
-
-	// Reach assets in controller
-	public static List<AbstractAsset> getAssetList() {
-		return assets;
-	}
-
-	public static void setAssetList(ArrayList<AbstractAsset> assetList) {
-		assets = assetList;
-	}
+	} 
+	*/
 
 	// get direction
 	public static Direction getDirection() {
 		return direction;
 	}
-
-	private void startInGameThreads() {
-		// start player
-		for (Thread t : playerThreads) {
-			t.start();
-		}
-		// starts enemies
-		for (Thread t : enemyThreads) {
-			t.start();
-		}
-		// starts spikes
-		//for (Thread t : spikeThreads) {
-		//	t.start();
-		//}
-	}
-
-	public void readInlevel(String path) {
-		// pos int map
-		int posInList = 0;
-		// pos in enemy list
-		int enemyList = 0;
-		// pos in player list
-		int playerList = 0;
-		// pos in spike list
-		int spikeList = 0;
-		// System.out.println("current working directory is: " +
-		// System.getProperty("user.dir"));
-		try {
-			level = new String(Files.readAllBytes(Paths.get(path)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		// clear previous games if there are any
-		clearAllGameInfo();
-		for (int i = 0; i < level.length(); i++) {
-
-			if (level.charAt(i) == '#') {
-				assets.add(new Wall(posInList));
-				posInList++;
-			} else if (level.charAt(i) == ' ') {
-				assets.add(new Tile(posInList));
-				posInList++;
-			}
-			// Load in closed treasures
-			else if (level.charAt(i) == 't') {
-				assets.add(new Treasure(posInList));
-				posInList++;
-			}
-
-			// Load in opened treasures
-			else if (level.charAt(i) == 'o') {
-				assets.add(new Treasure(posInList));
-				posInList++;
-			}
-			// Load in spikes
-			else if (level.charAt(i) == 's') {
-				// Make a list of all spikes
-				spikes.add(spikeList, new SpikeController(posInList));
-				// Add threads to all players
-				//spikeThreads.add(spikeList, new Thread(spikes.get(spikeList)));
-				// Change to next pos in the player list
-				spikeList++;
-				posInList++;
-			} else if (level.charAt(i) == 'p') {
-				// Make a list of all players
-				System.out.println("Making a new player therad");
-				players.add(playerList, new PlayerController(posInList));
-				// Add threads to all players
-				playerThreads.add(playerList, new Thread(players.get(playerList)));
-				// Change to next pos in the player list
-				playerList++;
-				posInList++;
-			}
-			// Load in enemies
-			else if (level.charAt(i) == 'e') {
-				// Make a list of all enemies
-				enemies.add(new EnemyController(posInList));
-				// Add threads to all enemies
-				//enemyThreads.add(new Thread(enemies.get(enemyList)));
-				// change to next pos in the enemy list
-				enemyList++;
-				posInList++;
-			}
-		}
-		// Add enemies to the map
-		// for (EnemyController e : enemies) {
-
-		// }
-		levelRead = true;
-	}
-
+	
 	private void initWorld(Graphics g) {
 		// System.out.println("Hej initWorld");
+		
+		 List<AbstractAsset> assets = ReadInWorld.getAssetList();
 
 		for (int i = 0; i < assets.size(); i++) {
 			// System.out.println(level.charAt(i));
@@ -334,9 +232,9 @@ public class GamePanel extends JPanel {
 		//this.revalidate();
 		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
 		b.scheduleAtFixedRate(c, 0, 1000/60);
-		readInlevel(level1);
+		//new ReadInWorld();
 		System.out.println(level);
-		startInGameThreads();
+		//ReadInWorld.startInGameThreads();
 
 	}
 	
@@ -345,13 +243,13 @@ public class GamePanel extends JPanel {
     
     TimerTask c = new TimerTask() {
         public void run() {
-        	if(GameWindowTemp.isGameState() && levelRead) {
+        	if(GameWindowTemp.isGameState()) {
 	        	//System.out.println("Repainting.");
 	            repaint();
 				// Gör en gameoverskärm om player är död
         	}
 
-        	if (!PlayerController.isPlayerAlive() && levelRead) {
+        	if (!PlayerController.isPlayerAlive()) {
 				SwingUtilities.getWindowAncestor(gamePanel).dispose();
 				new GameWindowTemp();
 			}

@@ -66,10 +66,10 @@ public class EnemyController extends AssetController {
     
     TimerTask c = new TimerTask() {
         public void run() {
-        	if(GameWindowTemp.isGameState() && GamePanel.levelRead) {
+        	if(GameWindowTemp.isGameState()) {
         		moveDirection();
 			}
-        	else if(!GameWindowTemp.isGameState() && GamePanel.levelRead) {
+        	else if(!GameWindowTemp.isGameState() ) {
         		this.cancel();
         	}
         }
