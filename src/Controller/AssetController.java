@@ -4,13 +4,12 @@ import java.util.List;
 
 import assetclasses.AbstractAsset;
 import assetclasses.Tile;
-import viewer.GamePanel;
 import viewer.GameSettings;
 import viewer.ReadInWorld;
 
 public abstract class AssetController {
 	//Gameboard
-	protected List<AbstractAsset> assets =  ReadInWorld.getAssetList();
+	protected List<AbstractAsset> assets;// =  GamePanel.getWorld().getAssetList();
 
 	protected final static int WIDTH = GameSettings.getWidth();
 	protected final static int HEIGHT = GameSettings.getHeight();
@@ -19,6 +18,8 @@ public abstract class AssetController {
 	protected int position;
 	//Direction
 	protected Direction direction;
+	//world
+	protected ReadInWorld world;
 	
 	protected void moveAsset(int newPos, int oldPos, AbstractAsset ourAsset, AbstractAsset assetTargetLocation) {
 		// Sätt playerns positon till den nya positionen och ge objectet den nya positionen
@@ -45,15 +46,18 @@ public abstract class AssetController {
 		assets.set( pos, newAsset);
 	}
 	
-	public AssetController( int position){
-		this.position = position;
-	}
-	
-
 	protected int getPosition() {
 		return position;
 	}
-	protected void setPosition(int pos) {
+	
+	protected void setPosition(int pos ) {
 		this.position = pos;
 	}
+	// Constructor
+	public AssetController( int position, ReadInWorld world){
+		this.position = position;
+		this.world = world;
+		assets = world.getAssetList();
+	}
+	
 }

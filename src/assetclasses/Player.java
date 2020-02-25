@@ -8,6 +8,8 @@ public class Player extends AbstractAsset {
 	private static final String up = "src/assets/PlayerUp.png";
 	private static final String left = "src/assets/PlayerLeft.png";
 	private static final String right = "src/assets/PlayerRight.png";
+	
+	private boolean alive;
 
 
 	public Player(int position) {
@@ -15,6 +17,17 @@ public class Player extends AbstractAsset {
 		super.loadImage(up, Direction.UP);
 		super.loadImage(down,Direction.DOWN);
 		super.loadImage(left, Direction.LEFT);
-		super.loadImage(right, Direction.RIGHT);	
+		super.loadImage(right, Direction.RIGHT);
+		alive = true;
+	}
+
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 }

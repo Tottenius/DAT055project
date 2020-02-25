@@ -16,7 +16,10 @@ public class GameWindowTemp extends JFrame {
 		MENU,
 		GAME,
 		DEATHSCREEN,
+		RESTART,
+		WIN,
 	};
+
 	// gamestate bool
 	public static boolean isGameState() {
 		return State == STATE.GAME;
@@ -37,6 +40,10 @@ public class GameWindowTemp extends JFrame {
 
     // local reference to it self
     private GameWindowTemp window = this;
+    
+    // The game panel
+    GamePanel gpanel = new GamePanel();
+    
 
     
 
@@ -50,14 +57,8 @@ public class GameWindowTemp extends JFrame {
 		
 		//if gamestate is Game then we start the game;
 		if (State == STATE.GAME) {
-			
-			new ReadInWorld();
-			//ReadInWorld.clearAllGameInfo(); need to clear ans stop threads
-			GamePanel gpanel = new GamePanel();
 			this.add(gpanel);
-			//gameThread = new Thread(gpanel);
-			//gameThread.start();
-			System.out.println("hej är vi här");
+			System.out.println("Vi startar en ny gamePanel");
 
 		}
 		
@@ -92,10 +93,9 @@ public class GameWindowTemp extends JFrame {
         m3.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
 	            System.out.println("Restart");
+	           // SetRestartState(); 
 	            GameWindowTemp.SetStateGame();
 	            window.dispose();
-	            //Remove all game info
-	           // GamePanel.clearAllGameInfo();
 	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 			  } 
 			} 
@@ -126,6 +126,17 @@ public class GameWindowTemp extends JFrame {
         this.setJMenuBar(menubar);
 	}
 	
+	public static void setState( STATE s) {
+		State = s;
+	}
+	public static void SetWinState(){
+		State = STATE.WIN;	
+}
+
+	public static boolean isWinState() {
+		return State == STATE.WIN;
+	}
+	
 	public static void SetStateGame(){
 			State = STATE.GAME;	
 	}
@@ -139,6 +150,12 @@ public class GameWindowTemp extends JFrame {
 		State = STATE.DEATHSCREEN;		
 	}
 	
+	public static void SetRestartState() {
+		State = STATE.RESTART;		
+	}	
+	public static boolean isRestartState() {
+		return State == STATE.RESTART;
+	}
 	/*public  void GameOver() {
 		this.add(new GameOverScreen());
 	}

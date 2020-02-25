@@ -1,6 +1,5 @@
 package Controller;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -8,8 +7,8 @@ import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Tile;
-import viewer.GamePanel;
 import viewer.GameWindowTemp;
+import viewer.ReadInWorld;
 
 public class EnemyController extends AssetController {
 	private Enemy enemy;
@@ -18,8 +17,8 @@ public class EnemyController extends AssetController {
 	// Is the enemy alive?
 	private boolean isAlive = true;
 	
-	public EnemyController(int pos) {
-		super( pos);
+	public EnemyController(int pos, ReadInWorld world) {
+		super( pos,world);
 		enemy = new Enemy(pos);
 		assets.add(enemy);
 		// Kör timerTasken b efter 300ms
@@ -66,10 +65,13 @@ public class EnemyController extends AssetController {
     
     TimerTask c = new TimerTask() {
         public void run() {
+        	
         	if(GameWindowTemp.isGameState()) {
         		moveDirection();
 			}
+
         	else if(!GameWindowTemp.isGameState() ) {
+        		System.out.println("Stänger av Monster");
         		this.cancel();
         	}
         }

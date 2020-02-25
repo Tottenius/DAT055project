@@ -3,13 +3,11 @@ package Controller;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.SwingUtilities;
-
 import assetclasses.Player;
 import assetclasses.Spikes;
 import assetclasses.Tile;
-import viewer.GamePanel;
 import viewer.GameWindowTemp;
+import viewer.ReadInWorld;
 
 public class SpikeController extends AssetController{
 	
@@ -18,8 +16,8 @@ public class SpikeController extends AssetController{
 	
 	private boolean isSpike = true;
 	
-	public SpikeController(int position) {
-		super(position);
+	public SpikeController(int pos, ReadInWorld world) {
+		super(pos, world);
 		tile = new Tile(position);
 		spikes = new Spikes(position);
 		assets.add(spikes);
@@ -34,8 +32,7 @@ public class SpikeController extends AssetController{
         public void run() {
         	if(GameWindowTemp.isGameState()) {
 	        	System.out.println(assets.get(position));
-				//Fulfix player är inte längre spikes :(
-	        	
+	     
 	        	if (assets.get(position) instanceof Player) {
 					System.out.println("plz die");
 					PlayerController.playerDead();
@@ -50,15 +47,13 @@ public class SpikeController extends AssetController{
 	        		changeAsset(position, spikes);
 	        		isSpike= true;
 	        	}
-	        	else if(!GameWindowTemp.isGameState() && GamePanel.levelRead) {
-	        		this.cancel();
-	        	}
-        	}
 
-			
-			
-			//System.out.println("nu är jag en spike");
-			}
+        	}
+        	else if(!GameWindowTemp.isGameState()) {
+        		System.out.println("Stänger av Spikes");
+        		this.cancel();
+        	}
+		}
     };
 
 	/*

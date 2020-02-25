@@ -4,10 +4,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 import java.util.Timer;
@@ -16,9 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import Controller.Direction;
-import Controller.EnemyController;
 import Controller.PlayerController;
-import Controller.SpikeController;
 import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
 import assetclasses.Player;
@@ -26,14 +20,17 @@ import assetclasses.Spikes;
 import assetclasses.Tile;
 import assetclasses.Treasure;
 import assetclasses.Wall;
-import main.Main;
 
 public class GamePanel extends JPanel {
 	// This window
 	GamePanel gamePanel = this;
 	// Level read
 	public static boolean levelRead = false;
-
+	// Read in level
+	private static ReadInWorld world;
+	public static ReadInWorld getWorld() {
+		return world;
+	}
 	// Window size
 	private static final int WIDTH = GameSettings.getWidth();
 	private static final int HEIGHT = GameSettings.getHeight();
@@ -55,7 +52,7 @@ public class GamePanel extends JPanel {
 	private static Direction direction = Direction.RIGHT;
 
 	// list with assets
-	//private static List<AbstractAsset> assets = new ArrayList<AbstractAsset>();
+	public List<AbstractAsset> assets;
 
 	// Starting position
 	private int x = 0;
@@ -65,11 +62,6 @@ public class GamePanel extends JPanel {
 	// Symbols
 	private AbstractAsset AbstractAsset;
 	
-	
-	// level paths
-	String level = "";
-	String level1 = "src/levels/level2.txt";
-
 
 	// Clear the threads and assets
 
@@ -99,7 +91,7 @@ public class GamePanel extends JPanel {
 	private void initWorld(Graphics g) {
 		// System.out.println("Hej initWorld");
 		
-		 List<AbstractAsset> assets = ReadInWorld.getAssetList();
+		 List<AbstractAsset> assets = world.getAssetList();
 
 		for (int i = 0; i < assets.size(); i++) {
 			// System.out.println(level.charAt(i));
@@ -141,7 +133,6 @@ public class GamePanel extends JPanel {
 			}
 			// Load in treasures
 			else if (AbstractAsset instanceof Treasure) {
-
 				g.drawImage(AbstractAsset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
@@ -216,25 +207,28 @@ public class GamePanel extends JPanel {
 			default:
 				break;
 			}
+			//System.out.println(assets.get(15));
 			isKeyPressed = true;
 		}
 	}
-
+	//Levels
+	String level1 = "src/levels/level1.txt";
+	String level2 = "src/levels/level2.txt";
+	
 	public GamePanel() {
+		// Read in new world
+		world = new ReadInWorld(level2);
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(null);
-		System.out.println("Läser in leveln");
 		// System.out.println(level);
 		this.setVisible(true);
 		// adding the keylistener
 		this.addKeyListener(new keyLis());
 		this.setFocusable(true);
-		//this.revalidate();
 		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
 		b.scheduleAtFixedRate(c, 0, 1000/60);
-		//new ReadInWorld();
-		System.out.println(level);
-		//ReadInWorld.startInGameThreads();
+		System.out.println(level2);
+		world.startInGameThreads();
 
 	}
 	
@@ -243,15 +237,29 @@ public class GamePanel extends JPanel {
     
     TimerTask c = new TimerTask() {
         public void run() {
+        	/*
+        	if(GameWindowTemp.isRestartState()) {
+        		world.restartGame();
+        		GameWindowTemp.SetStateGame();
+        		System.out.println("Försöker starta om");
+        	}
+        	*/
         	if(GameWindowTemp.isGameState()) {
 	        	//System.out.println("Repainting.");
-	            repaint();
-				// Gör en gameoverskärm om player är död
+	            repaint();				
         	}
-
-        	if (!PlayerController.isPlayerAlive()) {
+        	// Att vinna ger just nu game over screen
+        	else if ( GameWindowTemp.isWinState()) {
+        		GameWindowTemp.SetDeathScreenState();
 				SwingUtilities.getWindowAncestor(gamePanel).dispose();
 				new GameWindowTemp();
+				this.cancel();
+        	}
+        	// Gör en gameoverskärm om player är död
+        	else if (!PlayerController.isPlayerAlive()) {
+				SwingUtilities.getWindowAncestor(gamePanel).dispose();
+				new GameWindowTemp();
+				this.cancel();
 			}
         	
         }

@@ -1,6 +1,5 @@
 package Controller;
 
-import java.util.ArrayList;
 import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
 import assetclasses.Player;
@@ -9,8 +8,11 @@ import assetclasses.Tile;
 import assetclasses.Treasure;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
+import viewer.ReadInWorld;
 
 public class PlayerController extends AssetController implements Runnable  {
+	//Number of opened treasures
+	private int openedTreasures = 0;
 
 	//private static ArrayList<Asset> assets = GamePanel.getAssetList();
 	private Player player;	
@@ -19,6 +21,7 @@ public class PlayerController extends AssetController implements Runnable  {
 	
 	public static void playerDead() {
 		playerAlive = false;
+		//((Player) assets.get(super.getPosition())).setAlive(false);
 		GameWindowTemp.SetDeathScreenState();
 	}
 	
@@ -26,8 +29,8 @@ public class PlayerController extends AssetController implements Runnable  {
 		return playerAlive;
 	}
 	
-	public PlayerController(int pos) {
-		super(pos);
+	public PlayerController(int pos, ReadInWorld world) {
+		super(pos, world);
 		player = new Player(pos);
 		assets.add(player);
 		playerAlive = true;
@@ -52,8 +55,17 @@ public class PlayerController extends AssetController implements Runnable  {
 		}
 		// If treasure, open treasure
 		else if (swapAsset instanceof Treasure) {
-			((Treasure) swapAsset).openTreasure();
+			// Om skatten inte är öppen, öppna den och öka mängden öppnande kistor
+			if( !((Treasure) swapAsset).treasureIsOpen()) {
+				openedTreasures++;
+				((Treasure) swapAsset).openTreasure();
+				// Om du öpnnat alla kistor vinn
+				if( openedTreasures == world.numberOfTresures) {
+					GameWindowTemp.SetWinState();
+				}
+			}	
 		}
+			
 		// If enemy, kill player :(
 		else if (swapAsset instanceof Enemy) {
 			super.dieWhileMovingIntoDanger(oldPlayerPos, newPlayerPos);
