@@ -16,27 +16,14 @@ import viewer.ReadInWorld;
 public class PlayerController extends AssetController  {
 	//Number of opened treasures
 	private int openedTreasures = 0;
-
-	//private static ArrayList<Asset> assets = GamePanel.getAssetList();
+	
+	// Player
 	private Player player;	
-	private static boolean playerAlive;
 
-	
-	public static void playerDead() {
-		playerAlive = false;
-		//((Player) assets.get(super.getPosition())).setAlive(false);
-		GameWindowTemp.SetDeathScreenState();
-	}
-	
-	public static boolean isPlayerAlive() {
-		return playerAlive;
-	}
-	
 	public PlayerController(int pos, ReadInWorld world) {
 		super(pos, world);
 		player = new Player(pos);
 		assets.add(player);
-		playerAlive = true;
 		// Kör timerTasken b efter 150ms
 		b.scheduleAtFixedRate(c, 1000, 150);
 	}
@@ -74,12 +61,12 @@ public class PlayerController extends AssetController  {
 		// If enemy, kill player :(
 		else if (swapAsset instanceof Enemy) {
 			super.dieWhileMovingIntoDanger(oldPlayerPos, newPlayerPos);
-			playerDead();
+			player.setAlive(false);
 		}
 		// if spikes, die
 		else if (swapAsset instanceof Spikes) {
 			super.dieWhileMovingIntoDanger(oldPlayerPos, newPlayerPos);
-			playerDead();
+			player.setAlive(false);
 		}
 	}
     Timer b = new Timer();
@@ -87,13 +74,14 @@ public class PlayerController extends AssetController  {
     TimerTask c = new TimerTask() {
         public void run() {
         	
-        	if(GameWindowTemp.isGameState() && GamePanel.isKeyPressed()) {
+        	if(player.isAlive() && GameWindowTemp.isGameState() && GamePanel.isKeyPressed()) {
         		moveDirection(direction);
         		GamePanel.setKeyPressed(false);
 			}
 
-        	else if(!GameWindowTemp.isGameState() ) {
+        	else if(!GameWindowTemp.isGameState() || !player.isAlive() ) {
         		System.out.println("Stänger av Player");
+        		GameWindowTemp.SetDeathScreenState();
         		this.cancel();
         	}
         }

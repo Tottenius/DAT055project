@@ -149,6 +149,9 @@ public class GameWindowTemp extends JFrame {
 	public static void SetDeathScreenState() {
 		State = STATE.DEATHSCREEN;		
 	}
+	public static boolean isDeathScreenState() {
+		return State == STATE.DEATHSCREEN;
+	}
 	
 	public static void SetRestartState() {
 		State = STATE.RESTART;		

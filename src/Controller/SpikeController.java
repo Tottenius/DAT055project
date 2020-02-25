@@ -35,7 +35,7 @@ public class SpikeController extends AssetController{
 	     
 	        	if (assets.get(position) instanceof Player) {
 					System.out.println("plz die");
-					PlayerController.playerDead();
+					((Player) assets.get(position)).setAlive(false);
 					
 				}
 				else if (isSpike) {

@@ -256,10 +256,11 @@ public class GamePanel extends JPanel {
 				this.cancel();
         	}
         	// Gör en gameoverskärm om player är död
-        	else if (!PlayerController.isPlayerAlive()) {
+        	else if (GameWindowTemp.isDeathScreenState()) {
 				SwingUtilities.getWindowAncestor(gamePanel).dispose();
 				new GameWindowTemp();
-				this.cancel();
+        		this.cancel();
+				
 			}
         	
         }

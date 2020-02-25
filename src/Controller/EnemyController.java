@@ -53,7 +53,7 @@ public class EnemyController extends AssetController {
 			// If player, kill player
 			else if (newEnemyLocation instanceof Player  ) {
 				super.killAsset(newEnemyPos, oldEnemyPos, enemy);
-				PlayerController.playerDead();
+				((Player) newEnemyLocation).setAlive(false);
 			}
 			// else turn around
 			else  {
