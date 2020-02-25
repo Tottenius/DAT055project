@@ -112,7 +112,7 @@ public class ReadInWorld {
 				System.out.println("Making a new player therad");
 				players.add(playerList, new PlayerController(posInList,this));
 				// Add threads to all players
-				playerThreads.add(playerList, new Thread(players.get(playerList)));
+				//playerThreads.add(playerList, new Thread(players.get(playerList)));
 				// Change to next pos in the player list
 				playerList++;
 				posInList++;

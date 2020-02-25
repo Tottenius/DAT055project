@@ -1,5 +1,8 @@
 package Controller;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
 import assetclasses.Player;
@@ -10,7 +13,7 @@ import viewer.GamePanel;
 import viewer.GameWindowTemp;
 import viewer.ReadInWorld;
 
-public class PlayerController extends AssetController implements Runnable  {
+public class PlayerController extends AssetController  {
 	//Number of opened treasures
 	private int openedTreasures = 0;
 
@@ -34,6 +37,8 @@ public class PlayerController extends AssetController implements Runnable  {
 		player = new Player(pos);
 		assets.add(player);
 		playerAlive = true;
+		// Kör timerTasken b efter 150ms
+		b.scheduleAtFixedRate(c, 1000, 150);
 	}
 
 	public void moveDirection( Direction direction) {
@@ -77,7 +82,24 @@ public class PlayerController extends AssetController implements Runnable  {
 			playerDead();
 		}
 	}
-	
+    Timer b = new Timer();
+    
+    TimerTask c = new TimerTask() {
+        public void run() {
+        	
+        	if(GameWindowTemp.isGameState() && GamePanel.isKeyPressed()) {
+        		moveDirection(direction);
+        		GamePanel.setKeyPressed(false);
+			}
+
+        	else if(!GameWindowTemp.isGameState() ) {
+        		System.out.println("Stänger av Player");
+        		this.cancel();
+        	}
+        }
+    };
+    
+	/*
 	@Override
     public void run() {
 		// Kolla om det går att lösa med en kö. 
@@ -97,4 +119,5 @@ public class PlayerController extends AssetController implements Runnable  {
 
         }
     }
+    */
 }
