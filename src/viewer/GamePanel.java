@@ -2,6 +2,7 @@ package viewer;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -25,9 +26,9 @@ import assetclasses.Wall;
 /*
  Att göra:
  	Allmän interrupt för threads
- 	Instanceof almost
- 	kordinater
- 	attributes för assets
+ 	Instanceof FIXED except when restarting level need to look at
+ 	kordinater 
+ 	attributes för assets FIXED
  	Testa sätta upp en lokal server (Kolla föreläsningar) 
  */
 
@@ -67,8 +68,8 @@ public class GamePanel extends JPanel {
 	public List<AbstractAsset> assets;
 
 	// Starting position
-	private int x = 0;
-	private int y = 0;
+	private Point pos = new Point(0,0);
+
 
 	
 	// Symbols
@@ -108,24 +109,24 @@ public class GamePanel extends JPanel {
 			// assetSymbol = level.charAt(i);
 			asset = assets.get(i);
 			// Time for a new row?
-			if (x == WIDTH) {
-				x = 0;
-				y = y + SIZE;
+			if (pos.x == WIDTH) {
+				pos.x = 0;
+				pos.y = pos.y + SIZE;
 			}
 			// Load in player
 			if (asset.hasDirections() ) {
 				asset.getImageAtMap(direction);
-				g.drawImage(asset.getImage(), x, y, this);
-				x = x + SIZE;
+				g.drawImage(asset.getImage(), pos.x, pos.y, this);
+				pos.x = pos.x + SIZE;
 			}
 			// Load in enemies
 			else {
-				g.drawImage(asset.getImage(), x, y, this);
-				x = x + SIZE;
+				g.drawImage(asset.getImage(), pos.x, pos.y, this);
+				pos.x = pos.x + SIZE;
 			}
 		}
-		y = 0;
-		x = 0;
+		pos.y = 0;
+		pos.x = 0;
 	}
 
 	@Override

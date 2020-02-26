@@ -28,6 +28,10 @@ public class ReadInWorld {
 		//list with assets for quick restart
 	private List<AbstractAsset> restartAssets = new ArrayList<AbstractAsset>();
 	
+	
+	
+	
+	// DETTA ÄR SKIT MANNEN FIXA! TACK PELLE
 	public void restartGame() {
 		assets = restartAssets;
 		System.out.println(assets);
@@ -45,9 +49,14 @@ public class ReadInWorld {
 				new PlayerController(i,this);
 			}
 			
+			
 		}
 		System.out.println("skrivit ut de nya controllersen");
 	}
+	
+	
+	
+	
 
 	// level paths
 	String level = "";
