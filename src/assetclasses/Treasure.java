@@ -39,13 +39,11 @@ public class Treasure extends AbstractAsset{
 
 	@Override
 	public boolean killable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean canKill() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -63,13 +61,11 @@ public class Treasure extends AbstractAsset{
 
 	@Override
 	public boolean canWalkOn() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean hasDirections() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

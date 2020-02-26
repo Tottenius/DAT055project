@@ -53,15 +53,9 @@ public class ReadInWorld {
 		}
 		System.out.println("skrivit ut de nya controllersen");
 	}
-	
-	
-	
-	
 
 	// level paths
 	String level = "";
-
-	
 	// pos int map
 	int posInList = 0;
 	// pos in enemy list

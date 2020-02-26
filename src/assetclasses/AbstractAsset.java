@@ -23,8 +23,7 @@ public abstract class AbstractAsset implements Asset {
     private Map<Direction, Image> images = new HashMap<Direction ,Image>();
     
     public AbstractAsset(int position) {
-        this.setPosition(position);
-        //loadImage(path, direction);      
+        this.setPosition(position);     
     }
     
     //returns the image
@@ -33,7 +32,6 @@ public abstract class AbstractAsset implements Asset {
     }
   
     //get an image at an specified location in our asset array, hasmap
- 
     public void getImageAtMap(Direction direction ) {
     	img = images.get(direction);
     }

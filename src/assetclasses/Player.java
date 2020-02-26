@@ -34,35 +34,30 @@ public class Player extends AbstractAsset {
 
 	@Override
 	public boolean killable() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 
 	@Override
 	public boolean canKill() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 
 	@Override
 	public boolean intractable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 
 	@Override
 	public boolean canWalkOn() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 
 	@Override
 	public boolean hasDirections() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 }
