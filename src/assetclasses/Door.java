@@ -28,7 +28,7 @@ public class Door extends AbstractAsset {
 	@Override
 	public boolean intractable() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 
