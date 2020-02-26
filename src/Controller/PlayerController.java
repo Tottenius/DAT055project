@@ -53,7 +53,7 @@ public class PlayerController extends AssetController  {
 				((Treasure) swapAsset).openTreasure();
 				// Om du öpnnat alla kistor vinn
 				if( openedTreasures == world.numberOfTresures) {
-					GameWindowTemp.SetWinState();
+					GameWindowTemp.setWinState();
 				}
 			}	
 		}
@@ -78,10 +78,13 @@ public class PlayerController extends AssetController  {
         		moveDirection(direction);
         		GamePanel.setKeyPressed(false);
 			}
-
-        	else if(!GameWindowTemp.isGameState() || !player.isAlive() ) {
-        		System.out.println("Stänger av Player");
-        		GameWindowTemp.SetDeathScreenState();
+        	else if (!GameWindowTemp.isGameState()){
+        		System.out.println("Stänger av Player vi går till main menu");
+        		this.cancel();
+        	}
+        	else if(!player.isAlive() ) {
+        		System.out.println("Stänger av Player player död");
+        		GameWindowTemp.setDeathScreenState();
         		this.cancel();
         	}
         }

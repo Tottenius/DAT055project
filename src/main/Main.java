@@ -1,9 +1,10 @@
 package main;
 
+import java.lang.invoke.VolatileCallSite;
+
 import javax.swing.SwingUtilities;
 
 import viewer.GameWindowTemp;
-import viewer.ReadInWorld;
 
 public class Main {
 	public static boolean isRunning;
@@ -14,7 +15,9 @@ public class Main {
     	    public void run() {
     	    	isRunning = true;
     	    	//new ReadInWorld();
+    	    	System.out.println(GameWindowTemp.state + " Main");
     	    	new GameWindowTemp();
+    	    	
     	    }
     	  });
 	}

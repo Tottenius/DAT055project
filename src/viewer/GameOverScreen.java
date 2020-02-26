@@ -83,7 +83,7 @@ public class GameOverScreen extends JPanel {
 	    	RestartButton.addActionListener(new ActionListener() { 
 			  public void actionPerformed(ActionEvent e) { 
 		            System.out.println("Rest Button pressed!");
-		            GameWindowTemp.SetStateGame();
+		            GameWindowTemp.setStateGame();
 		            SwingUtilities.getWindowAncestor(GameOver).dispose();
 		            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 				  }  
@@ -93,7 +93,7 @@ public class GameOverScreen extends JPanel {
 	    	MenuButton.addActionListener(new ActionListener() { 
 	 		  public void actionPerformed(ActionEvent e) { 
 		            System.out.println("Menu Button pressed!");
-		            GameWindowTemp.SetStateMenu();
+		            GameWindowTemp.setStateMenu();
 		            SwingUtilities.getWindowAncestor(GameOver).dispose();
 		            new GameWindowTemp();
 				  } 

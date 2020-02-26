@@ -22,11 +22,11 @@ public class GameWindowTemp extends JFrame {
 
 	// gamestate bool
 	public static boolean isGameState() {
-		return State == STATE.GAME;
+		return state == STATE.GAME;
 	}
 
 	// create states
-	private static STATE State = STATE.MENU;
+	public static STATE state = STATE.MENU;
 	private Menu menu;
 
     // create a menubar
@@ -40,29 +40,23 @@ public class GameWindowTemp extends JFrame {
 
     // local reference to it self
     private GameWindowTemp window = this;
-    
-    // The game panel
-    GamePanel gpanel = new GamePanel();
-    
-
-    
-
 	
 	public GameWindowTemp(){
-
-		if (State == STATE.MENU) { 
+		System.out.println("Vi gör ett window");
+		System.out.println(state + " GameWindowTemp");
+		if (state == STATE.MENU) { 
 			menu = new Menu();
 			this.add(menu);
 		}
 		
 		//if gamestate is Game then we start the game;
-		if (State == STATE.GAME) {
-			this.add(gpanel);
+		else if (state == STATE.GAME) {
+			this.add(new GamePanel());
 			System.out.println("Vi startar en ny gamePanel");
 
 		}
 		
-		if (State == STATE.DEATHSCREEN) {
+		else if (state == STATE.DEATHSCREEN) {
 			System.out.println("am here");
 			window.dispose();
 			GameOverScreen gos = new GameOverScreen();
@@ -94,7 +88,7 @@ public class GameWindowTemp extends JFrame {
   		  public void actionPerformed(ActionEvent e) { 
 	            System.out.println("Restart");
 	           // SetRestartState(); 
-	            GameWindowTemp.SetStateGame();
+	            GameWindowTemp.setStateGame();
 	            window.dispose();
 	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 			  } 
@@ -104,7 +98,7 @@ public class GameWindowTemp extends JFrame {
         m4.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
 	            System.out.println("Go to main menu pressed");
-	            GameWindowTemp.SetStateMenu();
+	            GameWindowTemp.setStateMenu();
 	            window.dispose();
 	            //Remove all game info
 	            //GamePanel.clearAllGameInfo();
@@ -127,37 +121,36 @@ public class GameWindowTemp extends JFrame {
 	}
 	
 	public static void setState( STATE s) {
-		State = s;
+		state = s;
 	}
-	public static void SetWinState(){
-		State = STATE.WIN;	
+	public static void setWinState(){
+		state = STATE.WIN;	
 }
 
 	public static boolean isWinState() {
-		return State == STATE.WIN;
+		return state == STATE.WIN;
 	}
 	
-	public static void SetStateGame(){
-			State = STATE.GAME;	
+	public static void setStateGame(){
+			state = STATE.GAME;	
 	}
 	
-	public static void SetStateMenu(){
-		
-		State = STATE.MENU;	
-}
+	public static void setStateMenu(){	
+		state = STATE.MENU;	
+	}
 	
-	public static void SetDeathScreenState() {
-		State = STATE.DEATHSCREEN;		
+	public static void setDeathScreenState() {
+		state = STATE.DEATHSCREEN;		
 	}
 	public static boolean isDeathScreenState() {
-		return State == STATE.DEATHSCREEN;
+		return state == STATE.DEATHSCREEN;
 	}
 	
-	public static void SetRestartState() {
-		State = STATE.RESTART;		
+	public static void setRestartState() {
+		state = STATE.RESTART;		
 	}	
 	public static boolean isRestartState() {
-		return State == STATE.RESTART;
+		return state == STATE.RESTART;
 	}
 	/*public  void GameOver() {
 		this.add(new GameOverScreen());

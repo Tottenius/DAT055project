@@ -16,6 +16,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import com.sun.java_cup.internal.runtime.virtual_parse_stack;
+
 import main.Main;
 
 
@@ -65,6 +68,8 @@ public class Menu extends JPanel {
     }
 	
     public Menu() {
+    	System.out.println("Vi går in i menyn");
+    	System.out.println(GameWindowTemp.state);
     	
     	//this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     	this.setLayout(new GridBagLayout());  	
@@ -92,7 +97,7 @@ public class Menu extends JPanel {
    	 StartButton.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
 	            System.out.println("Start Button pressed!");
-	            GameWindowTemp.SetStateGame();
+	            GameWindowTemp.setStateGame();
 	            SwingUtilities.getWindowAncestor(menu).dispose();
 	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 			  } 

@@ -27,10 +27,10 @@ public class GamePanel extends JPanel {
 	// Level read
 	public static boolean levelRead = false;
 	// Read in level
-	private static ReadInWorld world;
-	public static ReadInWorld getWorld() {
-		return world;
-	}
+	private ReadInWorld world;
+	//public static ReadInWorld getWorld() {
+	//	return world;
+	//}
 	// Window size
 	private static final int WIDTH = GameSettings.getWidth();
 	private static final int HEIGHT = GameSettings.getHeight();
@@ -89,12 +89,10 @@ public class GamePanel extends JPanel {
 	}
 	
 	private void initWorld(Graphics g) {
-		// System.out.println("Hej initWorld");
 		
 		 List<AbstractAsset> assets = world.getAssetList();
 
 		for (int i = 0; i < assets.size(); i++) {
-			// System.out.println(level.charAt(i));
 			// assetSymbol = level.charAt(i);
 			AbstractAsset = assets.get(i);
 			// Time for a new row?
@@ -106,23 +104,19 @@ public class GamePanel extends JPanel {
 			if (AbstractAsset instanceof Player ) {
 				AbstractAsset.getImageAtMap(direction);
 				g.drawImage(AbstractAsset.getImage(), x, y, this);
-				// System.out.println("vi försöker göra en gubbe");
 				x = x + SIZE;
 			}
 			// Load in enemies
 			if (AbstractAsset instanceof Enemy) {
-				// System.out.println("Vi försöker göra en enemy");
 				g.drawImage(AbstractAsset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
 			if (AbstractAsset instanceof Spikes) {
-				// System.out.println("Vi försöker göra en enemy");
 				g.drawImage(AbstractAsset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
 			// Load in wall assets
 			if (AbstractAsset instanceof Wall) {
-				// System.out.println("Vi försöker göra en wall");
 				g.drawImage(AbstractAsset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
@@ -152,7 +146,6 @@ public class GamePanel extends JPanel {
 		public void keyPressed(KeyEvent e) {
 
 			int input = e.getKeyCode();
-			// System.out.println("vi försöker måla om");
 			switch (input) {
 
 			case KeyEvent.VK_UP:
@@ -207,7 +200,6 @@ public class GamePanel extends JPanel {
 			default:
 				break;
 			}
-			//System.out.println(assets.get(15));
 			isKeyPressed = true;
 		}
 	}
@@ -216,18 +208,18 @@ public class GamePanel extends JPanel {
 	String level2 = "src/levels/level2.txt";
 	
 	public GamePanel() {
+		System.out.println("Vi går in i gamepanel");
+		System.out.println(GameWindowTemp.state+ " GamePanel");
 		// Read in new world
 		world = new ReadInWorld(level2);
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(null);
-		// System.out.println(level);
 		this.setVisible(true);
 		// adding the keylistener
 		this.addKeyListener(new keyLis());
 		this.setFocusable(true);
 		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
 		b.scheduleAtFixedRate(c, 0, 1000/60);
-		System.out.println(level2);
 		world.startInGameThreads();
 
 	}
@@ -245,12 +237,11 @@ public class GamePanel extends JPanel {
         	}
         	*/
         	if(GameWindowTemp.isGameState()) {
-	        	//System.out.println("Repainting.");
 	            repaint();				
         	}
         	// Att vinna ger just nu game over screen
         	else if ( GameWindowTemp.isWinState()) {
-        		GameWindowTemp.SetDeathScreenState();
+        		GameWindowTemp.setDeathScreenState();
 				SwingUtilities.getWindowAncestor(gamePanel).dispose();
 				new GameWindowTemp();
 				this.cancel();
