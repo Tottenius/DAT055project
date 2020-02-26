@@ -33,5 +33,19 @@ public class Spikes extends AbstractAsset {
 	public boolean intractable() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+	@Override
+	public boolean canWalkOn() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean hasDirections() {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 }

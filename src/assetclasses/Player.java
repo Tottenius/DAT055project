@@ -51,4 +51,18 @@ public class Player extends AbstractAsset {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
+	@Override
+	public boolean canWalkOn() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean hasDirections() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

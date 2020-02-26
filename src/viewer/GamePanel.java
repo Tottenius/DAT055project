@@ -25,7 +25,7 @@ import assetclasses.Wall;
 /*
  Att göra:
  	Allmän interrupt för threads
- 	Instanceof
+ 	Instanceof almost
  	kordinater
  	attributes för assets
  	Testa sätta upp en lokal server (Kolla föreläsningar) 
@@ -113,32 +113,13 @@ public class GamePanel extends JPanel {
 				y = y + SIZE;
 			}
 			// Load in player
-			if (asset instanceof Player ) {
+			if (asset.hasDirections() ) {
 				asset.getImageAtMap(direction);
 				g.drawImage(asset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
 			// Load in enemies
-			if (asset instanceof Enemy) {
-				g.drawImage(asset.getImage(), x, y, this);
-				x = x + SIZE;
-			}
-			if (asset instanceof Spikes) {
-				g.drawImage(asset.getImage(), x, y, this);
-				x = x + SIZE;
-			}
-			// Load in wall assets
-			if (asset instanceof Wall) {
-				g.drawImage(asset.getImage(), x, y, this);
-				x = x + SIZE;
-			}
-			// Load in tile assets
-			else if (asset instanceof Tile) {
-				g.drawImage(asset.getImage(), x, y, this);
-				x = x + SIZE;
-			}
-			// Load in treasures
-			else if (asset instanceof Treasure) {
+			else {
 				g.drawImage(asset.getImage(), x, y, this);
 				x = x + SIZE;
 			}

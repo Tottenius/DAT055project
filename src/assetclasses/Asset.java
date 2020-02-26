@@ -8,6 +8,8 @@ public interface Asset {
     public boolean killable();
     public boolean canKill();
     public boolean intractable();
+    public boolean canWalkOn();
+    public boolean hasDirections();
    // public void interacted();
     
 }

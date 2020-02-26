@@ -10,10 +10,6 @@ import viewer.ReadInWorld;
 public abstract class AssetController {
 	//Gameboard
 	protected List<AbstractAsset> assets;// =  GamePanel.getWorld().getAssetList();
-
-	protected final static int WIDTH = GameSettings.getWidth();
-	protected final static int HEIGHT = GameSettings.getHeight();
-	protected final static int SIZE = GameSettings.getAssetsize();
 	//Position
 	protected int position;
 	//Direction

@@ -49,7 +49,7 @@ public class EnemyController extends AssetController {
 			
 			// Alla interaktioner med assets
 			// If tile, move to tile
-			if (newEnemyLocation instanceof Tile ) {
+			if (newEnemyLocation.canWalkOn() ) {
 				super.moveAsset(newEnemyPos, oldEnemyPos, enemy, newEnemyLocation);
 			}
 			// If player, kill player
@@ -79,19 +79,4 @@ public class EnemyController extends AssetController {
         	}
         }
     };
-    
-	/*
-	@Override
-	public void run() {
-		while(GameWindowTemp.isGameState() && isAlive ) {		
-			moveDirection();
-			try {
-				Thread.sleep(300);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
-		}
-	}
-	*/	
 }

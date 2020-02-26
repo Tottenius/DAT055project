@@ -43,7 +43,7 @@ public class PlayerController extends AssetController  {
 		// Alla interaktioner med assets
 		swapAsset = assets.get(newPlayerPos);
 		// If tile, move to the tile
-		if (swapAsset instanceof Tile) {
+		if (swapAsset.canWalkOn()) {
 			super.moveAsset(newPlayerPos, oldPlayerPos, movingAsset, swapAsset);
 		}
 		// If treasure, open treasure
@@ -81,26 +81,4 @@ public class PlayerController extends AssetController  {
         	}
         }
     };
-    
-	/*
-	@Override
-    public void run() {
-		// Kolla om det går att lösa med en kö. 
-        //System.out.println("Startar playertråd");
-        while(GameWindowTemp.isGameState() && playerAlive) {
-           // System.out.println("kör playertråd");
-            if(GamePanel.isKeyPressed()) {
-                moveDirection(direction);
-    			try {
-    				Thread.sleep(150);
-    			} catch (InterruptedException e) {
-    				Thread.currentThread().interrupt();
-    				break;
-    			}	
-                GamePanel.setKeyPressed(false);
-            }
-
-        }
-    }
-    */
 }

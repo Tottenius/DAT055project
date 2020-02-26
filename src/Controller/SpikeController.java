@@ -58,38 +58,4 @@ public class SpikeController extends AssetController{
         	}
 		}
     };
-
-	/*
-	@Override
-	public void run() {
-		while(GameWindowTemp.isGameState()) {
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//System.out.println("nu är jag en tile");
-			changeAsset(position, tile);
-			
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//Fulfix player är inte längre spikes :(
-			if(assets.get(position) instanceof Player) {
-				PlayerController.playerDead();
-			}
-			changeAsset(position, spikes);
-			
-			//System.out.println("nu är jag en spike");
-		}
-	}
-	*/
-	
-	
-	
-
 }
