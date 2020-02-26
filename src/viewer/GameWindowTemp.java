@@ -83,8 +83,7 @@ public class GameWindowTemp extends JFrame {
 			ReactionScreen gos = new ReactionScreen(Winpath, "You won the Game, nice work! It took you: " + TimeForCompletion + " seconds to beat the level!");
 			this.add(gos);
 		}	
-		
-		
+			
 		//Adding menubar
 		SetUpMenubar();
 		
@@ -104,17 +103,12 @@ public class GameWindowTemp extends JFrame {
         m5 = new JMenuItem("Increase Volume");
         m6 = new JMenuItem("Decrease Volume");
         
-        // Add listeners to buttons
-        // Går nog att göra dessa på ett snyggare sätt, var mest för test
         
         //Restart the game
         m3.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
 	            System.out.println("Restart");
 	            setRestartState(); 
-	            //setStateGame();
-	           // window.dispose();
-	           // new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 			  } 
 			} 
 	 );
@@ -124,9 +118,7 @@ public class GameWindowTemp extends JFrame {
 	            System.out.println("Go to main menu pressed");
 	            GameWindowTemp.setStateMenu();
 	            window.dispose();
-	            //Remove all game info
-	            //GamePanel.clearAllGameInfo();
-	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+	            new GameWindowTemp(); 
 			  } 
 			} 
 	 );
@@ -136,9 +128,7 @@ public class GameWindowTemp extends JFrame {
 	            System.out.println("Go to main menu pressed");
 	            GameWindowTemp.setStateMenu();
 	            window.dispose();
-	            //Remove all game info
-	            //GamePanel.clearAllGameInfo();
-	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+	            new GameWindowTemp(); 
 			  } 
 			} 
 	 );
@@ -146,8 +136,7 @@ public class GameWindowTemp extends JFrame {
         m5.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
   			
-  			MusicPlayer.increaseVolume(); 
-  			  
+  			MusicPlayer.increaseVolume(); 			  
   			  System.out.println("volume increased!");
 			  } 
 			} 
@@ -211,10 +200,6 @@ public class GameWindowTemp extends JFrame {
 	public static boolean isRestartState() {
 		return state == STATE.RESTART;
 	}
-	/*public  void GameOver() {
-		this.add(new GameOverScreen());
-	}
-	*/
-	
+
 }
 	
