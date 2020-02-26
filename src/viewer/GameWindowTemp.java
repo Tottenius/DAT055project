@@ -87,10 +87,10 @@ public class GameWindowTemp extends JFrame {
         m3.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
 	            System.out.println("Restart");
-	           // SetRestartState(); 
-	            GameWindowTemp.setStateGame();
-	            window.dispose();
-	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+	            setRestartState(); 
+	            //setStateGame();
+	           // window.dispose();
+	           // new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 			  } 
 			} 
 	 );

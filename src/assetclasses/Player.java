@@ -30,4 +30,25 @@ public class Player extends AbstractAsset {
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
+
+
+	@Override
+	public boolean killable() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+	@Override
+	public boolean canKill() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean intractable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

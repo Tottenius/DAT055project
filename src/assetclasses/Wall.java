@@ -10,5 +10,23 @@ public class Wall extends AbstractAsset{
         super(position);
         super.loadImage(path, Direction.DOWN);
         super.getImage();
-    }  
+    }
+
+	@Override
+	public boolean killable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canKill() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean intractable() {
+		// TODO Auto-generated method stub
+		return false;
+	}  
 }

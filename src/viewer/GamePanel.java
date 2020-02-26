@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.TimerTask;
+import java.util.PrimitiveIterator.OfDouble;
 import java.util.Timer;
 
 import javax.swing.JPanel;
@@ -21,7 +22,18 @@ import assetclasses.Tile;
 import assetclasses.Treasure;
 import assetclasses.Wall;
 
+/*
+ Att göra:
+ 	Allmän interrupt för threads
+ 	Instanceof
+ 	kordinater
+ 	attributes för assets
+ 	Testa sätta upp en lokal server (Kolla föreläsningar) 
+ */
+
 public class GamePanel extends JPanel {
+	//
+	public static volatile int numberOfControllers = 0;
 	// This window
 	GamePanel gamePanel = this;
 	// Level read
@@ -60,7 +72,7 @@ public class GamePanel extends JPanel {
 
 	
 	// Symbols
-	private AbstractAsset AbstractAsset;
+	private AbstractAsset asset;
 	
 
 	// Clear the threads and assets
@@ -94,40 +106,40 @@ public class GamePanel extends JPanel {
 
 		for (int i = 0; i < assets.size(); i++) {
 			// assetSymbol = level.charAt(i);
-			AbstractAsset = assets.get(i);
+			asset = assets.get(i);
 			// Time for a new row?
 			if (x == WIDTH) {
 				x = 0;
 				y = y + SIZE;
 			}
 			// Load in player
-			if (AbstractAsset instanceof Player ) {
-				AbstractAsset.getImageAtMap(direction);
-				g.drawImage(AbstractAsset.getImage(), x, y, this);
+			if (asset instanceof Player ) {
+				asset.getImageAtMap(direction);
+				g.drawImage(asset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
 			// Load in enemies
-			if (AbstractAsset instanceof Enemy) {
-				g.drawImage(AbstractAsset.getImage(), x, y, this);
+			if (asset instanceof Enemy) {
+				g.drawImage(asset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
-			if (AbstractAsset instanceof Spikes) {
-				g.drawImage(AbstractAsset.getImage(), x, y, this);
+			if (asset instanceof Spikes) {
+				g.drawImage(asset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
 			// Load in wall assets
-			if (AbstractAsset instanceof Wall) {
-				g.drawImage(AbstractAsset.getImage(), x, y, this);
+			if (asset instanceof Wall) {
+				g.drawImage(asset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
 			// Load in tile assets
-			else if (AbstractAsset instanceof Tile) {
-				g.drawImage(AbstractAsset.getImage(), x, y, this);
+			else if (asset instanceof Tile) {
+				g.drawImage(asset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
 			// Load in treasures
-			else if (AbstractAsset instanceof Treasure) {
-				g.drawImage(AbstractAsset.getImage(), x, y, this);
+			else if (asset instanceof Treasure) {
+				g.drawImage(asset.getImage(), x, y, this);
 				x = x + SIZE;
 			}
 		}
@@ -220,7 +232,7 @@ public class GamePanel extends JPanel {
 		this.setFocusable(true);
 		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
 		b.scheduleAtFixedRate(c, 0, 1000/60);
-		world.startInGameThreads();
+		//world.startInGameThreads();
 
 	}
 	
@@ -229,14 +241,20 @@ public class GamePanel extends JPanel {
     
     TimerTask c = new TimerTask() {
         public void run() {
-        	/*
+        	
         	if(GameWindowTemp.isRestartState()) {
-        		world.restartGame();
-        		GameWindowTemp.SetStateGame();
         		System.out.println("Försöker starta om");
+        		while(!(numberOfControllers == 0)) {
+        			// wait 
+        			//System.out.println(numberOfControllers);
+        		}
+        		System.out.println("Väntat klart");
+        		GameWindowTemp.setStateGame();
+        		System.out.println(GameWindowTemp.state);
+        		world.restartGame();
         	}
-        	*/
-        	if(GameWindowTemp.isGameState()) {
+        	
+        	else if(GameWindowTemp.isGameState()) {
 	            repaint();				
         	}
         	// Att vinna ger just nu game over screen

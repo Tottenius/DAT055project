@@ -18,6 +18,7 @@ public abstract class AbstractAsset implements Asset {
 	private int position;
     private Image img;
     protected Direction direction;
+    
     //private ArrayList<Image> images = new ArrayList<Image>();
     private Map<Direction, Image> images = new HashMap<Direction ,Image>();
     

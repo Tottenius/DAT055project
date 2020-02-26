@@ -1,6 +1,8 @@
 package assetclasses;
 
 import Controller.Direction;
+import viewer.GameWindowTemp;
+import viewer.ReadInWorld;
 
 public class Treasure extends AbstractAsset{
 	//test
@@ -11,6 +13,8 @@ public class Treasure extends AbstractAsset{
 	private final static  String path2 = "src/assets/openedtreasure.png";
 	//Open bool
 	private boolean isOpen= false;
+	
+	private static int openedTreasures = 0;
 	
     public Treasure(int position) {   
     	super(position);
@@ -31,5 +35,29 @@ public class Treasure extends AbstractAsset{
     
     public boolean treasureIsOpen() {
     	return isOpen;
-    }   
+    }
+
+	@Override
+	public boolean killable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canKill() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean intractable() {
+		if(!this.isOpen) {
+			this.openTreasure();
+			openedTreasures++;
+			if( openedTreasures == ReadInWorld.numberOfTresures) {
+				GameWindowTemp.setWinState();
+			}
+		}
+		return true;
+	}
 }

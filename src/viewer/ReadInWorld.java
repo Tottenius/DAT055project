@@ -10,14 +10,18 @@ import Controller.EnemyController;
 import Controller.PlayerController;
 import Controller.SpikeController;
 import assetclasses.AbstractAsset;
+import assetclasses.Enemy;
+import assetclasses.Player;
+import assetclasses.Spikes;
 import assetclasses.Tile;
 import assetclasses.Treasure;
 import assetclasses.Wall;
+import sun.security.util.Length;
 
 public class ReadInWorld {
 	
 	//Amount of treasures win condition
-	public int numberOfTresures = 0;
+	public static int numberOfTresures = 0;
 	
 	// list with assets
 	private List<AbstractAsset> assets = new ArrayList<AbstractAsset>();
@@ -26,6 +30,23 @@ public class ReadInWorld {
 	
 	public void restartGame() {
 		assets = restartAssets;
+		System.out.println(assets);
+		for (int i = 0; i < assets.size(); i++) {
+			if(restartAssets.get(i) instanceof Enemy) {
+				assets.remove(i);
+				new EnemyController(i,this);
+			}
+			else if(restartAssets.get(i) instanceof Spikes) {
+				assets.remove(i);
+				new SpikeController(i,this);
+			}
+			else if(restartAssets.get(i) instanceof Player) {
+				assets.remove(i);
+				new PlayerController(i,this);
+			}
+			
+		}
+		System.out.println("skrivit ut de nya controllersen");
 	}
 
 	// level paths
@@ -58,7 +79,10 @@ public class ReadInWorld {
 	public ReadInWorld(String thisLevel) {
 		System.out.println("am inside ReadInWorld CLass Constructor");
 		readInlevel(thisLevel);
+		System.out.println(restartAssets);
 		restartAssets = assets;
+		System.out.println(restartAssets);
+		
 		//startInGameThreads();
 	}
 	

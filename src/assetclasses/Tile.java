@@ -12,5 +12,23 @@ public class Tile extends AbstractAsset{
         super.loadImage(path, Direction.DOWN);
         super.getImage();
     }
+
+	@Override
+	public boolean killable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canKill() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean intractable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
     
 }

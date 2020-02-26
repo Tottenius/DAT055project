@@ -7,6 +7,7 @@ import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Tile;
+import viewer.GamePanel;
 import viewer.GameWindowTemp;
 import viewer.ReadInWorld;
 
@@ -20,12 +21,13 @@ public class EnemyController extends AssetController {
 	public EnemyController(int pos, ReadInWorld world) {
 		super( pos,world);
 		enemy = new Enemy(pos);
-		assets.add(enemy);
+		assets.add(pos, enemy);
 		// Kör timerTasken b efter 300ms
+		GamePanel.numberOfControllers ++;
 		b.scheduleAtFixedRate(c, 1000, 300);
 	}
 	
-	public void moveDirection() {
+	private void moveDirection() {
 		// Right now just player pos
 		int oldEnemyPos = super.getPosition();
 		int newEnemyPos = 0;
@@ -51,7 +53,7 @@ public class EnemyController extends AssetController {
 				super.moveAsset(newEnemyPos, oldEnemyPos, enemy, newEnemyLocation);
 			}
 			// If player, kill player
-			else if (newEnemyLocation instanceof Player  ) {
+			else if (newEnemyLocation.killable()  ) {
 				super.killAsset(newEnemyPos, oldEnemyPos, enemy);
 				((Player) newEnemyLocation).setAlive(false);
 			}
@@ -72,10 +74,12 @@ public class EnemyController extends AssetController {
 
         	else if(!GameWindowTemp.isGameState() ) {
         		System.out.println("Stänger av Monster");
+        		GamePanel.numberOfControllers --;
         		this.cancel();
         	}
         }
     };
+    
 	/*
 	@Override
 	public void run() {

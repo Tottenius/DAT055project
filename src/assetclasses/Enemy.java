@@ -17,4 +17,22 @@ public class Enemy extends AbstractAsset {
 		super.loadImage(right, Direction.RIGHT);
 	}
 
+	@Override
+	public boolean killable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canKill() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean intractable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

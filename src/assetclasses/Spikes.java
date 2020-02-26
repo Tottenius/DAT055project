@@ -12,5 +12,26 @@ public class Spikes extends AbstractAsset {
         super(position);
         super.loadImage(path, Direction.DOWN);
         super.getImage();
+	}
+
+
+	@Override
+	public boolean killable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean canKill() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+	@Override
+	public boolean intractable() {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 }

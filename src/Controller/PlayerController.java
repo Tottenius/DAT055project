@@ -15,7 +15,7 @@ import viewer.ReadInWorld;
 
 public class PlayerController extends AssetController  {
 	//Number of opened treasures
-	private int openedTreasures = 0;
+	//private int openedTreasures = 0;
 	
 	// Player
 	private Player player;	
@@ -23,7 +23,8 @@ public class PlayerController extends AssetController  {
 	public PlayerController(int pos, ReadInWorld world) {
 		super(pos, world);
 		player = new Player(pos);
-		assets.add(player);
+		assets.add(pos, player);
+		GamePanel.numberOfControllers ++;
 		// Kör timerTasken b efter 150ms
 		b.scheduleAtFixedRate(c, 1000, 150);
 	}
@@ -46,25 +47,13 @@ public class PlayerController extends AssetController  {
 			super.moveAsset(newPlayerPos, oldPlayerPos, movingAsset, swapAsset);
 		}
 		// If treasure, open treasure
-		else if (swapAsset instanceof Treasure) {
-			// Om skatten inte är öppen, öppna den och öka mängden öppnande kistor
-			if( !((Treasure) swapAsset).treasureIsOpen()) {
-				openedTreasures++;
-				((Treasure) swapAsset).openTreasure();
-				// Om du öpnnat alla kistor vinn
-				if( openedTreasures == world.numberOfTresures) {
-					GameWindowTemp.setWinState();
-				}
-			}	
+		else if (swapAsset.intractable()) {
+			//hej
+			//System.out.println("tjo");
 		}
 			
 		// If enemy, kill player :(
-		else if (swapAsset instanceof Enemy) {
-			super.dieWhileMovingIntoDanger(oldPlayerPos, newPlayerPos);
-			player.setAlive(false);
-		}
-		// if spikes, die
-		else if (swapAsset instanceof Spikes) {
+		else if (swapAsset.canKill()) {
 			super.dieWhileMovingIntoDanger(oldPlayerPos, newPlayerPos);
 			player.setAlive(false);
 		}
@@ -77,14 +66,17 @@ public class PlayerController extends AssetController  {
         	if(player.isAlive() && GameWindowTemp.isGameState() && GamePanel.isKeyPressed()) {
         		moveDirection(direction);
         		GamePanel.setKeyPressed(false);
+        	
 			}
         	else if (!GameWindowTemp.isGameState()){
         		System.out.println("Stänger av Player vi går till main menu");
+        		GamePanel.numberOfControllers --;
         		this.cancel();
         	}
         	else if(!player.isAlive() ) {
         		System.out.println("Stänger av Player player död");
         		GameWindowTemp.setDeathScreenState();
+        		GamePanel.numberOfControllers --;
         		this.cancel();
         	}
         }
