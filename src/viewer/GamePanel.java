@@ -180,12 +180,13 @@ public class GamePanel extends JPanel {
 	//Levels
 	String level1 = "src/levels/level1.txt";
 	String level2 = "src/levels/level2.txt";
+	String level3 = "src/levels/level3.txt";
 	
 	public GamePanel() {
 		System.out.println("Vi går in i gamepanel");
 		System.out.println(GameWindowTemp.state+ " GamePanel");
 		// Read in new world
-		world = new ReadInWorld(level2);
+		world = new ReadInWorld(level1);
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(null);
 		this.setVisible(true);
@@ -198,7 +199,7 @@ public class GamePanel extends JPanel {
 		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
 		timer1.scheduleAtFixedRate(timer2, 0, 1000/60);
 		//world.startInGameThreads();
-
+		StopWatch.start();
 	}
 	
 	// Vi kör en timer istället för en busy wait

@@ -28,8 +28,8 @@ public class ReactionScreen extends JPanel {
 		 JButton QuitButton = new JButton("Quit");
 
 		 // Window size
-		 private static final int WIDTH = GameSettings.getWidth();
-		 private static final int HEIGHT = GameSettings.getHeight();
+		 private static final int WIDTH = GameSettings.getWidth() *2;
+		 private static final int HEIGHT = GameSettings.getHeight()*2;
 		 
 		 //En lokal variabel för den här menyn. Kunde inte komma åt den i de anonyma actionlistnersen annars.
 		 private ReactionScreen GameOver = this;
@@ -41,7 +41,7 @@ public class ReactionScreen extends JPanel {
 		 public void render(Graphics g) {
 			
 			Graphics2D g2d = (Graphics2D) g;
-			Font fnto = new Font("Century Gothic", Font.BOLD, 50);
+			Font fnto = new Font("Century Gothic", Font.BOLD, 30);
 			g.setFont(fnto);
 			g.setColor(Color.BLACK);
 			
@@ -53,7 +53,7 @@ public class ReactionScreen extends JPanel {
 				e.printStackTrace();
 			}
 			g.drawImage(img,0,0,null);	
-			g.drawString(text, GameSettings.getWidth() / 4, GameSettings.getHeight() / 3); 
+			g.drawString(text, GameSettings.getWidth() / 2, GameSettings.getHeight() / 3); 
 		}
 			 
 		@Override

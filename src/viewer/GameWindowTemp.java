@@ -15,6 +15,9 @@ public class GameWindowTemp extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
+	//How long it took to complete the level for the player
+	Long TimeForCompletion ;
+	
 	private enum STATE{
 		MENU,
 		GAME,
@@ -49,7 +52,7 @@ public class GameWindowTemp extends JFrame {
   //private final  MusicPlayer musicplayer = new MusicPlayer();
     
     private static final String GameOverpath = "src/assets/GameOverScreen.jpg";
-    private static final String Winpath = "src/assets/WinScreen.png";
+    private static final String Winpath = "src/assets/WinScreenTemp.jpg";
 	
 	public GameWindowTemp(){
 		System.out.println("Vi gör ett window");
@@ -75,8 +78,9 @@ public class GameWindowTemp extends JFrame {
 		
 		else if (state == STATE.WIN) {
 			System.out.println("am here in win state");
+			Long TimeForCompletion = StopWatch.stopTimer(); 
 			window.dispose();
-			ReactionScreen gos = new ReactionScreen(Winpath, "You won the Game, nice work!");
+			ReactionScreen gos = new ReactionScreen(Winpath, "You won the Game, nice work! It took you: " + TimeForCompletion + " seconds to beat the level!");
 			this.add(gos);
 		}	
 		
