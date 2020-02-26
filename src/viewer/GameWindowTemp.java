@@ -2,7 +2,10 @@ package viewer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -33,13 +36,17 @@ public class GameWindowTemp extends JFrame {
 	private JMenuBar menubar = new JMenuBar();
 
     // create a menu 
-	private JMenu jmenu = new JMenu("Help"); 
+	private JMenu jmenu = new JMenu("Help");
+	private JMenu jmenu2 = new JMenu("Volume");
     
     // Menu items 
-    static JMenuItem m1, m2, m3, m4; 
+    static JMenuItem m1, m2, m3, m4,m5,m6; 
 
     // local reference to it self
     private GameWindowTemp window = this;
+    
+    //Music player obj so we avoid statics
+  //private final  MusicPlayer musicplayer = new MusicPlayer();
     
     private static final String GameOverpath = "src/assets/GameOverScreen.jpg";
     private static final String Winpath = "src/assets/WinScreen.png";
@@ -54,7 +61,7 @@ public class GameWindowTemp extends JFrame {
 		
 		//if gamestate is Game then we start the game;
 		else if (state == STATE.GAME) {
-			this.add(new GamePanel());
+			this.add(new GamePanel());	
 			System.out.println("Vi startar en ny gamePanel");
 
 		}
@@ -90,6 +97,8 @@ public class GameWindowTemp extends JFrame {
         m2 = new JMenuItem("Support"); 
         m3 = new JMenuItem("Restart");
         m4 = new JMenuItem("Quit to main menu");
+        m5 = new JMenuItem("Increase Volume");
+        m6 = new JMenuItem("Decrease Volume");
         
         // Add listeners to buttons
         // Går nog att göra dessa på ett snyggare sätt, var mest för test
@@ -117,15 +126,50 @@ public class GameWindowTemp extends JFrame {
 			  } 
 			} 
 	 );
+        //Increasing the audio volume
+        m4.addActionListener(new ActionListener() { 
+  		  public void actionPerformed(ActionEvent e) { 
+	            System.out.println("Go to main menu pressed");
+	            GameWindowTemp.setStateMenu();
+	            window.dispose();
+	            //Remove all game info
+	            //GamePanel.clearAllGameInfo();
+	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+			  } 
+			} 
+	 );
+        //Increasing the audio volume
+        m5.addActionListener(new ActionListener() { 
+  		  public void actionPerformed(ActionEvent e) { 
+  			
+  			MusicPlayer.increaseVolume(); 
+  			  
+  			  System.out.println("volume increased!");
+			  } 
+			} 
+	 );
+        
+        //Decreasing the audio volume
+        m6.addActionListener(new ActionListener() { 
+  		  public void actionPerformed(ActionEvent e) { 
+	            
+  			MusicPlayer.decreaseVolume();
+  			  System.out.println("volume Decreased!");
+			  } 
+			} 
+	 );
   
         // add menu items to menu 
         jmenu.add(m1); 
         jmenu.add(m2); 
         jmenu.add(m3);
-        jmenu.add(m4);      
+        jmenu.add(m4);
+        jmenu2.add(m5);
+        jmenu2.add(m6);
         
         //add menu to menubar
         menubar.add(jmenu);
+        menubar.add(jmenu2);
         
         //add menubar
         this.setJMenuBar(menubar);

@@ -29,7 +29,7 @@ public class Wall extends AbstractAsset{
 
 	@Override
 	public boolean canWalkOn() {
-		return true;
+		return false;
 	}
 
 	@Override

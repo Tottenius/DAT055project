@@ -5,11 +5,14 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.List;
 import java.util.TimerTask;
 import java.util.PrimitiveIterator.OfDouble;
 import java.util.Timer;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -182,13 +185,16 @@ public class GamePanel extends JPanel {
 		System.out.println("Vi går in i gamepanel");
 		System.out.println(GameWindowTemp.state+ " GamePanel");
 		// Read in new world
-		world = new ReadInWorld(level1);
+		world = new ReadInWorld(level2);
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(null);
 		this.setVisible(true);
 		// adding the keylistener
 		this.addKeyListener(new keyLis());
 		this.setFocusable(true);
+		
+		new MusicPlayer();
+		
 		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
 		timer1.scheduleAtFixedRate(timer2, 0, 1000/60);
 		//world.startInGameThreads();
