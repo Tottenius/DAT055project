@@ -33,7 +33,7 @@ public class Wall extends AbstractAsset{
 	@Override
 	public boolean canWalkOn() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

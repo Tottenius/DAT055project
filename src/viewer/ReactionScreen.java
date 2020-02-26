@@ -19,10 +19,9 @@ import javax.swing.SwingUtilities;
 
 import main.Main;
 
-public class GameOverScreen extends JPanel {
+public class ReactionScreen extends JPanel {
 
 		private static final long serialVersionUID = 1L;		
-		private static final String path = "src/assets/GameOverScreen.jpg";
 		
 		 JButton RestartButton = new JButton("Restart");
 		 JButton MenuButton = new JButton("Go to Menu");
@@ -33,7 +32,11 @@ public class GameOverScreen extends JPanel {
 		 private static final int HEIGHT = GameSettings.getHeight();
 		 
 		 //En lokal variabel för den här menyn. Kunde inte komma åt den i de anonyma actionlistnersen annars.
-		 private GameOverScreen GameOver = this;
+		 private ReactionScreen GameOver = this;
+		 
+		 //From constructor given path to the picture and the String that should be displayed so that we can make diffrent screens!
+		 String path;
+		 String text;
 		
 		 public void render(Graphics g) {
 			
@@ -50,7 +53,7 @@ public class GameOverScreen extends JPanel {
 				e.printStackTrace();
 			}
 			g.drawImage(img,0,0,null);	
-			g.drawString("WELCOME TO OUR GAME", GameSettings.getWidth() / 4, GameSettings.getHeight() / 3); 
+			g.drawString(text, GameSettings.getWidth() / 4, GameSettings.getHeight() / 3); 
 		}
 			 
 		@Override
@@ -59,13 +62,16 @@ public class GameOverScreen extends JPanel {
 	        render(g);      
 	    }
 		
-	    public GameOverScreen() {
+	    public ReactionScreen(String path, String text) {
 	    	
+	    	this.path = path;
+	    	this.text = text;
 	    	this.setLayout(new GridBagLayout());  		    	
 	        //Add buttons width actionListeners
 	    	addButtons();
 	        //Set menu size
 	        this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+	        
 	    }
 	    
 	    public void ButtonCustomazation(JButton button) {

@@ -205,7 +205,7 @@ public class GamePanel extends JPanel {
 		System.out.println("Vi går in i gamepanel");
 		System.out.println(GameWindowTemp.state+ " GamePanel");
 		// Read in new world
-		world = new ReadInWorld(level2);
+		world = new ReadInWorld(level1);
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(null);
 		this.setVisible(true);
@@ -241,7 +241,6 @@ public class GamePanel extends JPanel {
         	}
         	// Att vinna ger just nu game over screen
         	else if ( GameWindowTemp.isWinState()) {
-        		GameWindowTemp.setDeathScreenState();
 				SwingUtilities.getWindowAncestor(gamePanel).dispose();
 				new GameWindowTemp();
 				this.cancel();

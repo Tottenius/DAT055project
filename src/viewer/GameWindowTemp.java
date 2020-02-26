@@ -40,6 +40,9 @@ public class GameWindowTemp extends JFrame {
 
     // local reference to it self
     private GameWindowTemp window = this;
+    
+    private static final String GameOverpath = "src/assets/GameOverScreen.jpg";
+    private static final String Winpath = "src/assets/WinScreen.png";
 	
 	public GameWindowTemp(){
 		System.out.println("Vi gör ett window");
@@ -59,9 +62,17 @@ public class GameWindowTemp extends JFrame {
 		else if (state == STATE.DEATHSCREEN) {
 			System.out.println("am here");
 			window.dispose();
-			GameOverScreen gos = new GameOverScreen();
+			ReactionScreen gos = new ReactionScreen(GameOverpath, "YOU LOST!");
 			this.add(gos);
 		}
+		
+		else if (state == STATE.WIN) {
+			System.out.println("am here in win state");
+			window.dispose();
+			ReactionScreen gos = new ReactionScreen(Winpath, "You won the Game, nice work!");
+			this.add(gos);
+		}	
+		
 		
 		//Adding menubar
 		SetUpMenubar();
