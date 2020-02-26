@@ -69,33 +69,10 @@ public class GamePanel extends JPanel {
 
 	// Starting position
 	private Point pos = new Point(0,0);
-
-
 	
 	// Symbols
 	private AbstractAsset asset;
 	
-
-	// Clear the threads and assets
-
-	//FIX THIS SO ITS USED
-	/*
-	public void clearAllGameInfo() {
-		// reset game map
-		assets.clear();
-		// reset player info
-		players.clear();
-		playerThreads.clear();
-		// reset enemy info
-		enemies.clear();
-		enemyThreads.clear();
-		// Reset spikes
-		spikes.clear();
-		//spikeThreads.clear();
-		levelRead = false;
-	} 
-	*/
-
 	// get direction
 	public static Direction getDirection() {
 		return direction;
@@ -213,15 +190,15 @@ public class GamePanel extends JPanel {
 		this.addKeyListener(new keyLis());
 		this.setFocusable(true);
 		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
-		b.scheduleAtFixedRate(c, 0, 1000/60);
+		timer1.scheduleAtFixedRate(timer2, 0, 1000/60);
 		//world.startInGameThreads();
 
 	}
 	
 	// Vi kör en timer istället för en busy wait
-    Timer b = new Timer();
+    Timer timer1 = new Timer();
     
-    TimerTask c = new TimerTask() {
+    TimerTask timer2 = new TimerTask() {
         public void run() {
         	
         	if(GameWindowTemp.isRestartState()) {
