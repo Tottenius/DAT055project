@@ -86,7 +86,8 @@ public class GamePanel extends JPanel {
 				}
 				// Load in enemies
 				else {
-					g.drawImage(asset.getImage(), pos.x, pos.y, this);
+					asset.paintAsset(g, gamePanel);
+					//g.drawImage(asset.getImage(), pos.x, pos.y, this);
 					pos.x = pos.x + SIZE;
 				}
 			}
@@ -172,12 +173,13 @@ public class GamePanel extends JPanel {
 	String level1 = "src/levels/level1.txt";
 	String level2 = "src/levels/level2.txt";
 	String level3 = "src/levels/level3.txt";
+	String level4 = "src/levels/level4.txt";
 	
 	public GamePanel() {
 		System.out.println("Vi går in i gamepanel");
 		System.out.println(GameWindowTemp.state+ " GamePanel");
 		// Read in new world
-		world = new ReadInWorld(level1);
+		world = new ReadInWorld(level4);
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(null);
 		this.setVisible(true);

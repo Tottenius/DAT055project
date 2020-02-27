@@ -23,7 +23,7 @@ public class MusicPlayer {
 	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/Music/BackgroundMusic1.aifc"));
 	         MusicPlayer.clip = AudioSystem.getClip();
 	        clip.open(audioInputStream);
-	        setVolume(-3);
+	        setVolume(-20);
 	        clip.start();
 	        // If you want the sound to loop infinitely, then put: 
 	        clip.loop(Clip.LOOP_CONTINUOUSLY); 

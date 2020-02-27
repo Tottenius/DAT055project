@@ -12,14 +12,14 @@ import viewer.ReadInWorld;
 
 public class SpikeController extends AssetController{
 	
-	private Tile tile;
+	//private Tile tile;
 	private Spikes spikes;
 	
 	private boolean isSpike = true;
 	
 	public SpikeController(int pos, ReadInWorld world) {
 		super(pos, world);
-		tile = new Tile(position);
+		//tile = new Tile(position);
 		spikes = new Spikes(position);
 		assets.add(pos, spikes);
 		GamePanel.numberOfControllers ++;
@@ -33,22 +33,20 @@ public class SpikeController extends AssetController{
     TimerTask c = new TimerTask() {
         public void run() {
         	if(GameWindowTemp.isGameState()) {
-	        	System.out.println(assets.get(position));
-	     
+	        	//System.out.println(assets.get(position));
+	        	//System.out.println("Tile coords " + tile.getCoords());
+	        	System.out.println("Spikes coords " + spikes.getCoords());
+	        	//tile.setPosition(spikes.getPosition());
 	        	if (assets.get(position).killable()) {
 					System.out.println("plz die");
 					((Player) assets.get(position)).setAlive(false);
 					
 				}
-				else if (isSpike) {
+				else  {
 	        		//System.out.println("nu är jag en tile");
-	        		changeAsset(position, tile);
-	        		isSpike = false;
-	        	}
-	        	else if (!isSpike) {
-	        		changeAsset(position, spikes);
-	        		isSpike= true;
-	        	}
+	        		spikes.changeUpOrDown();
+				}
+	        	spikes.setPosition(position);
 
         	}
         	else if(!GameWindowTemp.isGameState()) {

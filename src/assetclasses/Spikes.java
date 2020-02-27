@@ -9,11 +9,16 @@ import viewer.GamePanel;
 public class Spikes extends AbstractAsset {
 
 	private static final String path = "src/assets/spikes.png";
+	private static final String path2 ="src/assets/tile.png";
+	private boolean up = true;
+	private boolean canKill = true;
+	private boolean canWalkOn = false;
 
 	
 	public Spikes(int position) {
         super(position);
-        super.loadImage(path, Direction.DOWN);
+        super.loadImage(path, Direction.UP);
+        super.loadImage(path2, Direction.DOWN);
         super.getImage();
 	}
 
@@ -26,7 +31,7 @@ public class Spikes extends AbstractAsset {
 
 	@Override
 	public boolean canKill() {
-		return true;
+		return canKill;
 	}
 
 
@@ -38,7 +43,7 @@ public class Spikes extends AbstractAsset {
 
 	@Override
 	public boolean canWalkOn() {
-		return false;
+		return canWalkOn;
 	}
 
 
@@ -46,11 +51,25 @@ public class Spikes extends AbstractAsset {
 	public boolean hasDirections(Direction d) {
 		return false;
 	}
+	
+	public void changeUpOrDown() {
+		up = !up;
+		canKill = !canKill;
+		canWalkOn = !canWalkOn;
+	}
 
 
 	@Override
 	public void paintAsset(Graphics g, GamePanel gp) {
-		// TODO Auto-generated method stub
+		
+		if(up) {
+			this.getImageAtMap(direction.UP);
+			g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
+		}
+		else {	
+			this.getImageAtMap(direction.DOWN);
+			g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);			
+		}
 	}
 
 
