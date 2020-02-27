@@ -79,8 +79,10 @@ public class GamePanel extends JPanel {
 					pos.y = pos.y + SIZE;
 				}
 				// Paint all assets
-				asset.hasDirections(direction);	
-				asset.paintAsset(g, gamePanel);	
+				if(asset.getCoords() != pos) {
+					asset.hasDirections(direction);	
+					asset.paintAsset(g, gamePanel);
+				}
 				pos.x = pos.x + SIZE;
 			}
 			pos.y = 0;
