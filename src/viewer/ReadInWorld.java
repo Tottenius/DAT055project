@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import Controller.EnemyController;
 import Controller.PlayerController;
@@ -26,6 +27,15 @@ public class ReadInWorld {
 		//list with assets for quick restart
 	private List<AbstractAsset> restartAssets = new ArrayList<AbstractAsset>();
 	
+	HashMap<String, String> levels = new HashMap<String, String>();
+
+	public void initLevelPaths() {
+		
+		levels.put("level1","src/levels/level1.txt");
+		levels.put("level2","src/levels/level2.txt");
+		levels.put("level3","src/levels/level3.txt");
+		levels.put("level4","src/levels/level4.txt");
+	}
 
 	// DETTA ÄR SKIT MANNEN FIXA! TACK PELLE
 	public void restartGame() {
@@ -76,6 +86,7 @@ public class ReadInWorld {
 	private AbstractAsset AbstractAsset;
 	
 	public ReadInWorld(String thisLevel) {
+		initLevelPaths();
 		System.out.println("am inside ReadInWorld CLass Constructor");
 		readInlevel(thisLevel);
 		System.out.println(restartAssets);
@@ -88,7 +99,7 @@ public class ReadInWorld {
 	public void readInlevel(String path) {
 		
 		try {
-			level = new String(Files.readAllBytes(Paths.get(path)));
+			level = new String(Files.readAllBytes(Paths.get(levels.get(path))));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimerTask;
 import java.util.Timer;
@@ -133,18 +134,20 @@ public class GamePanel extends JPanel {
 			isKeyPressed = true;
 		}
 	}
-	
+	/*
 	//Levels
 	String level1 = "src/levels/level1.txt";
 	String level2 = "src/levels/level2.txt";
 	String level3 = "src/levels/level3.txt";
 	String level4 = "src/levels/level4.txt";
+	*/
 	
 	public GamePanel() {
+	
 		System.out.println("Vi går in i gamepanel");
 		System.out.println(GameWindowTemp.state+ " GamePanel");
 		// Read in new world
-		world = new ReadInWorld(level4);
+		world = new ReadInWorld("level4");
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(null);
 		this.setVisible(true);
