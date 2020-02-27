@@ -1,6 +1,7 @@
 package assetclasses;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ public abstract class AbstractAsset implements Asset {
 	
 	private final static int size = GameSettings.getAssetsize();
 	private int position;
+	private Point coords;
     private Image img;
     protected Direction direction;
     
@@ -23,7 +25,8 @@ public abstract class AbstractAsset implements Asset {
     private Map<Direction, Image> images = new HashMap<Direction ,Image>();
     
     public AbstractAsset(int position) {
-        this.setPosition(position);     
+        this.setPosition(position);
+        this.setCoords( position);
     }
     
     //returns the image
@@ -31,7 +34,7 @@ public abstract class AbstractAsset implements Asset {
     	return img;
     }
   
-    //get an image at an specified location in our asset array, hasmap
+    //get an image at an specified location in our asset array, hashmap
     public void getImageAtMap(Direction direction ) {
     	img = images.get(direction);
     }
@@ -61,6 +64,17 @@ public abstract class AbstractAsset implements Asset {
 	//set the array location for a specified image 
 	public void setPosition(int position) {
 		this.position = position;
-	} 
+	}
+
+	public Point getCoords() {
+		return coords;
+	}
+
+	public void setCoords(Point coords) {
+		this.coords = coords;
+	}
+	public void setCoords( int pos) {
+		this.coords = ( new Point ((position*GameSettings.getAssetsize())%GameSettings.getWidth(), ((position*GameSettings.getAssetsize()/GameSettings.getWidth()))*GameSettings.getAssetsize()));
+	}
 	
 }

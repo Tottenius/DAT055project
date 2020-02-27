@@ -1,6 +1,9 @@
 package assetclasses;
 
+import java.awt.Graphics;
+
 import Controller.Direction;
+import viewer.GamePanel;
 
 //Spike to dodge or player will die
 public class Spikes extends AbstractAsset {
@@ -40,7 +43,20 @@ public class Spikes extends AbstractAsset {
 
 
 	@Override
-	public boolean hasDirections() {
+	public boolean hasDirections(Direction d) {
 		return false;
-	}	
+	}
+
+
+	@Override
+	public void paintAsset(Graphics g, GamePanel gp) {
+		// TODO Auto-generated method stub
+	}
+
+
+	@Override
+	public void setPrevPos() {
+		// TODO Auto-generated method stub
+		
+	}
 }

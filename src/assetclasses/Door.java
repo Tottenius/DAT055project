@@ -1,6 +1,9 @@
 package assetclasses;
 
+import java.awt.Graphics;
+
 import Controller.Direction;
+import viewer.GamePanel;
 
 //Door to go to next room!? are we even gonna do more then 1 room?? Could ranomize what next room is or maybe make it static
 public class Door extends AbstractAsset {
@@ -34,7 +37,20 @@ public class Door extends AbstractAsset {
 	}
 
 	@Override
-	public boolean hasDirections() {
+	public boolean hasDirections(Direction d) {
 		return false;
+	}
+
+
+	@Override
+	public void paintAsset(Graphics g, GamePanel gp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPrevPos() {
+		// TODO Auto-generated method stub
+		
 	}
 }

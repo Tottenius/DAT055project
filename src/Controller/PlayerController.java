@@ -1,10 +1,12 @@
 package Controller;
 
+import java.awt.Point;
 import java.util.Timer;
 import java.util.TimerTask;
 import assetclasses.AbstractAsset;
 import assetclasses.Player;
 import viewer.GamePanel;
+import viewer.GameSettings;
 import viewer.GameWindowTemp;
 import viewer.ReadInWorld;
 
@@ -58,6 +60,8 @@ public class PlayerController extends AssetController  {
         	
         	if(player.isAlive() && GameWindowTemp.isGameState() && GamePanel.isKeyPressed()) {
         		moveDirection(direction);
+        		player.setCoords( position);
+        		System.out.println(player.getCoords());
         		GamePanel.setKeyPressed(false);
         	
 			}
