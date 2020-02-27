@@ -64,6 +64,7 @@ public abstract class AbstractAsset implements Asset {
 	//set the array location for a specified image 
 	public void setPosition(int position) {
 		this.position = position;
+		this.coords = ( new Point ((position*GameSettings.getAssetsize())%GameSettings.getWidth(), ((position*GameSettings.getAssetsize()/GameSettings.getWidth()))*GameSettings.getAssetsize()));
 	}
 
 	public Point getCoords() {

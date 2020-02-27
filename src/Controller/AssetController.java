@@ -17,27 +17,33 @@ public abstract class AssetController {
 	
 	protected void moveAsset(int newPos, int oldPos, AbstractAsset ourAsset, AbstractAsset assetTargetLocation) {
 		// Sätt playerns positon till den nya positionen och ge objectet den nya positionen
-		assets.set(newPos, ourAsset ).setPosition(oldPos);
+		assets.set(newPos, ourAsset );
 		// Sätt objetet vi rör oss till på playerns gamla position och ge det playerns gamla position
-		assets.set(oldPos, assetTargetLocation ).setPosition(newPos);
+		assets.set(oldPos, assetTargetLocation );
 		// Sätt controllerns position till den nya positionen
 		setPosition(newPos);
+		ourAsset.setPosition(newPos);
+		assetTargetLocation.setPosition(oldPos);
+		//System.out.println(ourAsset.getCoords() + " " + assetTargetLocation.getCoords());
 	}
 	
 	protected void dieWhileMovingIntoDanger(int oldPos, int newPos) {
-		assets.set(oldPos, new Tile(oldPos) ).setPosition(newPos);
+		//Tile t = new Tile(oldPos);
+		assets.set(oldPos, new Tile(oldPos));
 	}
 	
 	protected void killAsset(int newPos, int oldPos, AbstractAsset ourAsset) {
 		// Den nya positionen
-		assets.set(newPos, ourAsset ).setPosition(oldPos);
+		assets.set(newPos, ourAsset );
+		ourAsset.setPosition(newPos);
 		// Den gamla positionen
-		assets.set(oldPos, new Tile(oldPos) ).setPosition(newPos);
+		assets.set(oldPos, new Tile(oldPos));
 		setPosition(newPos);
 	}
 	
 	protected void changeAsset(int pos, AbstractAsset newAsset) {
 		assets.set( pos, newAsset);
+		newAsset.setPosition(pos);
 	}
 	
 	protected int getPosition() {
