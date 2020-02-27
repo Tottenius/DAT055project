@@ -142,7 +142,7 @@ public class GamePanel extends JPanel {
 	String level2 = "src/levels/level2.txt";
 	String level3 = "src/levels/level3.txt";
 	String level4 = "src/levels/level4.txt";
-	*/
+	*/ 
 	
 	public GamePanel() {
 	
