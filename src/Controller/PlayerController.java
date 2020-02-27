@@ -61,6 +61,7 @@ public class PlayerController extends AssetController  {
         	if(player.isAlive() && GameWindowTemp.isGameState() && GamePanel.isKeyPressed()) {
         		moveDirection(direction);
         		player.setCoords( position);
+        		player.setPrevPos();
         		System.out.println(player.getCoords());
         		GamePanel.setKeyPressed(false);
         	

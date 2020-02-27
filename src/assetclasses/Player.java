@@ -15,7 +15,7 @@ public class Player extends AbstractAsset {
 	private static final String right = "src/assets/PlayerRight.png";
 	
 	private boolean alive;
-	private Point printPos;
+	private Point prevPos = getCoords();
 	private Direction dir = Direction.RIGHT;
 
 	public Player(int position) {
@@ -70,15 +70,18 @@ public class Player extends AbstractAsset {
 	}
 	@Override
 	public void setPrevPos() {
-		printPos.x = getCoords().x - direction.getXDelta() * GameSettings.getAssetsize();
-		printPos.y = getCoords().y - direction.getYDelta() * GameSettings.getAssetsize();
+		prevPos.x = getCoords().x - direction.getXDelta() * GameSettings.getAssetsize();
+		prevPos.y = getCoords().y - direction.getYDelta() * GameSettings.getAssetsize();
 	}
 	
 
 	@Override
 	public void paintAsset(Graphics g, GamePanel gp) {
-		setPrevPos();	
-		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
+		if(prevPos.x != getCoords().x || prevPos.y != getCoords().y ) {	
+			g.drawImage(this.getImage(), prevPos.x, prevPos.y, gp);
+			prevPos.x = prevPos.x + direction.getXDelta();
+			prevPos.y = prevPos.y + direction.getYDelta();
+		}
 		
 	}
 }
