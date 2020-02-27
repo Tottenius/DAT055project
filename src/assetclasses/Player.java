@@ -71,17 +71,20 @@ public class Player extends AbstractAsset {
 	@Override
 	public void setPrevPos() {
 		prevPos.x = getCoords().x - direction.getXDelta() * GameSettings.getAssetsize();
-		prevPos.y = getCoords().y - direction.getYDelta() * GameSettings.getAssetsize();
+		prevPos.y = getCoords().y - direction.getYDelta() * GameSettings.getAssetsize()/32;
 	}
 	
 
 	@Override
 	public void paintAsset(Graphics g, GamePanel gp) {
+		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
+		/*
 		if(prevPos.x != getCoords().x || prevPos.y != getCoords().y ) {	
 			g.drawImage(this.getImage(), prevPos.x, prevPos.y, gp);
 			prevPos.x = prevPos.x + direction.getXDelta();
-			prevPos.y = prevPos.y + direction.getYDelta();
+			prevPos.y = prevPos.y + direction.getYDelta()/32;
 		}
+		*/
 		
 	}
 }
