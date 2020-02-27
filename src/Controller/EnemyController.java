@@ -6,17 +6,15 @@ import java.util.TimerTask;
 import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
 import assetclasses.Player;
-import assetclasses.Tile;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
 import viewer.ReadInWorld;
 
 public class EnemyController extends AssetController {
 	private Enemy enemy;
+	
 	//True is going to the right
 	private boolean goingToTheRight = true;
-	// Is the enemy alive?
-	private boolean isAlive = true;
 	
 	public EnemyController(int pos, ReadInWorld world) {
 		super( pos,world);

@@ -1,9 +1,6 @@
 package main;
 
-import java.lang.invoke.VolatileCallSite;
-
 import javax.swing.SwingUtilities;
-
 import viewer.GameWindowTemp;
 
 public class Main {
@@ -16,8 +13,7 @@ public class Main {
     	    	isRunning = true;
     	    	//new ReadInWorld();
     	    	System.out.println(GameWindowTemp.state + " Main");
-    	    	new GameWindowTemp();
-    	    	
+    	    	new GameWindowTemp();  	    	
     	    }
     	  });
 	}

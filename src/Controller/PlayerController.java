@@ -2,20 +2,13 @@ package Controller;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import assetclasses.AbstractAsset;
-import assetclasses.Enemy;
 import assetclasses.Player;
-import assetclasses.Spikes;
-import assetclasses.Tile;
-import assetclasses.Treasure;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
 import viewer.ReadInWorld;
 
 public class PlayerController extends AssetController  {
-	//Number of opened treasures
-	//private int openedTreasures = 0;
 	
 	// Player
 	private Player player;	

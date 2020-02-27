@@ -5,8 +5,7 @@ import viewer.GameWindowTemp;
 import viewer.ReadInWorld;
 
 public class Treasure extends AbstractAsset{
-	//test
-	private static boolean TreasureIsOpen = false;
+
 	//closed treasure
 	private final static  String path = "src/assets/closedtreasure.png";
 	//open treasure

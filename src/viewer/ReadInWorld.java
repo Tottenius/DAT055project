@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
 import Controller.EnemyController;
 import Controller.PlayerController;
 import Controller.SpikeController;
@@ -16,7 +15,6 @@ import assetclasses.Spikes;
 import assetclasses.Tile;
 import assetclasses.Treasure;
 import assetclasses.Wall;
-import sun.security.util.Length;
 
 public class ReadInWorld {
 	
@@ -28,9 +26,7 @@ public class ReadInWorld {
 		//list with assets for quick restart
 	private List<AbstractAsset> restartAssets = new ArrayList<AbstractAsset>();
 	
-	
-	
-	
+
 	// DETTA ÄR SKIT MANNEN FIXA! TACK PELLE
 	public void restartGame() {
 		assets = restartAssets;
@@ -153,10 +149,8 @@ public class ReadInWorld {
 				// change to next pos in the enemy list
 				enemyList++;
 				posInList++;
-			}
-					
-		}
-	
+			}					
+		}	
 	}
 	
 	protected void startInGameThreads() {
@@ -168,8 +162,6 @@ public class ReadInWorld {
 		for (Thread t : enemyThreads) {
 			t.start();
 		}
-
-
 	}
 	
 	public void clearAllGameInfo() {
@@ -195,6 +187,4 @@ public class ReadInWorld {
 	public void setAssetList(ArrayList<AbstractAsset> assetList) {
 		assets = assetList;
 	}
-
-
 }

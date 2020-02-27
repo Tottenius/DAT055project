@@ -1,10 +1,8 @@
 package Controller;
 
 import java.util.List;
-
 import assetclasses.AbstractAsset;
 import assetclasses.Tile;
-import viewer.GameSettings;
 import viewer.ReadInWorld;
 
 public abstract class AssetController {
@@ -54,6 +52,5 @@ public abstract class AssetController {
 		this.position = position;
 		this.world = world;
 		assets = world.getAssetList();
-	}
-	
+	}	
 }

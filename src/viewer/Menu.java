@@ -11,22 +11,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.sun.java_cup.internal.runtime.virtual_parse_stack;
 
 import main.Main;
 
 
 public class Menu extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;	
 	
 	private static final String path = "src/assets/MenuBackground2.jpg";
@@ -58,8 +53,7 @@ public class Menu extends JPanel {
 		g.drawImage(img,0,0,null);
 		
 		g.drawString("THE LABYRINTH GAME ", GameSettings.getWidth() / 5, GameSettings.getHeight() / 3); 
-	}
-	
+	}	
 	 
 	@Override
 	public void paintComponent(Graphics g) {

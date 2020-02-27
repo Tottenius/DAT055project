@@ -41,5 +41,4 @@ public class Enemy extends AbstractAsset {
 	public boolean hasDirections() {
 		return false;
 	}
-
 }

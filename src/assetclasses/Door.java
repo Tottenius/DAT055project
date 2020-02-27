@@ -37,7 +37,4 @@ public class Door extends AbstractAsset {
 	public boolean hasDirections() {
 		return false;
 	}
-
-
-
 }

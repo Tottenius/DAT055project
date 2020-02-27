@@ -5,26 +5,14 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.List;
 import java.util.TimerTask;
-import java.util.PrimitiveIterator.OfDouble;
 import java.util.Timer;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
 import Controller.Direction;
-import Controller.PlayerController;
 import assetclasses.AbstractAsset;
-import assetclasses.Enemy;
-import assetclasses.Player;
-import assetclasses.Spikes;
-import assetclasses.Tile;
-import assetclasses.Treasure;
-import assetclasses.Wall;
+
 
 /*
  Att göra:
@@ -44,9 +32,6 @@ public class GamePanel extends JPanel {
 	public static boolean levelRead = false;
 	// Read in level
 	private ReadInWorld world;
-	//public static ReadInWorld getWorld() {
-	//	return world;
-	//}
 	// Window size
 	private static final int WIDTH = GameSettings.getWidth();
 	private static final int HEIGHT = GameSettings.getHeight();
@@ -127,9 +112,6 @@ public class GamePanel extends JPanel {
 
 				System.out.println("Moved Up");
 				direction = Direction.UP;
-				// player1.moveDirection(Direction.UP);
-				// moveDirection(Direction.UP);
-
 				break;
 
 			case KeyEvent.VK_DOWN:
@@ -137,9 +119,6 @@ public class GamePanel extends JPanel {
 
 				System.out.println("Moved Down");
 				direction = Direction.DOWN;
-				// player1.moveDirection(Direction.DOWN);
-				// moveDirection(Direction.DOWN);
-
 				break;
 
 			case KeyEvent.VK_RIGHT:
@@ -147,28 +126,13 @@ public class GamePanel extends JPanel {
 
 				System.out.println("Moved right");
 				direction = Direction.RIGHT;
-				// player1.moveDirection(Direction.RIGHT);
-				// moveDirection(Direction.RIGHT);
-
 				break;
 
 			case KeyEvent.VK_LEFT:
 			case KeyEvent.VK_A:
+				
 				System.out.println("Moved Left");
 				direction = Direction.LEFT;
-
-				break;
-
-			case KeyEvent.VK_R: // reset level
-
-				// resetLevel(); //Written resetLevel Method
-
-				break;
-
-			case KeyEvent.VK_ESCAPE: // Esc button
-
-				// openMenu(); //Possible method to open menu
-
 				break;
 
 			default:
@@ -177,6 +141,7 @@ public class GamePanel extends JPanel {
 			isKeyPressed = true;
 		}
 	}
+	
 	//Levels
 	String level1 = "src/levels/level1.txt";
 	String level2 = "src/levels/level2.txt";
@@ -233,11 +198,8 @@ public class GamePanel extends JPanel {
         	else if (GameWindowTemp.isDeathScreenState()) {
 				SwingUtilities.getWindowAncestor(gamePanel).dispose();
 				new GameWindowTemp();
-        		this.cancel();
-				
-			}
-        	
+				this.cancel();		
+			}      	
         }
     };
-
 }

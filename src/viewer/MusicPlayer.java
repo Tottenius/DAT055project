@@ -47,4 +47,4 @@ public class MusicPlayer {
 	public static void decreaseVolume() {
 		setVolume(-4);
 	}
-	}
+}

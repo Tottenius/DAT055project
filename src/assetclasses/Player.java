@@ -11,7 +11,6 @@ public class Player extends AbstractAsset {
 	
 	private boolean alive;
 
-
 	public Player(int position) {
 		super(position);
 		super.loadImage(up, Direction.UP);

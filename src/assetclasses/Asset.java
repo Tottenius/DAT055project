@@ -10,6 +10,5 @@ public interface Asset {
     public boolean canKill();
     public boolean intractable();
     public boolean canWalkOn();
-    public boolean hasDirections();
-    
+    public boolean hasDirections();  
 }

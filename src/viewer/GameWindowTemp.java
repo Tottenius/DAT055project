@@ -2,10 +2,6 @@ package viewer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,7 +11,7 @@ public class GameWindowTemp extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
-	//How long it took to complete the level for the player
+	//How long it took to complete the level for the player 
 	Long TimeForCompletion ;
 	
 	private enum STATE{
