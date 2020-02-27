@@ -81,10 +81,15 @@ public class Player extends AbstractAsset {
 		/*
 		if(prevPos.x != getCoords().x || prevPos.y != getCoords().y ) {	
 			g.drawImage(this.getImage(), prevPos.x, prevPos.y, gp);
-			prevPos.x = prevPos.x + direction.getXDelta();
-			prevPos.y = prevPos.y + direction.getYDelta()/32;
+			prevPos.x = prevPos.x + (direction.getXDelta())* 2;
+			prevPos.y = prevPos.y + (direction.getYDelta()/32)*2;
+		}
+		else {
+			g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 		}
 		*/
+		
+		
 		
 	}
 }
