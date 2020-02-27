@@ -70,55 +70,20 @@ public class GamePanel extends JPanel {
 		
 		 List<AbstractAsset> assets = world.getAssetList();
 			for (int i = 0; i < assets.size(); i++) {
-				// assetSymbol = level.charAt(i);
+				// Get first asset
 				asset = assets.get(i);
 				// Time for a new row?
 				if (pos.x == WIDTH) {
 					pos.x = 0;
 					pos.y = pos.y + SIZE;
 				}
-				// Load in player
-				if ( asset.hasDirections(direction) ) {
-					if(asset.getCoords() != pos) {
-						asset.paintAsset(g, gamePanel);
-					}
-					pos.x = pos.x + SIZE;
-				}
-				// Load in enemies
-				else {
-					asset.paintAsset(g, gamePanel);
-					//g.drawImage(asset.getImage(), pos.x, pos.y, this);
-					pos.x = pos.x + SIZE;
-				}
+				// Paint all assets
+				asset.hasDirections(direction);	
+				asset.paintAsset(g, gamePanel);	
+				pos.x = pos.x + SIZE;
 			}
 			pos.y = 0;
-			pos.x = 0;
-
-		 /*
-		for (int i = 0; i < assets.size(); i++) {
-			// assetSymbol = level.charAt(i);
-			asset = assets.get(i);
-			// Time for a new row?
-			if (pos.x == WIDTH) {
-				pos.x = 0;
-				pos.y = pos.y + SIZE;
-			}
-			// Load in player
-			if (asset.hasDirections() ) {
-				asset.getImageAtMap(direction);
-				g.drawImage(asset.getImage(), pos.x, pos.y, this);
-				pos.x = pos.x + SIZE;
-			}
-			// Load in enemies
-			else {
-				g.drawImage(asset.getImage(), pos.x, pos.y, this);
-				pos.x = pos.x + SIZE;
-			}
-		}
-		pos.y = 0;
-		pos.x = 0;
-		*/
-		
+			pos.x = 0;	
 	}
 
 	@Override

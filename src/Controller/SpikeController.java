@@ -33,17 +33,13 @@ public class SpikeController extends AssetController{
     TimerTask c = new TimerTask() {
         public void run() {
         	if(GameWindowTemp.isGameState()) {
-	        	//System.out.println(assets.get(position));
-	        	//System.out.println("Tile coords " + tile.getCoords());
 	        	System.out.println("Spikes coords " + spikes.getCoords());
-	        	//tile.setPosition(spikes.getPosition());
+	        	// Om det är en player på. Döda den
 	        	if (assets.get(position).killable()) {
-					System.out.println("plz die");
-					((Player) assets.get(position)).setAlive(false);
-					
+					((Player) assets.get(position)).setAlive(false);					
 				}
+	        	// Byt om vart annat mellan spike och passable
 				else  {
-	        		//System.out.println("nu är jag en tile");
 	        		spikes.changeUpOrDown();
 				}
 	        	spikes.setPosition(position);
