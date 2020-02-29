@@ -143,6 +143,7 @@ public class ReadInWorld {
 			
 			// Load in door
 			else if (level.charAt(i) == 'd') {
+				movingAssets.add(new Empty(posInList));
 				assets.add(new Door(posInList));
 				posInList++;
 			}
