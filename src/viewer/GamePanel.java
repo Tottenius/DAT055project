@@ -44,6 +44,8 @@ public class GamePanel extends JPanel {
 	private Point pos = new Point(0,0);
 	// Symbols
 	private AbstractAsset asset;
+	private AbstractAsset movingAsset;
+
 	
 	List<AbstractAsset> Movingassets = new ArrayList<AbstractAsset>();
 
@@ -63,11 +65,13 @@ public class GamePanel extends JPanel {
 	}
 	
 	private void initWorld(Graphics g) {
-		System.out.println("am in here boi");
+		//System.out.println("am in here boi");
 		 List<AbstractAsset> assets = world.getAssetList();
+		 List<AbstractAsset> movingAssets = world.getMovingAssets();		 
 			for (int i = 0; i < assets.size(); i++) {
 				// Get first asset
 				asset = assets.get(i);
+				movingAsset = movingAssets.get(i);
 				// Time for a new row?
 				if (pos.x == WIDTH) {
 					pos.x = 0;
@@ -75,14 +79,16 @@ public class GamePanel extends JPanel {
 				}
 				// Paint all assets
 				if(asset.getCoords() != pos) {
-					asset.hasDirections(direction);	
+					movingAsset.hasDirections(direction);
 					asset.paintAsset(g, gamePanel);
+					movingAsset.paintAsset(g, gamePanel);
 				}
 				pos.x = pos.x + SIZE;
 			}
 			pos.y = 0;
-			pos.x = 0;	
-			}
+			pos.x = 0;
+					
+	 }
 	
 	@Override
 	public void paintComponent(Graphics g) {

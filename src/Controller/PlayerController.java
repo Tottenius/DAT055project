@@ -18,7 +18,7 @@ public class PlayerController extends AssetController  {
 	public PlayerController(int pos, ReadInWorld world) {
 		super(pos, world);
 		player = new Player(pos);
-		assets.add(pos, player);
+		movingAssets.add(pos, player);
 		GamePanel.numberOfControllers ++;
 		// Kör timerTasken b efter 150ms
 		b.scheduleAtFixedRate(c, 1000, 150);
@@ -30,25 +30,27 @@ public class PlayerController extends AssetController  {
 		int oldPlayerPos = super.getPosition();
 		//System.out.println(oldPlayerPos);
 		//System.out.println(direction);
-		AbstractAsset movingAsset = assets.get(oldPlayerPos);
-		AbstractAsset swapAsset = null;
+		AbstractAsset playerAsset = movingAssets.get(oldPlayerPos);
+		AbstractAsset newPlayerLocationMovingLayer = null;
+		AbstractAsset stationaryAsset = null;
 		 
 		int newPlayerPos = oldPlayerPos + GamePanel.getDirection().getXDelta() +  GamePanel.getDirection().getYDelta();
 		
 		// Alla interaktioner med assets
-		swapAsset = assets.get(newPlayerPos);
+		newPlayerLocationMovingLayer = movingAssets.get(newPlayerPos);
+		stationaryAsset = assets.get(newPlayerPos);
 		// If tile, move to the tile
-		if (swapAsset.canWalkOn()) {
-			super.moveAsset(newPlayerPos, oldPlayerPos, movingAsset, swapAsset);
+		if (stationaryAsset.canWalkOn()) {
+			super.moveAsset(newPlayerPos, oldPlayerPos, playerAsset, newPlayerLocationMovingLayer);
 		}
 		// If treasure, open treasure
-		else if (swapAsset.intractable()) {
+		else if (stationaryAsset.intractable()) {
 			//hej
 			//System.out.println("tjo");
 		}
 			
 		// If enemy, kill player :(
-		else if (swapAsset.canKill()) {
+		else if (newPlayerLocationMovingLayer.canKill() || stationaryAsset.canKill() ) {
 			super.dieWhileMovingIntoDanger(oldPlayerPos, newPlayerPos);
 			player.setAlive(false);
 		}

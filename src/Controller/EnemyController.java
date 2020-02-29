@@ -19,7 +19,7 @@ public class EnemyController extends AssetController {
 	public EnemyController(int pos, ReadInWorld world) {
 		super( pos,world);
 		enemy = new Enemy(pos);
-		assets.add(pos, enemy);
+		movingAssets.add(pos, enemy);
 		// Kör timerTasken b efter 300ms
 		GamePanel.numberOfControllers ++;
 		b.scheduleAtFixedRate(c, 1000, 300);
@@ -30,30 +30,32 @@ public class EnemyController extends AssetController {
 		int oldEnemyPos = super.getPosition();
 		int newEnemyPos = 0;
 		//System.out.println(oldEnemyPos);
-		AbstractAsset enemy = assets.get(oldEnemyPos);
-		AbstractAsset newEnemyLocation = null;
+		AbstractAsset enemy = movingAssets.get(oldEnemyPos);
+		AbstractAsset newEnemyLocationMovingLayer = null;
+		AbstractAsset newEnemyLocationStationaryLayer = null;
 			
 			// Going to the right
 			if(goingToTheRight) {
 				newEnemyPos = oldEnemyPos + 1;
-				newEnemyLocation = assets.get(newEnemyPos);
+				newEnemyLocationMovingLayer = movingAssets.get(newEnemyPos);
 			}
 			
 			// Going to the left
 			else {
 				newEnemyPos = oldEnemyPos - 1;
-				newEnemyLocation = assets.get(newEnemyPos);
+				newEnemyLocationMovingLayer = movingAssets.get(newEnemyPos);
 			}
 			
 			// Alla interaktioner med assets
 			// If tile, move to tile
-			if (newEnemyLocation.canWalkOn() ) {
-				super.moveAsset(newEnemyPos, oldEnemyPos, enemy, newEnemyLocation);
+			newEnemyLocationStationaryLayer = assets.get(newEnemyPos);
+			if (newEnemyLocationStationaryLayer.canWalkOn() ) {
+				super.moveAsset(newEnemyPos, oldEnemyPos, enemy, newEnemyLocationMovingLayer);
 			}
 			// If player, kill player
-			else if (newEnemyLocation.killable()  ) {
+			else if (newEnemyLocationStationaryLayer.killable()  ) {
 				super.killAsset(newEnemyPos, oldEnemyPos, enemy);
-				((Player) newEnemyLocation).setAlive(false);
+				((Player) newEnemyLocationMovingLayer).setAlive(false);
 			}
 			// else turn around
 			else  {
@@ -68,6 +70,7 @@ public class EnemyController extends AssetController {
         	
         	if(GameWindowTemp.isGameState()) {
         		moveDirection();
+        		System.out.println(enemy.getCoords());
 			}
 
         	else if(!GameWindowTemp.isGameState() ) {
