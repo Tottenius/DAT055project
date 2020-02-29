@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import Controller.Direction;
 import viewer.GamePanel;
+import viewer.GameSettings;
 
 //Spike to dodge or player will die
 public class Spikes extends AbstractAsset {
@@ -64,10 +65,12 @@ public class Spikes extends AbstractAsset {
 		
 		if(up) {
 			this.getImageAtMap(direction.UP);
+			gp.repaint(getCoords().x,getCoords().y,GameSettings.getAssetsize(),GameSettings.getAssetsize());
 			g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 		}
 		else {	
 			this.getImageAtMap(direction.DOWN);
+			gp.repaint(getCoords().x,getCoords().y,GameSettings.getAssetsize(),GameSettings.getAssetsize());
 			g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);			
 		}
 	}
@@ -79,10 +82,4 @@ public class Spikes extends AbstractAsset {
 		
 	}
 
-
-	@Override
-	public boolean hasMultibleStates() {
-		// TODO Auto-generated method stub
-		return true;
-	}
 }

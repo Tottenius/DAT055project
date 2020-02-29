@@ -51,11 +51,4 @@ public class Tile extends AbstractAsset{
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public boolean hasMultibleStates() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-    
 }

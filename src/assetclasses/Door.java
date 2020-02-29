@@ -54,9 +54,4 @@ public class Door extends AbstractAsset {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public boolean hasMultibleStates() {
-			return false;
-	}
 }
