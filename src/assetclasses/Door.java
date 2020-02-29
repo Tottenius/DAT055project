@@ -8,11 +8,13 @@ import viewer.GamePanel;
 //Door to go to next room!? are we even gonna do more then 1 room?? Could ranomize what next room is or maybe make it static
 public class Door extends AbstractAsset {
 
-	private static final String path = "src/assets/tile.png";
+	private static final String path1 = "src/assets/doordown.png";
+	private static final String path2 = "src/assets/doorup.png";
 	
 	public Door(int position) {
         super(position);
-        super.loadImage(path, Direction.DOWN);
+        super.loadImage(path1, Direction.DOWN);
+        super.loadImage(path2, Direction.UP);
         super.getImage();
 	}
 

@@ -10,6 +10,7 @@ import Controller.EnemyController;
 import Controller.PlayerController;
 import Controller.SpikeController;
 import assetclasses.AbstractAsset;
+import assetclasses.Door;
 import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Spikes;
@@ -130,6 +131,14 @@ public class ReadInWorld {
 				assets.add(new Treasure(posInList));
 				posInList++;
 			}
+			
+			// Load in door
+			else if (level.charAt(i) == 'd') {
+				assets.add(new Door(posInList));
+				posInList++;
+			}
+			
+			
 			// Load in spikes
 			else if (level.charAt(i) == 's') {
 				// Make a list of all spikes
