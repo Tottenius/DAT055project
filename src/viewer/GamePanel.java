@@ -45,6 +45,8 @@ public class GamePanel extends JPanel {
 	// Symbols
 	private AbstractAsset asset;
 	private AbstractAsset movingAsset;
+	//Current level
+	String CurrentLevel;
 
 	
 	List<AbstractAsset> Movingassets = new ArrayList<AbstractAsset>();
@@ -141,9 +143,11 @@ public class GamePanel extends JPanel {
 	}
 	
 	//maybe add what level to lead here as type for the contructor
-	public GamePanel() {
-
-		world = new ReadInWorld("level4");
+	public GamePanel(String CurrentLevel) {
+		
+		this.CurrentLevel = CurrentLevel;
+		
+		world = new ReadInWorld(CurrentLevel);
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(null);
 		this.setVisible(true);
@@ -178,22 +182,38 @@ public class GamePanel extends JPanel {
         		world.restartGame();
         	}
         	
+        	if(GameWindowTemp.isNextLevelState()) {
+        		/*System.out.println("Försöker starta om");
+        		while(!(numberOfControllers == 0)) {
+        		}*/
+        		
+        		System.out.println("loading next level");
+        		SwingUtilities.getWindowAncestor(gamePanel).dispose();
+        		
+        		new  GameWindowTemp(null);
+        		this.cancel();
+        		
+        		//System.out.println(GameWindowTemp.state);
+        		//world.restartGame();
+        	}
+        	
         	else if(GameWindowTemp.isGameState()) {
         	
         		repaint();
         	}	
-        	// Att vinna ger just nu game over screen
+
         	else if ( GameWindowTemp.isWinState()) {
 				SwingUtilities.getWindowAncestor(gamePanel).dispose();
-				new GameWindowTemp();
+				new GameWindowTemp(null);
 				this.cancel();
         	}
         	// Gör en gameoverskärm om player är död
         	else if (GameWindowTemp.isDeathScreenState()) {
 				SwingUtilities.getWindowAncestor(gamePanel).dispose();
-				new GameWindowTemp();
+				new GameWindowTemp(null);
 				this.cancel();		
-			}      	
+			}
+        	
         }
     };
 }

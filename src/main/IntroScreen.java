@@ -27,6 +27,6 @@ public static void main(String[] args) throws MalformedURLException {
 		}
 		window.dispose(); */
 		
-		new GameWindowTemp();
+		new GameWindowTemp("level1");
 	}
 }

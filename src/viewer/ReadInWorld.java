@@ -34,6 +34,7 @@ public class ReadInWorld {
 	private List<AbstractAsset> restartAssets = new ArrayList<AbstractAsset>();
 	
 	HashMap<String, String> levels = new HashMap<String, String>();
+	String nextLevel;
 
 	public void initLevelPaths() {
 		
@@ -41,7 +42,8 @@ public class ReadInWorld {
 		levels.put("level2","src/levels/level2.txt");
 		levels.put("level3","src/levels/level3.txt");
 		levels.put("level4","src/levels/level4.txt");
-	}  
+	}
+	
 
 	// DETTA ÄR SKIT MANNEN FIXA! TACK PELLE
 	public void restartGame() {

@@ -89,7 +89,7 @@ public class ReactionScreen extends JPanel {
 		            System.out.println("Rest Button pressed!");
 		            GameWindowTemp.setStateGame();
 		            SwingUtilities.getWindowAncestor(GameOver).dispose();
-		            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+		            new GameWindowTemp(null); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 				  }  
 				} 
 		 );
@@ -99,7 +99,7 @@ public class ReactionScreen extends JPanel {
 		            System.out.println("Menu Button pressed!");
 		            GameWindowTemp.setStateMenu();
 		            SwingUtilities.getWindowAncestor(GameOver).dispose();
-		            new GameWindowTemp();
+		            new GameWindowTemp(null);
 				  } 
 				} 
 	 	 );

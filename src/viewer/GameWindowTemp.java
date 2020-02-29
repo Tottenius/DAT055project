@@ -23,6 +23,7 @@ public class GameWindowTemp extends JFrame {
 		DEATHSCREEN,
 		RESTART,
 		WIN,
+		NextLevel,
 	};
 
 	// gamestate bool
@@ -47,10 +48,21 @@ public class GameWindowTemp extends JFrame {
     // local reference to it self
     private GameWindowTemp window = this;
     
+    //What level do read in
+    String nextLevel = "level1";
+    
+    public void setNextLevel(String nextLevel) {
+    	
+    	this.nextLevel = nextLevel;
+    }
+    
     //Music player obj so we avoid statics
   //private final  MusicPlayer musicplayer = new MusicPlayer();
 	
-	public GameWindowTemp(){
+	public GameWindowTemp(String nextLevel){
+		
+		this.nextLevel = nextLevel;
+		
 		System.out.println("Vi gör ett window");
 		System.out.println(state + " GameWindowTemp");
 		if (state == STATE.MENU) { 
@@ -60,8 +72,21 @@ public class GameWindowTemp extends JFrame {
 		
 		//if gamestate is Game then we start the game;
 		else if (state == STATE.GAME) {
-			this.add(new GamePanel());	
+			this.add(new GamePanel(nextLevel));	
 			System.out.println("Vi startar en ny gamePanel");
+		}
+		
+		else if (state == STATE.NextLevel) {
+			
+			//increment next level with 1
+			System.out.println("ey tjenna ju");
+			//nextLevel = "level" + (Integer.parseInt(nextLevel.substring(1,nextLevel.length()))+1);
+			System.out.println(nextLevel);
+			nextLevel = "level2";
+			setNextLevel(nextLevel);
+			this.add(new GamePanel(nextLevel));	
+			System.out.println("Vi laddar nästa nivå");
+			state = STATE.GAME;
 		}
 		
 		else if (state == STATE.DEATHSCREEN) {
@@ -111,21 +136,11 @@ public class GameWindowTemp extends JFrame {
   			  	System.out.println("Go to main menu pressed");
 	            GameWindowTemp.setStateMenu();
 	            window.dispose();
-	            new GameWindowTemp(); 
+	            new GameWindowTemp(null); 
 			  } 
 			} 
 	 );
-        //Increasing the audio volume
-        m4.addActionListener(new ActionListener() { 
-  		  public void actionPerformed(ActionEvent e) { 
-	            
-  			  	System.out.println("Go to main menu pressed");
-	            GameWindowTemp.setStateMenu();
-	            window.dispose();
-	            new GameWindowTemp(); 
-			  } 
-			} 
-	 );
+ 
         //Increasing the audio volume
         m5.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
@@ -192,5 +207,14 @@ public class GameWindowTemp extends JFrame {
 	
 	public static boolean isRestartState() {
 		return state == STATE.RESTART;
+	}
+	
+	public static void setNextLevelState() {
+		System.out.println("we are isnide setnextlevelstate");
+		state = STATE.NextLevel;		
+	}	
+	
+	public static boolean isNextLevelState() {
+		return state == STATE.NextLevel;
 	}
 }

@@ -4,6 +4,8 @@ import java.awt.Graphics;
 
 import Controller.Direction;
 import viewer.GamePanel;
+import viewer.GameWindowTemp;
+import viewer.ReadInWorld;
 
 //Door to go to next room!? are we even gonna do more then 1 room?? Could ranomize what next room is or maybe make it static
 public class Door extends AbstractAsset {
@@ -31,9 +33,10 @@ public class Door extends AbstractAsset {
 	@Override
 	public boolean intractable() {
 		
-		//player goes to next level!
 		System.out.println("player reached door!");
-		
+		//restart and new level doing
+		GameWindowTemp.setNextLevelState();
+		//player goes to next level!
 		return true;
 	}
 

@@ -112,7 +112,7 @@ public class Menu extends JPanel {
 	            System.out.println("Start Button pressed!");
 	            GameWindowTemp.setStateGame();
 	            SwingUtilities.getWindowAncestor(menu).dispose();
-	            new GameWindowTemp(); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+	            new GameWindowTemp("level1"); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 			  } 
 			} 
 	 );
