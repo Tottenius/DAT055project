@@ -13,6 +13,9 @@ public class GameWindowTemp extends JFrame {
 	
 	//How long it took to complete the level for the player 
 	Long TimeForCompletion ;
+	 
+    private static final String GameOverpath = "src/assets/GameOverScreen.jpg";
+    private static final String Winpath = "src/assets/WinScreenTemp.jpg";
 	
 	private enum STATE{
 		MENU,
@@ -46,9 +49,6 @@ public class GameWindowTemp extends JFrame {
     
     //Music player obj so we avoid statics
   //private final  MusicPlayer musicplayer = new MusicPlayer();
-    
-    private static final String GameOverpath = "src/assets/GameOverScreen.jpg";
-    private static final String Winpath = "src/assets/WinScreenTemp.jpg";
 	
 	public GameWindowTemp(){
 		System.out.println("Vi gör ett window");
@@ -62,7 +62,6 @@ public class GameWindowTemp extends JFrame {
 		else if (state == STATE.GAME) {
 			this.add(new GamePanel());	
 			System.out.println("Vi startar en ny gamePanel");
-
 		}
 		
 		else if (state == STATE.DEATHSCREEN) {
@@ -81,8 +80,7 @@ public class GameWindowTemp extends JFrame {
 		}	
 			
 		//Adding menubar
-		SetUpMenubar();
-		
+		SetUpMenubar();		
 		this.pack();		
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -92,18 +90,16 @@ public class GameWindowTemp extends JFrame {
 	public void SetUpMenubar() {
 		
 		// create menuitems 
-        m1 = new JMenuItem("Guides"); 
-        m2 = new JMenuItem("Support"); 
-        m3 = new JMenuItem("Restart");
-        m4 = new JMenuItem("Quit to main menu");
-        m5 = new JMenuItem("Increase Volume");
+        m1 = new JMenuItem("Guides");	m2 = new JMenuItem("Support"); 
+        m3 = new JMenuItem("Restart"); 	m4 = new JMenuItem("Quit to main menu"); 
+        m5 = new JMenuItem("Increase Volume");	
         m6 = new JMenuItem("Decrease Volume");
-        
-        
+         
         //Restart the game
         m3.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
-	            System.out.println("Restart");
+	           
+  			  	System.out.println("Restart");
 	            setRestartState(); 
 			  } 
 			} 
@@ -111,7 +107,8 @@ public class GameWindowTemp extends JFrame {
         //Return to the main menu
         m4.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
-	            System.out.println("Go to main menu pressed");
+	           
+  			  	System.out.println("Go to main menu pressed");
 	            GameWindowTemp.setStateMenu();
 	            window.dispose();
 	            new GameWindowTemp(); 
@@ -121,7 +118,8 @@ public class GameWindowTemp extends JFrame {
         //Increasing the audio volume
         m4.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
-	            System.out.println("Go to main menu pressed");
+	            
+  			  	System.out.println("Go to main menu pressed");
 	            GameWindowTemp.setStateMenu();
 	            window.dispose();
 	            new GameWindowTemp(); 
@@ -132,7 +130,7 @@ public class GameWindowTemp extends JFrame {
         m5.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
   			
-  			MusicPlayer.increaseVolume(); 			  
+  			  MusicPlayer.increaseVolume(); 			  
   			  System.out.println("volume increased!");
 			  } 
 			} 
@@ -142,19 +140,16 @@ public class GameWindowTemp extends JFrame {
         m6.addActionListener(new ActionListener() { 
   		  public void actionPerformed(ActionEvent e) { 
 	            
-  			MusicPlayer.decreaseVolume();
+  			  MusicPlayer.decreaseVolume();
   			  System.out.println("volume Decreased!");
 			  } 
 			} 
 	 );
   
         // add menu items to menu 
-        jmenu.add(m1); 
-        jmenu.add(m2); 
-        jmenu.add(m3);
-        jmenu.add(m4);
-        jmenu2.add(m5);
-        jmenu2.add(m6);
+        jmenu.add(m1);	jmenu.add(m2);	
+        jmenu.add(m3);  jmenu.add(m4);  
+        jmenu2.add(m5); jmenu2.add(m6);
         
         //add menu to menubar
         menubar.add(jmenu);
@@ -186,6 +181,7 @@ public class GameWindowTemp extends JFrame {
 	public static void setDeathScreenState() {
 		state = STATE.DEATHSCREEN;		
 	}
+	
 	public static boolean isDeathScreenState() {
 		return state == STATE.DEATHSCREEN;
 	}
@@ -193,9 +189,8 @@ public class GameWindowTemp extends JFrame {
 	public static void setRestartState() {
 		state = STATE.RESTART;		
 	}	
+	
 	public static boolean isRestartState() {
 		return state == STATE.RESTART;
 	}
-
 }
-	

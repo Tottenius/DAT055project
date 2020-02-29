@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimerTask;
@@ -14,18 +15,8 @@ import javax.swing.SwingUtilities;
 import Controller.Direction;
 import assetclasses.AbstractAsset;
 
-
-/*
- Att göra:
- 	Allmän interrupt för threads
- 	Instanceof FIXED except when restarting level need to look at
- 	kordinater 
- 	attributes för assets FIXED
- 	Testa sätta upp en lokal server (Kolla föreläsningar) 
- */
-
 public class GamePanel extends JPanel {
-	//
+	
 	public static volatile int numberOfControllers = 0;
 	// This window
 	GamePanel gamePanel = this;
@@ -42,7 +33,21 @@ public class GamePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	// NewKeyPressedBool
 	private static volatile boolean isKeyPressed = false;
+	//general counter for different purposes
+	int counter = 0;
+	//set base Direction for enum
+	private static Direction direction = Direction.RIGHT;
+	// list with assets
+	public List<AbstractAsset> assets;
+	// Starting position
+	private Point pos = new Point(0,0);
+	// Symbols
+	private AbstractAsset asset;
+	
+	List<AbstractAsset> Movingassets = new ArrayList<AbstractAsset>();
 
+	
+	
 	public static boolean isKeyPressed() {
 		return isKeyPressed;
 	}
@@ -50,17 +55,6 @@ public class GamePanel extends JPanel {
 	public static void setKeyPressed(boolean isKeyPressed) {
 		GamePanel.isKeyPressed = isKeyPressed;
 	}
-
-	private static Direction direction = Direction.RIGHT;
-
-	// list with assets
-	public List<AbstractAsset> assets;
-
-	// Starting position
-	private Point pos = new Point(0,0);
-	
-	// Symbols
-	private AbstractAsset asset;
 	
 	// get direction
 	public static Direction getDirection() {
@@ -88,11 +82,47 @@ public class GamePanel extends JPanel {
 			pos.y = 0;
 			pos.x = 0;	
 	}
-
+	
+	private void initMovingWorld(Graphics g) {
+		
+		 List<AbstractAsset> assets = world.getAssetList();
+			for (int i = 0; i < assets.size(); i++) {
+			
+				if (assets.get(i).hasMultibleStates() ) {
+				asset = assets.get(i);
+				//System.out.println("am in here boi");
+				System.out.println(GameSettings.getWidth());
+				repaint((int)asset.getCoords().getX(),(int)asset.getCoords().getY(),GameSettings.getAssetsize(),GameSettings.getAssetsize());
+				
+				}
+				// if(asset.getCoords() != pos) {
+				//	asset.hasDirections(direction);	
+				//	asset.paintAsset(g, gamePanel);
+				//}
+				//pos.x = pos.x + SIZE;
+			//}
+			// //pos.y = 0;
+			//pos.x = 0;	
+		//	}
+			
+	}
+	}
+	
+	
 	@Override
 	public void paintComponent(Graphics g) {
+		
+		//we only draw the background once then only the moving assets have to be redrawn
+		//if (counter == 0) {
 		super.paintComponent(g);
 		initWorld(g);
+		//counter++;
+		//}
+		
+		/*else
+			super.paintComponent(g);
+		initMovingWorld(g); */
+			
 	}
 
 	private class keyLis extends KeyAdapter {
@@ -136,18 +166,11 @@ public class GamePanel extends JPanel {
 			isKeyPressed = true;
 		}
 	}
-	/*
-	//Levels
-	String level1 = "src/levels/level1.txt";
-	String level2 = "src/levels/level2.txt";
-	String level3 = "src/levels/level3.txt";
-	String level4 = "src/levels/level4.txt";
-	*/ 
 	
 	public GamePanel() {
 	
-		System.out.println("Vi går in i gamepanel");
-		System.out.println(GameWindowTemp.state+ " GamePanel");
+		//System.out.println("Vi går in i gamepanel");
+		//System.out.println(GameWindowTemp.state+ " GamePanel");
 		// Read in new world
 		world = new ReadInWorld("level4");
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -157,13 +180,39 @@ public class GamePanel extends JPanel {
 		this.addKeyListener(new keyLis());
 		this.setFocusable(true);
 		
-		new MusicPlayer();
+		
+		loadinmovingAsset();
+		
+		//new MusicPlayer(); //music off for now
 		
 		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
 		timer1.scheduleAtFixedRate(timer2, 0, 1000/60);
 		//world.startInGameThreads();
 		StopWatch.start();
 	}
+	
+	public void redrawSpecified(int x,int y,int w,int h) {
+		
+		repaint(x,y,w,h);
+	}
+	
+	public void loadinmovingAsset() {
+		
+		List<AbstractAsset> assets = world.getAssetList();
+		List<AbstractAsset> Movingassets = new ArrayList<AbstractAsset>();
+		for (int i = 0; i < assets.size(); i++) {
+		
+			if (assets.get(i).hasMultibleStates() ) {
+				 Movingassets.add(assets.get(i));
+	}
+		}
+	}
+	
+	public List getmovingassets() {
+		
+		return Movingassets;
+	}
+	
 	
 	// Vi kör en timer istället för en busy wait
     Timer timer1 = new Timer();
@@ -184,7 +233,17 @@ public class GamePanel extends JPanel {
         	}
         	
         	else if(GameWindowTemp.isGameState()) {
-	            repaint();				
+        		//if(counter == 0)
+        		repaint();
+        		
+        		/*
+        		//else {
+        			int i = 0;
+        			while(Movingassets.get(i) != null) {
+        				repaint((int)Movingassets.get(i).getCoords().getX(),(int)Movingassets.get(i).getCoords().getY(), GameSettings.getAssetsize(),GameSettings.getAssetsize()); 
+        			i++;
+        			//}
+        		} */
         	}
         	// Att vinna ger just nu game over screen
         	else if ( GameWindowTemp.isWinState()) {

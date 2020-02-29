@@ -22,6 +22,8 @@ public interface Asset {
     public boolean canWalkOn();
     //Entity that moves in multible directions
     public boolean hasDirections(Direction d);
+    //Can change state
+    public boolean hasMultibleStates();
     
     //Animations
     public void setPrevPos();

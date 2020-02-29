@@ -56,4 +56,10 @@ public class Enemy extends AbstractAsset {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean hasMultibleStates() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

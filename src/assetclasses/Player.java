@@ -92,4 +92,11 @@ public class Player extends AbstractAsset {
 		
 		
 	}
+
+
+	@Override
+	public boolean hasMultibleStates() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

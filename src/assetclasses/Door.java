@@ -46,11 +46,17 @@ public class Door extends AbstractAsset {
 	public void paintAsset(Graphics g, GamePanel gp) {
 		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 		
+		
 	}
 
 	@Override
 	public void setPrevPos() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean hasMultibleStates() {
+			return false;
 	}
 }
