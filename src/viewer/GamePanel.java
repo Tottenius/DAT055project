@@ -65,7 +65,10 @@ public class GamePanel extends JPanel {
 	}
 	
 	private void initWorld(Graphics g) {
+<<<<<<< HEAD
 		//System.out.println("am in here boi");
+=======
+>>>>>>> refs/remotes/origin/master
 		 List<AbstractAsset> assets = world.getAssetList();
 		 List<AbstractAsset> movingAssets = world.getMovingAssets();		 
 			for (int i = 0; i < assets.size(); i++) {
