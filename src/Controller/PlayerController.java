@@ -40,7 +40,7 @@ public class PlayerController extends AssetController  {
 		newPlayerLocationMovingLayer = movingAssets.get(newPlayerPos);
 		stationaryAsset = assets.get(newPlayerPos);
 		// If tile, move to the tile
-		if (stationaryAsset.canWalkOn()) {
+		if (stationaryAsset.canWalkOn() && newPlayerLocationMovingLayer.canWalkOn()) {
 			super.moveAsset(newPlayerPos, oldPlayerPos, playerAsset, newPlayerLocationMovingLayer);
 		}
 		// If treasure, open treasure

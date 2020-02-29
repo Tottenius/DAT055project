@@ -49,11 +49,11 @@ public class EnemyController extends AssetController {
 			// Alla interaktioner med assets
 			// If tile, move to tile
 			newEnemyLocationStationaryLayer = assets.get(newEnemyPos);
-			if (newEnemyLocationStationaryLayer.canWalkOn() ) {
+			if (newEnemyLocationStationaryLayer.canWalkOn() && newEnemyLocationMovingLayer.canWalkOn()) {
 				super.moveAsset(newEnemyPos, oldEnemyPos, enemy, newEnemyLocationMovingLayer);
 			}
 			// If player, kill player
-			else if (newEnemyLocationStationaryLayer.killable()  ) {
+			else if (newEnemyLocationMovingLayer.killable()  ) {
 				super.killAsset(newEnemyPos, oldEnemyPos, enemy);
 				((Player) newEnemyLocationMovingLayer).setAlive(false);
 			}
