@@ -10,11 +10,11 @@ import Controller.EnemyController;
 import Controller.PlayerController;
 import Controller.SpikeController;
 import assetclasses.AbstractAsset;
-<<<<<<< HEAD
+
 import assetclasses.Empty;
-=======
+
 import assetclasses.Door;
->>>>>>> refs/remotes/origin/master
+
 import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Spikes;
