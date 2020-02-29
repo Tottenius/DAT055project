@@ -48,7 +48,7 @@ public class Enemy extends AbstractAsset {
 
 	@Override
 	public void paintAsset(Graphics g, GamePanel gp) {
-		gp.repaint(getCoords().x,getCoords().y,GameSettings.getAssetsize(),GameSettings.getAssetsize());
+		//gp.repaint(getCoords().x,getCoords().y,GameSettings.getAssetsize(),GameSettings.getAssetsize());
 		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 		
 	}

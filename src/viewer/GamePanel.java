@@ -63,7 +63,6 @@ public class GamePanel extends JPanel {
 	}
 	
 	private void initWorld(Graphics g) {
-		System.out.println("am in here boi");
 		 List<AbstractAsset> assets = world.getAssetList();
 			for (int i = 0; i < assets.size(); i++) {
 				// Get first asset

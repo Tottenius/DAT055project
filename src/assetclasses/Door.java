@@ -30,6 +30,10 @@ public class Door extends AbstractAsset {
 
 	@Override
 	public boolean intractable() {
+		
+		//player goes to next level!
+		System.out.println("player reached door!");
+		
 		return true;
 	}
 
