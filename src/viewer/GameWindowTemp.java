@@ -85,18 +85,6 @@ public class GameWindowTemp extends JFrame {
 		
 		else if (state == STATE.NextLevel) {
 			System.out.println("not being used");
-			/*
-			//increment next level with 1
-			System.out.println("ey tjenna ju");
-			System.out.println(returnNextLevel());
-			String nextLevelNumber = returnNextLevel().substring(returnNextLevel().length() - 1);
-			nextLevelNumber= String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
-			nextLevel = "level" + nextLevelNumber;
-			System.out.println(nextLevel);
-			setNextLevel(nextLevel);
-			this.add(new GamePanel(nextLevel));	
-			System.out.println("Vi laddar nästa nivå");
-			state = STATE.GAME; */
 		}
 		
 		else if (state == STATE.DEATHSCREEN) {
