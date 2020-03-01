@@ -191,7 +191,7 @@ public class GamePanel extends JPanel {
 	// Vi kör en timer istället för en busy wait
 	Timer timer1 = new Timer();
 	TimerTask timer2 = new TimerTask() {
-      
+		
 	    public void run() {
         	
         	if(GameWindowTemp.isRestartState()) {
