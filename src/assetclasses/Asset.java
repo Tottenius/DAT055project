@@ -24,6 +24,5 @@ public interface Asset {
     public boolean hasDirections(Direction d);
     
     //Animations
-    public void setPrevPos();
     public void paintAsset(Graphics g, GamePanel gp);
 }

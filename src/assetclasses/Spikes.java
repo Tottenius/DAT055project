@@ -65,21 +65,11 @@ public class Spikes extends AbstractAsset {
 		
 		if(up) {
 			this.getImageAtMap(direction.UP);
-			//gp.repaint(getCoords().x,getCoords().y,GameSettings.getAssetsize(),GameSettings.getAssetsize());
 			g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 		}
 		else {	
 			this.getImageAtMap(direction.DOWN);
-			//gp.repaint(getCoords().x,getCoords().y,GameSettings.getAssetsize(),GameSettings.getAssetsize());
 			g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);			
 		}
 	}
-
-
-	@Override
-	public void setPrevPos() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

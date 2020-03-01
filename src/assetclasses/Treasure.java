@@ -78,11 +78,6 @@ public class Treasure extends AbstractAsset{
 		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 	}
 
-	@Override
-	public void setPrevPos() {
-		
-	}
-
 	public static int getOpenedTreasures() {
 		return openedTreasures;
 	}

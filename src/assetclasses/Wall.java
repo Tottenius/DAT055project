@@ -45,12 +45,5 @@ public class Wall extends AbstractAsset{
 	@Override
 	public void paintAsset(Graphics g, GamePanel gp) {
 		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
-		//GamePanel.redrawSpecified(getCoords().x,getCoords().y,GameSettings.getWidth(),GameSettings.getHeight());
-	}
-
-	@Override
-	public void setPrevPos() {
-		// TODO Auto-generated method stub
-		
 	}
 }

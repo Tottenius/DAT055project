@@ -46,9 +46,4 @@ public class Tile extends AbstractAsset{
 		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 	}
 
-	@Override
-	public void setPrevPos() {
-		// TODO Auto-generated method stub
-		
-	}
 }
