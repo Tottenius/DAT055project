@@ -183,18 +183,17 @@ public class GamePanel extends JPanel {
         	}
         	
         	if(GameWindowTemp.isNextLevelState()) {
-        		/*System.out.println("Försöker starta om");
-        		while(!(numberOfControllers == 0)) {
-        		}*/
+
         		
         		System.out.println("loading next level");
-        		SwingUtilities.getWindowAncestor(gamePanel).dispose();
+     
+        		String nextLevelNumber = CurrentLevel.substring(CurrentLevel.length() - 1);
+    			nextLevelNumber= String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
+    			CurrentLevel = "level" + nextLevelNumber;
         		
-        		new  GameWindowTemp(CurrentLevel);
-        		this.cancel();
-        		
-        		//System.out.println(GameWindowTemp.state);
-        		//world.restartGame();
+    			world = new ReadInWorld(CurrentLevel); 			
+    			GameWindowTemp.setStateGame();
+
         	}
         	
         	else if(GameWindowTemp.isGameState()) {
