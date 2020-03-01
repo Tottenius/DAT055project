@@ -9,22 +9,25 @@ import javax.sound.sampled.FloatControl;
 
 
 // REMOVE ALL THIS STATIC, JUST COULDNT MAKE IT WORK WITHOUT IT BEFORE!
-public class MusicPlayer {
+public class MusicPlayer{
 
+	
 	 static Clip clip;
 	
-	public MusicPlayer() {
+	public MusicPlayer(String path) {
 		
-		playSound();
+		playSound(path);
 	}
 	
-	public  void playSound() {
+	public  void playSound(String path) {
 	    try {
-	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/Music/BackgroundMusic1.aifc"));
+
+	    	AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path));
 	         MusicPlayer.clip = AudioSystem.getClip();
 	        clip.open(audioInputStream);
 	        setVolume(-20);
 	        clip.start();
+	        
 	        // If you want the sound to loop infinitely, then put: 
 	        clip.loop(Clip.LOOP_CONTINUOUSLY); 
 	        // If you want to stop the sound, then use clip.stop();
@@ -33,7 +36,12 @@ public class MusicPlayer {
 	    }
 	}
 	
-	public static  void setVolume(float gain) {
+	public static void StopMusic() {
+		clip.stop();
+		
+	}
+	
+	public static void setVolume(float gain) {
 		
 		FloatControl volume = (FloatControl) MusicPlayer.clip.getControl(FloatControl.Type.MASTER_GAIN);
 		volume.setValue(gain);  

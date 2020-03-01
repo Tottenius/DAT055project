@@ -56,7 +56,6 @@ public class Door extends AbstractAsset {
 		return false;
 	}
 
-
 	@Override
 	public void paintAsset(Graphics g, GamePanel gp) {
 		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);		

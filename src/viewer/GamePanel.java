@@ -47,7 +47,22 @@ public class GamePanel extends JPanel {
 	private AbstractAsset movingAsset;
 	//Current level
 	String CurrentLevel;
+	//music for each level
+	HashMap<String, String> levelMusic = new HashMap<String, String>();
+	
+	
+public void loadInLevelMusicPaths() {
+	levelMusic.put("level1","src/Music/level1.aifc");
+	levelMusic.put("level2","src/Music/level2.aifc");
+	levelMusic.put("level3","src/Music/level3.aifc");
+	levelMusic.put("level4","src/Music/level4.aifc");	
+}
 
+public String getLevelMusic(String level) {
+	System.out.println(level);
+	System.out.println(levelMusic.get(level));
+	return levelMusic.get(level);
+}
 	
 	List<AbstractAsset> Movingassets = new ArrayList<AbstractAsset>();
 
@@ -142,6 +157,21 @@ public class GamePanel extends JPanel {
 		}
 	}
 	
+	public static void playMusic(String path) {
+		//precaution
+		if(!path.equals("src/Music/level1.aifc") && !path.equals( null )) {
+			System.out.println("we stop music");
+			MusicPlayer.StopMusic();
+		}
+		
+		if (path == null)
+		new MusicPlayer("src/Music/level1.aifc");
+		
+		else
+		new MusicPlayer(path);
+		
+	}
+	
 	//maybe add what level to lead here as type for the contructor
 	public GamePanel(String CurrentLevel) {
 		
@@ -155,7 +185,9 @@ public class GamePanel extends JPanel {
 		this.addKeyListener(new keyLis());
 		this.setFocusable(true);
 		
-		//new MusicPlayer(); //music off for now
+		loadInLevelMusicPaths();
+		GamePanel.playMusic(getLevelMusic("level1"));
+
 		
 		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
 		timer1.scheduleAtFixedRate(timer2, 0, 1000/60);
@@ -193,6 +225,7 @@ public class GamePanel extends JPanel {
         		
     			world = new ReadInWorld(CurrentLevel); 			
     			GameWindowTemp.setStateGame();
+    			playMusic(getLevelMusic(CurrentLevel));
 
         	}
         	
