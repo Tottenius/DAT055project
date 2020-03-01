@@ -190,7 +190,7 @@ public class GamePanel extends JPanel {
         		System.out.println("loading next level");
         		SwingUtilities.getWindowAncestor(gamePanel).dispose();
         		
-        		new  GameWindowTemp(null);
+        		new  GameWindowTemp(CurrentLevel);
         		this.cancel();
         		
         		//System.out.println(GameWindowTemp.state);

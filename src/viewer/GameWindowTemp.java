@@ -50,10 +50,16 @@ public class GameWindowTemp extends JFrame {
     
     //What level do read in
     String nextLevel = "level1";
+    String currentRunningLevel = "level1";
     
     public void setNextLevel(String nextLevel) {
     	
     	this.nextLevel = nextLevel;
+    }
+    
+    public String returnNextLevel() {
+    	
+    	return this.nextLevel;
     }
     
     //Music player obj so we avoid statics
@@ -72,17 +78,21 @@ public class GameWindowTemp extends JFrame {
 		
 		//if gamestate is Game then we start the game;
 		else if (state == STATE.GAME) {
-			this.add(new GamePanel(nextLevel));	
+			this.add(new GamePanel(returnNextLevel()));
+					
 			System.out.println("Vi startar en ny gamePanel");
 		}
 		
 		else if (state == STATE.NextLevel) {
 			
+			
 			//increment next level with 1
 			System.out.println("ey tjenna ju");
-			//nextLevel = "level" + (Integer.parseInt(nextLevel.substring(1,nextLevel.length()))+1);
+			System.out.println(returnNextLevel());
+			String nextLevelNumber = returnNextLevel().substring(returnNextLevel().length() - 1);
+			nextLevelNumber= String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
+			nextLevel = "level" + nextLevelNumber;
 			System.out.println(nextLevel);
-			nextLevel = "level2";
 			setNextLevel(nextLevel);
 			this.add(new GamePanel(nextLevel));	
 			System.out.println("Vi laddar nästa nivå");
