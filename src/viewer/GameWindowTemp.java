@@ -61,9 +61,6 @@ public class GameWindowTemp extends JFrame {
     	
     	return this.nextLevel;
     }
-    
-    //Music player obj so we avoid statics
-  //private final  MusicPlayer musicplayer = new MusicPlayer();
 	
 	public GameWindowTemp(String nextLevel){
 		
@@ -101,7 +98,7 @@ public class GameWindowTemp extends JFrame {
 			ReactionScreen gos = new ReactionScreen(Winpath, "You won the Game, nice work! It took you: " + TimeForCompletion + " seconds to beat the level!");
 			this.add(gos);
 		}	
-			
+		
 		//Adding menubar
 		SetUpMenubar();		
 		this.pack();		
@@ -173,8 +170,10 @@ public class GameWindowTemp extends JFrame {
 	}
 	
 	public static void setState( STATE s) {
+
 		state = s;
 	}
+	
 	public static void setWinState(){
 		state = STATE.WIN;	
 }

@@ -49,24 +49,21 @@ public class GamePanel extends JPanel {
 	String CurrentLevel;
 	//music for each level
 	HashMap<String, String> levelMusic = new HashMap<String, String>();
+	//asset that moves
+	List<AbstractAsset> Movingassets = new ArrayList<AbstractAsset>();
 	
-	
-public void loadInLevelMusicPaths() {
+	public void loadInLevelMusicPaths() {
 	levelMusic.put("level1","src/Music/level1.aifc");
 	levelMusic.put("level2","src/Music/level2.aifc");
 	levelMusic.put("level3","src/Music/level3.aifc");
 	levelMusic.put("level4","src/Music/level4.aifc");	
 }
 
-public String getLevelMusic(String level) {
+	public String getLevelMusic(String level) {
 	System.out.println(level);
 	System.out.println(levelMusic.get(level));
 	return levelMusic.get(level);
 }
-	
-	List<AbstractAsset> Movingassets = new ArrayList<AbstractAsset>();
-
-	
 	
 	public static boolean isKeyPressed() {
 		return isKeyPressed;
@@ -104,15 +101,13 @@ public String getLevelMusic(String level) {
 				pos.x = pos.x + SIZE;
 			}
 			pos.y = 0;
-			pos.x = 0;
-					
+			pos.x = 0;				
 	 }
 	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		initWorld(g);
-
 	}
 
 	private class keyLis extends KeyAdapter {
@@ -162,45 +157,42 @@ public String getLevelMusic(String level) {
 		if(!path.equals("src/Music/level1.aifc") && !path.equals( null )) {
 			System.out.println("we stop music");
 			MusicPlayer.StopMusic();
-		}
-		
-		if (path == null)
-		new MusicPlayer("src/Music/level1.aifc");
-		
+		}		
 		else
-		new MusicPlayer(path);
-		
+		new MusicPlayer(path);		
 	}
 	
 	//maybe add what level to lead here as type for the contructor
 	public GamePanel(String CurrentLevel) {
 		
-		this.CurrentLevel = CurrentLevel;
-		
+	    	//read in and build  level
+		this.CurrentLevel = CurrentLevel;	
 		world = new ReadInWorld(CurrentLevel);
+		
+		//set layout
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(null);
 		this.setVisible(true);
+		
 		// adding the keylistener
 		this.addKeyListener(new keyLis());
 		this.setFocusable(true);
 		
+		//add music
 		loadInLevelMusicPaths();
 		GamePanel.playMusic(getLevelMusic("level1"));
 
-		
 		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
 		timer1.scheduleAtFixedRate(timer2, 0, 1000/60);
 		//world.startInGameThreads();
 		StopWatch.start();
 	}
-
 	
 	// Vi kör en timer istället för en busy wait
-    Timer timer1 = new Timer();
-    
-    TimerTask timer2 = new TimerTask() {
-        public void run() {
+	Timer timer1 = new Timer();
+	TimerTask timer2 = new TimerTask() {
+      
+	    public void run() {
         	
         	if(GameWindowTemp.isRestartState()) {
         		System.out.println("Försöker starta om");
@@ -215,8 +207,7 @@ public String getLevelMusic(String level) {
         	}
         	
         	if(GameWindowTemp.isNextLevelState()) {
-
-        		
+	
         		System.out.println("loading next level");
      
         		String nextLevelNumber = CurrentLevel.substring(CurrentLevel.length() - 1);
@@ -245,7 +236,6 @@ public String getLevelMusic(String level) {
 				new GameWindowTemp(null);
 				this.cancel();		
 			}
-        	
         }
     };
 }
