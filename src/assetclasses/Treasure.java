@@ -53,11 +53,13 @@ public class Treasure extends AbstractAsset{
 	public boolean intractable() {
 		if(!this.isOpen) {
 			this.openTreasure();
-			openedTreasures++;
-			if( openedTreasures == ReadInWorld.numberOfTresures) {
-				GameWindowTemp.setWinState();
+			setOpenedTreasures(getOpenedTreasures() + 1);
+			if( getOpenedTreasures() == ReadInWorld.numberOfTresures) {
+				//GameWindowTemp.setWinState();
+				System.out.println("you opened all treasure, now you can go to next level trough the door!");
 			}
 		}
+		
 		return true;
 	}
 
@@ -78,8 +80,14 @@ public class Treasure extends AbstractAsset{
 
 	@Override
 	public void setPrevPos() {
-		// TODO Auto-generated method stub
 		
 	}
 
+	public static int getOpenedTreasures() {
+		return openedTreasures;
+	}
+
+	public static void setOpenedTreasures(int openedTreasures) {
+		Treasure.openedTreasures = openedTreasures;
+	}
 }
