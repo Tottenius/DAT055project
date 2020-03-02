@@ -2,9 +2,7 @@ package server;
 
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
  
-
 public class UdpClient implements Runnable { 
    
 	String input = "";
@@ -16,9 +14,11 @@ public class UdpClient implements Runnable {
         // carrying the data. 
         DatagramSocket socket = new DatagramSocket(); 
         this.setreceivedInput(message); 
+        
         InetAddress ip = InetAddress.getLocalHost(); 
         byte buf[] = null; 
         input = getreceivedInput();
+        
         // convert the String input into the byte array. 
         buf = input.getBytes(); 
 
@@ -55,50 +55,11 @@ public class UdpClient implements Runnable {
         // the data. 
         socket.send(DpSend);
         socket.close();
-        
-      		
-       // setreceivedInput("");
-      //  break;
-
-        
-        // loop while user not enters "bye" 
-        /*
-        while (true) { 
-           // String inp = sc.nextLine(); 
-        	input = getreceivedInput();
-            // convert the String input into the byte array. 
-            buf = input.getBytes(); 
-  
-            // Step 2 : Create the datagramPacket for sending 
-            // the data. 
-            DatagramPacket DpSend = new DatagramPacket(buf, buf.length, ip, 4567); 
-  
-            // Step 3 : invoke the send call to actually send 
-            // the data. 
-            socket.send(DpSend);
-            
-            //waiting for new text
-            while (input == getreceivedInput()) {
-            	
-            	//System.out.println("waitng for new text");
-            
-            }
-            		
-           // setreceivedInput("");
-          //  break;
-  
-            // break the loop if user enters "bye" 
-            if (input.equals("bye")) 
-                break; 
-        }
-        */
-        
-       
+     
     }
 	
     public void setreceivedInput(String input) {
-    	this.input = input;
-    	
+    	this.input = input;   	
     }
     
     public String getreceivedInput() {
@@ -113,9 +74,7 @@ public class UdpClient implements Runnable {
 			if(input != "")
 			startClient();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 	} 
 } 
