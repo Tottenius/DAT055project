@@ -172,8 +172,10 @@ public class GamePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		if(GameWindowTemp.isGameState())
-		initWorld(g);
+		if(GameWindowTemp.isGameState()) 
+	
+			initWorld(g);
+		
 		
 		else if(GameWindowTemp.isDeathScreenState())
 			initDeathOrWinScreen(g,"src/assets/GameOverScreen.jpg", "YOU LOST!");
@@ -206,8 +208,9 @@ public class GamePanel extends JPanel {
 		startTimer(0,1000/60);
 		StopWatch.start();
 	}
+
 		
-	private void startTimer(int firstTime,int period) {
+	public void startTimer(int firstTime,int period) {
 	   
 		this.period = period;
 		this.firstTime = firstTime;
@@ -222,6 +225,7 @@ public class GamePanel extends JPanel {
         		System.out.println("Försöker starta om");
         		world = new ReadInWorld(CurrentLevel);
         		GameWindowTemp.setStateGame();
+        		world.startControllers();
         		System.out.println(GameWindowTemp.state);
 
         	}
@@ -244,17 +248,17 @@ public class GamePanel extends JPanel {
         	else if(GameWindowTemp.isGameState()) {
         		
         		repaint();
-        		System.out.println(period);
+        		System.out.println(firstTime);
         	}
         	
         	else if (GameWindowTemp.isDeathScreenState() || GameWindowTemp.isWinState() ) {
-        		
+        		System.out.println(firstTime);
         		timer.cancel();
-        		startTimer(10000,period);
-        		System.out.println(period);
+        		startTimer(0,1000);
+        		System.out.println(firstTime);
         		repaint();	
 			}       	
        }
-    },firstTime ,period);
+    },this.firstTime ,this.period);
 }	
 }
