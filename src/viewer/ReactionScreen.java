@@ -87,9 +87,9 @@ public class ReactionScreen extends JPanel {
 	    	RestartButton.addActionListener(new ActionListener() { 
 			  public void actionPerformed(ActionEvent e) { 
 		            System.out.println("Rest Button pressed!");
-		            GameWindowTemp.setStateGame();
-		            SwingUtilities.getWindowAncestor(GameOver).dispose();
-		            new GameWindowTemp(null); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+		            //GameWindowTemp.setStateGame();
+		            //SwingUtilities.getWindowAncestor(GameOver).dispose();
+		            //new GameWindowTemp(null); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
 				  }  
 				} 
 		 );

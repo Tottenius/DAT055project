@@ -33,8 +33,7 @@ public class Door extends AbstractAsset {
 	@Override
 	public boolean intractable() {
 		
-		if(Treasure.getOpenedTreasures() == ReadInWorld.numberOfTresures) {
-		
+		if(Treasure.getOpenedTreasures() >= ReadInWorld.numberOfTresures) {
 		System.out.println("player reached door!");
 		//restart and new level doing
 		GameWindowTemp.setNextLevelState();

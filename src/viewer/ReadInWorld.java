@@ -94,6 +94,8 @@ public class ReadInWorld {
 	private AbstractAsset AbstractAsset;
 	
 	public ReadInWorld(String thisLevel) {
+		 numberOfTresures = 0;
+		 Treasure.setOpenedTreasures(0);
 		initLevelPaths();
 		System.out.println("am inside ReadInWorld CLass Constructor");
 		readInlevel(thisLevel);

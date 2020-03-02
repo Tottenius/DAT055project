@@ -157,6 +157,7 @@ public class GamePanel extends JPanel {
 		if(!path.equals("src/Music/level1.aifc") && !path.equals( null )) {
 			System.out.println("we stop music");
 			MusicPlayer.StopMusic();
+			new MusicPlayer(path);
 		}		
 		else
 		new MusicPlayer(path);		
@@ -196,14 +197,10 @@ public class GamePanel extends JPanel {
         	
         	if(GameWindowTemp.isRestartState()) {
         		System.out.println("Försöker starta om");
-        		while(!(numberOfControllers == 0)) {
-        			// wait 
-        			//System.out.println(numberOfControllers);
-        		}
-        		System.out.println("Väntat klart");
+        		world = new ReadInWorld(CurrentLevel);
         		GameWindowTemp.setStateGame();
         		System.out.println(GameWindowTemp.state);
-        		world.restartGame();
+
         	}
         	
         	if(GameWindowTemp.isNextLevelState()) {
