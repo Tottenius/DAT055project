@@ -6,10 +6,10 @@ import java.net.*;
  
 
 public class UdpServer { 
-    public static void main(String[] args) throws IOException 
-    { 
+    public void startServer() throws IOException { 
+    	System.out.println(" Vi försöker starta servern");
         // Step 1 : Create a socket to listen at port 1234 
-        DatagramSocket socket = new DatagramSocket(1234); 
+        DatagramSocket socket = new DatagramSocket(1240); 
         byte[] receive = new byte[65535]; 
   
         DatagramPacket DpReceive = null; 

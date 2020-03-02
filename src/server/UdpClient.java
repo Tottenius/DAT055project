@@ -8,8 +8,9 @@ import java.util.Scanner;
 public class UdpClient { 
    
 	
-	public static void main(String args[]) throws IOException 
+	public void startClient() throws IOException 
     { 
+		System.out.println(" Vi försöker starta clienten");
         Scanner sc = new Scanner(System.in); 
   
         // Step 1:Create the socket object for 
