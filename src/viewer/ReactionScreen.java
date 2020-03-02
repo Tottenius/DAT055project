@@ -52,14 +52,6 @@ public class ReactionScreen extends JPanel {
 			g.drawImage(img,0,0,null);	
 			g.drawString(text, GameSettings.getWidth() / 2, GameSettings.getHeight() / 3); 
 		}
-		
-		 /*
-		@Override
-		public void paintComponent(Graphics g) {
-	        super.paintComponent(g);
-	        render(g);      
-	    }
-		*/
 		 
 	    public ReactionScreen(String path, String text) {
 	    	
@@ -84,6 +76,7 @@ public class ReactionScreen extends JPanel {
 	    	
 	    	button.setPreferredSize(new Dimension(GameSettings.getWidth()/4, GameSettings.getHeight()/4));
 	    	button.setFont(new Font("Century Gothic", Font.BOLD, 26));
+	    	button.setOpaque(true);
 	    	
 	    }
 	 	// Add anonymous actionsListners to buttons. Easier because we don't need lot's of if cases
@@ -91,6 +84,7 @@ public class ReactionScreen extends JPanel {
 	    	RestartButton.addActionListener(new ActionListener() { 
 			  public void actionPerformed(ActionEvent e) { 
 		            System.out.println("Rest Button pressed!");
+		            GameWindowTemp.setStateGame();
 		            
 				  }  
 				} 
@@ -119,10 +113,12 @@ public class ReactionScreen extends JPanel {
 		 ButtonCustomazation(MenuButton);
 		 ButtonCustomazation(QuitButton);
 
+		 System.out.println("befor adding buttons!");
 		 //add buttons to the panel
 		 add(RestartButton);
 		 add(MenuButton);
 		 add(QuitButton);
+		 System.out.println("after adding buttons!");
 	    }
 		
 	}
