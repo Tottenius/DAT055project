@@ -11,17 +11,18 @@ import viewer.GameWindowTemp;
 public class Main {
 	public static boolean isRunning;
 	
-	public static void main(String[] args)  {
+	public static void main(String[] args) throws IOException  {
 		UdpServer server = new UdpServer();
 		UdpClient client = new UdpClient();
 		Thread serverThread = new Thread(server);
-		Thread clientThread = new Thread(client);
+		//Thread clientThread = new Thread(client);
 		
 		serverThread.start();
-		clientThread.start();
+		//clientThread.start();
 		
-		client.setreceivedInput("hello");
-		client.setreceivedInput("hello 2nd message");
+		client.sendMessage("hello");
+		client.sendMessage("hello 2nd message");
+		client.sendMessage("Känns ju som det här typ funkar :)");
 
     	SwingUtilities.invokeLater(new Runnable() {
     	    public void run() {
