@@ -6,7 +6,7 @@ import assetclasses.Empty;
 import assetclasses.Tile;
 import viewer.ReadInWorld;
 
-public abstract class AssetController {
+public abstract class AssetController implements ControllerInterface{
 	//Gameboard
 	protected List<AbstractAsset> assets;// =  GamePanel.getWorld().getAssetList();
 	protected List<AbstractAsset> movingAssets;

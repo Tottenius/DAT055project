@@ -21,8 +21,9 @@ public class EnemyController extends AssetController {
 		enemy = new Enemy(pos);
 		movingAssets.add(pos, enemy);
 		// Kör timerTasken b efter 300ms
+		System.out.println("Gör nya monster controllers");
 		GamePanel.numberOfControllers ++;
-		b.scheduleAtFixedRate(c, 1000, 300);
+		//startController();
 	}
 	
 	private void moveDirection() {
@@ -70,7 +71,7 @@ public class EnemyController extends AssetController {
         	
         	if(GameWindowTemp.isGameState()) {
         		moveDirection();
-        		System.out.println(enemy.getCoords());
+        		//System.out.println(enemy.getCoords());
 			}
 
         	else if(!GameWindowTemp.isGameState() ) {
@@ -80,4 +81,10 @@ public class EnemyController extends AssetController {
         	}
         }
     };
+
+	@Override
+	public void startController() {
+		b.scheduleAtFixedRate(c, 1000, 300);
+		
+	}
 }

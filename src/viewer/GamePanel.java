@@ -169,6 +169,7 @@ public class GamePanel extends JPanel {
 	    	//read in and build  level
 		this.CurrentLevel = CurrentLevel;	
 		world = new ReadInWorld(CurrentLevel);
+		world.startControllers();
 		
 		//set layout
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -210,9 +211,10 @@ public class GamePanel extends JPanel {
         		String nextLevelNumber = CurrentLevel.substring(CurrentLevel.length() - 1);
     			nextLevelNumber= String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
     			CurrentLevel = "level" + nextLevelNumber;
-        		
-    			world = new ReadInWorld(CurrentLevel); 			
+    			world = new ReadInWorld(CurrentLevel);  			
     			GameWindowTemp.setStateGame();
+    			world.startControllers();
+    			System.out.println("Sätter Gamestate");
     			playMusic(getLevelMusic(CurrentLevel));
 
         	}

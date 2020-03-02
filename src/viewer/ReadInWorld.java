@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import Controller.AssetController;
 import Controller.EnemyController;
 import Controller.PlayerController;
 import Controller.SpikeController;
@@ -79,6 +81,7 @@ public class ReadInWorld {
 	// pos in spike list
 	int spikeList = 0;
 	
+	
 	// Players
 	private List<PlayerController> players = new ArrayList<PlayerController>();
 	// Enemys
@@ -89,6 +92,8 @@ public class ReadInWorld {
 	private List<Thread> playerThreads = new ArrayList<Thread>();
 	// Spikes
 	private List<SpikeController> spikes = new ArrayList<SpikeController>();
+	// Controllers
+	private List<AssetController> assetContollers = new ArrayList<AssetController>();
 
 	// Symbols
 	private AbstractAsset AbstractAsset;
@@ -97,7 +102,7 @@ public class ReadInWorld {
 		 numberOfTresures = 0;
 		 Treasure.setOpenedTreasures(0);
 		initLevelPaths();
-		System.out.println("am inside ReadInWorld CLass Constructor");
+		System.out.println("am inside ReadInWorld Class Constructor");
 		readInlevel(thisLevel);
 		System.out.println(restartAssets);
 		restartAssets = assets;
@@ -157,7 +162,7 @@ public class ReadInWorld {
 			else if (level.charAt(i) == 's') {
 				// Make a list of all spikes
 				movingAssets.add(new Empty(posInList));
-				spikes.add(spikeList, new SpikeController(posInList,this));
+				assetContollers.add( new SpikeController(posInList,this));
 				// Add threads to all players
 				//spikeThreads.add(spikeList, new Thread(spikes.get(spikeList)));
 				// Change to next pos in the player list
@@ -169,7 +174,7 @@ public class ReadInWorld {
 				// Make a list of all players
 				//System.out.println("Making a new player therad");
 				assets.add(new Tile(posInList));
-				players.add(playerList, new PlayerController(posInList,this));
+				assetContollers.add( new PlayerController(posInList,this));
 				// Add threads to all players
 				//playerThreads.add(playerList, new Thread(players.get(playerList)));
 				// Change to next pos in the player list
@@ -180,7 +185,7 @@ public class ReadInWorld {
 			else if (level.charAt(i) == 'e') {
 				// Make a list of all enemies
 				assets.add(new Tile(posInList));
-				enemies.add(new EnemyController(posInList,this));
+				assetContollers.add(new EnemyController(posInList,this));
 				// Add threads to all enemies
 				//enemyThreads.add(new Thread(enemies.get(enemyList)));
 				// change to next pos in the enemy list
@@ -188,6 +193,12 @@ public class ReadInWorld {
 				posInList++;
 			}					
 		}	
+	}
+	// Starta controllers
+	public void startControllers() {
+		for (AssetController c : assetContollers) {
+			c.startController();
+		}
 	}
 	
 	protected void startInGameThreads() {

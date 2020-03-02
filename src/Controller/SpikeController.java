@@ -24,7 +24,7 @@ public class SpikeController extends AssetController{
 		assets.add(pos, spikes);
 		GamePanel.numberOfControllers ++;
 		// Kör timerTasken b körs varannan sek, startar efter 1 sek
-		b.scheduleAtFixedRate(c, 1000, 2000);
+		//startController();
 		
 	}
 	// Vi kör en timer istället för en busy wait
@@ -52,4 +52,10 @@ public class SpikeController extends AssetController{
         	}
 		}
     };
+
+	@Override
+	public void startController() {
+		b.scheduleAtFixedRate(c, 1000, 2000);
+		
+	}
 }

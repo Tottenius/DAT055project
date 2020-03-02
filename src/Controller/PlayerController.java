@@ -21,7 +21,7 @@ public class PlayerController extends AssetController  {
 		movingAssets.add(pos, player);
 		GamePanel.numberOfControllers ++;
 		// Kör timerTasken b efter 150ms
-		b.scheduleAtFixedRate(c, 1000, 150);
+		//startController();
 	}
 
 	public void moveDirection( Direction direction) {
@@ -81,4 +81,10 @@ public class PlayerController extends AssetController  {
         	}
         }
     };
+
+	@Override
+	public void startController() {
+		b.scheduleAtFixedRate(c, 1000, 150);
+		
+	}
 }
