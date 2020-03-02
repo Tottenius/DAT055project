@@ -248,14 +248,14 @@ public class GamePanel extends JPanel {
         	else if(GameWindowTemp.isGameState()) {
         		
         		repaint();
-        		System.out.println(firstTime);
+        		//System.out.println(firstTime);
         	}
         	
         	else if (GameWindowTemp.isDeathScreenState() || GameWindowTemp.isWinState() ) {
-        		System.out.println(firstTime);
+        		//System.out.println(firstTime);
         		timer.cancel();
         		startTimer(0,1000);
-        		System.out.println(firstTime);
+        		//System.out.println(firstTime);
         		repaint();	
 			}       	
        }
