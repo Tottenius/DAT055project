@@ -39,11 +39,12 @@ public class UdpClient implements Runnable {
             // the data. 
             socket.send(DpSend); 
             
-            setreceivedInput("bye");
+            setreceivedInput("");
+            break;
   
             // break the loop if user enters "bye" 
-            if (input.equals("bye")) 
-                break; 
+           // if (input.equals("bye")) 
+              //  break; 
         }
        
     }

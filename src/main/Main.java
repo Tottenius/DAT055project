@@ -21,7 +21,7 @@ public class Main {
 		clientThread.start();
 		
 		client.setreceivedInput("hello");
-		//client.setreceivedInput("hello 2nd message");
+		client.setreceivedInput("hello 2nd message");
 
     	SwingUtilities.invokeLater(new Runnable() {
     	    public void run() {
