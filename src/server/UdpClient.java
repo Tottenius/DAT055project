@@ -7,11 +7,12 @@ import java.util.Scanner;
 
 public class UdpClient implements Runnable { 
    
+	String input = "";
 	
-	public void startClient() throws IOException 
+	public void startClient(String input) throws IOException 
     { 
 		System.out.println(" Vi försöker starta clienten");
-        Scanner sc = new Scanner(System.in); 
+       // Scanner sc = new Scanner(System.in); 
   
         // Step 1:Create the socket object for 
         // carrying the data. 
@@ -19,14 +20,15 @@ public class UdpClient implements Runnable {
   
         InetAddress ip = InetAddress.getLocalHost(); 
         byte buf[] = null; 
-  
+
+        
         // loop while user not enters "bye" 
         while (true) 
         { 
-            String inp = sc.nextLine(); 
+           // String inp = sc.nextLine(); 
   
             // convert the String input into the byte array. 
-            buf = inp.getBytes(); 
+            buf = input.getBytes(); 
   
             // Step 2 : Create the datagramPacket for sending 
             // the data. 
@@ -38,15 +40,28 @@ public class UdpClient implements Runnable {
             socket.send(DpSend); 
   
             // break the loop if user enters "bye" 
-            if (inp.equals("bye")) 
+            if (input.equals("bye")) 
                 break; 
-        } 
+        }
+       
+    }
+	
+    public void setreceivedInput(String input) {
+    	this.input = input;
+    	
+    }
+    
+    public String getreceivedInput() {
+    	
+    	return this.input;
     }
 
 	@Override
 	public void run() {
 		try {
-			startClient();
+			input = getreceivedInput();
+			if(input != "")
+			startClient(input);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
