@@ -14,9 +14,6 @@ public class GameWindowTemp extends JFrame {
 	
 	//How long it took to complete the level for the player 
 	Long TimeForCompletion ;
-	 
-    private static final String GameOverpath = "src/assets/GameOverScreen.jpg";
-    private static final String Winpath = "src/assets/WinScreenTemp.jpg";
 	
 	private enum STATE{
 		MENU,
@@ -79,25 +76,6 @@ public class GameWindowTemp extends JFrame {
 			this.add(new GamePanel(returnNextLevel()));
 					
 			System.out.println("Vi startar en ny gamePanel");
-		}
-		
-		else if (state == STATE.NextLevel) {
-			System.out.println("not being used");
-		}
-		
-		else if (state == STATE.DEATHSCREEN) {
-			System.out.println("am here");
-			window.dispose();
-			ReactionScreen gos = new ReactionScreen(GameOverpath, "YOU LOST!");
-			this.add(gos);
-		}
-		
-		else if (state == STATE.WIN) {
-			System.out.println("am here in win state");
-			Long TimeForCompletion = StopWatch.stopTimer(); 
-			window.dispose();
-			ReactionScreen gos = new ReactionScreen(Winpath, "You won the Game, nice work! It took you: " + TimeForCompletion + " seconds to beat the level!");
-			this.add(gos);
 		}	
 		
 		//Adding menubar

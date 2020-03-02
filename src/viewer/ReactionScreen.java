@@ -26,8 +26,8 @@ public class ReactionScreen extends JPanel {
 		 JButton QuitButton = new JButton("Quit");
 
 		 // Window size
-		 private static final int WIDTH = GameSettings.getWidth() *2;
-		 private static final int HEIGHT = GameSettings.getHeight()*2;
+		 private static final int WIDTH = GameSettings.getWidth() ;
+		 private static final int HEIGHT = GameSettings.getHeight();
 		 
 		 //En lokal variabel för den här menyn. Kunde inte komma åt den i de anonyma actionlistnersen annars.
 		 private ReactionScreen GameOver = this;
@@ -38,7 +38,6 @@ public class ReactionScreen extends JPanel {
 		
 		 public void render(Graphics g) {
 			
-			Graphics2D g2d = (Graphics2D) g;
 			Font fnto = new Font("Century Gothic", Font.BOLD, 30);
 			g.setFont(fnto);
 			g.setColor(Color.BLACK);
@@ -53,13 +52,15 @@ public class ReactionScreen extends JPanel {
 			g.drawImage(img,0,0,null);	
 			g.drawString(text, GameSettings.getWidth() / 2, GameSettings.getHeight() / 3); 
 		}
-			 
+		
+		 /*
 		@Override
 		public void paintComponent(Graphics g) {
 	        super.paintComponent(g);
 	        render(g);      
 	    }
-		
+		*/
+		 
 	    public ReactionScreen(String path, String text) {
 	    	
 	    	this.path = path;
@@ -73,13 +74,16 @@ public class ReactionScreen extends JPanel {
 	    }
 	    
 	    public void ButtonCustomazation(JButton button) {
-	    	
+	    	//System.out.println("inside button custom");
 	    	//Customization
 	    	button.setBackground(Color.CYAN);
-	    	button.setAlignmentX(this.CENTER_ALIGNMENT);
-	    	button.setAlignmentY(this.CENTER_ALIGNMENT);   	 
-	    	button.setPreferredSize(new Dimension(GameSettings.getWidth()/6, GameSettings.getHeight()/6));
-	    	button.setFont(new Font("Century Gothic", Font.BOLD, 18));
+	    	//button.setAlignmentX(this.CENTER_ALIGNMENT);
+	    	//button.setAlignmentY(this.CENTER_ALIGNMENT);  
+	    	button.setAlignmentX(200);
+	    	button.setAlignmentX(200);
+	    	
+	    	button.setPreferredSize(new Dimension(GameSettings.getWidth()/4, GameSettings.getHeight()/4));
+	    	button.setFont(new Font("Century Gothic", Font.BOLD, 26));
 	    	
 	    }
 	 	// Add anonymous actionsListners to buttons. Easier because we don't need lot's of if cases
@@ -87,9 +91,7 @@ public class ReactionScreen extends JPanel {
 	    	RestartButton.addActionListener(new ActionListener() { 
 			  public void actionPerformed(ActionEvent e) { 
 		            System.out.println("Rest Button pressed!");
-		            //GameWindowTemp.setStateGame();
-		            //SwingUtilities.getWindowAncestor(GameOver).dispose();
-		            //new GameWindowTemp(null); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp
+		            
 				  }  
 				} 
 		 );

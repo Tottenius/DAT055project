@@ -51,6 +51,8 @@ public class GamePanel extends JPanel {
 	HashMap<String, String> levelMusic = new HashMap<String, String>();
 	//asset that moves
 	List<AbstractAsset> Movingassets = new ArrayList<AbstractAsset>();
+	private int period= 1000; // ms
+	private int firstTime = 0;
 	
 	public void loadInLevelMusicPaths() {
 	levelMusic.put("level1","src/Music/level1.aifc");
@@ -78,38 +80,6 @@ public class GamePanel extends JPanel {
 		return direction;
 	}
 	
-	private void initWorld(Graphics g) {
-		//System.out.println("am in here boi");
-
-		 List<AbstractAsset> assets = world.getAssetList();
-		 List<AbstractAsset> movingAssets = world.getMovingAssets();		 
-			for (int i = 0; i < assets.size(); i++) {
-				// Get first asset
-				asset = assets.get(i);
-				movingAsset = movingAssets.get(i);
-				// Time for a new row?
-				if (pos.x == WIDTH) {
-					pos.x = 0;
-					pos.y = pos.y + SIZE;
-				}
-				// Paint all assets
-				if(asset.getCoords() != pos) {
-					movingAsset.hasDirections(direction);
-					asset.paintAsset(g, gamePanel);
-					movingAsset.paintAsset(g, gamePanel);
-				}
-				pos.x = pos.x + SIZE;
-			}
-			pos.y = 0;
-			pos.x = 0;				
-	 }
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		initWorld(g);
-	}
-
 	private class keyLis extends KeyAdapter {
 
 		public void keyPressed(KeyEvent e) {
@@ -160,7 +130,56 @@ public class GamePanel extends JPanel {
 			new MusicPlayer(path);
 		}		
 		else
-		new MusicPlayer(path);		
+		new MusicPlayer(path);		}
+		
+	private void initWorld(Graphics g) {
+		//System.out.println("am in here boi");
+
+		 List<AbstractAsset> assets = world.getAssetList();
+		 List<AbstractAsset> movingAssets = world.getMovingAssets();		 
+			for (int i = 0; i < assets.size(); i++) {
+				// Get first asset
+				asset = assets.get(i);
+				movingAsset = movingAssets.get(i);
+				// Time for a new row?
+				if (pos.x == WIDTH) {
+					pos.x = 0;
+					pos.y = pos.y + SIZE;
+				}
+				// Paint all assets
+				if(asset.getCoords() != pos) {
+					movingAsset.hasDirections(direction);
+					asset.paintAsset(g, gamePanel);
+					movingAsset.paintAsset(g, gamePanel);
+				}
+				pos.x = pos.x + SIZE;
+			}
+			pos.y = 0;
+			pos.x = 0;				
+	 }
+	
+	//0 = deathScreen , 1= Winscreen
+	private void initDeathOrWinScreen(Graphics g, String path, String Msg) { 
+		
+		
+		ReactionScreen gos = new ReactionScreen(path, Msg);
+		gos.render(g);
+		this.add(gos);
+	
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		if(GameWindowTemp.isGameState())
+		initWorld(g);
+		
+		else if(GameWindowTemp.isDeathScreenState())
+			initDeathOrWinScreen(g,"src/assets/GameOverScreen.jpg", "YOU LOST!");
+		
+		else if(GameWindowTemp.isWinState() )
+			initDeathOrWinScreen(g,"src/assets/WinScreenTemp.jpg", "You Won nice work!");
 	}
 	
 	//maybe add what level to lead here as type for the contructor
@@ -183,18 +202,21 @@ public class GamePanel extends JPanel {
 		//add music
 		loadInLevelMusicPaths();
 		GamePanel.playMusic(getLevelMusic("level1"));
-
-		// Kör timerTasken b 60 gånger per sek. Just nu repaint och kolla om vi har dött
-		timer1.scheduleAtFixedRate(timer2, 0, 1000/60);
-		//world.startInGameThreads();
+		
+		startTimer(0,1000/60);
 		StopWatch.start();
 	}
-	
-	// Vi kör en timer istället för en busy wait
-	Timer timer1 = new Timer();
-	TimerTask timer2 = new TimerTask() {
 		
-	    public void run() {
+	private void startTimer(int firstTime,int period) {
+	   
+		this.period = period;
+		this.firstTime = firstTime;
+		
+	    Timer timer = new Timer();
+	    
+	    timer.schedule(new TimerTask() {
+	   
+	    	public void run() {
         	
         	if(GameWindowTemp.isRestartState()) {
         		System.out.println("Försöker starta om");
@@ -220,21 +242,19 @@ public class GamePanel extends JPanel {
         	}
         	
         	else if(GameWindowTemp.isGameState()) {
-        	
+        		
         		repaint();
-        	}	
-
-        	else if ( GameWindowTemp.isWinState()) {
-				SwingUtilities.getWindowAncestor(gamePanel).dispose();
-				new GameWindowTemp(null);
-				this.cancel();
+        		System.out.println(period);
         	}
-        	// Gör en gameoverskärm om player är död
-        	else if (GameWindowTemp.isDeathScreenState()) {
-				SwingUtilities.getWindowAncestor(gamePanel).dispose();
-				new GameWindowTemp(null);
-				this.cancel();		
-			}
-        }
-    };
+        	
+        	else if (GameWindowTemp.isDeathScreenState() || GameWindowTemp.isWinState() ) {
+        		
+        		timer.cancel();
+        		startTimer(10000,period);
+        		System.out.println(period);
+        		repaint();	
+			}       	
+       }
+    },firstTime ,period);
+}	
 }
