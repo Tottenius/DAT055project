@@ -5,7 +5,7 @@ import java.net.*;
 import java.util.Scanner;
  
 
-public class UdpClient { 
+public class UdpClient implements Runnable { 
    
 	
 	public void startClient() throws IOException 
@@ -41,5 +41,16 @@ public class UdpClient {
             if (inp.equals("bye")) 
                 break; 
         } 
-    } 
+    }
+
+	@Override
+	public void run() {
+		try {
+			startClient();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	} 
 } 

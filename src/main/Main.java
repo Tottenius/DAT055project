@@ -14,15 +14,11 @@ public class Main {
 	public static void main(String[] args)  {
 		UdpServer server = new UdpServer();
 		UdpClient client = new UdpClient();
+		Thread serverThread = new Thread(server);
+		Thread clientThread = new Thread(client);
 		
-		try {
-			
-			client.startClient();
-			server.startServer();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		serverThread.start();
+		clientThread.start();
 		
 
     	SwingUtilities.invokeLater(new Runnable() {
