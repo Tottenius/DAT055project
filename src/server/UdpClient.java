@@ -12,7 +12,7 @@ public class UdpClient {
   
         // Step 1:Create the socket object for 
         // carrying the data. 
-        DatagramSocket ds = new DatagramSocket(); 
+        DatagramSocket socket = new DatagramSocket(); 
   
         InetAddress ip = InetAddress.getLocalHost(); 
         byte buf[] = null; 
@@ -32,7 +32,7 @@ public class UdpClient {
   
             // Step 3 : invoke the send call to actually send 
             // the data. 
-            ds.send(DpSend); 
+            socket.send(DpSend); 
   
             // break the loop if user enters "bye" 
             if (inp.equals("bye")) 

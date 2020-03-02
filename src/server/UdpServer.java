@@ -9,7 +9,7 @@ public class UdpServer {
     public static void main(String[] args) throws IOException 
     { 
         // Step 1 : Create a socket to listen at port 1234 
-        DatagramSocket ds = new DatagramSocket(1234); 
+        DatagramSocket socket = new DatagramSocket(1234); 
         byte[] receive = new byte[65535]; 
   
         DatagramPacket DpReceive = null; 
@@ -20,7 +20,7 @@ public class UdpServer {
             DpReceive = new DatagramPacket(receive, receive.length); 
   
             // Step 3 : revieve the data in byte buffer. 
-            ds.receive(DpReceive); 
+            socket.receive(DpReceive); 
   
             System.out.println("Client:-" + data(receive)); 
   
