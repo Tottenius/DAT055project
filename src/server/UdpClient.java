@@ -9,7 +9,7 @@ public class UdpClient implements Runnable {
    
 	String input = "";
 	
-	public void startClient(String input) throws IOException 
+	public void startClient() throws IOException 
     { 
 		System.out.println(" Vi försöker starta clienten");
        // Scanner sc = new Scanner(System.in); 
@@ -26,7 +26,7 @@ public class UdpClient implements Runnable {
         while (true) 
         { 
            // String inp = sc.nextLine(); 
-  
+        	input = getreceivedInput();
             // convert the String input into the byte array. 
             buf = input.getBytes(); 
   
@@ -38,6 +38,8 @@ public class UdpClient implements Runnable {
             // Step 3 : invoke the send call to actually send 
             // the data. 
             socket.send(DpSend); 
+            
+            setreceivedInput("bye");
   
             // break the loop if user enters "bye" 
             if (input.equals("bye")) 
@@ -61,7 +63,7 @@ public class UdpClient implements Runnable {
 		try {
 			input = getreceivedInput();
 			if(input != "")
-			startClient(input);
+			startClient();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
