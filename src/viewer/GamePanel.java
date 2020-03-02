@@ -53,6 +53,7 @@ public class GamePanel extends JPanel {
 	List<AbstractAsset> Movingassets = new ArrayList<AbstractAsset>();
 	private int period= 1000; // ms
 	private int firstTime = 0;
+	private boolean slowTime = false;
 	
 	public void loadInLevelMusicPaths() {
 	levelMusic.put("level1","src/Music/level1.aifc");
@@ -161,7 +162,7 @@ public class GamePanel extends JPanel {
 	//0 = deathScreen , 1= Winscreen
 	private void initDeathOrWinScreen(Graphics g, String path, String Msg) { 
 		
-		
+		this.slowTime = true;
 		ReactionScreen gos = new ReactionScreen(path, Msg);
 		gos.render(g);
 		this.add(gos);
@@ -246,15 +247,21 @@ public class GamePanel extends JPanel {
         	}
         	
         	else if(GameWindowTemp.isGameState()) {
-        		
+        		if(slowTime == true) {
+        		timer.cancel();
+        		startTimer(0,1000/60);
+        		slowTime = false;
         		repaint();
+        		}
+        		else 
+        			repaint();
         		//System.out.println(firstTime);
         	}
         	
         	else if (GameWindowTemp.isDeathScreenState() || GameWindowTemp.isWinState() ) {
         		//System.out.println(firstTime);
         		timer.cancel();
-        		startTimer(0,1000);
+        		startTimer(5000,100000);
         		//System.out.println(firstTime);
         		repaint();	
 			}       	
