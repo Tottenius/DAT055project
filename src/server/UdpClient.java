@@ -31,7 +31,7 @@ public class UdpClient {
             // Step 2 : Create the datagramPacket for sending 
             // the data. 
             DatagramPacket DpSend = 
-                  new DatagramPacket(buf, buf.length, ip, 1234); 
+                  new DatagramPacket(buf, buf.length, ip, 4567); 
   
             // Step 3 : invoke the send call to actually send 
             // the data. 

@@ -8,8 +8,8 @@ import java.net.*;
 public class UdpServer { 
     public void startServer() throws IOException { 
     	System.out.println(" Vi försöker starta servern");
-        // Step 1 : Create a socket to listen at port 1234 
-        DatagramSocket socket = new DatagramSocket(1240); 
+        // Step 1 : Create a socket to listen at port 4567 
+        DatagramSocket socket = new DatagramSocket(4567); 
         byte[] receive = new byte[65535]; 
   
         DatagramPacket DpReceive = null; 

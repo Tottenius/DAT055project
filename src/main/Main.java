@@ -16,8 +16,10 @@ public class Main {
 		UdpClient client = new UdpClient();
 		
 		try {
-			server.startServer();
+			
 			client.startClient();
+			server.startServer();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
