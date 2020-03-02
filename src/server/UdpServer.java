@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 public class UdpServer implements Runnable{
 	
 	private String leaderboard;
-	private StringBuilder stringb;
 	private final String leaderboardPath = "src/leaderboard/leaderboard.txt";
 	
 	//private File leaderboardFile = new File("src/leaderboard/leaderboard.txt");
@@ -20,6 +19,7 @@ public class UdpServer implements Runnable{
 	}
 	
 	private void readInLeaderboard() {
+		leaderboard = null;
 		try {
 			leaderboard = new String(Files.readAllBytes(Paths.get(leaderboardPath)));
 		} catch (IOException e) {
