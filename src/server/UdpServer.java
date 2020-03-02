@@ -2,69 +2,53 @@ package server;
 
 import java.io.*;
 import java.net.*;
-import java.util.*;
+
  
 
-public class UdpServer {
-    private DatagramSocket socket;
-    private List<String> listQuotes = new ArrayList<String>();
-    private Random random;
- 
-    public UdpServer(int port) throws SocketException {
-        socket = new DatagramSocket(port);
-        random = new Random();
-    }
- 
-    public static void main(String[] args) {
-        if (args.length < 2) {
-            System.out.println("Syntax: QuoteServer <file> <port>");
-            return;
-        }
- 
-        String quoteFile = args[0];
-        int port = Integer.parseInt(args[1]);
- 
-        try {
-            UdpServer server = new UdpServer(port);
-            server.loadQuotesFromFile(quoteFile);
-            server.service();
-        } catch (SocketException ex) {
-            System.out.println("Socket error: " + ex.getMessage());
-        } catch (IOException ex) {
-            System.out.println("I/O error: " + ex.getMessage());
-        }
-    }
- 
-    private void service() throws IOException {
-        while (true) {
-            DatagramPacket request = new DatagramPacket(new byte[1], 1);
-            socket.receive(request);
- 
-            String quote = getRandomQuote();
-            byte[] buffer = quote.getBytes();
- 
-            InetAddress clientAddress = request.getAddress();
-            int clientPort = request.getPort();
- 
-            DatagramPacket response = new DatagramPacket(buffer, buffer.length, clientAddress, clientPort);
-            socket.send(response);
-        }
-    }
- 
-    private void loadQuotesFromFile(String quoteFile) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(quoteFile));
-        String aQuote;
- 
-        while ((aQuote = reader.readLine()) != null) {
-            listQuotes.add(aQuote);
-        }
- 
-        reader.close();
-    }
- 
-    private String getRandomQuote() {
-        int randomIndex = random.nextInt(listQuotes.size());
-        String randomQuote = listQuotes.get(randomIndex);
-        return randomQuote;
-    }
-}
+public class UdpServer { 
+    public static void main(String[] args) throws IOException 
+    { 
+        // Step 1 : Create a socket to listen at port 1234 
+        DatagramSocket ds = new DatagramSocket(1234); 
+        byte[] receive = new byte[65535]; 
+  
+        DatagramPacket DpReceive = null; 
+        while (true) 
+        { 
+  
+            // Step 2 : create a DatgramPacket to receive the data. 
+            DpReceive = new DatagramPacket(receive, receive.length); 
+  
+            // Step 3 : revieve the data in byte buffer. 
+            ds.receive(DpReceive); 
+  
+            System.out.println("Client:-" + data(receive)); 
+  
+            // Exit the server if the client sends "bye" 
+            if (data(receive).toString().equals("bye")) 
+            { 
+                System.out.println("Client sent bye.....EXITING"); 
+                break; 
+            } 
+  
+            // Clear the buffer after every message. 
+            receive = new byte[65535]; 
+        } 
+    } 
+  
+    // A utility method to convert the byte array 
+    // data into a string representation. 
+    public static StringBuilder data(byte[] a) 
+    { 
+        if (a == null) 
+            return null; 
+        StringBuilder ret = new StringBuilder(); 
+        int i = 0; 
+        while (a[i] != 0) 
+        { 
+            ret.append((char) a[i]); 
+            i++; 
+        } 
+        return ret; 
+    } 
+} 

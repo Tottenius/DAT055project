@@ -2,48 +2,41 @@ package server;
 
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
  
 
-public class UdpClient {
- 
-    public static void main(String[] args) {
-        if (args.length < 2) {
-            System.out.println("Syntax: QuoteClient <hostname> <port>");
-            return;
-        }
- 
-        String hostname = args[0];
-        int port = Integer.parseInt(args[1]);
- 
-        try {
-            InetAddress address = InetAddress.getByName(hostname);
-            DatagramSocket socket = new DatagramSocket();
- 
-            while (true) {
- 
-                DatagramPacket request = new DatagramPacket(new byte[1], 1, address, port);
-                socket.send(request);
- 
-                byte[] buffer = new byte[512];
-                DatagramPacket response = new DatagramPacket(buffer, buffer.length);
-                socket.receive(response);
- 
-                String quote = new String(buffer, 0, response.getLength());
- 
-                System.out.println(quote);
-                System.out.println();
- 
-                Thread.sleep(10000);
-            }
- 
-        } catch (SocketTimeoutException ex) {
-            System.out.println("Timeout error: " + ex.getMessage());
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            System.out.println("Client error: " + ex.getMessage());
-            ex.printStackTrace();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-    }
-}
+public class UdpClient { 
+    public static void main(String args[]) throws IOException 
+    { 
+        Scanner sc = new Scanner(System.in); 
+  
+        // Step 1:Create the socket object for 
+        // carrying the data. 
+        DatagramSocket ds = new DatagramSocket(); 
+  
+        InetAddress ip = InetAddress.getLocalHost(); 
+        byte buf[] = null; 
+  
+        // loop while user not enters "bye" 
+        while (true) 
+        { 
+            String inp = sc.nextLine(); 
+  
+            // convert the String input into the byte array. 
+            buf = inp.getBytes(); 
+  
+            // Step 2 : Create the datagramPacket for sending 
+            // the data. 
+            DatagramPacket DpSend = 
+                  new DatagramPacket(buf, buf.length, ip, 1234); 
+  
+            // Step 3 : invoke the send call to actually send 
+            // the data. 
+            ds.send(DpSend); 
+  
+            // break the loop if user enters "bye" 
+            if (inp.equals("bye")) 
+                break; 
+        } 
+    } 
+} 
