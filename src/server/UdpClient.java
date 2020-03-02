@@ -6,7 +6,9 @@ import java.util.Scanner;
  
 
 public class UdpClient { 
-    public static void main(String args[]) throws IOException 
+   
+	
+	public static void main(String args[]) throws IOException 
     { 
         Scanner sc = new Scanner(System.in); 
   
