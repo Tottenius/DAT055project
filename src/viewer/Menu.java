@@ -11,10 +11,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -29,8 +36,10 @@ public class Menu extends JPanel {
 	private static final String path = "src/assets/MenuBackground2.jpg";
 	
 	 JButton StartButton = new JButton("Start");
-	 JButton OptionsButton = new JButton("Options");
+	 JButton LeaderboardButton = new JButton("Show Leaderboard");
 	 JButton QuitButton = new JButton("Quit");
+	 
+	 private final String leaderboardpath = "src/leaderboard/leaderboard.txt";
 	 
 	 //En lokal variabel för den här menyn. Kunde inte komma åt den i de anonyma actionlistnersen annars.
 	 private Menu menu = this;
@@ -54,7 +63,7 @@ public class Menu extends JPanel {
 		}
 		g.drawImage(img,0,0,null);
 		
-		g.drawString("THE LABYRINTH GAME ", GameSettings.getWidth() / 5, GameSettings.getHeight() / 3); 
+		g.drawString("LABYRINTH OF SOLITUDE", GameSettings.getWidth() / 5, GameSettings.getHeight() / 3); 
 	}	
 	 
 	@Override
@@ -84,8 +93,8 @@ public class Menu extends JPanel {
     	button.setOpaque(true);
     	button.setAlignmentX(this.CENTER_ALIGNMENT);
     	button.setAlignmentY(this.CENTER_ALIGNMENT);   	 
-    	button.setPreferredSize(new Dimension(GameSettings.getWidth()/6, GameSettings.getHeight()/6));
-    	button.setFont(new Font("Century Gothic", Font.BOLD, 18));
+    	button.setPreferredSize(new Dimension(GameSettings.getWidth()/5, GameSettings.getHeight()/5));
+    	button.setFont(new Font("Century Gothic", Font.BOLD, 15));
 
     	
     }
@@ -101,11 +110,19 @@ public class Menu extends JPanel {
 			} 
 	 );
 	 
-	 OptionsButton.addActionListener(new ActionListener() { 
+   	LeaderboardButton.addActionListener(new ActionListener() { 
  		  public void actionPerformed(ActionEvent e) { 
-	            System.out.println("Options Button pressed!");
-	            Main.isRunning = false;
-	            System.exit(0);
+	            System.out.println("LeaderboardButton pressed!");
+	            
+	            String leaderboard = fileToString(leaderboardpath);
+	           // System.out.println(leaderboard);
+	          //custom title, custom icon
+	            Icon icon = new ImageIcon("src/assets/LeaderboardIcon.jpg");
+	            
+	            JOptionPane.showMessageDialog(menu,leaderboard,"Leaderboard",
+	            JOptionPane.INFORMATION_MESSAGE,icon);
+	            
+	            //System.exit(0);
 			  } 
 			} 
  	 );
@@ -121,12 +138,28 @@ public class Menu extends JPanel {
    
 	//customazation  	 
 	 ButtonCustomazation(StartButton);
-	 ButtonCustomazation(OptionsButton);
+	 ButtonCustomazation(LeaderboardButton);
 	 ButtonCustomazation(QuitButton);
 
 	 //add buttons to the panel
 	 add(StartButton);
-	 add(OptionsButton);
+	 add(LeaderboardButton);
 	 add(QuitButton);
-    }	
+    }
+    
+    //utility for leaderboard
+    
+    private static String fileToString(String filePath) 
+    {
+        StringBuilder contentBuilder = new StringBuilder();
+        try (Stream<String> stream = Files.lines( Paths.get(filePath), StandardCharsets.UTF_8)) 
+        {
+            stream.forEach(s -> contentBuilder.append(s).append("\n"));
+        }
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+        return contentBuilder.toString();
+    }
 }

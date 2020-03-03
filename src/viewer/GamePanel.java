@@ -201,16 +201,16 @@ public class GamePanel extends JPanel {
 		serverThread.start();
 		clientThread.start();
 	
-		client.sendMessage("hello");
+		/*client.sendMessage("hello");
 		client.sendMessage("hello 2nd message");
 		client.sendMessage("Känns ju som det här typ funkar :)");
-		client.sendMessage("getLeaderboard");
+		client.sendMessage("getLeaderboard"); */
 	}
 	
 	//maybe add what level to lead here as type for the contructor
 	public GamePanel(String CurrentLevel, String profileName) {
 		
-		this.profileName = profileName;
+		GamePanel.profileName = profileName;
 		
 		try {
 			UDPSetup();
