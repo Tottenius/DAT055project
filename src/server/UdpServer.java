@@ -65,15 +65,15 @@ public class UdpServer implements Runnable{
             	sendLeaderboardToClient(this.leaderboard);
             }
             
-            else
+            
             
            // Exit the server if the client sends "bye" 
-                if (data(receive).toString().equals("bye")) 
+            else if (data(receive).toString().equals("bye")) 
                 { 
                     System.out.println("Client sent bye.....EXITING"); 
                     break; 
                 } 
-            	
+            else   	
             	// System.out.println("Client:-" + data(receive)); 
             writeToLeaderboard(data(receive));
   
