@@ -21,8 +21,9 @@ public class Main {
 		client.sendMessage("hello");
 		client.sendMessage("hello 2nd message");
 		client.sendMessage("Känns ju som det här typ funkar :)");
-
-    	SwingUtilities.invokeLater(new Runnable() {
+		client.sendMessage("getLeaderboard");
+    	
+		SwingUtilities.invokeLater(new Runnable() {
     	    public void run() {
     	    	isRunning = true;
     	    	//new ReadInWorld();

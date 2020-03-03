@@ -10,3 +10,20 @@ K?nns ju som det h?r typ funkar :)
 hello
 hello 2nd message
 K?nns ju som det h?r typ funkar :)
+hello
+hello 2nd message
+K?nns ju som det h?r typ funkar :)
+getLeaderboard
+hello
+hello 2nd message
+K?nns ju som det h?r typ funkar :)
+hello
+hello 2nd message
+K?nns ju som det h?r typ funkar :)
+hello
+hello 2nd message
+K?nns ju som det h?r typ funkar :)
+hello
+hello 2nd message
+K?nns ju som det h?r typ funkar :)
+getLeaderboard

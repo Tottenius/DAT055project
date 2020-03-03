@@ -48,7 +48,7 @@ public class UdpClient implements Runnable {
             // Step 3 : revieve the data in byte buffer. 
             socket.receive(DpReceive); 
             
-
+            System.out.println("we where here");
             System.out.println(data(receive).toString());
             
             // Clear the buffer after every message. 
