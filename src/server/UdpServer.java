@@ -60,7 +60,8 @@ public class UdpServer implements Runnable{
             	
             	sendLeaderboardToClient();
             }
-  
+            
+            else
            // System.out.println("Client:-" + data(receive)); 
             writeToLeaderboard(data(receive));
   
