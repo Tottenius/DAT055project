@@ -73,30 +73,13 @@ public class ReadInWorld {
 	// level paths
 	String level = "";
 	// pos int map
-	int posInList = 0;
-	// pos in enemy list
-	int enemyList = 0;
-	// pos in player list
-	int playerList = 0;
-	// pos in spike list
-	int spikeList = 0;
+	int posInList = 0;	
 	
-	
-	// Players
-	private List<PlayerController> players = new ArrayList<PlayerController>();
-	// Enemys
-	private List<EnemyController> enemies = new ArrayList<EnemyController>();
-	// Enemy threads
-	private List<Thread> enemyThreads = new ArrayList<Thread>();
-	// Player threads
-	private List<Thread> playerThreads = new ArrayList<Thread>();
-	// Spikes
-	private List<SpikeController> spikes = new ArrayList<SpikeController>();
-	// Controllers
+	//Asset list
 	private List<AssetController> assetContollers = new ArrayList<AssetController>();
 
 	// Symbols
-	private AbstractAsset AbstractAsset;
+	//private AbstractAsset AbstractAsset;
 	
 	public ReadInWorld(String thisLevel) {
 		 numberOfTresures = 0;
@@ -107,21 +90,16 @@ public class ReadInWorld {
 		System.out.println(restartAssets);
 		restartAssets = assets;
 		System.out.println(restartAssets);
-		
-		//startInGameThreads();
 	}
 	
 	public void readInlevel(String path) {
-		
+		//Read in the level
 		try {
 			level = new String(Files.readAllBytes(Paths.get(levels.get(path))));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println("JA vi är här");
-		// clear previous games if there are any
-		//clearAllGameInfo();
 		for (int i = 0; i < level.length(); i++) {
 			// Load in walls
 			if (level.charAt(i) == '#') {
@@ -163,22 +141,13 @@ public class ReadInWorld {
 				// Make a list of all spikes
 				movingAssets.add(new Empty(posInList));
 				assetContollers.add( new SpikeController(posInList,this));
-				// Add threads to all players
-				//spikeThreads.add(spikeList, new Thread(spikes.get(spikeList)));
-				// Change to next pos in the player list
-				spikeList++;
 				posInList++;
 			
 			
 			} else if (level.charAt(i) == 'p') {
-				// Make a list of all players
-				//System.out.println("Making a new player therad");
 				assets.add(new Tile(posInList));
 				assetContollers.add( new PlayerController(posInList,this));
-				// Add threads to all players
-				//playerThreads.add(playerList, new Thread(players.get(playerList)));
-				// Change to next pos in the player list
-				playerList++;
+
 				posInList++;
 			}
 			// Load in enemies
@@ -186,10 +155,6 @@ public class ReadInWorld {
 				// Make a list of all enemies
 				assets.add(new Tile(posInList));
 				assetContollers.add(new EnemyController(posInList,this));
-				// Add threads to all enemies
-				//enemyThreads.add(new Thread(enemies.get(enemyList)));
-				// change to next pos in the enemy list
-				enemyList++;
 				posInList++;
 			}					
 		}	
@@ -200,32 +165,6 @@ public class ReadInWorld {
 			c.startController();
 		}
 	}
-	
-	protected void startInGameThreads() {
-		// start player
-		for (Thread t : playerThreads) {
-			t.start();
-		}
-		// starts enemies
-		for (Thread t : enemyThreads) {
-			t.start();
-		}
-	}
-	
-	public void clearAllGameInfo() {
-		// reset game map
-		assets.clear();
-		// reset player info
-		players.clear();
-		playerThreads.clear();
-		// reset enemy info
-		enemies.clear();
-		enemyThreads.clear();
-		// Reset spikes
-		spikes.clear();
-		//spikeThreads.clear();
-		//levelRead = false;
-	} 
 	
 	// Reach assets in controller
 	public List<AbstractAsset> getAssetList() {
