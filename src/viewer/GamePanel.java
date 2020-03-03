@@ -126,6 +126,13 @@ public class GamePanel extends JPanel {
 				System.out.println("Moved Left");
 				direction = Direction.LEFT;
 				break;
+				
+			case KeyEvent.VK_R:
+				
+				System.out.println("Fast Reset");
+				//GameWindowTemp.setDeathScreenState();
+				//GameWindowTemp.setRestartState();
+				break;
 
 			default:
 				break;

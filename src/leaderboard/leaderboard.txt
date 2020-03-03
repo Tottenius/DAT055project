@@ -3,3 +3,5 @@ Name: Anton 	Time it took to beat the game: 21s
 Name: Anton 	Time it took to beat the game: 22s
 Name: Anton 	Time it took to beat the game: 17s
 Name: Anton 	Time it took to beat the game: 19s
+Name: Anton 	Time it took to beat the game: 19s
+Name: Antonio 	Time it took to beat the game: 17s
