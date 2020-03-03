@@ -5,8 +5,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -26,7 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-
+import javax.swing.UIManager;
 
 import main.Main;
 
@@ -38,7 +42,7 @@ public class Menu extends JPanel {
 	private static final String path = "src/assets/MenuBackground2.jpg";
 	
 	 JButton StartButton = new JButton("Start");
-	 JButton LeaderboardButton = new JButton("Show Leaderboard");
+	 JButton LeaderboardButton = new JButton("Leaderboards");
 	 JButton QuitButton = new JButton("Quit");
 	 
 	 private final String leaderboardpath = "src/leaderboard/leaderboard.txt";
@@ -80,7 +84,8 @@ public class Menu extends JPanel {
     	System.out.println(GameWindowTemp.state);
     	
     	//this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-    	this.setLayout(new GridBagLayout());  	
+    	this.setLayout(new GridBagLayout());
+
     	
         //Add buttons width actionListeners
     	addButtons();
@@ -89,15 +94,20 @@ public class Menu extends JPanel {
     }
     
     public void ButtonCustomazation(JButton button) {
-    	final Color DARK_ORANGE = new Color(255,102,0);
+    		
     	//customazation
-    	button.setBackground(DARK_ORANGE);
+    	button.setBackground(Color.BLACK);
     	button.setOpaque(true);
+    	button.setForeground(Color.PINK);
+    	button.setBounds(new Rectangle(20,20));
+    	//Work in progress
+    	//button.setIcon(new ImageIcon("src/assets/button.png"));
+    	
+    	
     	button.setAlignmentX(this.CENTER_ALIGNMENT);
     	button.setAlignmentY(this.CENTER_ALIGNMENT);   	 
-    	button.setPreferredSize(new Dimension(GameSettings.getWidth()/5, GameSettings.getHeight()/5));
+    	button.setPreferredSize(new Dimension(GameSettings.getWidth()/6, GameSettings.getHeight()/6));
     	button.setFont(new Font("Century Gothic", Font.BOLD, 15));
-
     	
     }
  	// Add anonymous actionsListners to buttons. Easier because we don't need lot's of if cases
@@ -124,6 +134,7 @@ public class Menu extends JPanel {
 	           // JLabel label = new JLabel(leaderboard);
 	            //label.setHorizontalTextPosition(SwingConstants.CENTER);
 	            //label.setFont(new Font("Arial", Font.BOLD, 12));
+	            //UIManager.put("OptionPane.minimumSize",new Dimension(200,200)); 
 	            
 	            JOptionPane.showMessageDialog(menu,leaderboard,"Leaderboard",
 	            JOptionPane.INFORMATION_MESSAGE,icon);
@@ -142,7 +153,7 @@ public class Menu extends JPanel {
 		} 
 	 );
    
-	//customazation  	 
+	//customazation 
 	 ButtonCustomazation(StartButton);
 	 ButtonCustomazation(LeaderboardButton);
 	 ButtonCustomazation(QuitButton);

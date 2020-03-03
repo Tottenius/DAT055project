@@ -20,6 +20,9 @@ public class Profile {
 			
 			String input = JOptionPane.showInputDialog("Please enter your username: ");
 			
+			if (input == null)
+				input = "canceled";
+			
 			if (input.length() > 1) {
 				
 				g++;

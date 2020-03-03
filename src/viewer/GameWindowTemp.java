@@ -75,12 +75,19 @@ public class GameWindowTemp extends JFrame {
 		else if (state == STATE.GAME) {
 			
 			Profile profile = new Profile();
-			
 			String ProfileName = profile.returnProfileName();
 			
-			this.add(new GamePanel(returnNextLevel(), ProfileName));
-					
+			if(!ProfileName.equals("canceled"))  {
+
+			this.add(new GamePanel(returnNextLevel(), ProfileName));				
 			System.out.println("Vi startar en ny gamePanel");
+		}
+			//handles if player exists or presses cancel button when inputing profile name
+			else if (ProfileName.equals("canceled")) {
+			setStateMenu();
+			menu = new Menu();
+			this.add(menu);
+			}
 		}	
 		
 		//Adding menubar
