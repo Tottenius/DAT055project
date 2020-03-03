@@ -59,6 +59,7 @@ public class UdpServer implements Runnable{
             
             if (data(receive).toString().equals("getLeaderboard")) {
             	
+            	
             	readInLeaderboard();
             	
             	sendLeaderboardToClient(this.leaderboard);
@@ -83,7 +84,7 @@ public class UdpServer implements Runnable{
     
     //we need to catch that exception
    private void sendLeaderboardToClient(String leaderboard) throws IOException {
-    	
+	   
    
        // Step 1:Create the socket object for 
        // carrying the data. 
@@ -98,7 +99,7 @@ public class UdpServer implements Runnable{
        // Step 2 : Create the datagramPacket for sending 
        // the data. 
        DatagramPacket DpSend = new DatagramPacket(buf, buf.length, ip, 4568); 
-
+       
        // Step 3 : invoke the send call to actually send 
        // the data. 
        socket.send(DpSend);

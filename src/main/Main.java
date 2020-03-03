@@ -15,8 +15,10 @@ public class Main {
 		UdpServer server = new UdpServer();
 		UdpClient client = new UdpClient();
 		Thread serverThread = new Thread(server);
+		Thread clientThread = new Thread(client);
 		
 		serverThread.start();
+		clientThread.start();
 	
 		client.sendMessage("hello");
 		client.sendMessage("hello 2nd message");
