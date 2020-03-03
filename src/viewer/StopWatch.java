@@ -16,13 +16,14 @@ public class StopWatch {
 	static long End_time;
 
 	/**
-	   * This method starts the timer
+	   * This method starts the timer, can also be used to reset timer
 	   * @return Nothing.
 	   */
 	public static void start() {
 	
 		Start_time = System.currentTimeMillis();
 	}
+	
 
 	/**
 	   * This method stops the timer

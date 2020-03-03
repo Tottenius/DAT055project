@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import Controller.Direction;
 import assetclasses.AbstractAsset;
+import server.UdpClient;
+import server.UdpServer;
 
 public class GamePanel extends JPanel {
 	
@@ -54,6 +57,13 @@ public class GamePanel extends JPanel {
 	private int period= 1000; // ms
 	private int firstTime = 0;
 	private boolean slowTime = false;
+	private long timeToBeatGame;
+	
+	//server stuff
+	UdpServer server = new UdpServer();
+	UdpClient client = new UdpClient();
+	Thread serverThread = new Thread(server);
+	Thread clientThread = new Thread(client);
 	
 	public void loadInLevelMusicPaths() {
 	levelMusic.put("level1","src/Music/level1.aifc");
@@ -185,8 +195,26 @@ public class GamePanel extends JPanel {
 			initDeathOrWinScreen(g,"src/assets/WinScreenTemp.jpg", "You Won nice work!");
 	}
 	
+	private void UDPSetup() throws IOException{
+		
+		serverThread.start();
+		clientThread.start();
+	
+		client.sendMessage("hello");
+		client.sendMessage("hello 2nd message");
+		client.sendMessage("Känns ju som det här typ funkar :)");
+		client.sendMessage("getLeaderboard");
+	}
+	
 	//maybe add what level to lead here as type for the contructor
 	public GamePanel(String CurrentLevel) {
+		
+		
+		try {
+			UDPSetup();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	    	//read in and build  level
 		this.CurrentLevel = CurrentLevel;	
@@ -209,6 +237,12 @@ public class GamePanel extends JPanel {
 		startTimer(0,1000/60);
 		StopWatch.start();
 	}
+	
+	private void setTimeToCompleteGame() {
+		
+		timeToBeatGame = timeToBeatGame + StopWatch.stopTimer();
+		
+	}
 
 		
 	public void startTimer(int firstTime,int period) {
@@ -227,23 +261,42 @@ public class GamePanel extends JPanel {
         		world = new ReadInWorld(CurrentLevel);
         		GameWindowTemp.setStateGame();
         		world.startControllers();
+        		//reset timer
+        		StopWatch.start();
         		System.out.println(GameWindowTemp.state);
 
         	}
         	
         	if(GameWindowTemp.isNextLevelState()) {
-	
+        		
+        		//add time it took to beat level!
+        		setTimeToCompleteGame();        		
+        		
         		System.out.println("loading next level");
-     
         		String nextLevelNumber = CurrentLevel.substring(CurrentLevel.length() - 1);
     			nextLevelNumber= String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
     			CurrentLevel = "level" + nextLevelNumber;
+    			
+    			//temporary set when beating level 2 you win the game!
+    			if(CurrentLevel.equals("level3")) {
+    				System.out.println("It took you this many seconds to beat both levels!");
+    				System.out.println(StopWatch.stopTimer());
+    				String time = Long.toString(StopWatch.stopTimer());
+    				try {
+						client.sendMessage(time);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+    				GameWindowTemp.setWinState();
+    				
+    			}
+    			else {
     			world = new ReadInWorld(CurrentLevel);  			
     			GameWindowTemp.setStateGame();
     			world.startControllers();
     			System.out.println("Sätter Gamestate");
     			playMusic(getLevelMusic(CurrentLevel));
-
+    			}
         	}
         	
         	else if(GameWindowTemp.isGameState()) {

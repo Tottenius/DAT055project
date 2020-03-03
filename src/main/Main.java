@@ -12,6 +12,7 @@ public class Main {
 	public static boolean isRunning;
 	
 	public static void main(String[] args) throws IOException  {
+		/*
 		UdpServer server = new UdpServer();
 		UdpClient client = new UdpClient();
 		Thread serverThread = new Thread(server);
@@ -23,7 +24,7 @@ public class Main {
 		client.sendMessage("hello");
 		client.sendMessage("hello 2nd message");
 		client.sendMessage("Känns ju som det här typ funkar :)");
-		client.sendMessage("getLeaderboard");
+		client.sendMessage("getLeaderboard"); */
     	
 		SwingUtilities.invokeLater(new Runnable() {
     	    public void run() {
