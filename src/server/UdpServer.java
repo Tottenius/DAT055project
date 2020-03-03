@@ -55,6 +55,11 @@ public class UdpServer implements Runnable{
   
             // Step 3 : revieve the data in byte buffer. 
             socket.receive(DpReceive); 
+            
+            if (data(receive).toString().equals("getLeaderboard")) {
+            	
+            	sendLeaderboardToClient();
+            }
   
            // System.out.println("Client:-" + data(receive)); 
             writeToLeaderboard(data(receive));
@@ -69,7 +74,13 @@ public class UdpServer implements Runnable{
             // Clear the buffer after every message. 
             receive = new byte[65535]; 
         } 
-    } 
+    }
+    
+   private void sendLeaderboardToClient() {
+    	
+	   //send the leaderboard to the client
+	   
+    }
   
     // A utility method to convert the byte array 
     // data into a string representation. 
