@@ -34,27 +34,26 @@ public class UdpClient implements Runnable {
 	
 	public void startClient() throws IOException 
     { 
-		System.out.println(" Vi försöker starta clienten");
-       // Scanner sc = new Scanner(System.in); 
+		// Step 1 : Create a socket to listen at port 4568 
+        DatagramSocket socket = new DatagramSocket(4568); 
+        byte[] receive = new byte[65535]; 
   
-        // Step 1:Create the socket object for 
-        // carrying the data. 
-        DatagramSocket socket = new DatagramSocket(); 
+        DatagramPacket DpReceive = null; 
+        while (true) 
+        { 
   
-        InetAddress ip = InetAddress.getLocalHost(); 
-        byte buf[] = null; 
-        input = getreceivedInput();
-        // convert the String input into the byte array. 
-        buf = input.getBytes(); 
+            // Step 2 : create a DatgramPacket to receive the data. 
+            DpReceive = new DatagramPacket(receive, receive.length); 
+  
+            // Step 3 : revieve the data in byte buffer. 
+            socket.receive(DpReceive); 
+            
 
-        // Step 2 : Create the datagramPacket for sending 
-        // the data. 
-        DatagramPacket DpSend = new DatagramPacket(buf, buf.length, ip, 4567); 
-
-        // Step 3 : invoke the send call to actually send 
-        // the data. 
-        socket.send(DpSend);
-        socket.close();
+            System.out.println(data(receive).toString());
+            
+            // Clear the buffer after every message. 
+            receive = new byte[65535]; 
+        } 
      
     }
 	
@@ -66,12 +65,26 @@ public class UdpClient implements Runnable {
     	
     	return this.input;
     }
+    
+    // A utility method to convert the byte array 
+    // data into a string representation. 
+    public static StringBuilder data(byte[] a) 
+    { 
+        if (a == null) 
+            return null; 
+        StringBuilder ret = new StringBuilder(); 
+        int i = 0; 
+        while (a[i] != 0) 
+        { 
+            ret.append((char) a[i]); 
+            i++; 
+        } 
+        return ret; 
+    }
 
 	@Override
 	public void run() {
 		try {
-			input = getreceivedInput();
-			if(input != "")
 			startClient();
 		} catch (IOException e) {
 			e.printStackTrace();
