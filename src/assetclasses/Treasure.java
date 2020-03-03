@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import Controller.Direction;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
+import viewer.MusicPlayer;
 import viewer.ReadInWorld;
 
 public class Treasure extends AbstractAsset{
@@ -26,7 +27,9 @@ public class Treasure extends AbstractAsset{
     }
     
     public void openTreasure() { 	
-    	super.getImageAtMap(Direction.UP);  	
+    	super.getImageAtMap(Direction.UP);
+    	//play an actually sutitble sounds not an beep, just for now
+    	java.awt.Toolkit.getDefaultToolkit().beep();
     	isOpen = true;    	
     }
     

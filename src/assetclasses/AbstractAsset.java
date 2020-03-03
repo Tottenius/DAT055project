@@ -11,9 +11,10 @@ import javax.imageio.ImageIO;
 
 import Controller.Direction;
 import viewer.GameSettings;
+import viewer.MusicPlayer;
 
 //Abstract Asset class that is used by all assets in the game
-public abstract class AbstractAsset implements Asset {
+public abstract class AbstractAsset implements Asset{
 	
 	private final static int size = GameSettings.getAssetsize();
 	private int position;
