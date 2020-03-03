@@ -21,8 +21,10 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 
@@ -115,9 +117,13 @@ public class Menu extends JPanel {
 	            System.out.println("LeaderboardButton pressed!");
 	            
 	            String leaderboard = fileToString(leaderboardpath);
-	           // System.out.println(leaderboard);
+	            
 	          //custom title, custom icon
 	            Icon icon = new ImageIcon("src/assets/LeaderboardIcon.jpg");
+	            
+	           // JLabel label = new JLabel(leaderboard);
+	            //label.setHorizontalTextPosition(SwingConstants.CENTER);
+	            //label.setFont(new Font("Arial", Font.BOLD, 12));
 	            
 	            JOptionPane.showMessageDialog(menu,leaderboard,"Leaderboard",
 	            JOptionPane.INFORMATION_MESSAGE,icon);

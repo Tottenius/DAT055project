@@ -280,12 +280,12 @@ public class GamePanel extends JPanel {
     			CurrentLevel = "level" + nextLevelNumber;
     			
     			//temporary set when beating level 2 you win the game!
-    			if(CurrentLevel.equals("level3")) {
+    			if(CurrentLevel.equals("level2")) {
     				System.out.println("It took you this many seconds to beat both levels!");
     				System.out.println(StopWatch.stopTimer());
     				String temptime = Long.toString(StopWatch.stopTimer());
     				
-    				String time = "Name: " + GamePanel.profileName + " \t" + "time: " + temptime;
+    				String time = "Name: " + GamePanel.profileName + " \t" + "Time it took to beat the game: " + temptime+"s";
     				try {
 						client.sendMessage(time);
 					} catch (IOException e) {
