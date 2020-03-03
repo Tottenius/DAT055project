@@ -64,6 +64,7 @@ public class GamePanel extends JPanel {
 	UdpClient client = new UdpClient();
 	Thread serverThread = new Thread(server);
 	Thread clientThread = new Thread(client);
+	private static String profileName = "";
 	
 	public void loadInLevelMusicPaths() {
 	levelMusic.put("level1","src/Music/level1.aifc");
@@ -207,8 +208,9 @@ public class GamePanel extends JPanel {
 	}
 	
 	//maybe add what level to lead here as type for the contructor
-	public GamePanel(String CurrentLevel) {
+	public GamePanel(String CurrentLevel, String profileName) {
 		
+		this.profileName = profileName;
 		
 		try {
 			UDPSetup();
@@ -281,7 +283,9 @@ public class GamePanel extends JPanel {
     			if(CurrentLevel.equals("level3")) {
     				System.out.println("It took you this many seconds to beat both levels!");
     				System.out.println(StopWatch.stopTimer());
-    				String time = Long.toString(StopWatch.stopTimer());
+    				String temptime = Long.toString(StopWatch.stopTimer());
+    				
+    				String time = "Name: " + GamePanel.profileName + " \t" + "time: " + temptime;
     				try {
 						client.sendMessage(time);
 					} catch (IOException e) {

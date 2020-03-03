@@ -31,22 +31,12 @@ public class Menu extends JPanel {
 	 JButton StartButton = new JButton("Start");
 	 JButton OptionsButton = new JButton("Options");
 	 JButton QuitButton = new JButton("Quit");
+	 
 	 //En lokal variabel för den här menyn. Kunde inte komma åt den i de anonyma actionlistnersen annars.
 	 private Menu menu = this;
 	 // Window size
 	 private static final int WIDTH = GameSettings.getWidth();
 	 private static final int HEIGHT = GameSettings.getHeight();
-	
-		// Read in new world
-		/*
-		//Levels
-		String level1 = "src/levels/level1.txt";
-		String level2 = "src/levels/level2.txt";
-		String level3 = "src/levels/level3.txt";
-		String level4 = "src/levels/level4.txt"; */
-	 
-		//store levels, level1 , level path
-		static HashMap<String, String> levels = new HashMap<String, String>();
 	
 	 public void render(Graphics g) {
 		
@@ -74,13 +64,7 @@ public class Menu extends JPanel {
     }
 	
     public Menu() {
-    	
-    	//read in levels
-    	levels.put("level1","src/levels/level1.txt");
-    	levels.put("level2","src/levels/level2.txt");
-    	levels.put("level3","src/levels/level3.txt");
-    	levels.put("level4","src/levels/level4.txt");  	
-    	  	
+	
     	System.out.println("Vi går in i menyn");
     	System.out.println(GameWindowTemp.state);
     	
@@ -109,7 +93,7 @@ public class Menu extends JPanel {
     private void addButtons() {
    	 StartButton.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
-	            System.out.println("Start Button pressed!");
+	            System.out.println("Start Button pressed!");           
 	            GameWindowTemp.setStateGame();
 	            SwingUtilities.getWindowAncestor(menu).dispose();
 	            new GameWindowTemp("level1"); //we are actually opening another windows this way and keeping options window open can be changed by having start game in own method inside windowtemp

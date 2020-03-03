@@ -73,7 +73,12 @@ public class GameWindowTemp extends JFrame {
 		
 		//if gamestate is Game then we start the game;
 		else if (state == STATE.GAME) {
-			this.add(new GamePanel(returnNextLevel()));
+			
+			Profile profile = new Profile();
+			
+			String ProfileName = profile.returnProfileName();
+			
+			this.add(new GamePanel(returnNextLevel(), ProfileName));
 					
 			System.out.println("Vi startar en ny gamePanel");
 		}	
