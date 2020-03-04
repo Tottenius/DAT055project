@@ -14,9 +14,9 @@ public class GameWindowTemp extends JFrame {
 
 	private enum STATE {
 		MENU, GAME, DEATHSCREEN, RESTART, WIN, NextLevel,
-	}
+	} 
 
-	// gamestate bool
+	// gamestate bool aa
 	public static boolean isGameState() {
 		return state == STATE.GAME;
 	}
