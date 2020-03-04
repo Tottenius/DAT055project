@@ -93,6 +93,7 @@ public class ReactionScreen extends JPanel {
 	    	MenuButton.addActionListener(new ActionListener() { 
 	 		  public void actionPerformed(ActionEvent e) { 
 		            System.out.println("Menu Button pressed!");
+		            MusicPlayer.StopMusic();
 		            GameWindowTemp.setStateMenu();
 		            SwingUtilities.getWindowAncestor(GameOver).dispose();
 		            new GameWindowTemp(null);

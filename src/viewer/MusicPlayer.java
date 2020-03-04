@@ -11,7 +11,7 @@ import javax.sound.sampled.FloatControl;
 // REMOVE ALL THIS STATIC, JUST COULDNT MAKE IT WORK WITHOUT IT BEFORE!
 public class MusicPlayer{
 
-	
+	static boolean currently_playing = false;
 	 static Clip clip;
 	
 	public MusicPlayer(String path) {
@@ -19,7 +19,7 @@ public class MusicPlayer{
 		playSound(path);
 	}
 	
-	public  void playSound(String path) {
+	public static void playSound(String path) {
 	    try {
 
 	    	AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path));
@@ -27,6 +27,7 @@ public class MusicPlayer{
 	        clip.open(audioInputStream);
 	        setVolume(-20);
 	        clip.start();
+	        currently_playing = true;
 	        
 	        // If you want the sound to loop infinitely, then put: 
 	        clip.loop(Clip.LOOP_CONTINUOUSLY); 
@@ -38,7 +39,13 @@ public class MusicPlayer{
 	
 	public static void StopMusic() {
 		clip.stop();
+		 currently_playing = false;
 		
+	}
+	
+	public static boolean isMusicRunning(){
+		
+		return currently_playing;
 	}
 	
 	public static void setVolume(float gain) {

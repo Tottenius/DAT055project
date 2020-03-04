@@ -46,6 +46,9 @@ public class GameWindowTemp extends JFrame {
     // local reference to it self
     private GameWindowTemp window = this;
     
+    //menu sound path
+    private String menuSongPath = "src/Music/MainMenuSong.aifc";
+    
     //What level do read in
     String nextLevel = "level1";
     String currentRunningLevel = "level1";
@@ -67,6 +70,14 @@ public class GameWindowTemp extends JFrame {
 		System.out.println("Vi gör ett window");
 		System.out.println(state + " GameWindowTemp");
 		if (state == STATE.MENU) { 
+			
+			if(MusicPlayer.isMusicRunning()) {
+				MusicPlayer.StopMusic();
+				MusicPlayer.playSound(menuSongPath);
+			}
+			else
+				MusicPlayer.playSound(menuSongPath);
+			
 			menu = new Menu();
 			this.add(menu);
 		}
