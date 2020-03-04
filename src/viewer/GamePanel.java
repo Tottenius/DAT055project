@@ -286,18 +286,38 @@ public class GamePanel extends JPanel {
 					// add time it took to beat level!
 					setTimeToCompleteGame();
 
-					System.out.println("loading next level");
-					String nextLevelNumber = GamePanel.this.CurrentLevel
-							.substring(GamePanel.this.CurrentLevel.length() - 1);
-					nextLevelNumber = String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
-					GamePanel.this.CurrentLevel = "level" + nextLevelNumber;
-
 					// temporary set when beating level 2 you win the game!
-					if (GamePanel.this.CurrentLevel.equals("level6")) {
-						System.out.println("It took you this many seconds to beat both levels!");
-						System.out.println(StopWatch.stopTimer());
-						final String temptime = Long.toString(StopWatch.stopTimer());
+					if (GamePanel.this.CurrentLevel.equals("level10")) {
 
+						String temptime = Long.toString(StopWatch.stopTimer());
+						
+						//trying to fix top ten highscore with soritn algorithm
+						/*
+						String testTime = temptime;
+						int i=Integer.parseInt(temptime); 
+						int currentBestPos = -1;
+						
+						//Check if top 15 time
+						testTime = testTime.replaceAll("[^0-9]+", " ");
+						testTime.substring(0, testTime.length()-1);
+						String[] parts = testTime.split(",");
+						int[] ints = new int[parts.length];
+						for (int j = 0; j < parts.length; j++) {
+					    
+						    if(i < ints[j]) {
+						    	currentBestPos = j;
+						    }
+						}
+						//new highscore achived!
+						if(currentBestPos != -1) {
+							ints[currentBestPos] =	i;
+							for (int k=0; k>currentBestPos+1; k-- ) {
+								
+							}
+						}
+						*/
+						
+						
 						final String time = "Name: " + GamePanel.profileName + " \t" + "Time it took to beat the game: "
 								+ temptime + "s";
 						try {
@@ -307,8 +327,14 @@ public class GamePanel extends JPanel {
 						}
 						GameWindowTemp.setWinState();
 
-					} else {
-						GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
+					}	
+					else {
+					System.out.println("loading next level");
+					String nextLevelNumber = GamePanel.this.CurrentLevel
+							.substring(GamePanel.this.CurrentLevel.length() - 1);
+					nextLevelNumber = String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
+					GamePanel.this.CurrentLevel = "level" + nextLevelNumber;
+					GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
 						GameWindowTemp.setStateGame();
 						GamePanel.this.world.startControllers();
 						System.out.println("Sätter Gamestate");

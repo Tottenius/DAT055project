@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import javax.imageio.ImageIO;
@@ -113,8 +114,8 @@ public class Menu extends JPanel {
 		this.LeaderboardButton.addActionListener(e -> {
 			System.out.println("LeaderboardButton pressed!");
 
-			final String leaderboard = fileToString(Menu.this.leaderboardpath);
-
+			String leaderboard = fileToString(Menu.this.leaderboardpath);     
+			
 			// custom title, custom icon
 			final Icon icon = new ImageIcon("src/assets/LeaderboardIcon.jpg");
 
