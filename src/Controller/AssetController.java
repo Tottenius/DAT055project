@@ -29,12 +29,9 @@ public abstract class AssetController implements ControllerInterface {
 		setPosition(newPos);
 		ourAsset.setPosition(newPos);
 		assetTargetLocation.setPosition(oldPos);
-		// System.out.println(ourAsset.getCoords() + " " +
-		// assetTargetLocation.getCoords());
 	}
 
 	protected void dieWhileMovingIntoDanger(final int oldPos) {
-		// Tile t = new Tile(oldPos);
 		this.movingAssets.set(oldPos, new Empty(oldPos));
 	}
 

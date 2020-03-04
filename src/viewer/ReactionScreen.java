@@ -64,7 +64,6 @@ public class ReactionScreen extends JPanel {
 	}
 
 	public void ButtonCustomazation(final JButton button) {
-		// System.out.println("inside button custom");
 		// Customization
 		button.setBackground(Color.CYAN);
 		// button.setAlignmentX(this.CENTER_ALIGNMENT);
@@ -83,13 +82,11 @@ public class ReactionScreen extends JPanel {
 	@SuppressWarnings("unused")
 	private void addButtons() {
 		this.RestartButton.addActionListener(e -> {
-			System.out.println("Rest Button pressed!");
 			GameWindowTemp.setStateGame();
 
 		});
 
 		this.MenuButton.addActionListener(e -> {
-			System.out.println("Menu Button pressed!");
 			MusicPlayer.StopMusic();
 			GameWindowTemp.setStateMenu();
 			SwingUtilities.getWindowAncestor(ReactionScreen.this.GameOver).dispose();
@@ -97,7 +94,6 @@ public class ReactionScreen extends JPanel {
 		});
 
 		this.QuitButton.addActionListener(e -> {
-			System.out.println("Quit Button pressed!");
 			System.exit(0);
 		});
 
@@ -106,12 +102,9 @@ public class ReactionScreen extends JPanel {
 		ButtonCustomazation(this.MenuButton);
 		ButtonCustomazation(this.QuitButton);
 
-		System.out.println("befor adding buttons!");
 		// add buttons to the panel
 		add(this.RestartButton);
 		add(this.MenuButton);
 		add(this.QuitButton);
-		System.out.println("after adding buttons!");
 	}
-
 }

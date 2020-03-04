@@ -21,7 +21,6 @@ public class EnemyController extends AssetController {
 		this.enemy = new Enemy(pos);
 		this.movingAssets.add(pos, this.enemy);
 		// Kör timerTasken b efter 300ms
-		System.out.println("Gör nya monster controllers");
 		GamePanel.numberOfControllers++;
 		// startController();
 	}
@@ -30,7 +29,6 @@ public class EnemyController extends AssetController {
 		// Right now just player pos
 		final int oldEnemyPos = super.getPosition();
 		int newEnemyPos = 0;
-		// System.out.println(oldEnemyPos);
 		final AbstractAsset enemy = this.movingAssets.get(oldEnemyPos);
 		AbstractAsset newEnemyLocationMovingLayer = null;
 		AbstractAsset newEnemyLocationStationaryLayer = null;
@@ -72,11 +70,9 @@ public class EnemyController extends AssetController {
 
 			if (GameWindowTemp.isGameState()) {
 				moveDirection();
-				// System.out.println(enemy.getCoords());
 			}
 
 			else if (!GameWindowTemp.isGameState()) {
-				System.out.println("Stänger av Monster");
 				GamePanel.numberOfControllers--;
 				this.cancel();
 			}

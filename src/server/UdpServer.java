@@ -10,8 +10,6 @@ public class UdpServer implements Runnable {
 	private String leaderboard;
 	private final String leaderboardPath = "src/leaderboard/leaderboard.txt";
 
-	// private File leaderboardFile = new File("src/leaderboard/leaderboard.txt");
-
 	public UdpServer() {
 		readInLeaderboard();
 	}
@@ -37,7 +35,7 @@ public class UdpServer implements Runnable {
 	}
 
 	public void startServer() throws IOException {
-		// System.out.println(" Vi försöker starta servern");
+		
 		// Step 1 : Create a socket to listen at port 4567
 		try (final DatagramSocket socket = new DatagramSocket(4567)) {
 			byte[] receive = new byte[65535];
@@ -63,7 +61,6 @@ public class UdpServer implements Runnable {
 					System.out.println("Client sent bye.....EXITING");
 					break;
 				} else {
-					// System.out.println("Client:-" + data(receive));
 					writeToLeaderboard(data(receive));
 				}
 

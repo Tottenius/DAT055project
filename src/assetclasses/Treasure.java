@@ -55,10 +55,6 @@ public class Treasure extends AbstractAsset {
 		if (!this.isOpen) {
 			this.openTreasure();
 			setOpenedTreasures(getOpenedTreasures() + 1);
-			if (getOpenedTreasures() == ReadInWorld.numberOfTresures) {
-				// GameWindowTemp.setWinState();
-				System.out.println("you opened all treasure, now you can go to next level trough the door!");
-			}
 		}
 
 		return true;

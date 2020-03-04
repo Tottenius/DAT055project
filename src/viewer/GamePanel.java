@@ -73,8 +73,6 @@ public class GamePanel extends JPanel {
 	}
 
 	public String getLevelMusic(final String level) {
-		System.out.println(level);
-		System.out.println(this.levelMusic.get(level));
 		return this.levelMusic.get(level);
 	}
 
@@ -102,35 +100,29 @@ public class GamePanel extends JPanel {
 			case KeyEvent.VK_UP:
 			case KeyEvent.VK_W:
 
-				System.out.println("Moved Up");
 				direction = Direction.UP;
 				break;
 
 			case KeyEvent.VK_DOWN:
 			case KeyEvent.VK_S:
 
-				System.out.println("Moved Down");
 				direction = Direction.DOWN;
 				break;
 
 			case KeyEvent.VK_RIGHT:
 			case KeyEvent.VK_D:
 
-				System.out.println("Moved right");
 				direction = Direction.RIGHT;
 				break;
 
 			case KeyEvent.VK_LEFT:
 			case KeyEvent.VK_A:
 
-				System.out.println("Moved Left");
 				direction = Direction.LEFT;
 				break;
 
 			case KeyEvent.VK_R:
 
-				System.out.println("Fast Reset");
-				// GameWindowTemp.setDeathScreenState();
 				// GameWindowTemp.setRestartState();
 				break;
 
@@ -145,10 +137,9 @@ public class GamePanel extends JPanel {
 	public static void playMusic(final String path) {
 		// precaution
 		if (!path.equals("src/Music/level1.aifc") && !path.equals(null)) {
-			System.out.println("we stop music");
 			MusicPlayer.StopMusic();
 			new MusicPlayer(path);
-			// FIX ! Start-metod?
+		
 		} else if (MusicPlayer.isMusicRunning()) {
 			MusicPlayer.StopMusic();
 			new MusicPlayer(path);
@@ -159,7 +150,6 @@ public class GamePanel extends JPanel {
 	}
 
 	private void initWorld(final Graphics g) {
-		// System.out.println("am in here boi");
 
 		final List<AbstractAsset> assets = this.world.getAssetList();
 		final List<AbstractAsset> movingAssets = this.world.getMovingAssets();
@@ -271,14 +261,11 @@ public class GamePanel extends JPanel {
 			public void run() {
 
 				if (GameWindowTemp.isRestartState()) {
-					System.out.println("Försöker starta om");
 					GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
 					GameWindowTemp.setStateGame();
 					GamePanel.this.world.startControllers();
 					// reset timer
 					StopWatch.start();
-					System.out.println(GameWindowTemp.state);
-
 				}
 
 				if (GameWindowTemp.isNextLevelState()) {
@@ -289,34 +276,7 @@ public class GamePanel extends JPanel {
 					// temporary set when beating level 2 you win the game!
 					if (GamePanel.this.CurrentLevel.equals("level10")) {
 
-						String temptime = Long.toString(StopWatch.stopTimer());
-						
-						//trying to fix top ten highscore with soritn algorithm
-						/*
-						String testTime = temptime;
-						int i=Integer.parseInt(temptime); 
-						int currentBestPos = -1;
-						
-						//Check if top 15 time
-						testTime = testTime.replaceAll("[^0-9]+", " ");
-						testTime.substring(0, testTime.length()-1);
-						String[] parts = testTime.split(",");
-						int[] ints = new int[parts.length];
-						for (int j = 0; j < parts.length; j++) {
-					    
-						    if(i < ints[j]) {
-						    	currentBestPos = j;
-						    }
-						}
-						//new highscore achived!
-						if(currentBestPos != -1) {
-							ints[currentBestPos] =	i;
-							for (int k=0; k>currentBestPos+1; k-- ) {
-								
-							}
-						}
-						*/
-						
+						final String temptime = Long.toString(StopWatch.stopTimer());											
 						
 						final String time = "Name: " + GamePanel.profileName + " \t" + "Time it took to beat the game: "
 								+ temptime + "s";
@@ -326,10 +286,10 @@ public class GamePanel extends JPanel {
 							e.printStackTrace();
 						}
 						GameWindowTemp.setWinState();
-
-					}	
+					}
+					
+						
 					else {
-					System.out.println("loading next level");
 					String nextLevelNumber = GamePanel.this.CurrentLevel
 							.substring(GamePanel.this.CurrentLevel.length() - 1);
 					nextLevelNumber = String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
@@ -337,7 +297,6 @@ public class GamePanel extends JPanel {
 					GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
 						GameWindowTemp.setStateGame();
 						GamePanel.this.world.startControllers();
-						System.out.println("Sätter Gamestate");
 						playMusic(getLevelMusic(GamePanel.this.CurrentLevel));
 					}
 				}
@@ -350,15 +309,12 @@ public class GamePanel extends JPanel {
 						repaint();
 					} else {
 						repaint();
-						// System.out.println(firstTime);
 					}
 				}
 
 				else if (GameWindowTemp.isDeathScreenState() || GameWindowTemp.isWinState()) {
-					// System.out.println(firstTime);
 					timer.cancel();
 					startTimer(5000, 100000);
-					// System.out.println(firstTime);
 					repaint();
 				}
 			}

@@ -18,16 +18,13 @@ public class PlayerController extends AssetController {
 		this.player = new Player(pos);
 		this.movingAssets.add(pos, this.player);
 		GamePanel.numberOfControllers++;
-		// Kör timerTasken b efter 150ms
-		// startController();
 	}
 
 	public void moveDirection() {
 
 		// Right now just player pos
 		final int oldPlayerPos = super.getPosition();
-		// System.out.println(oldPlayerPos);
-		// System.out.println(direction);
+
 		final AbstractAsset playerAsset = this.movingAssets.get(oldPlayerPos);
 		AbstractAsset newPlayerLocationMovingLayer = null;
 		AbstractAsset stationaryAsset = null;
@@ -45,7 +42,6 @@ public class PlayerController extends AssetController {
 		// If treasure, open treasure
 		else if (stationaryAsset.intractable()) {
 			// hej
-			// System.out.println("tjo");
 		}
 
 		// If enemy, kill player :(
@@ -65,15 +61,12 @@ public class PlayerController extends AssetController {
 				moveDirection();
 				// player.setCoords( position);
 				// PlayerController.this.player.setPrevPos();
-				System.out.println(PlayerController.this.player.getCoords());
 				GamePanel.setKeyPressed(false);
 
 			} else if (!GameWindowTemp.isGameState()) {
-				System.out.println("Stänger av Player vi går till main menu");
 				GamePanel.numberOfControllers--;
 				this.cancel();
 			} else if (!PlayerController.this.player.isAlive()) {
-				System.out.println("Stänger av Player player död");
 				GameWindowTemp.setDeathScreenState();
 				GamePanel.numberOfControllers--;
 				this.cancel();

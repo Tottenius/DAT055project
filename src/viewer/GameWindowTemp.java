@@ -53,8 +53,6 @@ public class GameWindowTemp extends JFrame {
 
 		this.nextLevel = nextLevel;
 
-		System.out.println("Vi gör ett window");
-		System.out.println(state + " GameWindowTemp");
 		if (state == STATE.MENU) {
 
 			if (MusicPlayer.isMusicRunning()) {
@@ -77,7 +75,6 @@ public class GameWindowTemp extends JFrame {
 			if (!ProfileName.equals("canceled")) {
 
 				this.add(new GamePanel(returnNextLevel(), ProfileName));
-				System.out.println("Vi startar en ny gamePanel");
 			}
 			// handles if player exists or presses cancel button when inputing profile name
 			else if (ProfileName.equals("canceled")) {
@@ -108,13 +105,11 @@ public class GameWindowTemp extends JFrame {
 		// Restart the game
 		m3.addActionListener(e -> {
 
-			System.out.println("Restart");
 			setRestartState();
 		});
 		// Return to the main menu
 		m4.addActionListener(e -> {
-
-			System.out.println("Go to main menu pressed");
+			
 			GameWindowTemp.setStateMenu();
 			GameWindowTemp.this.window.dispose();
 			new GameWindowTemp(null);
@@ -124,14 +119,12 @@ public class GameWindowTemp extends JFrame {
 		m5.addActionListener(e -> {
 
 			MusicPlayer.increaseVolume();
-			System.out.println("volume increased!");
 		});
 
 		// Decreasing the audio volume
 		m6.addActionListener(e -> {
 
 			MusicPlayer.decreaseVolume();
-			System.out.println("volume Decreased!");
 		});
 
 		// add menu items to menu
@@ -188,7 +181,6 @@ public class GameWindowTemp extends JFrame {
 	}
 
 	public static void setNextLevelState() {
-		System.out.println("we are isnide setnextlevelstate");
 		state = STATE.NextLevel;
 	}
 

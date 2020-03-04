@@ -27,7 +27,6 @@ public class Profile {
 			if (input.length() > 1) {
 
 				g++;
-				System.out.println("the name " + input + " has been choosen!");
 				this.name = input;
 
 			}

@@ -70,9 +70,6 @@ public class Menu extends JPanel {
 
 	public Menu() {
 
-		System.out.println("Vi går in i menyn");
-		System.out.println(GameWindowTemp.state);
-
 		// this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		this.setLayout(new GridBagLayout());
 
@@ -104,7 +101,6 @@ public class Menu extends JPanel {
 	@SuppressWarnings("unused")
 	private void addButtons() {
 		this.StartButton.addActionListener(e -> {
-			System.out.println("Start Button pressed!");
 			GameWindowTemp.setStateGame();
 			SwingUtilities.getWindowAncestor(Menu.this.menu).dispose();
 			new GameWindowTemp("level1"); // we are actually opening another windows this way and keeping options window
@@ -112,7 +108,6 @@ public class Menu extends JPanel {
 		});
 
 		this.LeaderboardButton.addActionListener(e -> {
-			System.out.println("LeaderboardButton pressed!");
 
 			String leaderboard = fileToString(Menu.this.leaderboardpath);     
 			
@@ -131,7 +126,6 @@ public class Menu extends JPanel {
 		});
 
 		this.QuitButton.addActionListener(e -> {
-			System.out.println("Quit Button pressed!");
 			Main.isRunning = false;
 			System.exit(0);
 		});

@@ -20,9 +20,6 @@ public class SpikeController extends AssetController {
 		this.spikes = new Spikes(this.position);
 		this.assets.add(pos, this.spikes);
 		GamePanel.numberOfControllers++;
-		// Kör timerTasken b körs varannan sek, startar efter 1 sek
-		// startController();
-
 	}
 
 	// Vi kör en timer istället för en busy wait
@@ -32,7 +29,7 @@ public class SpikeController extends AssetController {
 		@Override
 		public void run() {
 			if (GameWindowTemp.isGameState()) {
-				// System.out.println("Spikes coords " + spikes.getCoords());
+				
 				// Om det är en player på. Döda den
 				if (SpikeController.this.movingAssets.get(SpikeController.this.position).killable()) {
 					((Player) SpikeController.this.movingAssets.get(SpikeController.this.position)).setAlive(false);
@@ -44,7 +41,6 @@ public class SpikeController extends AssetController {
 				SpikeController.this.spikes.setPosition(SpikeController.this.position);
 
 			} else if (!GameWindowTemp.isGameState()) {
-				System.out.println("Stänger av Spikes");
 				GamePanel.numberOfControllers--;
 				this.cancel();
 			}

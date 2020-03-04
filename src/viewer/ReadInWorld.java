@@ -51,7 +51,6 @@ public class ReadInWorld {
 	@SuppressWarnings("unused")
 	public void restartGame() {
 		this.assets = this.restartAssets;
-		System.out.println(this.assets);
 		for (int i = 0; i < this.assets.size(); i++) {
 			if (this.restartAssets.get(i) instanceof Enemy) {
 				this.assets.remove(i);
@@ -65,7 +64,6 @@ public class ReadInWorld {
 			}
 
 		}
-		System.out.println("skrivit ut de nya controllersen");
 	}
 
 	// level paths
@@ -83,11 +81,8 @@ public class ReadInWorld {
 		numberOfTresures = 0;
 		Treasure.setOpenedTreasures(0);
 		initLevelPaths();
-		System.out.println("am inside ReadInWorld Class Constructor");
 		readInlevel(thisLevel);
-		System.out.println(this.restartAssets);
 		this.restartAssets = this.assets;
-		System.out.println(this.restartAssets);
 	}
 
 	public void readInlevel(final String path) {

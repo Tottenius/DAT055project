@@ -12,7 +12,6 @@ public class Main {
 
 		SwingUtilities.invokeLater(() -> {
 			isRunning = true;
-			System.out.println(GameWindowTemp.state + " Main");
 			new GameWindowTemp("level1");
 		});
 	}

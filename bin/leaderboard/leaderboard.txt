@@ -1,8 +1,5 @@
-Name: Anton 	Time it took to beat the game: 32s
-Name: Anton 	Time it took to beat the game: 21s
-Name: Anton 	Time it took to beat the game: 22s
-Name: Anton 	Time it took to beat the game: 17s
-Name: Anton 	Time it took to beat the game: 19s
-Name: Anton 	Time it took to beat the game: 19s
-Name: Antonio 	Time it took to beat the game: 17s
-Name: Pelle 	Time it took to beat the game: 33s
+Name: Anton 	Time it took to beat the game: 16s
+Name: Anton 	Time it took to beat the game: 12s
+Name: Anton 	Time it took to beat the game: 24s
+Name: Anton 	Time it took to beat the game: 63s
+Name: Grupp 4   Time it took to beat the game: 210302103s
