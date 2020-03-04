@@ -147,9 +147,10 @@ public class GamePanel extends JPanel {
 			System.out.println("we stop music");
 			MusicPlayer.StopMusic();
 			new MusicPlayer(path);
-		}		
-		else
-		new MusicPlayer(path);		}
+		}
+		else if (MusicPlayer.isMusicRunning())
+			MusicPlayer.StopMusic();
+			new MusicPlayer(path);		}
 		
 	private void initWorld(Graphics g) {
 		//System.out.println("am in here boi");
