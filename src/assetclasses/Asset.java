@@ -10,8 +10,7 @@ public interface Asset {
 
 	Image getImage(); // get an image at an specified location in our asset array intractable
 
-	// ------------------------------------------------ Asset Attributes
-	// ------------------------------------------------ \\
+	// ------------------------------------------------ Asset Attributes ------------------------------------------------ \\
 
 	// Can be killed, in this case it only refers to the player, as a player
 	// currently can't kill anything
