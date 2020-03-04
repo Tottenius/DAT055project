@@ -69,6 +69,7 @@ public class GamePanel extends JPanel {
 		this.levelMusic.put("level2", "src/Music/level2.aifc");
 		this.levelMusic.put("level3", "src/Music/level3.aifc");
 		this.levelMusic.put("level4", "src/Music/level4.aifc");
+		this.levelMusic.put("level5", "src/Music/level5.aifc");
 	}
 
 	public String getLevelMusic(final String level) {
@@ -292,7 +293,7 @@ public class GamePanel extends JPanel {
 					GamePanel.this.CurrentLevel = "level" + nextLevelNumber;
 
 					// temporary set when beating level 2 you win the game!
-					if (GamePanel.this.CurrentLevel.equals("level5")) {
+					if (GamePanel.this.CurrentLevel.equals("level6")) {
 						System.out.println("It took you this many seconds to beat both levels!");
 						System.out.println(StopWatch.stopTimer());
 						final String temptime = Long.toString(StopWatch.stopTimer());
