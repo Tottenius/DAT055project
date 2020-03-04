@@ -1,28 +1,20 @@
 package viewer;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-
 public class GameWindowTemp extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
-	//How long it took to complete the level for the player 
-	Long TimeForCompletion ;
-	
-	private enum STATE{
-		MENU,
-		GAME,
-		DEATHSCREEN,
-		RESTART,
-		WIN,
-		NextLevel,
-	};
+
+	// How long it took to complete the level for the player
+	Long TimeForCompletion;
+
+	private enum STATE {
+		MENU, GAME, DEATHSCREEN, RESTART, WIN, NextLevel,
+	}
 
 	// gamestate bool
 	public static boolean isGameState() {
@@ -33,186 +25,173 @@ public class GameWindowTemp extends JFrame {
 	public static STATE state = STATE.MENU;
 	private Menu menu;
 
-    // create a menubar
-	private JMenuBar menubar = new JMenuBar();
+	// create a menubar
+	private final JMenuBar menubar = new JMenuBar();
 
-    // create a menu 
-	private JMenu jmenu = new JMenu("Help");
-	private JMenu jmenu2 = new JMenu("Volume");
-    
-    // Menu items 
-    static JMenuItem m1, m2, m3, m4,m5,m6; 
+	// create a menu
+	private final JMenu jmenu = new JMenu("Help");
+	private final JMenu jmenu2 = new JMenu("Volume");
 
-    // local reference to it self
-    private GameWindowTemp window = this;
-    
-    //menu sound path
-    private String menuSongPath = "src/Music/MainMenuSong.aifc";
-    
-    //What level do read in
-    String nextLevel = "level1";
-    String currentRunningLevel = "level1";
-    
-    public void setNextLevel(String nextLevel) {
-    	
-    	this.nextLevel = nextLevel;
-    }
-    
-    public String returnNextLevel() {
-    	
-    	return this.nextLevel;
-    }
-	
-	public GameWindowTemp(String nextLevel){
-		
+	// Menu items
+	static JMenuItem m1, m2, m3, m4, m5, m6;
+
+	// local reference to it self
+	private final GameWindowTemp window = this;
+
+	// menu sound path
+	private final String menuSongPath = "src/Music/MainMenuSong.aifc";
+
+	// What level do read in
+	String nextLevel = "levelewfkjwofkjiewkijef";
+
+	public String returnNextLevel() {
+
+		return this.nextLevel;
+	}
+
+	public GameWindowTemp(final String nextLevel) {
+
 		this.nextLevel = nextLevel;
-		
+
 		System.out.println("Vi gör ett window");
 		System.out.println(state + " GameWindowTemp");
-		if (state == STATE.MENU) { 
-			
-			if(MusicPlayer.isMusicRunning()) {
-				MusicPlayer.StopMusic();
-				MusicPlayer.playSound(menuSongPath);
-			}
-			else
-				MusicPlayer.playSound(menuSongPath);
-			
-			menu = new Menu();
-			this.add(menu);
-		}
-		
-		//if gamestate is Game then we start the game;
-		else if (state == STATE.GAME) {
-			
-			Profile profile = new Profile();
-			String ProfileName = profile.returnProfileName();
-			
-			if(!ProfileName.equals("canceled"))  {
+		if (state == STATE.MENU) {
 
-			this.add(new GamePanel(returnNextLevel(), ProfileName));				
-			System.out.println("Vi startar en ny gamePanel");
-		}
-			//handles if player exists or presses cancel button when inputing profile name
-			else if (ProfileName.equals("canceled")) {
-			setStateMenu();
-			menu = new Menu();
-			this.add(menu);
+			if (MusicPlayer.isMusicRunning()) {
+				MusicPlayer.StopMusic();
+				MusicPlayer.playSound(this.menuSongPath);
+			} else {
+				MusicPlayer.playSound(this.menuSongPath);
 			}
-		}	
-		
-		//Adding menubar
-		SetUpMenubar();		
-		this.pack();		
+
+			this.menu = new Menu();
+			this.add(this.menu);
+		}
+
+		// if gamestate is Game then we start the game;
+		else if (state == STATE.GAME) {
+
+			final Profile profile = new Profile();
+			final String ProfileName = profile.returnProfileName();
+
+			if (!ProfileName.equals("canceled")) {
+
+				this.add(new GamePanel(returnNextLevel(), ProfileName));
+				System.out.println("Vi startar en ny gamePanel");
+			}
+			// handles if player exists or presses cancel button when inputing profile name
+			else if (ProfileName.equals("canceled")) {
+				setStateMenu();
+				this.menu = new Menu();
+				this.add(this.menu);
+			}
+		}
+
+		// Adding menubar
+		SetUpMenubar();
+		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 	public void SetUpMenubar() {
-		
-		// create menuitems 
-        m1 = new JMenuItem("Guides");	m2 = new JMenuItem("Support"); 
-        m3 = new JMenuItem("Restart"); 	m4 = new JMenuItem("Quit to main menu"); 
-        m5 = new JMenuItem("Increase Volume");	
-        m6 = new JMenuItem("Decrease Volume");
-         
-        //Restart the game
-        m3.addActionListener(new ActionListener() { 
-  		  public void actionPerformed(ActionEvent e) { 
-	           
-  			  	System.out.println("Restart");
-	            setRestartState(); 
-			  } 
-			} 
-	 );
-        //Return to the main menu
-        m4.addActionListener(new ActionListener() { 
-  		  public void actionPerformed(ActionEvent e) { 
-	           
-  			  	System.out.println("Go to main menu pressed");
-	            GameWindowTemp.setStateMenu();
-	            window.dispose();
-	            new GameWindowTemp(null); 
-			  } 
-			} 
-	 );
- 
-        //Increasing the audio volume
-        m5.addActionListener(new ActionListener() { 
-  		  public void actionPerformed(ActionEvent e) { 
-  			
-  			  MusicPlayer.increaseVolume(); 			  
-  			  System.out.println("volume increased!");
-			  } 
-			} 
-	 );
-        
-        //Decreasing the audio volume
-        m6.addActionListener(new ActionListener() { 
-  		  public void actionPerformed(ActionEvent e) { 
-	            
-  			  MusicPlayer.decreaseVolume();
-  			  System.out.println("volume Decreased!");
-			  } 
-			} 
-	 );
-  
-        // add menu items to menu 
-        jmenu.add(m1);	jmenu.add(m2);	
-        jmenu.add(m3);  jmenu.add(m4);  
-        jmenu2.add(m5); jmenu2.add(m6);
-        
-        //add menu to menubar
-        menubar.add(jmenu);
-        menubar.add(jmenu2);
-        
-        //add menubar
-        this.setJMenuBar(menubar);
+
+		// create menuitems
+		m1 = new JMenuItem("Guides");
+		m2 = new JMenuItem("Support");
+		m3 = new JMenuItem("Restart");
+		m4 = new JMenuItem("Quit to main menu");
+		m5 = new JMenuItem("Increase Volume");
+		m6 = new JMenuItem("Decrease Volume");
+
+		// Restart the game
+		m3.addActionListener(e -> {
+
+			System.out.println("Restart");
+			setRestartState();
+		});
+		// Return to the main menu
+		m4.addActionListener(e -> {
+
+			System.out.println("Go to main menu pressed");
+			GameWindowTemp.setStateMenu();
+			GameWindowTemp.this.window.dispose();
+			new GameWindowTemp(null);
+		});
+
+		// Increasing the audio volume
+		m5.addActionListener(e -> {
+
+			MusicPlayer.increaseVolume();
+			System.out.println("volume increased!");
+		});
+
+		// Decreasing the audio volume
+		m6.addActionListener(e -> {
+
+			MusicPlayer.decreaseVolume();
+			System.out.println("volume Decreased!");
+		});
+
+		// add menu items to menu
+		this.jmenu.add(m1);
+		this.jmenu.add(m2);
+		this.jmenu.add(m3);
+		this.jmenu.add(m4);
+		this.jmenu2.add(m5);
+		this.jmenu2.add(m6);
+
+		// add menu to menubar
+		this.menubar.add(this.jmenu);
+		this.menubar.add(this.jmenu2);
+
+		// add menubar
+		this.setJMenuBar(this.menubar);
 	}
-	
-	public static void setState( STATE s) {
+
+	public static void setState(final STATE s) {
 
 		state = s;
 	}
-	
-	public static void setWinState(){
-		state = STATE.WIN;	
-}
+
+	public static void setWinState() {
+		state = STATE.WIN;
+	}
 
 	public static boolean isWinState() {
 		return state == STATE.WIN;
 	}
-	
-	public static void setStateGame(){
-			state = STATE.GAME;	
+
+	public static void setStateGame() {
+		state = STATE.GAME;
 	}
-	
-	public static void setStateMenu(){	
-		state = STATE.MENU;	
+
+	public static void setStateMenu() {
+		state = STATE.MENU;
 	}
-	
+
 	public static void setDeathScreenState() {
-		state = STATE.DEATHSCREEN;		
+		state = STATE.DEATHSCREEN;
 	}
-	
+
 	public static boolean isDeathScreenState() {
 		return state == STATE.DEATHSCREEN;
 	}
-	
+
 	public static void setRestartState() {
-		state = STATE.RESTART;		
-	}	
-	
+		state = STATE.RESTART;
+	}
+
 	public static boolean isRestartState() {
 		return state == STATE.RESTART;
 	}
-	
+
 	public static void setNextLevelState() {
 		System.out.println("we are isnide setnextlevelstate");
-		state = STATE.NextLevel;		
-	}	
-	
+		state = STATE.NextLevel;
+	}
+
 	public static boolean isNextLevelState() {
 		return state == STATE.NextLevel;
 	}

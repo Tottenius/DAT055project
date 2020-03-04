@@ -25,47 +25,45 @@ import assetclasses.Treasure;
 import assetclasses.Wall;
 
 public class ReadInWorld {
-	
-	//Amount of treasures win condition
+
+	// Amount of treasures win condition
 	public static int numberOfTresures = 0;
-	
+
 	// list with assets
-	private List<AbstractAsset> assets = new ArrayList<AbstractAsset>();
-	private List<AbstractAsset> movingAssets = new ArrayList<AbstractAsset>();
-		//list with assets for quick restart
-	private List<AbstractAsset> restartAssets = new ArrayList<AbstractAsset>();
-	
-	HashMap<String, String> levels = new HashMap<String, String>();
+	private List<AbstractAsset> assets = new ArrayList<>();
+	private List<AbstractAsset> movingAssets = new ArrayList<>();
+	// list with assets for quick restart
+	private List<AbstractAsset> restartAssets = new ArrayList<>();
+
+	HashMap<String, String> levels = new HashMap<>();
 	String nextLevel;
 
 	public void initLevelPaths() {
-		
-		levels.put("level1","src/levels/level1.txt");
-		levels.put("level2","src/levels/level2.txt");
-		levels.put("level3","src/levels/level3.txt");
-		levels.put("level4","src/levels/level4.txt");
+
+		this.levels.put("level1", "src/levels/level1.txt");
+		this.levels.put("level2", "src/levels/level2.txt");
+		this.levels.put("level3", "src/levels/level3.txt");
+		this.levels.put("level4", "src/levels/level4.txt");
+		this.levels.put("level5", "src/levels/level5.txt");
 	}
-	
 
 	// DETTA ÄR SKIT MANNEN FIXA! TACK PELLE
+	@SuppressWarnings("unused")
 	public void restartGame() {
-		assets = restartAssets;
-		System.out.println(assets);
-		for (int i = 0; i < assets.size(); i++) {
-			if(restartAssets.get(i) instanceof Enemy) {
-				assets.remove(i);
-				new EnemyController(i,this);
+		this.assets = this.restartAssets;
+		System.out.println(this.assets);
+		for (int i = 0; i < this.assets.size(); i++) {
+			if (this.restartAssets.get(i) instanceof Enemy) {
+				this.assets.remove(i);
+				new EnemyController(i, this);
+			} else if (this.restartAssets.get(i) instanceof Spikes) {
+				this.assets.remove(i);
+				new SpikeController(i, this);
+			} else if (this.restartAssets.get(i) instanceof Player) {
+				this.assets.remove(i);
+				new PlayerController(i, this);
 			}
-			else if(restartAssets.get(i) instanceof Spikes) {
-				assets.remove(i);
-				new SpikeController(i,this);
-			}
-			else if(restartAssets.get(i) instanceof Player) {
-				assets.remove(i);
-				new PlayerController(i,this);
-			}
-			
-			
+
 		}
 		System.out.println("skrivit ut de nya controllersen");
 	}
@@ -73,113 +71,112 @@ public class ReadInWorld {
 	// level paths
 	String level = "";
 	// pos int map
-	int posInList = 0;	
-	
-	//Asset list
-	private List<AssetController> assetContollers = new ArrayList<AssetController>();
+	int posInList = 0;
+
+	// Asset list
+	private final List<AssetController> assetContollers = new ArrayList<>();
 
 	// Symbols
-	//private AbstractAsset AbstractAsset;
-	
-	public ReadInWorld(String thisLevel) {
-		 numberOfTresures = 0;
-		 Treasure.setOpenedTreasures(0);
+	// private AbstractAsset AbstractAsset;
+
+	public ReadInWorld(final String thisLevel) {
+		numberOfTresures = 0;
+		Treasure.setOpenedTreasures(0);
 		initLevelPaths();
 		System.out.println("am inside ReadInWorld Class Constructor");
 		readInlevel(thisLevel);
-		System.out.println(restartAssets);
-		restartAssets = assets;
-		System.out.println(restartAssets);
+		System.out.println(this.restartAssets);
+		this.restartAssets = this.assets;
+		System.out.println(this.restartAssets);
 	}
-	
-	public void readInlevel(String path) {
-		//Read in the level
+
+	public void readInlevel(final String path) {
+		// Read in the level
 		try {
-			level = new String(Files.readAllBytes(Paths.get(levels.get(path))));
-		} catch (IOException e) {
+			this.level = new String(Files.readAllBytes(Paths.get(this.levels.get(path))));
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 
-		for (int i = 0; i < level.length(); i++) {
+		for (int i = 0; i < this.level.length(); i++) {
 			// Load in walls
-			if (level.charAt(i) == '#') {
-				movingAssets.add(new Empty(posInList));
-				assets.add(new Wall(posInList));
-				posInList++;
-			} 
+			if (this.level.charAt(i) == '#') {
+				this.movingAssets.add(new Empty(this.posInList));
+				this.assets.add(new Wall(this.posInList));
+				this.posInList++;
+			}
 			// Load in tiles
-			else if (level.charAt(i) == ' ') {
-				movingAssets.add(new Empty(posInList));
-				assets.add(new Tile(posInList));
-				posInList++;
+			else if (this.level.charAt(i) == ' ') {
+				this.movingAssets.add(new Empty(this.posInList));
+				this.assets.add(new Tile(this.posInList));
+				this.posInList++;
 			}
 			// Load in closed treasures
-			else if (level.charAt(i) == 't') {
-				movingAssets.add(new Empty(posInList));
-				assets.add(new Treasure(posInList));
-				numberOfTresures ++;
-				posInList++;
+			else if (this.level.charAt(i) == 't') {
+				this.movingAssets.add(new Empty(this.posInList));
+				this.assets.add(new Treasure(this.posInList));
+				numberOfTresures++;
+				this.posInList++;
 			}
 
 			// Load in opened treasures
-			else if (level.charAt(i) == 'o') {
-				movingAssets.add(new Empty(posInList));
-				assets.add(new Treasure(posInList));
-				posInList++;
+			else if (this.level.charAt(i) == 'o') {
+				this.movingAssets.add(new Empty(this.posInList));
+				this.assets.add(new Treasure(this.posInList));
+				this.posInList++;
 			}
-			
-			// Load in door
-			else if (level.charAt(i) == 'd') {
-				movingAssets.add(new Empty(posInList));
-				assets.add(new Door(posInList));
-				posInList++;
-			}
-			
-			
-			// Load in spikes
-			else if (level.charAt(i) == 's') {
-				// Make a list of all spikes
-				movingAssets.add(new Empty(posInList));
-				assetContollers.add( new SpikeController(posInList,this));
-				posInList++;
-			
-			
-			} else if (level.charAt(i) == 'p') {
-				assets.add(new Tile(posInList));
-				assetContollers.add( new PlayerController(posInList,this));
 
-				posInList++;
+			// Load in door
+			else if (this.level.charAt(i) == 'd') {
+				this.movingAssets.add(new Empty(this.posInList));
+				this.assets.add(new Door(this.posInList));
+				this.posInList++;
+			}
+
+			// Load in spikes
+			else if (this.level.charAt(i) == 's') {
+				// Make a list of all spikes
+				this.movingAssets.add(new Empty(this.posInList));
+				this.assetContollers.add(new SpikeController(this.posInList, this));
+				this.posInList++;
+
+			} else if (this.level.charAt(i) == 'p') {
+				this.assets.add(new Tile(this.posInList));
+				this.assetContollers.add(new PlayerController(this.posInList, this));
+
+				this.posInList++;
 			}
 			// Load in enemies
-			else if (level.charAt(i) == 'e') {
+			else if (this.level.charAt(i) == 'e') {
 				// Make a list of all enemies
-				assets.add(new Tile(posInList));
-				assetContollers.add(new EnemyController(posInList,this));
-				posInList++;
-			}					
-		}	
+				this.assets.add(new Tile(this.posInList));
+				this.assetContollers.add(new EnemyController(this.posInList, this));
+				this.posInList++;
+			}
+		}
 	}
+
 	// Starta controllers
 	public void startControllers() {
-		for (AssetController c : assetContollers) {
+		for (final AssetController c : this.assetContollers) {
 			c.startController();
 		}
 	}
-	
+
 	// Reach assets in controller
 	public List<AbstractAsset> getAssetList() {
-		return assets;
+		return this.assets;
 	}
 
-	public void setAssetList(ArrayList<AbstractAsset> assetList) {
-		assets = assetList;
+	public void setAssetList(final ArrayList<AbstractAsset> assetList) {
+		this.assets = assetList;
 	}
 
 	public List<AbstractAsset> getMovingAssets() {
-		return movingAssets;
+		return this.movingAssets;
 	}
 
-	public void setMovingAssets(List<AbstractAsset> movingAssets) {
+	public void setMovingAssets(final List<AbstractAsset> movingAssets) {
 		this.movingAssets = movingAssets;
 	}
 }

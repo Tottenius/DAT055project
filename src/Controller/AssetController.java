@@ -6,60 +6,65 @@ import assetclasses.Empty;
 import assetclasses.Tile;
 import viewer.ReadInWorld;
 
-public abstract class AssetController implements ControllerInterface{
-	//Gameboard
-	protected List<AbstractAsset> assets;// =  GamePanel.getWorld().getAssetList();
+public abstract class AssetController implements ControllerInterface {
+	// Gameboard
+	protected List<AbstractAsset> assets;// = GamePanel.getWorld().getAssetList();
 	protected List<AbstractAsset> movingAssets;
-	//Position
+	// Position
 	protected int position;
-	//Direction
+	// Direction
 	protected Direction direction;
-	//world
+	// world
 	protected ReadInWorld world;
-	
-	protected void moveAsset(int newPos, int oldPos, AbstractAsset ourAsset, AbstractAsset assetTargetLocation) {
-		// Sätt playerns positon till den nya positionen och ge objectet den nya positionen
-		movingAssets.set(newPos, ourAsset );
-		// Sätt objetet vi rör oss till på playerns gamla position och ge det playerns gamla position
-		movingAssets.set(oldPos, assetTargetLocation );
+
+	protected void moveAsset(final int newPos, final int oldPos, final AbstractAsset ourAsset,
+			final AbstractAsset assetTargetLocation) {
+		// Sätt playerns positon till den nya positionen och ge objectet den nya
+		// positionen
+		this.movingAssets.set(newPos, ourAsset);
+		// Sätt objetet vi rör oss till på playerns gamla position och ge det playerns
+		// gamla position
+		this.movingAssets.set(oldPos, assetTargetLocation);
 		// Sätt controllerns position till den nya positionen
 		setPosition(newPos);
 		ourAsset.setPosition(newPos);
 		assetTargetLocation.setPosition(oldPos);
-		//System.out.println(ourAsset.getCoords() + " " + assetTargetLocation.getCoords());
+		// System.out.println(ourAsset.getCoords() + " " +
+		// assetTargetLocation.getCoords());
 	}
-	
-	protected void dieWhileMovingIntoDanger(int oldPos, int newPos) {
-		//Tile t = new Tile(oldPos);
-		movingAssets.set(oldPos, new Empty(oldPos));
+
+	protected void dieWhileMovingIntoDanger(final int oldPos) {
+		// Tile t = new Tile(oldPos);
+		this.movingAssets.set(oldPos, new Empty(oldPos));
 	}
-	
-	protected void killAsset(int newPos, int oldPos, AbstractAsset ourAsset) {
+
+	protected void killAsset(final int newPos, final int oldPos, final AbstractAsset ourAsset) {
 		// Den nya positionen
-		assets.set(newPos, ourAsset );
+		this.assets.set(newPos, ourAsset);
 		ourAsset.setPosition(newPos);
 		// Den gamla positionen
-		assets.set(oldPos, new Tile(oldPos));
+		this.assets.set(oldPos, new Tile(oldPos));
 		setPosition(newPos);
 	}
-	
-	protected void changeAsset(int pos, AbstractAsset newAsset) {
-		assets.set( pos, newAsset);
+
+	protected void changeAsset(final int pos, final AbstractAsset newAsset) {
+		this.assets.set(pos, newAsset);
 		newAsset.setPosition(pos);
 	}
-	
+
 	protected int getPosition() {
-		return position;
+		return this.position;
 	}
-	
-	protected void setPosition(int pos ) {
+
+	protected void setPosition(final int pos) {
 		this.position = pos;
 	}
+
 	// Constructor
-	public AssetController( int position, ReadInWorld world){
+	public AssetController(final int position, final ReadInWorld world) {
 		this.position = position;
 		this.world = world;
-		assets = world.getAssetList();
-		movingAssets = world.getMovingAssets();
-	}	
+		this.assets = world.getAssetList();
+		this.movingAssets = world.getMovingAssets();
+	}
 }

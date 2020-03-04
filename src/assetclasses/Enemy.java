@@ -4,19 +4,18 @@ import java.awt.Graphics;
 
 import Controller.Direction;
 import viewer.GamePanel;
-import viewer.GameSettings;
 
 public class Enemy extends AbstractAsset {
-	
+
 	private static final String down = "src/assets/headcrabMonsterAsset.png";
 	private static final String up = "src/assets/headcrabMonsterAsset.png";
-	private static final String left = "src/assets/headcrabMonsterAsset.png";;
+	private static final String left = "src/assets/headcrabMonsterAsset.png";
 	private static final String right = "src/assets/headcrabMonsterAsset.png";
-	
-	public Enemy(int position) {
+
+	public Enemy(final int position) {
 		super(position);
 		super.loadImage(up, Direction.UP);
-		super.loadImage(down,Direction.DOWN);
+		super.loadImage(down, Direction.DOWN);
 		super.loadImage(left, Direction.LEFT);
 		super.loadImage(right, Direction.RIGHT);
 	}
@@ -42,12 +41,12 @@ public class Enemy extends AbstractAsset {
 	}
 
 	@Override
-	public boolean hasDirections(Direction d) {
+	public boolean hasDirections(final Direction d) {
 		return false;
 	}
 
 	@Override
-	public void paintAsset(Graphics g, GamePanel gp) {
-		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);		
+	public void paintAsset(final Graphics g, final GamePanel gp) {
+		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 	}
 }

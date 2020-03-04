@@ -13,70 +13,61 @@ public class Player extends AbstractAsset {
 	private static final String up = "src/assets/PlayerUp.png";
 	private static final String left = "src/assets/PlayerLeft.png";
 	private static final String right = "src/assets/PlayerRight.png";
-	
-	private boolean alive;
-	private Point prevPos = getCoords();
-	private Direction dir = Direction.RIGHT;
 
-	public Player(int position) {
+	private boolean alive;
+	private final Point prevPos = getCoords();
+	public Player(final int position) {
 		super(position);
 		super.loadImage(up, Direction.UP);
-		super.loadImage(down,Direction.DOWN);
+		super.loadImage(down, Direction.DOWN);
 		super.loadImage(left, Direction.LEFT);
 		super.loadImage(right, Direction.RIGHT);
-		alive = true;
+		this.alive = true;
 	}
-
 
 	public boolean isAlive() {
-		return alive;
+		return this.alive;
 	}
 
-
-	public void setAlive(boolean alive) {
+	public void setAlive(final boolean alive) {
 		this.alive = alive;
 	}
-
 
 	@Override
 	public boolean killable() {
 		return true;
 	}
 
-
 	@Override
 	public boolean canKill() {
 		return false;
 	}
-
 
 	@Override
 	public boolean intractable() {
 		return false;
 	}
 
-
 	@Override
 	public boolean canWalkOn() {
 		return false;
 	}
 
-
 	@Override
-	public boolean hasDirections(Direction d) {
+	public boolean hasDirections(final Direction d) {
 		this.direction = d;
 		getImageAtMap(d);
 		return true;
 	}
-	
+
 	public void setPrevPos() {
-		prevPos.x = getCoords().x - direction.getXDelta() * GameSettings.getAssetsize();
-		prevPos.y = getCoords().y - direction.getYDelta() * GameSettings.getAssetsize()/32;
+		this.prevPos.x = getCoords().x - this.direction.getXDelta() * GameSettings.getAssetsize();
+		this.prevPos.y = getCoords().y - this.direction.getYDelta() * GameSettings.getAssetsize() / 32;
 	}
-	
+
 	@Override
-	public void paintAsset(Graphics g, GamePanel gp) {
-		
-		g.drawImage(this.getImage(), getCoords().x , getCoords().y , gp);
+	public void paintAsset(final Graphics g, final GamePanel gp) {
+
+		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 	}
 }

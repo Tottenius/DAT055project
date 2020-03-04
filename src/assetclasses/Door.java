@@ -12,12 +12,12 @@ public class Door extends AbstractAsset {
 
 	private static final String path1 = "src/assets/doordown.png";
 	private static final String path2 = "src/assets/doorup.png";
-	
-	public Door(int position) {
-        super(position);
-        super.loadImage(path1, Direction.DOWN);
-        super.loadImage(path2, Direction.UP);
-        super.getImage();
+
+	public Door(final int position) {
+		super(position);
+		super.loadImage(path1, Direction.DOWN);
+		super.loadImage(path2, Direction.UP);
+		super.getImage();
 	}
 
 	@Override
@@ -32,16 +32,17 @@ public class Door extends AbstractAsset {
 
 	@Override
 	public boolean intractable() {
-		
-		if(Treasure.getOpenedTreasures() >= ReadInWorld.numberOfTresures) {
-		System.out.println("player reached door!");
-		//restart and new level doing
-		GameWindowTemp.setNextLevelState();
-		//player goes to next level!
-		return true;
+
+		if (Treasure.getOpenedTreasures() >= ReadInWorld.numberOfTresures) {
+			System.out.println("player reached door!");
+			System.out.println(Treasure.getOpenedTreasures());
+			System.out.println(ReadInWorld.numberOfTresures);
+			// restart and new level doing
+			GameWindowTemp.setNextLevelState();
+			// player goes to next level!
+			return true;
 		}
-		else
-			System.out.println("You have to collect all the treasures first to open the door!");
+		System.out.println("You have to collect all the treasures first to open the door!");
 		return true;
 	}
 
@@ -51,12 +52,12 @@ public class Door extends AbstractAsset {
 	}
 
 	@Override
-	public boolean hasDirections(Direction d) {
+	public boolean hasDirections(final Direction d) {
 		return false;
 	}
 
 	@Override
-	public void paintAsset(Graphics g, GamePanel gp) {
-		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);		
+	public void paintAsset(final Graphics g, final GamePanel gp) {
+		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 	}
 }

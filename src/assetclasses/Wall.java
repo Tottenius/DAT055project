@@ -4,18 +4,16 @@ import java.awt.Graphics;
 
 import Controller.Direction;
 import viewer.GamePanel;
-import viewer.GameSettings;
 
-public class Wall extends AbstractAsset{
-	
+public class Wall extends AbstractAsset {
+
 	private static final String path = "src/assets/wall.png";
 
-	
-    public Wall(int position) {
-        super(position);
-        super.loadImage(path, Direction.DOWN);
-        super.getImage();
-    }
+	public Wall(final int position) {
+		super(position);
+		super.loadImage(path, Direction.DOWN);
+		super.getImage();
+	}
 
 	@Override
 	public boolean killable() {
@@ -38,12 +36,12 @@ public class Wall extends AbstractAsset{
 	}
 
 	@Override
-	public boolean hasDirections(Direction d) {
+	public boolean hasDirections(final Direction d) {
 		return false;
 	}
 
 	@Override
-	public void paintAsset(Graphics g, GamePanel gp) {
+	public void paintAsset(final Graphics g, final GamePanel gp) {
 		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 	}
 }

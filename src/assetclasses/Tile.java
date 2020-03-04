@@ -5,16 +5,16 @@ import java.awt.Graphics;
 import Controller.Direction;
 import viewer.GamePanel;
 
-public class Tile extends AbstractAsset{
-	//test
+public class Tile extends AbstractAsset {
+	// test
 	private static final String path = "src/assets/tile.png";
-	//private static final String name = "Tile";
+	// private static final String name = "Tile";
 
-    public Tile(int position) {
-        super(position);
-        super.loadImage(path, Direction.DOWN);
-        super.getImage();
-    }
+	public Tile(final int position) {
+		super(position);
+		super.loadImage(path, Direction.DOWN);
+		super.getImage();
+	}
 
 	@Override
 	public boolean killable() {
@@ -37,12 +37,12 @@ public class Tile extends AbstractAsset{
 	}
 
 	@Override
-	public boolean hasDirections(Direction d) {
+	public boolean hasDirections(final Direction d) {
 		return false;
 	}
 
 	@Override
-	public void paintAsset(Graphics g, GamePanel gp) {
+	public void paintAsset(final Graphics g, final GamePanel gp) {
 		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 	}
 
