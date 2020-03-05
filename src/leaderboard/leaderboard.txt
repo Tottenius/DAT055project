@@ -1,5 +1,7 @@
 Name: Anton 	Time it took to beat the game: 16s
 Name: Anton 	Time it took to beat the game: 12s
 Name: Anton 	Time it took to beat the game: 24s
+Name: Tor 	Time it took to beat the game: 35s
 Name: Anton 	Time it took to beat the game: 63s
-Name: Grupp 4   Time it took to beat the game: 210302103s
+Name: Tor 	Time it took to beat the game: 72s
+
