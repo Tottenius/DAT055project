@@ -18,7 +18,7 @@ import server.UdpClient;
 import server.UdpServer;
 
 public class GamePanel extends JPanel {
-
+	//Gamepanel
 	public static volatile int numberOfControllers = 0;
 	// This window
 	GamePanel gamePanel = this;
