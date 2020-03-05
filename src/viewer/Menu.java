@@ -103,8 +103,7 @@ public class Menu extends JPanel {
 		this.StartButton.addActionListener(e -> {
 			GameWindowTemp.setStateGame();
 			SwingUtilities.getWindowAncestor(Menu.this.menu).dispose();
-			new GameWindowTemp("level1"); // we are actually opening another windows this way and keeping options window
-											// open can be changed by having start game in own method inside windowtemp
+			new GameWindowTemp("level1"); 
 		});
 
 		this.LeaderboardButton.addActionListener(e -> {
@@ -113,16 +112,8 @@ public class Menu extends JPanel {
 			
 			// custom title, custom icon
 			final Icon icon = new ImageIcon("src/assets/LeaderboardIcon.jpg");
-
-			// JLabel label = new JLabel(leaderboard);
-			// label.setHorizontalTextPosition(SwingConstants.CENTER);
-			// label.setFont(new Font("Arial", Font.BOLD, 12));
-			// UIManager.put("OptionPane.minimumSize",new Dimension(200,200));
-
 			JOptionPane.showMessageDialog(Menu.this.menu, leaderboard, "Leaderboard", JOptionPane.INFORMATION_MESSAGE,
 					icon);
-
-			// System.exit(0);
 		});
 
 		this.QuitButton.addActionListener(e -> {
