@@ -12,7 +12,15 @@ import javax.imageio.ImageIO;
 import Controller.Direction;
 import viewer.GameSettings;
 
-//Abstract Asset class that is used by all assets in the game
+/**
+ * An abstract class utilized by all asset classes. 
+ * Contains methods for assets image handling as well as handling assets position.
+ * 
+ * 
+ * @author Group 10
+ * @version 2020-02-25
+ */
+
 public abstract class AbstractAsset implements Asset {
 
 	private final static int size = GameSettings.getAssetsize();
@@ -21,26 +29,45 @@ public abstract class AbstractAsset implements Asset {
 	private Image img;
 	protected Direction direction;
 
-	// private ArrayList<Image> images = new ArrayList<Image>();
 	private final Map<Direction, Image> images = new HashMap<>();
 
+	/**
+	 * Constructor takes position that will set the class position and coords field.
+	 * 
+	 * @param position
+	 * 
+	 */
 	public AbstractAsset(final int position) {
 		this.setPosition(position);
 		this.setCoords();
 	}
 
-	// returns the image
+	/**
+	 * returns img field, that being the assets image represenation. 
+	 * 
+	 */
 	@Override
 	public Image getImage() {
 		return this.img;
 	}
 
-	// get an image at an specified location in our asset array, hashmap
+	/**
+	 * Set the image at an specified location in our asset array, the image it sets is determined by the direction param.
+	 * 
+	 * @param direction
+	 */
 	public void getImageAtMap(final Direction direction) {
 		this.img = this.images.get(direction);
 	}
 
-	// load in an image
+	/**
+	 * Loads in an image, determined by the path and direction parameters, 
+	 * the direction is used to store different images for the same assets.
+	 * The method also scales the image the gets loaded in such that all assets are the same size.
+	 * 
+	 * @param path
+	 * @param direction
+	 */
 	public void loadImage(final String path, final Direction direction) {
 		Image imgTemp;
 
@@ -56,26 +83,49 @@ public abstract class AbstractAsset implements Asset {
 		this.images.put(direction, this.img);
 	}
 
-	// get the array location for a specified image
+	
+	/**
+	 * Get the array location for a specified image
+	 * 
+	 * @return the position for the asset
+	 */
 	public int getPosition() {
 		return this.position;
 	}
 
+	/**
+	 * Sets the position for the asset
+	 * 
+	 * @param position
+	 */
+	
 	// set the array location for a specified image
 	public void setPosition(final int position) {
 		this.position = position;
 		this.coords = new Point(position * GameSettings.getAssetsize() % GameSettings.getWidth(),
 				position * GameSettings.getAssetsize() / GameSettings.getWidth() * GameSettings.getAssetsize());
 	}
-
+/**
+ * 
+ * @return the coordinates for the asset
+ */
 	public Point getCoords() {
 		return this.coords;
 	}
 
+	/**
+	 * Sets the coordinates given by the parameter for the asset.
+	 * 
+	 * @param coords
+	 */
 	public void setCoords(final Point coords) {
 		this.coords = coords;
 	}
 
+	/**
+	 * 
+	 * ??? Tor please explain wtf is the diffrence between these
+	 */
 	public void setCoords() {
 		this.coords = new Point(this.position * GameSettings.getAssetsize() % GameSettings.getWidth(),
 				this.position * GameSettings.getAssetsize() / GameSettings.getWidth() * GameSettings.getAssetsize());
