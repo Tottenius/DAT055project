@@ -197,9 +197,10 @@ public class GamePanel extends JPanel {
 		if (GameWindowTemp.isGameState()) {
 			initWorld(g);
 		} else if (GameWindowTemp.isDeathScreenState()) {
-			initDeathOrWinScreen(g, "src/assets/GameOverScreen.jpg", "YOU LOST!");
+			initDeathOrWinScreen(g, "src/assets/GameOverScreen.jpg", "bad");
 		} else if (GameWindowTemp.isWinState()) {
-			initDeathOrWinScreen(g, "src/assets/WinScreenTemp.jpg", "You Won nice work!");
+			final String finishtime = Long.toString(StopWatch.stopTimer());
+			initDeathOrWinScreen(g, "src/assets/WinScreen.png", "It took you " + finishtime + "s" + " to beat the game!");
 		}
 	}
 
@@ -280,7 +281,7 @@ public class GamePanel extends JPanel {
 					setTimeToCompleteGame();
 
 					// temporary set when beating level 2 you win the game!
-					if (GamePanel.this.CurrentLevel.equals("level10")) {
+					if (GamePanel.this.CurrentLevel.equals("level1")) {
 
 						final String temptime = Long.toString(StopWatch.stopTimer());											
 						

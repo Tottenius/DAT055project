@@ -1,6 +1,7 @@
 package viewer;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -48,7 +49,7 @@ public class ReactionScreen extends JPanel {
 			e.printStackTrace();
 		}
 		g.drawImage(img, 0, 0, null);
-		g.drawString(this.text, GameSettings.getWidth() / 2, GameSettings.getHeight() / 3);
+		g.drawString(this.text, (GameSettings.getWidth() / 2) - 140, GameSettings.getHeight() / 2);
 	}
 
 	public ReactionScreen(final String path, final String text) {
@@ -66,11 +67,9 @@ public class ReactionScreen extends JPanel {
 	public void ButtonCustomazation(final JButton button) {
 		// Customization
 		button.setBackground(Color.CYAN);
-		// button.setAlignmentX(this.CENTER_ALIGNMENT);
-		// button.setAlignmentY(this.CENTER_ALIGNMENT);
-		button.setAlignmentX(200);
-		button.setAlignmentX(200);
-
+		button.setAlignmentX(Component.CENTER_ALIGNMENT);
+		button.setAlignmentY(Component.CENTER_ALIGNMENT);
+		button.setVisible(true);
 		button.setPreferredSize(new Dimension(GameSettings.getWidth() / 4, GameSettings.getHeight() / 4));
 		button.setFont(new Font("Century Gothic", Font.BOLD, 26));
 		button.setOpaque(true);
