@@ -45,6 +45,11 @@ public class ReadInWorld {
 		this.levels.put("level3", "src/levels/level3.txt");
 		this.levels.put("level4", "src/levels/level4.txt");
 		this.levels.put("level5", "src/levels/level5.txt");
+		this.levels.put("level6", "src/levels/level6.txt");
+		this.levels.put("level7", "src/levels/level7.txt");
+		this.levels.put("level8", "src/levels/level8.txt");
+		this.levels.put("level9", "src/levels/level9.txt");
+		this.levels.put("level10", "src/levels/level10.txt");
 	}
 
 	// DETTA ÄR SKIT MANNEN FIXA! TACK PELLE
