@@ -30,6 +30,7 @@ public class Menu extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private static final String path = "src/assets/MenuBackground2.jpg";
+	private String level = "";
 
 	JButton StartButton = new JButton("Start");
 	JButton LeaderboardButton = new JButton("Leaderboards");
@@ -68,8 +69,8 @@ public class Menu extends JPanel {
 		render(g);
 	}
 
-	public Menu() {
-
+	public Menu(String level) {
+		this.level = level;
 		// this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		this.setLayout(new GridBagLayout());
 
@@ -100,13 +101,14 @@ public class Menu extends JPanel {
 	// of if cases
 	@SuppressWarnings("unused")
 	private void addButtons() {
+		//For start button
 		this.StartButton.addActionListener(e -> {
 			GameWindowTemp.setStateGame();
 			SwingUtilities.getWindowAncestor(Menu.this.menu).dispose();
-			new GameWindowTemp("level1"); // we are actually opening another windows this way and keeping options window
+			new GameWindowTemp(level); // we are actually opening another windows this way and keeping options window
 											// open can be changed by having start game in own method inside windowtemp
 		});
-
+		//For leaderboard button
 		this.LeaderboardButton.addActionListener(e -> {
 
 			String leaderboard = fileToString(Menu.this.leaderboardpath);     
@@ -124,7 +126,7 @@ public class Menu extends JPanel {
 
 			// System.exit(0);
 		});
-
+		//For quit button
 		this.QuitButton.addActionListener(e -> {
 			Main.isRunning = false;
 			System.exit(0);

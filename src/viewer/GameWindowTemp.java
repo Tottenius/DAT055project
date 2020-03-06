@@ -50,7 +50,6 @@ public class GameWindowTemp extends JFrame {
 	}
 
 	public GameWindowTemp(final String nextLevel) {
-
 		this.nextLevel = nextLevel;
 
 		if (state == STATE.MENU) {
@@ -62,7 +61,7 @@ public class GameWindowTemp extends JFrame {
 				MusicPlayer.playSound(this.menuSongPath);
 			}
 
-			this.menu = new Menu();
+			this.menu = new Menu(returnNextLevel());
 			this.add(this.menu);
 		}
 
@@ -73,13 +72,12 @@ public class GameWindowTemp extends JFrame {
 			final String ProfileName = profile.returnProfileName();
 
 			if (!ProfileName.equals("canceled")) {
-
 				this.add(new GamePanel(returnNextLevel(), ProfileName));
 			}
 			// handles if player exists or presses cancel button when inputing profile name
 			else if (ProfileName.equals("canceled")) {
 				setStateMenu();
-				this.menu = new Menu();
+				this.menu = new Menu(returnNextLevel());
 				this.add(this.menu);
 			}
 		}

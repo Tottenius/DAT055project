@@ -223,7 +223,7 @@ public class GamePanel extends JPanel {
 
 		// read in and build level
 		this.CurrentLevel = CurrentLevel;
-		this.world = new ReadInWorld(CurrentLevel);
+		this.world = new ReadInWorld(this.CurrentLevel);
 		this.world.startControllers();
 
 		// set layout
