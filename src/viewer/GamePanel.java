@@ -238,7 +238,7 @@ public class GamePanel extends JPanel {
 
 		// add music
 		loadInLevelMusicPaths();
-		GamePanel.playMusic(getLevelMusic("level1"));
+		GamePanel.playMusic(getLevelMusic(this.CurrentLevel));
 
 		startTimer(0, 1000 / 60);
 		StopWatch.start();

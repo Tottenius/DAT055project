@@ -4,3 +4,5 @@ Name: Anton 	Time it took to beat the game: 24s
 Name: Tor 		Time it took to beat the game: 35s
 Name: Anton 	Time it took to beat the game: 63s
 Name: Tor 		Time it took to beat the game: 72s
+Name: Tor 	Time it took to beat the game: 24s
+Name: Tor 	Time it took to beat the game: 22s
