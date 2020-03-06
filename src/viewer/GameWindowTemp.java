@@ -1,9 +1,12 @@
 package viewer;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class GameWindowTemp extends JFrame {
 
@@ -99,6 +102,25 @@ public class GameWindowTemp extends JFrame {
 		m4 = new JMenuItem("Quit to main menu");
 		m5 = new JMenuItem("Increase Volume");
 		m6 = new JMenuItem("Decrease Volume");
+		
+		m1.addActionListener(e -> {
+			
+			final Icon guidesicon = new ImageIcon("src/assets/GuidesIcon.jpg");
+			JOptionPane.showMessageDialog(GameWindowTemp.this.window,"For help on getting good at this game, please see: \n https://www.wikihow.com/Become-a-Master-Gamer",
+					"Guide",JOptionPane.INFORMATION_MESSAGE,guidesicon);
+			
+		});
+		
+		m2.addActionListener(e -> {
+			final Icon supporticon = new ImageIcon("src/assets/SupportIcon.png");
+			JOptionPane.showMessageDialog(GameWindowTemp.this.window,
+					"\n ”Character consists of what you do on the third and fourth tries.” \n -James A. Michener \n \n "
+					+ "“Winners never quit, and quitters never win.” \n -Vince Lombardi \n \n "
+					+ "“It always seems impossible until it’s done.” \n -Nelson Mandela \n \n "
+					+ "“You just can’t beat the person who won’t give up.” \n -Babe Ruth \n \n", 	
+					"Support", JOptionPane.INFORMATION_MESSAGE,
+					supporticon);
+		});
 
 		// Restart the game
 		m3.addActionListener(e -> {

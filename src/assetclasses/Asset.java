@@ -6,6 +6,13 @@ import java.awt.Image;
 import Controller.Direction;
 import viewer.GamePanel;
 
+/**
+ * An interface for assets. Contains a method for retrieving an image.
+ * Also has many diffrent attribute methods that can be giving to different assets to differentiate and classify them. 
+ * 
+ * @author Group 10
+ *
+ */
 public interface Asset {
 
 	Image getImage(); // get an image at an specified location in our asset array intractable
