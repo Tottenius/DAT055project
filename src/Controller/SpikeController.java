@@ -8,12 +8,25 @@ import assetclasses.Spikes;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
 import viewer.ReadInWorld;
-
+/**
+ * A controller for the Spikes asset
+ * 
+ * @author Group 10
+ * @version 2020-03-06
+ *
+ */
 public class SpikeController extends AssetController {
 
 	// private Tile tile;
 	private final Spikes spikes;
-
+	/**
+	 * Controller for the Spikes asset
+	 * 
+	 * @param pos
+	 * Position for the controller
+	 * @param world
+	 * World in which the controller should exist
+	 */
 	public SpikeController(final int pos, final ReadInWorld world) {
 		super(pos, world);
 		// tile = new Tile(position);
@@ -46,7 +59,9 @@ public class SpikeController extends AssetController {
 			}
 		}
 	};
-
+	/**
+	 * Start the SpikeController
+	 */
 	@Override
 	public void startController() {
 		this.b.scheduleAtFixedRate(this.c, 1000, 2000);

@@ -1,18 +1,32 @@
 package Controller;
 
 import java.util.Timer;
+
 import java.util.TimerTask;
 import assetclasses.AbstractAsset;
 import assetclasses.Player;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
 import viewer.ReadInWorld;
-
+/**
+ * A controller for the Player asset
+ * 
+ * @author Group 10
+ * @version 2020-03-06
+ *
+ */
 public class PlayerController extends AssetController {
 
 	// Player
 	private final Player player;
-
+	/**
+	 * Controller for the Player asset
+	 * 
+	 * @param pos
+	 * Position for the controller
+	 * @param world
+	 * World in which the controller should exist
+	 */
 	public PlayerController(final int pos, final ReadInWorld world) {
 		super(pos, world);
 		this.player = new Player(pos);
@@ -20,7 +34,7 @@ public class PlayerController extends AssetController {
 		GamePanel.numberOfControllers++;
 	}
 
-	public void moveDirection() {
+	private void moveDirection() {
 
 		// Right now just player pos
 		final int oldPlayerPos = super.getPosition();
@@ -37,7 +51,7 @@ public class PlayerController extends AssetController {
 		stationaryAsset = this.assets.get(newPlayerPos);
 		// If tile, move to the tile
 		if (stationaryAsset.canWalkOn() && newPlayerLocationMovingLayer.canWalkOn()) {
-			super.moveAsset(newPlayerPos, oldPlayerPos, playerAsset, newPlayerLocationMovingLayer);
+			super.moveAsset(playerAsset, newPlayerLocationMovingLayer);
 		}
 		// If treasure, open treasure
 		else if (stationaryAsset.intractable()) {
@@ -73,7 +87,9 @@ public class PlayerController extends AssetController {
 			}
 		}
 	};
-
+	/**
+	 * Starts the PlayerController
+	 */
 	@Override
 	public void startController() {
 		this.b.scheduleAtFixedRate(this.c, 1000, 150);

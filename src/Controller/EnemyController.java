@@ -9,13 +9,26 @@ import assetclasses.Player;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
 import viewer.ReadInWorld;
-
+/**
+ * A controller for the Enemy asset
+ * 
+ * @author Group 10
+ * @version 2020-03-06
+ *
+ */
 public class EnemyController extends AssetController {
 	private final Enemy enemy;
 
 	// True is going to the right
 	private boolean goingToTheRight = true;
-
+/**
+ * Controller for the Enemy asset
+ * 
+ * @param pos
+ * Position for the controller
+ * @param world
+ * World in which the controller should exist
+ */
 	public EnemyController(final int pos, final ReadInWorld world) {
 		super(pos, world);
 		this.enemy = new Enemy(pos);
@@ -49,11 +62,11 @@ public class EnemyController extends AssetController {
 		// If tile, move to tile
 		newEnemyLocationStationaryLayer = this.assets.get(newEnemyPos);
 		if (newEnemyLocationStationaryLayer.canWalkOn() && newEnemyLocationMovingLayer.canWalkOn()) {
-			super.moveAsset(newEnemyPos, oldEnemyPos, enemy, newEnemyLocationMovingLayer);
+			super.moveAsset(enemy, newEnemyLocationMovingLayer);
 		}
 		// If player, kill player
 		else if (newEnemyLocationMovingLayer.killable()) {
-			super.killAsset(newEnemyPos, oldEnemyPos, enemy);
+			super.killAsset(newEnemyPos, enemy);
 			((Player) newEnemyLocationMovingLayer).setAlive(false);
 		}
 		// else turn around
@@ -78,7 +91,9 @@ public class EnemyController extends AssetController {
 			}
 		}
 	};
-
+	/**
+	 * Starts the EnemyController
+	 */
 	@Override
 	public void startController() {
 		this.b.scheduleAtFixedRate(this.c, 1000, 300);
