@@ -105,12 +105,7 @@ public class Menu extends JPanel {
 		this.StartButton.addActionListener(e -> {
 			GameWindowTemp.setStateGame();
 			SwingUtilities.getWindowAncestor(Menu.this.menu).dispose();
-<<<<<<< HEAD
-			new GameWindowTemp(level); // we are actually opening another windows this way and keeping options window
-											// open can be changed by having start game in own method inside windowtemp
-=======
-			new GameWindowTemp("level1"); 
->>>>>>> refs/remotes/origin/master
+			new GameWindowTemp(level);
 		});
 		//For leaderboard button
 		this.LeaderboardButton.addActionListener(e -> {
