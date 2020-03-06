@@ -1,13 +1,10 @@
 package viewer;
 
 /**
- * A class that can track time for different task.
+ * A class that can track time for a task . 
  * 
- * @author Anton...
- * @param
- * @see
- * @value
- * @ @version 1.0
+ * @author Group 10
+ * @version 2020-02-19
  */
 
 public class StopWatch {
@@ -16,7 +13,7 @@ public class StopWatch {
 	static long End_time;
 
 	/**
-	 * This method starts the timer, can also be used to reset timer
+	 * This method starts the timer, can also be used to reset the timer
 	 * 
 	 * @return Nothing.
 	 */

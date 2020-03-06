@@ -2,11 +2,22 @@ package server;
 
 import java.io.*;
 import java.net.*;
-
+/**
+ * A client class used for UDP communication. 
+ * 
+ * @author Group10, Rishabh Mahrsee and MarkShanks 
+ * @see https://www.geeksforgeeks.org/working-udp-datagramsockets-java/
+ *
+ */
 public class UdpClient implements Runnable {
 
 	String input = "";
-
+/**
+ * Method takes a message and sends it via standard UDP protocol.
+ * 
+ * @param message
+ * @throws IOException
+ */
 	public void sendMessage(final String message) throws IOException {
 
 		// Step 1:Create the socket object for
@@ -30,7 +41,11 @@ public class UdpClient implements Runnable {
 			socket.send(DpSend);
 		}
 	}
-
+/**
+ * Starts the client such that it can now receive data from another source
+ * 
+ * @throws IOException
+ */
 	public void startClient() throws IOException {
 		
 		// Step 1 : Create a socket to listen at port 4568
@@ -52,18 +67,30 @@ public class UdpClient implements Runnable {
 			}
 		}
 	}
-
+/**
+ * Sets the received input from another source.
+ * 
+ * @param input
+ */
 	public void setreceivedInput(final String input) {
 		this.input = input;
 	}
-
+/**
+ * Get the input that was last received from another source.
+ * 
+ * @return String of data from another source.
+ */
 	public String getreceivedInput() {
 
 		return this.input;
 	}
 
-	// A utility method to convert the byte array
-	// data into a string representation.
+/**
+ *  A utility method to convert the byte array "a" data into a string representation "ret".
+ * @author Rishabh Mahrsee and MarkShanks 
+ * @param 
+ * @return String 
+ */
 	public static StringBuilder data(final byte[] a) {
 		if (a == null) {
 			return null;
@@ -76,7 +103,9 @@ public class UdpClient implements Runnable {
 		}
 		return ret;
 	}
-
+/**
+ * Starts the client thread.
+ */
 	@Override
 	public void run() {
 		try {

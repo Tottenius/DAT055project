@@ -15,26 +15,45 @@ import viewer.GamePanel;
  */
 public interface Asset {
 
-	Image getImage(); // get an image at an specified location in our asset array intractable
+	/**
+	 * get an image at an specified location in our asset array intractable
+	 * @return Image
+	 */
+	
+	Image getImage(); 
 
 	// ------------------------------------------------ Asset Attributes ------------------------------------------------ \\
-
-	// Can be killed, in this case it only refers to the player, as a player
-	// currently can't kill anything
+	
+	/**
+	 * Whether or not an asset is killable.
+	 */
 	boolean killable();
 
-	// Can kill something that is killable
+	/**
+	 * Determines if an asset can kill other assets.
+	 */
 	boolean canKill();
 
-	// Is interactble, something the player can interact with for exemple a treasure
+	/**
+	 * Method tells if an asset is intractable and if so what it does when being interacted with.
+	 */
 	boolean intractable();
 
-	// Something any moving entity that moves can walk over
+	/**
+	 * Determines if the asset is walkable over by other assets.
+	 */
 	boolean canWalkOn();
-
-	// Entity that moves in multible directions
+	
+	/**
+	 * Determines if an asset has multiple graphical states that can be drawn depending on different decided conditions.
+	 */
 	boolean hasDirections(Direction d);
-
+	
+	/**
+	 * method for painting an asset at a specified panel.
+	 * @param g
+	 * @param gp
+	 */
 	// Animations
 	void paintAsset(Graphics g, GamePanel gp);
 }

@@ -4,7 +4,12 @@ import java.awt.Graphics;
 
 import Controller.Direction;
 import viewer.GamePanel;
-
+/**
+ * An class to make emptiness concrete. Can be used to have empty assets or multible layers of assets.
+ * 
+ * @author Group 10
+ *
+ */
 public class Empty extends AbstractAsset {
 	public Empty(final int position) {
 		super(position);

@@ -4,7 +4,12 @@ import java.awt.Graphics;
 
 import Controller.Direction;
 import viewer.GamePanel;
-
+/**
+ * An class for a wall asset.
+ * 
+ * @author Group 10
+ *
+ */
 public class Wall extends AbstractAsset {
 
 	private static final String path = "src/assets/wall.png";

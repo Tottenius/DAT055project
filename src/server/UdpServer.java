@@ -5,6 +5,11 @@ import java.net.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * 
+ * @author anton
+ *
+ */
 public class UdpServer implements Runnable {
 
 	private String leaderboard;
@@ -13,7 +18,10 @@ public class UdpServer implements Runnable {
 	public UdpServer() {
 		readInLeaderboard();
 	}
-
+/**
+ * Reads in a leaderboard representation file.
+ * 
+ */
 	private void readInLeaderboard() {
 		this.leaderboard = null;
 		try {
@@ -22,7 +30,11 @@ public class UdpServer implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * method that writes a given string to a .txt file.
+ * 
+ * @param stringBuilder
+ */
 	private void writeToLeaderboard(final StringBuilder stringBuilder) {
 		try {
 			try (final BufferedWriter writer = new BufferedWriter(new FileWriter(this.leaderboardPath, true))) {
@@ -33,7 +45,11 @@ public class UdpServer implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * 	Starts the server such that it can now receive data from another source, usually a client.
+ * 
+ * @throws IOException
+ */
 	public void startServer() throws IOException {
 		
 		// Step 1 : Create a socket to listen at port 4567
@@ -69,7 +85,12 @@ public class UdpServer implements Runnable {
 			}
 		}
 	}
-
+/**
+ * Sends a leaderboard string representation to another source.
+ * 
+ * @param leaderboard
+ * @throws IOException
+ */
 	// we need to catch that exception
 	private static void sendLeaderboardToClient(final String leaderboard) throws IOException {
 
@@ -93,8 +114,12 @@ public class UdpServer implements Runnable {
 
 	}
 
-	// A utility method to convert the byte array
-	// data into a string representation.
+	/**
+	 *  A utility method to convert the byte array "a" data into a string representation "ret".
+	 * @author Rishabh Mahrsee and MarkShanks 
+	 * @param 
+	 * @return String 
+	 */
 	public static StringBuilder data(final byte[] a) {
 		if (a == null) {
 			return null;
@@ -107,7 +132,9 @@ public class UdpServer implements Runnable {
 		}
 		return ret;
 	}
-
+	/**
+	 * Starts the server thread.
+	 */
 	@Override
 	public void run() {
 		try {

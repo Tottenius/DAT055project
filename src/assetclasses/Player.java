@@ -6,7 +6,12 @@ import java.awt.Point;
 import Controller.Direction;
 import viewer.GamePanel;
 import viewer.GameSettings;
-
+/**
+ * An class for a player asset.
+ * 
+ * @author Group 10
+ *
+ */
 public class Player extends AbstractAsset {
 
 	private static final String down = "src/assets/PlayerDown.png";
@@ -24,11 +29,19 @@ public class Player extends AbstractAsset {
 		super.loadImage(right, Direction.RIGHT);
 		this.alive = true;
 	}
-
+/**
+ * Method to get the state of the player.
+ * 
+ * @return State of player, if player is alive or not.
+ */
 	public boolean isAlive() {
 		return this.alive;
 	}
-
+/**
+ * Set the state of the player to alive. 
+ * 
+ * @param alive
+ */
 	public void setAlive(final boolean alive) {
 		this.alive = alive;
 	}

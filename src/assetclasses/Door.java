@@ -1,13 +1,17 @@
 package assetclasses;
 
 import java.awt.Graphics;
-
 import Controller.Direction;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
 import viewer.ReadInWorld;
 
-//Door to go to next room!? are we even gonna do more then 1 room?? Could ranomize what next room is or maybe make it static
+/**
+ * An class for a door asset
+ * 
+ * @author Group 10
+ *
+ */
 public class Door extends AbstractAsset {
 
 	private static final String path1 = "src/assets/doordown.png";

@@ -13,7 +13,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
+/**
+ * Class that is a JPanel used for specific events, such as a win or death screen for a game.
+ * 
+ * @author Group 10
+ * @version 2020-03-03
+ */
 public class ReactionScreen extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -34,7 +39,10 @@ public class ReactionScreen extends JPanel {
 	// displayed so that we can make diffrent screens!
 	String path;
 	String text;
-
+/**
+ * Draws the graphical part of the JPanel, can read in an image and or draw a string of text that can be visualized on the screen.
+ * @param
+ */
 	public void render(final Graphics g) {
 
 		final Font fnto = new Font("Century Gothic", Font.BOLD, 30);
@@ -51,7 +59,12 @@ public class ReactionScreen extends JPanel {
 		g.drawImage(img, 0, 0, null);
 		g.drawString(this.text, (GameSettings.getWidth() / 2) - 140, GameSettings.getHeight() / 2);
 	}
-
+/**
+ * Constructor takes two parameters that determines what images and what string of text that will be drawn on the JPanel
+ * 
+ * @param path
+ * @param text
+ */
 	public ReactionScreen(final String path, final String text) {
 
 		this.path = path;
@@ -63,9 +76,13 @@ public class ReactionScreen extends JPanel {
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
 	}
-
+/**
+ * Method handles a Buttons customization.
+ * 
+ * @param button
+ */
 	public void ButtonCustomazation(final JButton button) {
-		// Customization
+
 		button.setBackground(Color.CYAN);
 		button.setAlignmentX(Component.CENTER_ALIGNMENT);
 		button.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -76,8 +93,9 @@ public class ReactionScreen extends JPanel {
 
 	}
 
-	// Add anonymous actionsListners to buttons. Easier because we don't need lot's
-	// of if cases
+/**
+ *  Add anonymous actionsListners to buttons and adds them to the JPanel.
+ */
 	@SuppressWarnings("unused")
 	private void addButtons() {
 		this.RestartButton.addActionListener(e -> {

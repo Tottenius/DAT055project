@@ -283,7 +283,7 @@ public class GamePanel extends JPanel {
 					// add time it took to beat level!
 					setTimeToCompleteGame();
 
-					// temporary set when beating level 2 you win the game!
+					// temporary set when beating level 1 you win the game!
 					if (GamePanel.this.CurrentLevel.equals("level1")) {
 
 						final String temptime = Long.toString(StopWatch.stopTimer());											

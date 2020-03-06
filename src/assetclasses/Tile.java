@@ -4,12 +4,16 @@ import java.awt.Graphics;
 
 import Controller.Direction;
 import viewer.GamePanel;
-
+/**
+ * An class for a Tile asset.
+ * 
+ * @author Group 10
+ *
+ */
 public class Tile extends AbstractAsset {
-	// test
+	
 	private static final String path = "src/assets/tile.png";
-	// private static final String name = "Tile";
-
+	
 	public Tile(final int position) {
 		super(position);
 		super.loadImage(path, Direction.DOWN);

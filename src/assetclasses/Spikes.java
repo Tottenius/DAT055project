@@ -5,7 +5,12 @@ import java.awt.Graphics;
 import Controller.Direction;
 import viewer.GamePanel;
 
-//Spike to dodge or player will die
+/**
+ * An class for a spike asset.
+ * 
+ * @author Group 10
+ *
+ */
 public class Spikes extends AbstractAsset {
 
 	private static final String path = "src/assets/spikes.png";
@@ -45,7 +50,10 @@ public class Spikes extends AbstractAsset {
 	public boolean hasDirections(final Direction d) {
 		return false;
 	}
-
+/**
+ * Update the state of the spike, whether it's up or down.
+ * 
+ */
 	public void changeUpOrDown() {
 		this.up = !this.up;
 		this.canKill = !this.canKill;

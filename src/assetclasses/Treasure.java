@@ -5,7 +5,12 @@ import java.awt.Graphics;
 import Controller.Direction;
 import viewer.GamePanel;
 import viewer.ReadInWorld;
-
+/**
+ * An class for a TreasureChest asset.
+ * 
+ * @author Group 10
+ *
+ */
 public class Treasure extends AbstractAsset {
 
 	// closed treasure
@@ -74,11 +79,16 @@ public class Treasure extends AbstractAsset {
 	public void paintAsset(final Graphics g, final GamePanel gp) {
 		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
 	}
-
+/**
+ * 
+ * @return The amount of opened treasures.
+ */
 	public static int getOpenedTreasures() {
 		return openedTreasures;
 	}
-
+/*
+ * Set the treasure asset to open.
+ */
 	public static void setOpenedTreasures(final int openedTreasures) {
 		Treasure.openedTreasures = openedTreasures;
 	}

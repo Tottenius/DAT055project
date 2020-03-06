@@ -4,7 +4,12 @@ import java.awt.Graphics;
 
 import Controller.Direction;
 import viewer.GamePanel;
-
+/**
+ * An class for an enemy asset
+ * 
+ * @author Group 10
+ *
+ */
 public class Enemy extends AbstractAsset {
 
 	private static final String down = "src/assets/headcrabMonsterAsset.png";
