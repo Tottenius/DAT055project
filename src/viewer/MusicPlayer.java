@@ -24,7 +24,7 @@ public class MusicPlayer {
 			final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path));
 			MusicPlayer.clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
-			setVolume(1.0);
+			setVolume(0.1);
 			clip.start();
 			currently_playing = true;
 
