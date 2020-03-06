@@ -281,7 +281,7 @@ public class GamePanel extends JPanel {
 					setTimeToCompleteGame();
 
 					// temporary set when beating level 2 you win the game!
-					if (GamePanel.this.CurrentLevel.equals("level2")) {
+					if (GamePanel.this.CurrentLevel.equals("level10")) {
 
 						final String temptime = Long.toString(StopWatch.stopTimer());											
 						
@@ -294,13 +294,18 @@ public class GamePanel extends JPanel {
 						}
 						GameWindowTemp.setWinState();
 					}
-					
+						
 						
 					else {
+						if (GamePanel.this.CurrentLevel.equals("level9"))
+							GamePanel.this.CurrentLevel = "level10";
+						else {
 					String nextLevelNumber = GamePanel.this.CurrentLevel
 							.substring(GamePanel.this.CurrentLevel.length() - 1);
 					nextLevelNumber = String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
 					GamePanel.this.CurrentLevel = "level" + nextLevelNumber;
+						}
+						
 					GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
 						GameWindowTemp.setStateGame();
 						GamePanel.this.world.startControllers();
