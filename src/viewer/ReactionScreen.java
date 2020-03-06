@@ -23,8 +23,8 @@ public class ReactionScreen extends JPanel {
 	JButton QuitButton = new JButton("Quit");
 
 	// Window size
-	private static final int WIDTH = GameSettings.getWidth();
-	private static final int HEIGHT = GameSettings.getHeight();
+	private static final int WIDTH = GameSettings.getWidth() +100;
+	private static final int HEIGHT = GameSettings.getHeight()+100;
 
 	// En lokal variabel för den här menyn. Kunde inte komma åt den i de anonyma
 	// actionlistnersen annars.

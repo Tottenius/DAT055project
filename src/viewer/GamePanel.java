@@ -63,6 +63,7 @@ public class GamePanel extends JPanel {
 	Thread serverThread = new Thread(this.server);
 	Thread clientThread = new Thread(this.client);
 	private static String profileName = "";
+	private int HowManyTries = 0;
 
 	public void loadInLevelMusicPaths() {
 		this.levelMusic.put("level1", "src/Music/level1.aifc");
@@ -200,7 +201,7 @@ public class GamePanel extends JPanel {
 			initDeathOrWinScreen(g, "src/assets/GameOverScreen.jpg", "bad");
 		} else if (GameWindowTemp.isWinState()) {
 			final String finishtime = Long.toString(StopWatch.stopTimer());
-			initDeathOrWinScreen(g, "src/assets/WinScreen.png", "It took you " + finishtime + "s" + " to beat the game!");
+			initDeathOrWinScreen(g, "src/assets/WinScreen.png", "It took you " + GamePanel.this.HowManyTries + " tries and " + finishtime + "s" + " to beat the game!");
 		}
 	}
 
@@ -218,6 +219,7 @@ public class GamePanel extends JPanel {
 	// maybe add what level to lead here as type for the contructor
 	public GamePanel(final String CurrentLevel, final String profileName) {
 
+		this.HowManyTries = 1;
 		GamePanel.profileName = profileName;
 
 		UDPSetup();
@@ -273,6 +275,7 @@ public class GamePanel extends JPanel {
 					GamePanel.this.world.startControllers();
 					// reset timer
 					StopWatch.start();
+					GamePanel.this.HowManyTries++;
 				}
 
 				if (GameWindowTemp.isNextLevelState()) {
@@ -281,11 +284,11 @@ public class GamePanel extends JPanel {
 					setTimeToCompleteGame();
 
 					// temporary set when beating level 2 you win the game!
-					if (GamePanel.this.CurrentLevel.equals("level10")) {
+					if (GamePanel.this.CurrentLevel.equals("level1")) {
 
 						final String temptime = Long.toString(StopWatch.stopTimer());											
 						
-						final String time = "Name: " + GamePanel.profileName + " \t" + "Time it took to beat the game: "
+						final String time = "Name: " + GamePanel.profileName + " \t Tries: " + GamePanel.this.HowManyTries + " \t " + "Time it took to beat the game: "
 								+ temptime + "s";
 						try {
 							GamePanel.this.client.sendMessage(time);
