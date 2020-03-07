@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * A client class used for UDP communication.
+ * A server class used for UDP communication.
  * 
  * @author Group10, Rishabh Mahrsee and MarkShanks 
  * @see https://www.geeksforgeeks.org/working-udp-datagramsockets-java/
