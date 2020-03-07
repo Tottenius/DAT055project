@@ -24,9 +24,19 @@ import assetclasses.Tile;
 import assetclasses.Treasure;
 import assetclasses.Wall;
 
+/**
+ * Creates a game world based on the level chosen in the constructor of the class
+ * 
+ * @author Group 10
+ * @version 2020-03-06
+ *
+ */
 public class ReadInWorld {
 
 	// Amount of treasures win condition
+	/**
+	 * The amount of treasures that has to be collected to finnish the current level
+	 */
 	public static int numberOfTresures = 0;
 
 	// list with assets
@@ -38,7 +48,7 @@ public class ReadInWorld {
 	HashMap<String, String> levels = new HashMap<>();
 	String nextLevel;
 
-	public void initLevelPaths() {
+	private void initLevelPaths() {
 
 		this.levels.put("level1", "src/levels/level1.txt");
 		this.levels.put("level2", "src/levels/level2.txt");
@@ -51,8 +61,9 @@ public class ReadInWorld {
 		this.levels.put("level9", "src/levels/level9.txt");
 		this.levels.put("level10", "src/levels/level10.txt");
 	}
-
-	// DETTA ÄR SKIT MANNEN FIXA! TACK PELLE
+	/**
+	 * Restarts the current level
+	 */
 	@SuppressWarnings("unused")
 	public void restartGame() {
 		this.assets = this.restartAssets;
@@ -81,7 +92,12 @@ public class ReadInWorld {
 
 	// Symbols
 	// private AbstractAsset AbstractAsset;
-
+/**
+ * Creates a world based on the level chosen in the argument
+ * @param thisLevel
+ * A key for the hashmap containing level information
+ * 
+ */
 	public ReadInWorld(final String thisLevel) {
 		numberOfTresures = 0;
 		Treasure.setOpenedTreasures(0);
@@ -90,7 +106,7 @@ public class ReadInWorld {
 		this.restartAssets = this.assets;
 	}
 
-	public void readInlevel(final String path) {
+	private void readInlevel(final String path) {
 		// Read in the level
 		try {
 			this.level = new String(Files.readAllBytes(Paths.get(this.levels.get(path))));
@@ -157,6 +173,9 @@ public class ReadInWorld {
 	}
 
 	// Starta controllers
+	/**
+	 * Starts the AssetControllers in the world
+	 */
 	public void startControllers() {
 		for (final AssetController c : this.assetContollers) {
 			c.startController();
@@ -164,18 +183,36 @@ public class ReadInWorld {
 	}
 
 	// Reach assets in controller
+	/**
+	 * A getter for the list of stationary assets
+	 * @return
+	 * Returns the levels stationary assets in an ArrayList
+	 */
 	public List<AbstractAsset> getAssetList() {
 		return this.assets;
 	}
-
+	
+	/**
+	 * Sets the worlds current stationary assets list to another list containing stationary assets
+	 * @param assetList
+	 * A list of new stationary assets for the world
+	 */
 	public void setAssetList(final ArrayList<AbstractAsset> assetList) {
 		this.assets = assetList;
 	}
-
+	/**
+	 * A getter for the list of moving assets
+	 * @return
+	 * Returns the levels moving assets in an ArrayList
+	 */
 	public List<AbstractAsset> getMovingAssets() {
 		return this.movingAssets;
 	}
-
+	/**
+	 * Sets the worlds current moving assets list to another list containing moving assets
+	 * @param movingAssets
+	 *  A list of new moving assets for the world
+	 */
 	public void setMovingAssets(final List<AbstractAsset> movingAssets) {
 		this.movingAssets = movingAssets;
 	}
