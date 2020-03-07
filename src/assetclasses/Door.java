@@ -14,13 +14,11 @@ import viewer.ReadInWorld;
  */
 public class Door extends AbstractAsset {
 
-	private static final String path1 = "src/assets/doordown.png";
-	private static final String path2 = "src/assets/doorup.png";
+	private static final String path = "src/assets/doordown.png";
 
 	public Door(final int position) {
 		super(position);
-		super.loadImage(path1, Direction.DOWN);
-		super.loadImage(path2, Direction.UP);
+		super.loadImage(path, Direction.DOWN);
 		super.getImage();
 	}
 
