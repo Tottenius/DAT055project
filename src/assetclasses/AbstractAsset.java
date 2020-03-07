@@ -123,8 +123,8 @@ public abstract class AbstractAsset implements Asset {
 	}
 
 	/**
+	 * Set the coords from the assets position.
 	 * 
-	 * ??? Tor please explain wtf is the diffrence between these
 	 */
 	public void setCoords() {
 		this.coords = new Point(this.position * GameSettings.getAssetsize() % GameSettings.getWidth(),
