@@ -20,7 +20,6 @@ public class Player extends AbstractAsset {
 	private static final String right = "src/assets/PlayerRight.png";
 
 	private boolean alive;
-	//private final Point prevPos = getCoords();
 	public Player(final int position) {
 		super(position);
 		super.loadImage(up, Direction.UP);
@@ -72,11 +71,6 @@ public class Player extends AbstractAsset {
 		getImageAtMap(d);
 		return true;
 	}
-/*
-	public void setPrevPos() {
-		this.prevPos.x = getCoords().x - this.direction.getXDelta() * GameSettings.getAssetsize();
-		this.prevPos.y = getCoords().y - this.direction.getYDelta() * GameSettings.getAssetsize() / 32;
-	} */ 
 
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {
