@@ -12,7 +12,7 @@ public class Main {
 
 		SwingUtilities.invokeLater(() -> {
 			isRunning = true;
-			new GameWindowTemp("level1");
+			new GameWindowTemp("level10");
 		});
 	}
 }

@@ -3,7 +3,6 @@ package Controller;
 import java.util.List;
 import assetclasses.AbstractAsset;
 import assetclasses.Empty;
-import assetclasses.Tile;
 import viewer.ReadInWorld;
 /**
  * An abstract class that is used by other the other controller classes. 

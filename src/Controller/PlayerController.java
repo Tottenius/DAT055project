@@ -65,9 +65,9 @@ public class PlayerController extends AssetController {
 		}
 	}
 
-	Timer b = new Timer();
+	private Timer b = new Timer();
 
-	TimerTask c = new TimerTask() {
+	private TimerTask c = new TimerTask() {
 		@Override
 		public void run() {
 

@@ -36,9 +36,9 @@ public class SpikeController extends AssetController {
 	}
 
 	// Vi kör en timer istället för en busy wait
-	Timer b = new Timer();
+	private Timer b = new Timer();
 
-	TimerTask c = new TimerTask() {
+	private TimerTask c = new TimerTask() {
 		@Override
 		public void run() {
 			if (GameWindowTemp.isGameState()) {
