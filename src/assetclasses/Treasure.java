@@ -31,8 +31,6 @@ public class Treasure extends AbstractAsset {
 
 	public void openTreasure() {
 		super.getImageAtMap(Direction.UP);
-		// play an actually sutitble sounds not an beep, just for now
-		java.awt.Toolkit.getDefaultToolkit().beep();
 		this.isOpen = true;
 	}
 
