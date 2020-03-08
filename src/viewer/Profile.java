@@ -1,7 +1,11 @@
 package viewer;
 
 import javax.swing.JOptionPane;
-
+/**
+ * A class that used for bringing up a JOptionPanel where a profile name can be entered in and created. 
+ * @author Anton
+ *
+ */
 public class Profile {
 
 	String name = "You didnt choose a profile name";
@@ -32,8 +36,10 @@ public class Profile {
 			}
 		}
 	}
-	// return standard name!
-
+/**
+ * Give the profile name that was created.
+ * @return Profile name
+ */
 	public String returnProfileName() {
 		return this.name;
 	}

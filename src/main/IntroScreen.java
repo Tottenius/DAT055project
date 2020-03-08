@@ -7,9 +7,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 import javax.swing.SwingConstants;
-
 import viewer.GameWindowTemp;
-
+/**
+ * An class that plays a short intro, by reading a gif file from an URL
+ * 
+ * @author Grupp 10
+ *
+ */
 public class IntroScreen {
 
 	@SuppressWarnings("unused")

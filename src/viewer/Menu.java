@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.stream.Stream;
-
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -24,7 +22,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import main.Main;
-
+/**
+ * A class for creating a menu.
+ * @author Group 10
+ *
+ */
 public class Menu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -45,6 +47,10 @@ public class Menu extends JPanel {
 	private static final int WIDTH = GameSettings.getWidth();
 	private static final int HEIGHT = GameSettings.getHeight();
 
+	/**
+	 * Draws the graphical part of the menu
+	 * @param g
+	 */
 	public void render(final Graphics g) {
 
 		final Font fnto = new Font("Roboto", Font.BOLD + Font.ITALIC, 48);
@@ -80,7 +86,7 @@ public class Menu extends JPanel {
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 	}
 
-	public void ButtonCustomazation(final JButton button) {
+	private void ButtonCustomazation(final JButton button) {
 
 		// customazation
 		button.setBackground(Color.BLACK);

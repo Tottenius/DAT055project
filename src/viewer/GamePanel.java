@@ -16,7 +16,13 @@ import Controller.Direction;
 import assetclasses.AbstractAsset;
 import server.UdpClient;
 import server.UdpServer;
-
+/**
+ * A class containing the core part of the game 
+ * 
+ * @author Group 10
+ * @version 2020-03-08
+ *
+ */
 public class GamePanel extends JPanel {
 	//Gamepanels
 	public static volatile int numberOfControllers = 0;
@@ -65,7 +71,7 @@ public class GamePanel extends JPanel {
 	private static String profileName = "";
 	private int HowManyTries = 0;
 
-	public void loadInLevelMusicPaths() {
+	private void loadInLevelMusicPaths() {
 		this.levelMusic.put("level1", "src/Music/level1.aifc");
 		this.levelMusic.put("level2", "src/Music/level2.aifc");
 		this.levelMusic.put("level3", "src/Music/level3.aifc");
@@ -79,19 +85,30 @@ public class GamePanel extends JPanel {
 		
 	}
 
-	public String getLevelMusic(final String level) {
+	private String getLevelMusic(final String level) {
 		return this.levelMusic.get(level);
 	}
 
+	/**
+	 * A method to say whether a key is currently pressed or not.
+	 * @return The status of the key
+	 */
 	public static boolean isKeyPressed() {
 		return isKeyPressed;
 	}
-
+/**
+ * Sets isKeyPressed to true or false.
+ * @param isKeyPressed
+ */
 	public static void setKeyPressed(final boolean isKeyPressed) {
 		GamePanel.isKeyPressed = isKeyPressed;
 	}
+/**
+ * Give the direction. 
+ *
+ * @return The direction.
+ */
 
-	// get direction
 	public static Direction getDirection() {
 		return direction;
 	}
@@ -141,7 +158,7 @@ public class GamePanel extends JPanel {
 	}
 
 	@SuppressWarnings("unused")
-	public static void playMusic(final String path) {
+	private static void playMusic(final String path) {
 		// precaution
 		if (!path.equals("src/Music/level1.aifc") && !path.equals(null)) {
 			MusicPlayer.StopMusic();
@@ -212,11 +229,10 @@ public class GamePanel extends JPanel {
 	}
 
 	/**
-	 *
+	 * Constructor for the GamePanel class. Sets the currentLevel that shall be loaded in and the Profile name for the session.
 	 * @param CurrentLevel
 	 * @param profileName
 	 */
-	// maybe add what level to lead here as type for the contructor
 	public GamePanel(final String CurrentLevel, final String profileName) {
 
 		this.HowManyTries = 1;
@@ -252,12 +268,7 @@ public class GamePanel extends JPanel {
 
 	}
 
-	/**
-	 *
-	 * @param firstTime
-	 * @param period
-	 */
-	public void startTimer(final int firstTime, final int period) {
+	private void startTimer(final int firstTime, final int period) {
 
 		this.period = period;
 		this.firstTime = firstTime;

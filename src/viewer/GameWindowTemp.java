@@ -7,7 +7,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
+/**
+ * A class that is used as an intermediate between the menu and the Main game class. Keeps a track of what State the program is in and also is the main JFram that we then add our JPanel containing the game into. 
+ * 
+ * @author Group 10
+ *
+ */
 public class GameWindowTemp extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -18,11 +23,6 @@ public class GameWindowTemp extends JFrame {
 	private enum STATE {
 		MENU, GAME, DEATHSCREEN, RESTART, WIN, NextLevel,
 	} 
-
-	// gamestate bool aa
-	public static boolean isGameState() {
-		return state == STATE.GAME;
-	}
 
 	// create states
 	public static STATE state = STATE.MENU;
@@ -47,7 +47,7 @@ public class GameWindowTemp extends JFrame {
 	// What level do read in
 	String nextLevel = "levelewfkjwofkjiewkijef";
 
-	public String returnNextLevel() {
+	private String returnNextLevel() {
 
 		return this.nextLevel;
 	}
@@ -93,7 +93,7 @@ public class GameWindowTemp extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public void SetUpMenubar() {
+	private void SetUpMenubar() {
 
 		// create menuitems
 		m1 = new JMenuItem("Guides");
@@ -162,48 +162,77 @@ public class GameWindowTemp extends JFrame {
 		// add menubar
 		this.setJMenuBar(this.menubar);
 	}
-
-	public static void setState(final STATE s) {
-
-		state = s;
-	}
-
+	
+	/**
+	 * Sets the state to WinState.
+	 */
 	public static void setWinState() {
 		state = STATE.WIN;
 	}
-
+	/**
+	 * Check whether the state is winState.
+	 * @return true if state is WinState.
+	 */
 	public static boolean isWinState() {
 		return state == STATE.WIN;
 	}
-
+	/**
+	 * Sets the state to GameState.
+	 */
 	public static void setStateGame() {
 		state = STATE.GAME;
 	}
 
+	/**
+	 * Method to tell if the game is in the State Game.
+	 * @return True if gamestate is Game, False otherwise.
+	 */
+	public static boolean isGameState() {
+		return state == STATE.GAME;
+	}
+
+	/**
+	 * Sets the state to MenuState.
+	 */
 	public static void setStateMenu() {
 		state = STATE.MENU;
 	}
-
+	/**
+	 * Sets the state to DeathScreenState.
+	 */
 	public static void setDeathScreenState() {
 		state = STATE.DEATHSCREEN;
 	}
-
+	/**
+	 * Check whether the state is DeathScreenState.
+	 * @return true if state is DeathScreenState.
+	 */
 	public static boolean isDeathScreenState() {
 		return state == STATE.DEATHSCREEN;
 	}
-
+	/**
+	 * Sets the state to RestartState.
+	 */
 	public static void setRestartState() {
 		state = STATE.RESTART;
 	}
-
+	/**
+	 * Check whether the state is RestartState.
+	 * @return true if state is RestartState.
+	 */
 	public static boolean isRestartState() {
 		return state == STATE.RESTART;
 	}
-
+	/**
+	 * Sets the state to NextLevelState.
+	 */
 	public static void setNextLevelState() {
 		state = STATE.NextLevel;
 	}
-
+	/**
+	 * Check whether the state is NextLevelState.
+	 * @return true if state is NextLevelState.
+	 */
 	public static boolean isNextLevelState() {
 		return state == STATE.NextLevel;
 	}
