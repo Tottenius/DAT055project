@@ -56,8 +56,7 @@ public class GamePanel extends JPanel {
 	String CurrentLevel;
 	// music for each level
 	HashMap<String, String> levelMusic = new HashMap<>();
-	// asset that moves
-	List<AbstractAsset> Movingassets = new ArrayList<>();
+
 	private int period = 1000; // ms
 	private int firstTime = 0;
 	private boolean slowTime = false;

@@ -8,7 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 /**
- * A class that is used as an intermediate between the menu and the Main game class. Keeps a track of what State the program is in and also is the main JFram that we then add our JPanel containing the game into. 
+ * A class that is used as an intermediate between the menu and the Main game class. Keeps a track of what State the program is in and also is the main JFrame that we then add our JPanel containing the game into. 
  * 
  * @author Group 10
  *
