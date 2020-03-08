@@ -31,7 +31,7 @@ public class MusicPlayer {
 			final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path));
 			MusicPlayer.clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
-			setVolume(0.1);
+			setVolume(1);
 			clip.start();
 			currently_playing = true;
 
@@ -66,6 +66,7 @@ public class MusicPlayer {
 
 		final FloatControl volume = (FloatControl) MusicPlayer.clip.getControl(FloatControl.Type.MASTER_GAIN);
 		volume.setValue(20f * (float) Math.log10(d));
+		System.out.println(20f * (float) Math.log10(d));
 	}
 /**
  * Increases the volume of the music.
