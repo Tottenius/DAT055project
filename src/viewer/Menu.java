@@ -35,6 +35,7 @@ public class Menu extends JPanel {
 	private String level = "";
 
 	JButton StartButton = new JButton("Start");
+	JButton SavedGameButton = new JButton("Saved Game");
 	JButton LeaderboardButton = new JButton("Leaderboards");
 	JButton QuitButton = new JButton("Quit");
 
@@ -123,6 +124,12 @@ public class Menu extends JPanel {
 			JOptionPane.showMessageDialog(Menu.this.menu, leaderboard, "Leaderboard", JOptionPane.INFORMATION_MESSAGE,
 					icon);
 		});
+		// For saved game
+		this.SavedGameButton.addActionListener(e -> {
+			GameWindowTemp.setStateGame();
+			SwingUtilities.getWindowAncestor(Menu.this.menu).dispose();
+			new GameWindowTemp("saveLevel");
+		});
 		//For quit button
 		this.QuitButton.addActionListener(e -> {
 			Main.isRunning = false;
@@ -131,11 +138,13 @@ public class Menu extends JPanel {
 
 		// customazation
 		ButtonCustomazation(this.StartButton);
+		ButtonCustomazation(this.SavedGameButton);
 		ButtonCustomazation(this.LeaderboardButton);
 		ButtonCustomazation(this.QuitButton);
 
 		// add buttons to the panel
 		add(this.StartButton);
+		add(this.SavedGameButton);
 		add(this.LeaderboardButton);
 		add(this.QuitButton);
 	}

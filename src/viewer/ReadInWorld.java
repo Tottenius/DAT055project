@@ -1,11 +1,16 @@
 package viewer;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 import Controller.AssetController;
 import Controller.EnemyController;
@@ -35,9 +40,10 @@ public class ReadInWorld {
 
 	// Amount of treasures win condition
 	/**
-	 * The amount of treasures that has to be collected to finnish the current level
+	 * The amount of treasures that has to be collected to finish the current level
 	 */
 	public static int numberOfTresures = 0;
+	private String currentSavedLevel = "";
 
 	// list with assets
 	private List<AbstractAsset> assets = new ArrayList<>();
@@ -60,6 +66,7 @@ public class ReadInWorld {
 		this.levels.put("level8", "src/levels/level8.txt");
 		this.levels.put("level9", "src/levels/level9.txt");
 		this.levels.put("level10", "src/levels/level10.txt");
+		this.levels.put("saveLevel", "src/levels/saveLevel.txt");
 	}
 	/**
 	 * Restarts the current level
@@ -170,6 +177,121 @@ public class ReadInWorld {
 				this.posInList++;
 			}
 		}
+		
+		if ( path == "saveLevel") {
+			FileInputStream saveGameData = null;
+			String s;
+			try {
+				saveGameData = new FileInputStream("src/levels/saveLevelData.txt");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}       
+			Scanner sc = new Scanner(saveGameData);
+			
+			// Save the save level
+			s = sc.nextLine();
+			currentSavedLevel = s;
+			
+			while(sc.hasNextLine()) {
+				if(sc.hasNextInt()) {
+					//System.out.println("found an int "+ sc.nextInt());
+					
+					assets.get(sc.nextInt()).intractable();
+				}
+				else {
+					sc.nextLine();
+				}
+				
+			}
+		}
+	}			
+
+	/**
+	 * Saves the current game
+	 * @param s
+	 * The current level
+	 */
+	//Save a level to two files one for the positions and one for the data
+	public void saveLevel(String s) {
+		int pos = 0;
+		//For the level layout
+		String saveLevel = "";
+		StringBuilder saveLevelBuilder = new StringBuilder(assets.size());
+		// For the level data
+		String saveLevelData = "";
+		StringBuilder saveLevelDataBuilder = new StringBuilder();
+		// Add level that is saved for music etc
+		saveLevelDataBuilder.append(s);
+		saveLevelDataBuilder.append('\n');
+		
+		// Empty the old savefiles
+		PrintWriter writerData;
+		PrintWriter writerLevel;
+		try {
+			writerData = new PrintWriter("src/levels/saveLevelData.txt");
+			writerData.print("");
+			writerData.close();
+			writerLevel = new PrintWriter("src/levels/saveLevel.txt");
+			writerLevel.print("");
+			writerLevel.close();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
+		//Save stationary assets at the right places
+		for(AbstractAsset a: assets) {						
+			if(a instanceof Wall) {
+				saveLevelBuilder.append('#');
+			}
+			else if (a instanceof Tile) {
+				saveLevelBuilder.append(' ');
+			}
+			else if (a instanceof Spikes) {
+				saveLevelBuilder.append('s');
+			}
+			else if (a instanceof Door) {
+				saveLevelBuilder.append('d');
+			}
+			else if (a instanceof Treasure) {
+				saveLevelBuilder.append('t');
+				if (((Treasure) a).treasureIsOpen()) {
+					saveLevelDataBuilder.append(pos);
+					saveLevelDataBuilder.append('\n');					
+				}
+			}
+			else if ( a instanceof Empty) {
+				saveLevelBuilder.append(' ');
+			}
+			pos++;
+		}
+		pos = 0;
+		//Save moving assets at the right places
+		for(AbstractAsset a: movingAssets) {
+			if(a instanceof Enemy) {
+				saveLevelBuilder.deleteCharAt(pos);
+				saveLevelBuilder.insert(pos, 'e');
+			}
+			else if (a instanceof Player) {
+				saveLevelBuilder.deleteCharAt(pos);
+				saveLevelBuilder.insert(pos, 'p');
+			}
+			pos++;
+		}
+		saveLevel = saveLevelBuilder.toString();
+		saveLevelData = saveLevelDataBuilder.toString();
+		
+		//Write the level to a file
+		try (PrintWriter out = new PrintWriter("src/levels/saveLevel.txt")) {
+		    out.println(saveLevel);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		//Write the data to a file
+		try (PrintWriter out = new PrintWriter("src/levels/saveLevelData.txt")) {
+		    out.println(saveLevelData);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Starta controllers
@@ -215,5 +337,13 @@ public class ReadInWorld {
 	 */
 	public void setMovingAssets(final List<AbstractAsset> movingAssets) {
 		this.movingAssets = movingAssets;
+	}
+	/**
+	 * Gets the saved levels level number
+	 * @return
+	 * Returns the saved levels level
+	 */
+	public String getCurrentSavedLevel() {
+		return currentSavedLevel;
 	}
 }

@@ -31,6 +31,7 @@ public class Treasure extends AbstractAsset {
 
 	public void openTreasure() {
 		super.getImageAtMap(Direction.UP);
+		openedTreasures++;
 		this.isOpen = true;
 	}
 
@@ -57,7 +58,7 @@ public class Treasure extends AbstractAsset {
 	public boolean intractable() {
 		if (!this.isOpen) {
 			this.openTreasure();
-			setOpenedTreasures(getOpenedTreasures() + 1);
+			//setOpenedTreasures(getOpenedTreasures() + 1);
 		}
 
 		return true;

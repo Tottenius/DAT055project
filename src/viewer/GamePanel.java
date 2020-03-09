@@ -81,6 +81,7 @@ public class GamePanel extends JPanel {
 		this.levelMusic.put("level8", "src/Music/level8.aifc");
 		this.levelMusic.put("level9", "src/Music/level9.aifc");
 		this.levelMusic.put("level10","src/Music/level10.aifc");
+		this.levelMusic.put("saveLevel", "src/Music/level1.aifc");
 		
 	}
 
@@ -243,7 +244,10 @@ public class GamePanel extends JPanel {
 		this.CurrentLevel = CurrentLevel;
 		this.world = new ReadInWorld(this.CurrentLevel);
 		this.world.startControllers();
-
+		// if it's a saved game, change it to the right level
+		if(this.CurrentLevel == "saveLevel") {
+			this.CurrentLevel = world.getCurrentSavedLevel();;
+		}
 		// set layout
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setLayout(null);
@@ -287,6 +291,12 @@ public class GamePanel extends JPanel {
 					StopWatch.start();
 					GamePanel.this.HowManyTries++;
 				}
+				if(GameWindowTemp.isSaveLevelState()) {
+					GamePanel.this.world.saveLevel(GamePanel.this.CurrentLevel);
+					//GamePanel.this.world = new ReadInWorld("saveLevel");
+					//GamePanel.this.world.startControllers();
+					GameWindowTemp.setStateGame();
+				}
 
 				if (GameWindowTemp.isNextLevelState()) {
 
@@ -313,13 +323,12 @@ public class GamePanel extends JPanel {
 						if (GamePanel.this.CurrentLevel.equals("level9"))
 							GamePanel.this.CurrentLevel = "level10";
 						else {
-					String nextLevelNumber = GamePanel.this.CurrentLevel
-							.substring(GamePanel.this.CurrentLevel.length() - 1);
-					nextLevelNumber = String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
-					GamePanel.this.CurrentLevel = "level" + nextLevelNumber;
+							String nextLevelNumber = GamePanel.this.CurrentLevel.substring(GamePanel.this.CurrentLevel.length() - 1);
+							nextLevelNumber = String.valueOf(Integer.parseInt(nextLevelNumber) + 1);
+							GamePanel.this.CurrentLevel = "level" + nextLevelNumber;
 						}
 						
-					GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
+						GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
 						GameWindowTemp.setStateGame();
 						GamePanel.this.world.startControllers();
 						playMusic(getLevelMusic(GamePanel.this.CurrentLevel));

@@ -21,7 +21,7 @@ public class GameWindowTemp extends JFrame {
 	Long TimeForCompletion;
 
 	private enum STATE {
-		MENU, GAME, DEATHSCREEN, RESTART, WIN, NextLevel,
+		MENU, GAME, DEATHSCREEN, RESTART, WIN, NextLevel, SAVE,
 	} 
 
 	// create states
@@ -36,7 +36,7 @@ public class GameWindowTemp extends JFrame {
 	private final JMenu jmenu2 = new JMenu("Volume");
 
 	// Menu items
-	static JMenuItem m1, m2, m3, m4, m5, m6;
+	static JMenuItem m1, m2, m3, m4, m5, m6, m7;
 
 	// local reference to it self
 	private final GameWindowTemp window = this;
@@ -102,6 +102,7 @@ public class GameWindowTemp extends JFrame {
 		m4 = new JMenuItem("Quit to main menu");
 		m5 = new JMenuItem("Increase Volume");
 		m6 = new JMenuItem("Decrease Volume");
+		m7 = new JMenuItem("Save Game");
 		
 		m1.addActionListener(e -> {
 			
@@ -146,12 +147,18 @@ public class GameWindowTemp extends JFrame {
 
 			MusicPlayer.decreaseVolume();
 		});
+		// Decreasing the audio volume
+		m7.addActionListener(e -> {
+
+			GameWindowTemp.setSaveState();
+		});
 
 		// add menu items to menu
 		this.jmenu.add(m1);
 		this.jmenu.add(m2);
 		this.jmenu.add(m3);
-		this.jmenu.add(m4);
+		this.jmenu.add(m7);
+		this.jmenu.add(m4);		
 		this.jmenu2.add(m5);
 		this.jmenu2.add(m6);
 
@@ -235,5 +242,18 @@ public class GameWindowTemp extends JFrame {
 	 */
 	public static boolean isNextLevelState() {
 		return state == STATE.NextLevel;
+	}
+	/**
+	 * Sets the state to SAVE
+	 */
+	public static void setSaveState() {
+		state = STATE.SAVE;
+	}
+	/**
+	 * Check whether the state is SAVE.
+	 * @return true if state is SAVE.
+	 */
+	public static boolean isSaveLevelState() {
+		return state == STATE.SAVE;
 	}
 }
