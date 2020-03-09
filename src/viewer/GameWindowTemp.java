@@ -136,7 +136,7 @@ public class GameWindowTemp extends JFrame {
 		m4.addActionListener(e -> {					
 			GameWindowTemp.setStateMenu();
 			GameWindowTemp.this.window.dispose();
-			new GameWindowTemp(null);
+			new GameWindowTemp("level1");
 		});
 
 		// Increasing the audio volume
