@@ -237,7 +237,7 @@ public class GamePanel extends JPanel {
 
 		this.HowManyTries = 1;
 		GamePanel.profileName = profileName;
-
+		closeSocket();
 		UDPSetup();
 
 		// read in and build level
@@ -263,7 +263,18 @@ public class GamePanel extends JPanel {
 
 		startTimer(0, 1000 / 60);
 		StopWatch.start();
+	
 	}
+	
+	private void closeSocket() {
+		GamePanel.this.client.stopSocket();
+		try {
+			GamePanel.this.client.sendMessage("bye");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	private void setTimeToCompleteGame() {
 

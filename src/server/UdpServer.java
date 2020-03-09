@@ -73,10 +73,11 @@ public class UdpServer implements Runnable {
 
 					sendLeaderboardToClient(this.leaderboard);
 				}
-
+				
 				// Exit the server if the client sends "bye"
 				else if (data(receive).toString().equals("bye")) {
 					System.out.println("Client sent bye.....EXITING");
+					socket.close();
 					break;
 				} else {
 					writeToLeaderboard(data(receive));
@@ -87,6 +88,7 @@ public class UdpServer implements Runnable {
 			}
 		}
 	}
+	
 /**
  * Sends a leaderboard string representation to another source.
  * 

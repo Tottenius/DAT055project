@@ -12,6 +12,7 @@ import java.net.*;
 public class UdpClient implements Runnable {
 
 	String input = "";
+	int previouslyRan = 0;
 /**
  * Method takes a message and sends it via standard UDP protocol.
  * 
@@ -47,13 +48,13 @@ public class UdpClient implements Runnable {
  * @throws IOException
  */
 	public void startClient() throws IOException {
-		
+	
 		// Step 1 : Create a socket to listen at port 4568
 		try (final DatagramSocket socket = new DatagramSocket(4568)) {
 			byte[] receive = new byte[65535];
 
 			DatagramPacket DpReceive = null;
-			while (true) {
+			while (previouslyRan == 0) {
 
 				// Step 2 : create a DatgramPacket to receive the data.
 				DpReceive = new DatagramPacket(receive, receive.length);
@@ -65,8 +66,15 @@ public class UdpClient implements Runnable {
 				// Clear the buffer after every message.
 				receive = new byte[65535];
 			}
-		}
+			
+		}		
 	}
+	
+	public void stopSocket() {
+		
+	this.previouslyRan = 1;	
+	}
+	
 /**
  * Sets the received input from another source.
  * 

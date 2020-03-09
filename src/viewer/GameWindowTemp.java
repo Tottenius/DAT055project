@@ -7,6 +7,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import server.UdpClient;
+import server.UdpServer;
 /**
  * A class that is used as an intermediate between the menu and the Main game class. Keeps a track of what State the program is in and also is the main JFrame that we then add our JPanel containing the game into. 
  * 
@@ -57,13 +60,14 @@ public class GameWindowTemp extends JFrame {
 
 		if (state == STATE.MENU) {
 
+			
 			if (MusicPlayer.isMusicRunning()) {
 				MusicPlayer.StopMusic();
 				MusicPlayer.playSound(this.menuSongPath);
 			} else {
 				MusicPlayer.playSound(this.menuSongPath);
 			}
-
+			
 			this.menu = new Menu(returnNextLevel());
 			this.add(this.menu);
 		}
@@ -129,8 +133,7 @@ public class GameWindowTemp extends JFrame {
 			setRestartState();
 		});
 		// Return to the main menu
-		m4.addActionListener(e -> {
-			
+		m4.addActionListener(e -> {					
 			GameWindowTemp.setStateMenu();
 			GameWindowTemp.this.window.dispose();
 			new GameWindowTemp(null);
