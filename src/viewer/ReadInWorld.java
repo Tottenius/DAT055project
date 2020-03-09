@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import Controller.AssetController;
+import Controller.Direction;
 import Controller.EnemyController;
 import Controller.PlayerController;
 import Controller.SpikeController;
@@ -271,7 +272,7 @@ public class ReadInWorld {
 				saveLevelBuilder.deleteCharAt(pos);
 				saveLevelBuilder.insert(pos, 'e');
 			}
-			else if (a instanceof Player) {
+			else if (a.killable()) {
 				saveLevelBuilder.deleteCharAt(pos);
 				saveLevelBuilder.insert(pos, 'p');
 			}

@@ -150,7 +150,7 @@ public class GameWindowTemp extends JFrame {
 		});
 		// Decreasing the audio volume
 		m7.addActionListener(e -> {
-
+			if(isGameState() )
 			GameWindowTemp.setSaveState();
 		});
 
