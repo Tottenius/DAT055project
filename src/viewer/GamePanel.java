@@ -364,7 +364,6 @@ public class GamePanel extends JPanel {
 					repaint();
 				}
 				else {
-					System.out.println("stänger av tråden i gamepanel");
 					timer.cancel();
 				}
 			}
