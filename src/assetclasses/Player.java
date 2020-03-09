@@ -1,11 +1,9 @@
 package assetclasses;
 
 import java.awt.Graphics;
-import java.awt.Point;
-
 import Controller.Direction;
 import viewer.GamePanel;
-import viewer.GameSettings;
+
 /**
  * An class for a player asset.
  * 

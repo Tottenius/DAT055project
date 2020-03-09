@@ -10,18 +10,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-
 import Controller.AssetController;
-import Controller.Direction;
 import Controller.EnemyController;
 import Controller.PlayerController;
 import Controller.SpikeController;
 import assetclasses.AbstractAsset;
-
 import assetclasses.Empty;
-
 import assetclasses.Door;
-
 import assetclasses.Enemy;
 import assetclasses.Player;
 import assetclasses.Spikes;
