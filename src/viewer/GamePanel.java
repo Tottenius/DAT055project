@@ -246,6 +246,8 @@ public class GamePanel extends JPanel {
 		this.world.startControllers();
 		// if it's a saved game, change it to the right level
 		if(this.CurrentLevel == "saveLevel") {
+			this.timeToBeatGame = world.getTime();
+			System.out.println(this.timeToBeatGame);
 			this.CurrentLevel = world.getCurrentSavedLevel();;
 		}
 		// set layout
@@ -303,9 +305,8 @@ public class GamePanel extends JPanel {
 					GamePanel.this.HowManyTries++;
 				}
 				if(GameWindowTemp.isSaveLevelState()) {
-					GamePanel.this.world.saveLevel(GamePanel.this.CurrentLevel);
-					//GamePanel.this.world = new ReadInWorld("saveLevel");
-					//GamePanel.this.world.startControllers();
+					setTimeToCompleteGame();
+					GamePanel.this.world.saveLevel(GamePanel.this.CurrentLevel, GamePanel.this.timeToBeatGame);
 					GameWindowTemp.setStateGame();
 				}
 
@@ -361,6 +362,10 @@ public class GamePanel extends JPanel {
 					timer.cancel();
 					startTimer(5000, 100000);
 					repaint();
+				}
+				else {
+					System.out.println("stänger av tråden i gamepanel");
+					timer.cancel();
 				}
 			}
 		}, this.firstTime, this.period);

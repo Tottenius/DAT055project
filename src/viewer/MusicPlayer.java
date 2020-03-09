@@ -31,7 +31,7 @@ public class MusicPlayer {
 			final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path));
 			MusicPlayer.clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
-			setVolume(1);
+			setVolume(0.5);
 			clip.start();
 			currently_playing = true;
 
@@ -72,12 +72,12 @@ public class MusicPlayer {
  * Increases the volume of the music.
  */
 	public static void increaseVolume() {
-		setVolume(2.0);
+		setVolume(1.0);
 	}
 /**
  * Decreases the volume of the the music.
  */
 	public static void decreaseVolume() {
-		setVolume(0.5);
+		setVolume(0.1);
 	}
 }
