@@ -69,7 +69,9 @@ public class UdpClient implements Runnable {
 			
 		}		
 	}
-	
+	/**
+	 * Closes the socket, precaution for starting new game. 
+	 */
 	public void stopSocket() {
 		
 	this.previouslyRan = 1;	
