@@ -31,8 +31,8 @@ public abstract class AbstractAsset implements Asset {
 	private  Image img;
 	protected Direction direction;
 
-	private final  Map<Direction, Image> images = new HashMap<>();
-	private final List<String> previouslyLoaded = new ArrayList<>();
+	private static final  Map<Direction, Image> images = new HashMap<>();
+	private static final List<String> previouslyLoaded = new ArrayList<>();
 	
 	
 
