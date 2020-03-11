@@ -1,6 +1,7 @@
 package assetclasses;
 
 import java.awt.Graphics;
+import java.awt.Image;
 
 import Controller.Direction;
 import viewer.GamePanel;
@@ -13,10 +14,10 @@ import viewer.GamePanel;
 public class Tile extends AbstractAsset {
 	
 	private static final String path = "src/assets/tile.png";
+	private static Image image = AssetImageHandler.loadImage(path);
 	
 	public Tile(final int position) {
 		super(position);
-		super.loadImage(path, Direction.DOWN);
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class Tile extends AbstractAsset {
 
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {
-		g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
+		g.drawImage(image, getCoords().x, getCoords().y, gp);
 	}
 
 }

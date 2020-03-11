@@ -1,6 +1,9 @@
 package assetclasses;
 
 import java.awt.Graphics;
+import java.awt.Image;
+import java.util.HashMap;
+import java.util.Map;
 
 import Controller.Direction;
 import viewer.GamePanel;
@@ -13,16 +16,28 @@ import viewer.GamePanel;
  */
 public class Spikes extends AbstractAsset {
 
-	private static final String path = "src/assets/spikes.png";
-	private static final String path2 = "src/assets/tile.png";
+	private static final String pathUp = "src/assets/spikes.png";
+	private static final String pathDown = "src/assets/tile.png";
+	
+	private static Image imageDown = AssetImageHandler.loadImage(pathDown);
+	private static Image imageUp = AssetImageHandler.loadImage(pathUp);
+	
+	private static Map<Direction,Image> map = new HashMap<>();
+	
+	
 	private boolean up = true;
 	private boolean canKill = true;
 	private boolean canWalkOn = false;
+	
 
 	public Spikes(final int position) {
 		super(position);
-		super.loadImage(Spikes.path, Direction.UP);
-		super.loadImage(Spikes.path2, Direction.DOWN);
+		initMap();
+	}
+	
+	private void initMap() {
+		map.put(Direction.UP,imageUp );
+		map.put(Direction.DOWN,imageDown );
 	}
 
 	@Override
@@ -63,11 +78,9 @@ public class Spikes extends AbstractAsset {
 	public void paintAsset(final Graphics g, final GamePanel gp) {
 
 		if (this.up) {
-			this.getImageAtMap(Direction.UP);
-			g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
+			g.drawImage(map.get(Direction.UP), getCoords().x, getCoords().y, gp);
 		} else {
-			this.getImageAtMap(Direction.DOWN);
-			g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
+			g.drawImage(map.get(Direction.DOWN), getCoords().x, getCoords().y, gp);
 		}
 	}
 }

@@ -1,6 +1,10 @@
 package assetclasses;
 
 import java.awt.Graphics;
+import java.awt.Image;
+import java.util.HashMap;
+import java.util.Map;
+
 import Controller.Direction;
 import viewer.GamePanel;
 
@@ -16,16 +20,31 @@ public class Player extends AbstractAsset {
 	private static final String up = "src/assets/PlayerUp.png";
 	private static final String left = "src/assets/PlayerLeft.png";
 	private static final String right = "src/assets/PlayerRight.png";
+	
+	private static Image imageDown = AssetImageHandler.loadImage(down);
+	private static Image imageUp = AssetImageHandler.loadImage(up);
+	private static Image imageLeft = AssetImageHandler.loadImage(left);
+	private static Image imageRight = AssetImageHandler.loadImage(right);
+	
+	private Image currentImage = null;
+	
+	private static Map<Direction,Image> map = new HashMap<>();
 
 	private boolean alive;
 	public Player(final int position) {
 		super(position);
-		super.loadImage(Player.up, Direction.UP);
-		super.loadImage(Player.down, Direction.DOWN);
-		super.loadImage(Player.left, Direction.LEFT);
-		super.loadImage(Player.right, Direction.RIGHT);
 		this.alive = true;
+		initMap();
 	}
+	
+	private void initMap() {
+		
+		Player.map.put(Direction.DOWN, imageDown );
+		Player.map.put(Direction.UP, imageUp );
+		Player.map.put(Direction.LEFT, imageLeft );
+		Player.map.put(Direction.RIGHT, imageRight );
+	}
+	
 /**
  * Method to get the state of the player.
  * 
@@ -66,13 +85,13 @@ public class Player extends AbstractAsset {
 	@Override
 	public boolean hasDirections(final Direction d) {
 		this.direction = d;
-		getImageAtMap(d);
+		currentImage = map.get(d);
 		return true;
 	}
 
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {
 
-		g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
+		g.drawImage(Player.this.currentImage, getCoords().x, getCoords().y, gp);
 	}
 }

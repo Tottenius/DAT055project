@@ -1,6 +1,9 @@
 package assetclasses;
 
 import java.awt.Graphics;
+import java.awt.Image;
+import java.util.HashMap;
+import java.util.Map;
 
 import Controller.Direction;
 import viewer.GamePanel;
@@ -13,9 +16,17 @@ import viewer.GamePanel;
 public class Treasure extends AbstractAsset {
 
 	// closed treasure
-	private final static String path = "src/assets/closedtreasure.png";
+	private final static String ImageClosedPath = "src/assets/closedtreasure.png";
 	// open treasure
-	private final static String path2 = "src/assets/openedtreasure.png";
+	private final static String ImageOpenedPath = "src/assets/openedtreasure.png";
+	
+	
+	private static Image imageClosed = AssetImageHandler.loadImage(ImageClosedPath);
+	private static Image imageOpened= AssetImageHandler.loadImage(ImageOpenedPath);
+	
+	private static Map<Direction,Image> map = new HashMap<>();
+	
+	
 	// Open bool
 	private boolean isOpen = false;
 
@@ -23,19 +34,20 @@ public class Treasure extends AbstractAsset {
 
 	public Treasure(final int position) {
 		super(position);
-		super.loadImage(Treasure.path, Direction.DOWN);
-		super.loadImage(Treasure.path2, Direction.UP);
-		super.getImageAtMap(Direction.DOWN);
+		initMap();
+	}
+	
+	private void initMap() {
+		map.put(Direction.UP,imageOpened );
+		map.put(Direction.DOWN,imageClosed );
 	}
 
 	public void openTreasure() {
-		super.getImageAtMap(Direction.UP);
 		openedTreasures++;
 		this.isOpen = true;
 	}
 
 	public void closeTreasure() {
-		super.getImageAtMap(Direction.DOWN);
 		this.isOpen = false;
 	}
 
@@ -75,7 +87,11 @@ public class Treasure extends AbstractAsset {
 
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {
-		g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
+		
+		if(Treasure.this.isOpen )
+			g.drawImage(map.get(Direction.UP), getCoords().x, getCoords().y, gp);
+		else
+		g.drawImage(map.get(Direction.DOWN), getCoords().x, getCoords().y, gp);
 	}
 /**
  * 
