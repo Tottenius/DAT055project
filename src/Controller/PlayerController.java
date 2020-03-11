@@ -92,7 +92,7 @@ public class PlayerController extends AssetController {
 	 */
 	@Override
 	public void startController() {
-		this.b.scheduleAtFixedRate(this.c, 1000, 150);
+		this.b.scheduleAtFixedRate(this.c, 1000, 10);
 
 	}
 }

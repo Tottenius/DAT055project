@@ -28,8 +28,11 @@ public abstract class AbstractAsset implements Asset {
 	private final static int size = GameSettings.getAssetsize();
 	private int position;
 	private Point coords;
-	private  Image img;
+	private Image img;
 	protected Direction direction;
+
+	private static final  Map<Direction, Image> images = new HashMap<>();
+	private static final List<String> previouslyLoaded = new ArrayList<>();
 	
 	
 
@@ -44,7 +47,55 @@ public abstract class AbstractAsset implements Asset {
 		this.setCoords();
 	}
 
+	/**
+	 * returns img field, that being the assets image represenation. 
+	 * 
+	 */
+	
+	public  Image getImage() {
+		return img;
+	}
 
+	/**
+	 * Set the image at an specified location in our asset array, the image it sets is determined by the direction param.
+	 * 
+	 * @param direction
+	 */
+	public void getImageAtMap(final Direction direction) {
+		img = images.get(direction);
+	}
+
+	/**
+	 * Loads in an image, determined by the path and direction parameters, 
+	 * the direction is used to store different images for the same assets.
+	 * The method also scales the image the gets loaded in such that all assets are the same size.
+	 * 
+	 * @param path
+	 * @param direction
+	 */
+	public void loadImage(final String path, final Direction direction) {
+
+		if(previouslyLoaded.contains(path))
+			return;
+		
+		else {
+			previouslyLoaded.add(path);
+			
+		try {
+			img = ImageIO.read(new File(path));
+		} catch (final IOException e) {
+			e.printStackTrace();
+		}
+
+		// Scaling the image so all images loaded in are the same size
+		img = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
+		images.put(direction, img);
+		
+		//System.out.println("Load image " + images);
+		}
+	}
+
+	
 	/**
 	 * Get the array location for a specified image
 	 * 

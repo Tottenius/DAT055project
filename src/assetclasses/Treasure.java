@@ -69,7 +69,6 @@ public class Treasure extends AbstractAsset {
 	public boolean intractable() {
 		if (!this.isOpen) {
 			this.openTreasure();
-			//setOpenedTreasures(getOpenedTreasures() + 1);
 		}
 
 		return true;
