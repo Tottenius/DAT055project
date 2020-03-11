@@ -17,7 +17,6 @@ public class Wall extends AbstractAsset {
 	public Wall(final int position) {
 		super(position);
 		super.loadImage(path, Direction.DOWN);
-		super.getImage();
 	}
 
 	@Override

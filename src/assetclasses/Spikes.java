@@ -23,7 +23,6 @@ public class Spikes extends AbstractAsset {
 		super(position);
 		super.loadImage(path, Direction.UP);
 		super.loadImage(path2, Direction.DOWN);
-		super.getImage();
 	}
 
 	@Override

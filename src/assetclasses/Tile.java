@@ -17,7 +17,6 @@ public class Tile extends AbstractAsset {
 	public Tile(final int position) {
 		super(position);
 		super.loadImage(path, Direction.DOWN);
-		super.getImage();
 	}
 
 	@Override

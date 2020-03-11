@@ -19,7 +19,6 @@ public class Door extends AbstractAsset {
 	public Door(final int position) {
 		super(position);
 		super.loadImage(path, Direction.DOWN);
-		super.getImage();
 	}
 
 	@Override
