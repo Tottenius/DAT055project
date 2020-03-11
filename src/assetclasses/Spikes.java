@@ -21,8 +21,8 @@ public class Spikes extends AbstractAsset {
 
 	public Spikes(final int position) {
 		super(position);
-		super.loadImage(path, Direction.UP);
-		super.loadImage(path2, Direction.DOWN);
+		super.loadImage(Spikes.path, Direction.UP);
+		super.loadImage(Spikes.path2, Direction.DOWN);
 	}
 
 	@Override
@@ -64,10 +64,10 @@ public class Spikes extends AbstractAsset {
 
 		if (this.up) {
 			this.getImageAtMap(Direction.UP);
-			g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
+			g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
 		} else {
 			this.getImageAtMap(Direction.DOWN);
-			g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
+			g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
 		}
 	}
 }

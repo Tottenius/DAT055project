@@ -20,7 +20,7 @@ public interface Asset {
 	 * @return Image
 	 */
 	
-	Image getImage(); 
+	//Image stigetImage();
 
 	// ------------------------------------------------ Asset Attributes ------------------------------------------------ \\
 	

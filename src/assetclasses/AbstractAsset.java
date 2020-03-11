@@ -4,7 +4,9 @@ import java.awt.Image;
 import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -26,10 +28,13 @@ public abstract class AbstractAsset implements Asset {
 	private final static int size = GameSettings.getAssetsize();
 	private int position;
 	private Point coords;
-	private Image img;
+	private  Image img;
 	protected Direction direction;
 
-	private final Map<Direction, Image> images = new HashMap<>();
+	private final  Map<Direction, Image> images = new HashMap<>();
+	private final List<String> previouslyLoaded = new ArrayList<>();
+	
+	
 
 	/**
 	 * Constructor takes position that will set the class position and coords field.
@@ -46,9 +51,9 @@ public abstract class AbstractAsset implements Asset {
 	 * returns img field, that being the assets image represenation. 
 	 * 
 	 */
-	@Override
-	public Image getImage() {
-		return this.img;
+	
+	public  Image getImage() {
+		return img;
 	}
 
 	/**
@@ -57,7 +62,7 @@ public abstract class AbstractAsset implements Asset {
 	 * @param direction
 	 */
 	public void getImageAtMap(final Direction direction) {
-		this.img = this.images.get(direction);
+		img = images.get(direction);
 	}
 
 	/**
@@ -68,21 +73,27 @@ public abstract class AbstractAsset implements Asset {
 	 * @param path
 	 * @param direction
 	 */
-	public void loadImage(final String path, final Direction direction) {
-		Image imgTemp = getImage();
-		
+	public  void loadImage(final String path, final Direction direction) {
 
+		if(previouslyLoaded.contains(path))
+			return;
+		
+		else {
+			previouslyLoaded.add(path);
+			
 		try {
-			this.img = ImageIO.read(new File(path));
+			img = ImageIO.read(new File(path));
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 
 		// Scaling the image so all images loaded in are the same size
-		imgTemp = this.img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
-		this.img = imgTemp;
-		this.images.put(direction, this.img);
-	}
+		img = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
+		images.put(direction, img);
+		
+	System.out.println(images);
+		}
+		}
 
 	
 	/**

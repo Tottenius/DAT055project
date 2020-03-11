@@ -18,7 +18,7 @@ public class Door extends AbstractAsset {
 
 	public Door(final int position) {
 		super(position);
-		super.loadImage(path, Direction.DOWN);
+		super.loadImage(Door.path, Direction.DOWN);
 	}
 
 	@Override
@@ -55,6 +55,6 @@ public class Door extends AbstractAsset {
 
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {
-		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
+		g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
 	}
 }

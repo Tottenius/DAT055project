@@ -16,7 +16,7 @@ public class Wall extends AbstractAsset {
 
 	public Wall(final int position) {
 		super(position);
-		super.loadImage(path, Direction.DOWN);
+		super.loadImage(Wall.path, Direction.DOWN);
 	}
 
 	@Override
@@ -46,6 +46,6 @@ public class Wall extends AbstractAsset {
 
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {
-		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
+		g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
 	}
 }

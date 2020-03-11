@@ -20,10 +20,10 @@ public class Player extends AbstractAsset {
 	private boolean alive;
 	public Player(final int position) {
 		super(position);
-		super.loadImage(up, Direction.UP);
-		super.loadImage(down, Direction.DOWN);
-		super.loadImage(left, Direction.LEFT);
-		super.loadImage(right, Direction.RIGHT);
+		super.loadImage(Player.up, Direction.UP);
+		super.loadImage(Player.down, Direction.DOWN);
+		super.loadImage(Player.left, Direction.LEFT);
+		super.loadImage(Player.right, Direction.RIGHT);
 		this.alive = true;
 	}
 /**
@@ -73,6 +73,6 @@ public class Player extends AbstractAsset {
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {
 
-		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
+		g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
 	}
 }

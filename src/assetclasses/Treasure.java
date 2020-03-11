@@ -23,8 +23,8 @@ public class Treasure extends AbstractAsset {
 
 	public Treasure(final int position) {
 		super(position);
-		super.loadImage(path, Direction.DOWN);
-		super.loadImage(path2, Direction.UP);
+		super.loadImage(Treasure.path, Direction.DOWN);
+		super.loadImage(Treasure.path2, Direction.UP);
 		super.getImageAtMap(Direction.DOWN);
 	}
 
@@ -75,7 +75,7 @@ public class Treasure extends AbstractAsset {
 
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {
-		g.drawImage(this.getImage(), getCoords().x, getCoords().y, gp);
+		g.drawImage(getImage(), getCoords().x, getCoords().y, gp);
 	}
 /**
  * 
