@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import Controller.Direction;
 import viewer.GamePanel;
-import viewer.ReadInWorld;
 /**
  * An class for a TreasureChest asset.
  * 
