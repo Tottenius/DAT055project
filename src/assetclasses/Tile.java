@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import Controller.Direction;
 import viewer.GamePanel;
 /**
- * An class for a Tile asset.
+ * A class for a Tile asset.
  * 
  * @author Group 10
  *

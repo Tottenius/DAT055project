@@ -91,7 +91,7 @@ public abstract class AbstractAsset implements Asset {
 		img = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
 		images.put(direction, img);
 		
-	System.out.println(images);
+	//System.out.println("Load image " + images);
 		}
 		}
 

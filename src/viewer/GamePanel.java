@@ -247,8 +247,11 @@ public class GamePanel extends JPanel {
 		// if it's a saved game, change it to the right level
 		if(this.CurrentLevel == "saveLevel") {
 			this.timeToBeatGame = world.getTime();
-			System.out.println(this.timeToBeatGame);
 			this.CurrentLevel = world.getCurrentSavedLevel();;
+			this.HowManyTries = world.getAttempts();
+			System.out.println("Level Restarted :" + this.CurrentLevel);
+			System.out.println("Time Restarted: " + this.timeToBeatGame);
+			System.out.println("attempts Restarted: " + this.HowManyTries);
 		}
 		// set layout
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -300,14 +303,21 @@ public class GamePanel extends JPanel {
 					GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
 					GameWindowTemp.setStateGame();
 					GamePanel.this.world.startControllers();
-					// reset timer
+					// set timer
+					setTimeToCompleteGame();
 					StopWatch.start();
 					GamePanel.this.HowManyTries++;
+					System.out.println(GamePanel.this.timeToBeatGame);
 				}
 				if(GameWindowTemp.isSaveLevelState()) {
 					setTimeToCompleteGame();
-					GamePanel.this.world.saveLevel(GamePanel.this.CurrentLevel, GamePanel.this.timeToBeatGame);
+					//GamePanel.this.timeToBeatGame = StopWatch.stopTimer();
+					GamePanel.this.world.saveLevel(GamePanel.this.CurrentLevel, GamePanel.this.timeToBeatGame, GamePanel.this.HowManyTries);
+					System.out.println("Level save :" + GamePanel.this.CurrentLevel);
+					System.out.println("Time save : " + GamePanel.this.timeToBeatGame);
+					System.out.println("attempts save : " + GamePanel.this.HowManyTries);
 					GameWindowTemp.setStateGame();
+					StopWatch.start();
 				}
 
 				if (GameWindowTemp.isNextLevelState()) {

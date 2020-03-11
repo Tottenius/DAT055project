@@ -56,16 +56,13 @@ public class GameWindowTemp extends JFrame {
 	public GameWindowTemp(final String nextLevel) {
 		this.nextLevel = nextLevel;
 
-		if (state == STATE.MENU) {
-
-			
+		if (state == STATE.MENU) {	
 			if (MusicPlayer.isMusicRunning()) {
 				MusicPlayer.StopMusic();
 				MusicPlayer.playSound(this.menuSongPath);
 			} else {
 				MusicPlayer.playSound(this.menuSongPath);
-			}
-			
+			}		
 			this.menu = new Menu(returnNextLevel());
 			this.add(this.menu);
 		}

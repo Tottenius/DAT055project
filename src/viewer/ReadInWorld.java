@@ -39,6 +39,7 @@ public class ReadInWorld {
 	 */
 	public static int numberOfTresures = 0;
 	private String currentSavedLevel = "";
+	private int attempts;
 	private long time;
 
 	// list with assets
@@ -187,13 +188,13 @@ public class ReadInWorld {
 			// Save the save level
 			s = sc.nextLine();
 			currentSavedLevel = s;
+			//Number of attempts
+			attempts = sc.nextInt();
 			// Save the time
 			time = sc.nextLong();
 						
 			while(sc.hasNextLine()) {
-				if(sc.hasNextInt()) {
-					//System.out.println("found an int "+ sc.nextInt());
-					
+				if(sc.hasNextInt()) {		
 					assets.get(sc.nextInt()).intractable();
 				}
 				else {
@@ -211,7 +212,7 @@ public class ReadInWorld {
 	 * The current level
 	 */
 	//Save a level to two files one for the positions and one for the data
-	public void saveLevel(String s, long currentTime) {
+	public void saveLevel(String s, long currentTime, int attempts) {
 		int pos = 0;
 		//For the level layout
 		String saveLevel = "";
@@ -221,6 +222,9 @@ public class ReadInWorld {
 		StringBuilder saveLevelDataBuilder = new StringBuilder();
 		// Add level that is saved for music etc
 		saveLevelDataBuilder.append(s);
+		saveLevelDataBuilder.append('\n');
+		//Attempts
+		saveLevelDataBuilder.append(attempts);
 		saveLevelDataBuilder.append('\n');
 		//Game time
 		saveLevelDataBuilder.append(currentTime);
@@ -233,7 +237,6 @@ public class ReadInWorld {
 			writerData = new PrintWriter("src/levels/saveLevelData.txt");
 			writerData.print("");
 			writerData.close();
-			System.out.println("Nollställer gamla saveLevel.txt");
 			writerLevel = new PrintWriter("src/levels/saveLevel.txt");
 			writerLevel.print("");
 			writerLevel.close();
@@ -356,5 +359,13 @@ public class ReadInWorld {
 	 */
 	public long getTime() {
 		return time;
+	}
+	/**
+	 * Gives the saved games time
+	 * @return
+	 * Time taken until game was saved
+	 */
+	public int getAttempts() {
+		return attempts;
 	}
 }
