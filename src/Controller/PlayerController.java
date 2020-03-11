@@ -77,7 +77,7 @@ public class PlayerController extends AssetController {
 				// PlayerController.this.player.setPrevPos();
 				GamePanel.setKeyPressed(false);
 
-			} else if (!GameWindowTemp.isGameState()) {
+			} else if (!GameWindowTemp.isGameState() && !GameWindowTemp.isSaveLevelState()) {
 				GamePanel.numberOfControllers--;
 				this.cancel();
 			} else if (!PlayerController.this.player.isAlive()) {

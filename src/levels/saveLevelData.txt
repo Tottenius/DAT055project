@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 level1
 1
 141
 367
 720
+=======
+level2
+1
+37
+>>>>>>> branch 'master' of https://github.com/Tottenius/DAT055project
 
