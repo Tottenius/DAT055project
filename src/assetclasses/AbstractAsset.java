@@ -26,10 +26,10 @@ public abstract class AbstractAsset implements Asset {
 	private final static int size = GameSettings.getAssetsize();
 	private int position;
 	private Point coords;
-	private Image img;
+	private static Image img;
 	protected Direction direction;
 
-	private final Map<Direction, Image> images = new HashMap<>();
+	private final static Map<Direction, Image> images = new HashMap<>();
 
 	/**
 	 * Constructor takes position that will set the class position and coords field.
@@ -48,7 +48,7 @@ public abstract class AbstractAsset implements Asset {
 	 */
 	@Override
 	public Image getImage() {
-		return this.img;
+		return AbstractAsset.img;
 	}
 
 	/**
@@ -57,7 +57,7 @@ public abstract class AbstractAsset implements Asset {
 	 * @param direction
 	 */
 	public void getImageAtMap(final Direction direction) {
-		this.img = this.images.get(direction);
+		AbstractAsset.img = this.images.get(direction);
 	}
 
 	/**
@@ -68,19 +68,19 @@ public abstract class AbstractAsset implements Asset {
 	 * @param path
 	 * @param direction
 	 */
-	public void loadImage(final String path, final Direction direction) {
+	public static void loadImage(final String path, final Direction direction) {
 		Image imgTemp;
 
 		try {
-			this.img = ImageIO.read(new File(path));
+			img = ImageIO.read(new File(path));
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 
 		// Scaling the image so all images loaded in are the same size
-		imgTemp = this.img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
-		this.img = imgTemp;
-		this.images.put(direction, this.img);
+		imgTemp = img.getScaledInstance(size, size, Image.SCALE_SMOOTH);
+		img = imgTemp;
+		images.put(direction, img);
 	}
 
 	
