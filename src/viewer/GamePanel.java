@@ -76,11 +76,11 @@ public class GamePanel extends JPanel {
 		this.levelMusic.put("level3", "src/Music/level3.aifc");
 		this.levelMusic.put("level4", "src/Music/level4.aifc");
 		this.levelMusic.put("level5", "src/Music/level5.aifc");
-		this.levelMusic.put("level6", "src/Music/level6.aifc");
+		this.levelMusic.put("level6", "src/Music/level6.wav");
 		this.levelMusic.put("level7", "src/Music/level7.aifc");
-		this.levelMusic.put("level8", "src/Music/level8.aifc");
-		this.levelMusic.put("level9", "src/Music/level9.aifc");
-		this.levelMusic.put("level10","src/Music/level10.aifc");
+		this.levelMusic.put("level8", "src/Music/level8.wav");
+		this.levelMusic.put("level9", "src/Music/level9.wav");
+		this.levelMusic.put("level10","src/Music/level10.wav");
 		this.levelMusic.put("saveLevel", "src/Music/level1.aifc");
 		
 	}
