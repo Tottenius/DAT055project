@@ -1,30 +1,26 @@
 package assetclasses;
 
 import java.awt.Image;
-import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.imageio.ImageIO;
-
-import Controller.Direction;
 import viewer.GameSettings;
 
+/**
+ * Handles the loading of asset images. 
+ * 
+ * @author Anton & Tor
+ *
+ */
 public class AssetImageHandler {
 
 	private final static int size = GameSettings.getAssetsize();
 	
 	/**
-	 * Loads in an image, determined by the path and direction parameters, 
-	 * the direction is used to store different images for the same assets.
+	 * Loads in an image, determined by the path parameter, 
 	 * The method also scales the image the gets loaded in such that all assets are the same size.
-	 * 
 	 * @param path
-	 * @param direction
+	 * @return
 	 */
 	public static Image loadImage(final String path) {
 		Image img = null;
