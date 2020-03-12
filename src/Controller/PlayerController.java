@@ -5,9 +5,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import assetclasses.AbstractAsset;
 import assetclasses.Player;
+import model.ReadInWorld;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
-import viewer.ReadInWorld;
 /**
  * A controller for the Player asset
  * 

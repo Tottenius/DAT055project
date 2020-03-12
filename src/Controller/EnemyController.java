@@ -6,9 +6,9 @@ import java.util.TimerTask;
 import assetclasses.AbstractAsset;
 import assetclasses.Enemy;
 import assetclasses.Player;
+import model.ReadInWorld;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
-import viewer.ReadInWorld;
 /**
  * A controller for the Enemy asset
  * 

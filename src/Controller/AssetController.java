@@ -3,7 +3,7 @@ package Controller;
 import java.util.List;
 import assetclasses.AbstractAsset;
 import assetclasses.Empty;
-import viewer.ReadInWorld;
+import model.ReadInWorld;
 /**
  * An abstract class that is used by other the other controller classes. 
  * It contains all movement methods and setters and getters for positions of the controllers

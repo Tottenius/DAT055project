@@ -4,9 +4,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import Controller.Direction;
+import model.ReadInWorld;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
-import viewer.ReadInWorld;
 
 /**
  * An class for a door asset

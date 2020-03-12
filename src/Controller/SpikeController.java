@@ -5,9 +5,9 @@ import java.util.TimerTask;
 
 import assetclasses.Player;
 import assetclasses.Spikes;
+import model.ReadInWorld;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;
-import viewer.ReadInWorld;
 /**
  * A controller for the Spikes asset
  * 
