@@ -9,6 +9,7 @@ import javax.sound.sampled.FloatControl;
 /**
  * A class for playing music.
  * @author Anton
+ * @version 2020-03-13
  *
  */
 public class MusicPlayer {
@@ -61,11 +62,20 @@ public class MusicPlayer {
 			ex.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Returns the level music path
+	 * 
+	 * @param level
+	 * @return String
+	 */
 	public String getLevelMusic(final String level) {
 		return levelMusic.get(level);
 	}
-
+/**
+ * Intermediate method for handling the music playing
+ * 
+ * @param path
+ */
 	public void playMusic(final String path) {
 		System.out.println(path);
 		

@@ -4,7 +4,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import Controller.Direction;
 
-
+/**
+ * Class that utilizes keylistener for handeling keyinputs.
+ * 
+ * @author Anton
+ * @version 2020-03-13
+ */
 public class KeyListenerController extends KeyAdapter {
 
 private static volatile boolean isKeyPressed = false;

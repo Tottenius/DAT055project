@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
  * Handles the loading of asset images. 
  * 
  * @author Anton & Tor
- *
+ * @version 2020-03-13
  */
 public class AssetImageHandler {
 
