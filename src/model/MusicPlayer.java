@@ -18,13 +18,6 @@ public class MusicPlayer {
 	static Clip clip;
 	// music for each level
 	private  HashMap<String, String> levelMusic = new HashMap<>();
-
-/*
-	public MusicPlayer(final String path) {
-		loadInLevelMusicPaths();
-		playSound(path);
-	}
-	*/
 	
 	public MusicPlayer() {
 		loadInLevelMusicPaths();
@@ -48,7 +41,7 @@ public class MusicPlayer {
  * Plays the song that is determined by the path parameter.
  * @param path
  */
-	public static void playSound(final String path) {
+	private void playSound(final String path) {
 		try {
 
 			@SuppressWarnings("resource")
