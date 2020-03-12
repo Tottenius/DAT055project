@@ -40,8 +40,10 @@ public class ReactionScreen extends JPanel {
 
 	// From constructor given path to the picture and the String that should be
 	// displayed so that we can make diffrent screens!
-	String path;
-	String text;
+	private String path;
+	private String text;
+	private MusicPlayer musicplayer;
+	
 /**
  * Draws the graphical part of the JPanel, can read in an image and or draw a string of text that can be visualized on the screen.
  * @param
@@ -68,10 +70,11 @@ public class ReactionScreen extends JPanel {
  * @param path
  * @param text
  */
-	public ReactionScreen(final String path, final String text) {
+	public ReactionScreen(final String path, final String text, MusicPlayer musicplayer) {
 
 		this.path = path;
 		this.text = text;
+		ReactionScreen.this.musicplayer = musicplayer;
 		this.setLayout(new GridBagLayout());
 		// Add buttons width actionListeners
 		addButtons();
@@ -107,7 +110,7 @@ public class ReactionScreen extends JPanel {
 		});
 
 		this.MenuButton.addActionListener(e -> {
-			MusicPlayer.StopMusic();
+			ReactionScreen.this.musicplayer.StopMusic();
 			GameWindowTemp.setStateMenu();
 			SwingUtilities.getWindowAncestor(ReactionScreen.this.GameOver).dispose();
 			new GameWindowTemp(null);

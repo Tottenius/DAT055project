@@ -97,7 +97,7 @@ public class GamePanel extends JPanel {
 	private void initDeathOrWinScreen(final Graphics g, final String path, final String Msg) {
 
 		this.slowTime = true;
-		final ReactionScreen gos = new ReactionScreen(path, Msg);
+		final ReactionScreen gos = new ReactionScreen(path, Msg, GamePanel.this.musicplayer);
 		gos.render(g);
 		this.add(gos);
 
@@ -128,7 +128,7 @@ public class GamePanel extends JPanel {
 	 * @param CurrentLevel
 	 * @param profileName
 	 */
-	public GamePanel(final String CurrentLevel, final String profileName) {
+	public GamePanel(final String CurrentLevel, final String profileName, MusicPlayer musicplayer) {
 
 		this.HowManyTries = 1;
 		GamePanel.profileName = profileName;
@@ -158,8 +158,8 @@ public class GamePanel extends JPanel {
 		this.setFocusable(true);
 
 		// add music
-		musicplayer = new MusicPlayer();
-		musicplayer.playMusic(musicplayer.getLevelMusic(this.CurrentLevel));
+		this.musicplayer = musicplayer;
+		GamePanel.this.musicplayer.playMusic(GamePanel.this.musicplayer.getLevelMusic(this.CurrentLevel));
 
 		startTimer(0, 1000 / 60);
 		StopWatch.start();

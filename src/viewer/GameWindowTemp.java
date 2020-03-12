@@ -44,26 +44,28 @@ public class GameWindowTemp extends JFrame {
 	// local reference to it self
 	private final GameWindowTemp window = this;
 
-	// menu sound path
-	private final String menuSongPath = "src/Music/MainMenuSong.aifc";
-
 	// What level do read in
 	String nextLevel = "levelewfkjwofkjiewkijef";
+	
+	 private MusicPlayer musicplayer;
 
 	private String returnNextLevel() {
 
 		return this.nextLevel;
 	}
 
-	public GameWindowTemp(final String nextLevel) {
-		this.nextLevel = nextLevel;
 
+	public GameWindowTemp(final String nextLevel) {
+		
+		this.nextLevel = nextLevel;
+		musicplayer = new MusicPlayer();
+		
 		if (state == STATE.MENU) {	
-			if (MusicPlayer.isMusicRunning()) {
-				MusicPlayer.StopMusic();
-				MusicPlayer.playSound(this.menuSongPath);
+			if (musicplayer.isMusicRunning()) {
+				musicplayer.StopMusic();
+				musicplayer.playMusic("menu");
 			} else {
-				MusicPlayer.playSound(this.menuSongPath);
+				musicplayer.playMusic("menu");
 			}		
 			this.menu = new Menu(returnNextLevel());
 			this.add(this.menu);
@@ -71,12 +73,13 @@ public class GameWindowTemp extends JFrame {
 
 		// if gamestate is Game then we start the game;
 		else if (state == STATE.GAME) {
-
+			
 			final Profile profile = new Profile();
 			final String ProfileName = profile.returnProfileName();
 
 			if (!ProfileName.equals("canceled")) {
-				this.add(new GamePanel(returnNextLevel(), ProfileName));
+
+				this.add(new GamePanel(returnNextLevel(), ProfileName, GameWindowTemp.this.musicplayer));
 			}
 			// handles if player exists or presses cancel button when inputing profile name
 			else if (ProfileName.equals("canceled")) {
@@ -139,13 +142,13 @@ public class GameWindowTemp extends JFrame {
 		// Increasing the audio volume
 		m5.addActionListener(e -> {
 
-			MusicPlayer.increaseVolume();
+			musicplayer.increaseVolume();
 		});
 
 		// Decreasing the audio volume
 		m6.addActionListener(e -> {
 
-			MusicPlayer.decreaseVolume();
+			musicplayer.decreaseVolume();
 		});
 		// Decreasing the audio volume
 		m7.addActionListener(e -> {

@@ -35,6 +35,8 @@ public class MusicPlayer {
 		levelMusic.put("level9", "src/Music/level9.wav");
 		levelMusic.put("level10","src/Music/level10.wav");
 		levelMusic.put("saveLevel", "src/Music/level1.aifc");
+		// menu sound path
+		levelMusic.put("menu", "src/Music/MainMenuSong.aifc");
 		
 	}
 /**
@@ -64,14 +66,13 @@ public class MusicPlayer {
 		return levelMusic.get(level);
 	}
 
-	@SuppressWarnings("unused")
 	public void playMusic(final String path) {
 		// precaution
 		if (!path.equals("src/Music/level1.aifc") && !path.equals(null)) {
 			StopMusic();
 			playSound(path);
 		
-		} else if (MusicPlayer.isMusicRunning()) {
+		} else if (isMusicRunning()) {
 			StopMusic();
 			playSound(path);
 
@@ -85,7 +86,7 @@ public class MusicPlayer {
 /**
  * Stops the currently playing song.
  */
-	public static void StopMusic() {
+	public void StopMusic() {
 		clip.stop();
 		currently_playing = false;
 
@@ -94,7 +95,7 @@ public class MusicPlayer {
  * Checks if any music is currently running.
  * @return True if music is running.
  */
-	public static boolean isMusicRunning() {
+	public boolean isMusicRunning() {
 
 		return currently_playing;
 	}
@@ -102,7 +103,7 @@ public class MusicPlayer {
  * Sets the volume of the music that can be played. 
  * @param d
  */
-	public static void setVolume(final double d) {
+	public void setVolume(final double d) {
 
 		final FloatControl volume = (FloatControl) MusicPlayer.clip.getControl(FloatControl.Type.MASTER_GAIN);
 		volume.setValue(20f * (float) Math.log10(d));
@@ -110,13 +111,13 @@ public class MusicPlayer {
 /**
  * Increases the volume of the music.
  */
-	public static void increaseVolume() {
+	public void increaseVolume() {
 		setVolume(1.0);
 	}
 /**
  * Decreases the volume of the the music.
  */
-	public static void decreaseVolume() {
+	public void decreaseVolume() {
 		setVolume(0.1);
 	}
 }
