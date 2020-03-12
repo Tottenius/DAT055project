@@ -2,7 +2,6 @@ package model;
 
 import java.io.File;
 import java.util.HashMap;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -14,8 +13,9 @@ import javax.sound.sampled.FloatControl;
  */
 public class MusicPlayer {
 
-	static boolean currently_playing = false;
-	static Clip clip;
+	private static boolean currently_playing = false;
+	private  static Clip clip;
+	private boolean soundEffect = false;
 	// music for each level
 	private  HashMap<String, String> levelMusic = new HashMap<>();
 	
@@ -45,6 +45,7 @@ public class MusicPlayer {
  */
 	private void playSound(final String path) {
 		try {
+			
 			System.out.println(path);
 
 			final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path));
@@ -52,7 +53,7 @@ public class MusicPlayer {
 			clip.open(audioInputStream);
 			setVolume(0.5);
 			clip.start();
-			currently_playing = true;
+			MusicPlayer.currently_playing = true;
 
 			// If you want the sound to loop infinitely, then put:
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -84,8 +85,8 @@ public class MusicPlayer {
  * Stops the currently playing song.
  */
 	public void StopMusic() {
-		clip.stop();
-		currently_playing = false;
+		MusicPlayer.clip.stop();
+		MusicPlayer.currently_playing = false;
 
 	}
 /**
