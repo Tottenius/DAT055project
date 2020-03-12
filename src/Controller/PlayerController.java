@@ -43,8 +43,8 @@ public class PlayerController extends AssetController {
 		AbstractAsset newPlayerLocationMovingLayer = null;
 		AbstractAsset stationaryAsset = null;
 
-		final int newPlayerPos = oldPlayerPos + GamePanel.getDirection().getXDelta()
-				+ GamePanel.getDirection().getYDelta();
+		final int newPlayerPos = oldPlayerPos + KeyListenerController.getDirection().getXDelta()
+				+ KeyListenerController.getDirection().getYDelta();
 
 		// Alla interaktioner med assets
 		newPlayerLocationMovingLayer = this.movingAssets.get(newPlayerPos);
@@ -71,11 +71,11 @@ public class PlayerController extends AssetController {
 		@Override
 		public void run() {
 
-			if (PlayerController.this.player.isAlive() && GameWindowTemp.isGameState() && GamePanel.isKeyPressed()) {
+			if (PlayerController.this.player.isAlive() && GameWindowTemp.isGameState() && KeyListenerController.isKeyPressed()) {
 				moveDirection();
 				// player.setCoords( position);
 				// PlayerController.this.player.setPrevPos();
-				GamePanel.setKeyPressed(false);
+				KeyListenerController.setKeyPressed(false);
 
 			} else if (!GameWindowTemp.isGameState() && !GameWindowTemp.isSaveLevelState()) {
 				GamePanel.numberOfControllers--;

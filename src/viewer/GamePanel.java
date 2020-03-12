@@ -3,16 +3,12 @@ package viewer;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.TimerTask;
 import java.util.Timer;
 import javax.swing.JPanel;
-import Controller.Direction;
+import Controller.KeyListenerController;
 import model.AbstractAsset;
 import model.GameSettings;
 import model.MusicPlayer;
@@ -43,12 +39,8 @@ public class GamePanel extends JPanel {
 	private static final int SIZE = GameSettings.getAssetsize();
 	// Serial
 	private static final long serialVersionUID = 1L;
-	// NewKeyPressedBool
-	private static volatile boolean isKeyPressed = false;
 	// general counter for different purposes
 	int counter = 0;
-	// set base Direction for enum
-	private static Direction direction = Direction.RIGHT;
 	// list with assets
 	public List<AbstractAsset> assets;
 	// Starting position
@@ -58,13 +50,14 @@ public class GamePanel extends JPanel {
 	private AbstractAsset movingAsset;
 	// Current level
 	String CurrentLevel;
-	// music for each level
-	HashMap<String, String> levelMusic = new HashMap<>();
 
 	private int period = 1000; // ms
 	private int firstTime = 0;
 	private boolean slowTime = false;
 	private long timeToBeatGame;
+	
+	//music
+	private MusicPlayer musicplayer; 
 
 	// server stuff
 	UdpServer server = new UdpServer();
@@ -74,109 +67,7 @@ public class GamePanel extends JPanel {
 	private static String profileName = "";
 	private int HowManyTries = 0;
 
-	private void loadInLevelMusicPaths() {
-		this.levelMusic.put("level1", "src/Music/level1.aifc");
-		this.levelMusic.put("level2", "src/Music/level2.aifc");
-		this.levelMusic.put("level3", "src/Music/level3.aifc");
-		this.levelMusic.put("level4", "src/Music/level4.aifc");
-		this.levelMusic.put("level5", "src/Music/level5.aifc");
-		this.levelMusic.put("level6", "src/Music/level6.wav");
-		this.levelMusic.put("level7", "src/Music/level7.aifc");
-		this.levelMusic.put("level8", "src/Music/level8.wav");
-		this.levelMusic.put("level9", "src/Music/level9.wav");
-		this.levelMusic.put("level10","src/Music/level10.wav");
-		this.levelMusic.put("saveLevel", "src/Music/level1.aifc");
-		
-	}
-
-	private String getLevelMusic(final String level) {
-		return this.levelMusic.get(level);
-	}
-
-	/**
-	 * A method to say whether a key is currently pressed or not.
-	 * @return The status of the key
-	 */
-	public static boolean isKeyPressed() {
-		return isKeyPressed;
-	}
-/**
- * Sets isKeyPressed to true or false.
- * @param isKeyPressed
- */
-	public static void setKeyPressed(final boolean isKeyPressed) {
-		GamePanel.isKeyPressed = isKeyPressed;
-	}
-/**
- * Give the direction. 
- *
- * @return The direction.
- */
-
-	public static Direction getDirection() {
-		return direction;
-	}
-
-	private class keyLis extends KeyAdapter {
-
-		@Override
-		public void keyPressed(final KeyEvent e) {
-
-			final int input = e.getKeyCode();
-			switch (input) {
-
-			case KeyEvent.VK_UP:
-			case KeyEvent.VK_W:
-
-				direction = Direction.UP;
-				break;
-
-			case KeyEvent.VK_DOWN:
-			case KeyEvent.VK_S:
-
-				direction = Direction.DOWN;
-				break;
-
-			case KeyEvent.VK_RIGHT:
-			case KeyEvent.VK_D:
-
-				direction = Direction.RIGHT;
-				break;
-
-			case KeyEvent.VK_LEFT:
-			case KeyEvent.VK_A:
-
-				direction = Direction.LEFT;
-				break;
-
-			case KeyEvent.VK_R:
-
-				// GameWindowTemp.setRestartState();
-				break;
-
-			default:
-				break;
-			}
-			isKeyPressed = true;
-		}
-	}
-
-	@SuppressWarnings("unused")
-	private static void playMusic(final String path) {
-		// precaution
-		if (!path.equals("src/Music/level1.aifc") && !path.equals(null)) {
-			MusicPlayer.StopMusic();
-			new MusicPlayer(path);
-		
-		} else if (MusicPlayer.isMusicRunning()) {
-			MusicPlayer.StopMusic();
-			new MusicPlayer(path);
-
-		} else {
-			new MusicPlayer(path);
-		}
-	}
-
+	
 	private void initWorld(final Graphics g) {
 
 		final List<AbstractAsset> assets = this.world.getAssetList();
@@ -192,7 +83,7 @@ public class GamePanel extends JPanel {
 			}
 			// Paint all assets
 			if (this.asset.getCoords() != this.pos) {
-				this.movingAsset.hasDirections(direction);
+				this.movingAsset.hasDirections(KeyListenerController.getDirection());
 				this.asset.paintAsset(g, this.gamePanel);
 				this.movingAsset.paintAsset(g, this.gamePanel);
 			}
@@ -263,12 +154,12 @@ public class GamePanel extends JPanel {
 		this.setVisible(true);
 
 		// adding the keylistener
-		this.addKeyListener(new keyLis());
+		this.addKeyListener(new KeyListenerController());
 		this.setFocusable(true);
 
 		// add music
-		loadInLevelMusicPaths();
-		GamePanel.playMusic(getLevelMusic(this.CurrentLevel));
+		musicplayer = new MusicPlayer();
+		musicplayer.playMusic(musicplayer.getLevelMusic(this.CurrentLevel));
 
 		startTimer(0, 1000 / 60);
 		StopWatch.start();
@@ -357,8 +248,7 @@ public class GamePanel extends JPanel {
 						GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
 						GameWindowTemp.setStateGame();
 						GamePanel.this.world.startControllers();
-						playMusic(getLevelMusic(GamePanel.this.CurrentLevel));
-					}
+						musicplayer.playMusic(musicplayer.getLevelMusic(GamePanel.this.CurrentLevel));					}
 				}
 
 				else if (GameWindowTemp.isGameState()) {
