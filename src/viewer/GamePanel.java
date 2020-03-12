@@ -20,7 +20,7 @@ import server.UdpServer;
  * A class containing the core part of the game 
  * 
  * @author Group 10
- * @version 2020-03-08
+ * @version 2020-03-13
  *
  */
 public class GamePanel extends JPanel {
@@ -144,9 +144,6 @@ public class GamePanel extends JPanel {
 			this.timeToBeatGame = world.getTime();
 			this.CurrentLevel = world.getCurrentSavedLevel();;
 			this.HowManyTries = world.getAttempts();
-			System.out.println("Level Restarted :" + this.CurrentLevel);
-			System.out.println("Time Restarted: " + this.timeToBeatGame);
-			System.out.println("attempts Restarted: " + this.HowManyTries);
 		}
 		// set layout
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -202,15 +199,10 @@ public class GamePanel extends JPanel {
 					setTimeToCompleteGame();
 					StopWatch.start();
 					GamePanel.this.HowManyTries++;
-					System.out.println(GamePanel.this.timeToBeatGame);
 				}
 				if(GameWindowTemp.isSaveLevelState()) {
 					setTimeToCompleteGame();
-					//GamePanel.this.timeToBeatGame = StopWatch.stopTimer();
 					GamePanel.this.world.saveLevel(GamePanel.this.CurrentLevel, GamePanel.this.timeToBeatGame, GamePanel.this.HowManyTries);
-					System.out.println("Level save :" + GamePanel.this.CurrentLevel);
-					System.out.println("Time save : " + GamePanel.this.timeToBeatGame);
-					System.out.println("attempts save : " + GamePanel.this.HowManyTries);
 					GameWindowTemp.setStateGame();
 					StopWatch.start();
 				}

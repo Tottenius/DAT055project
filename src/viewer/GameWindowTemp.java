@@ -14,6 +14,7 @@ import model.MusicPlayer;
  * A class that is used as an intermediate between the menu and the Main game class. Keeps a track of what State the program is in and also is the main JFrame that we then add our JPanel containing the game into. 
  * 
  * @author Group 10
+ * @version 2020-03-13
  *
  */
 public class GameWindowTemp extends JFrame {

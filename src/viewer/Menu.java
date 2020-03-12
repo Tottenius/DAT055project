@@ -26,7 +26,7 @@ import model.GameSettings;
 /**
  * A class for creating a menu.
  * @author Group 10
- *
+ * @version 2020-03-13
  */
 public class Menu extends JPanel {
 
@@ -79,7 +79,6 @@ public class Menu extends JPanel {
 
 	public Menu(String level) {
 		this.level = level;
-		// this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		this.setLayout(new GridBagLayout());
 
 		// Add buttons width actionListeners
@@ -96,7 +95,6 @@ public class Menu extends JPanel {
 		button.setForeground(Color.PINK);
 		button.setBounds(new Rectangle(20, 20));
 		// Work in progress
-		// button.setIcon(new ImageIcon("src/assets/button.png"));
 
 		button.setAlignmentX(Component.CENTER_ALIGNMENT);
 		button.setAlignmentY(Component.CENTER_ALIGNMENT);

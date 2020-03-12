@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 /**
  * A class that used for bringing up a JOptionPanel where a profile name can be entered in and created. 
  * @author Anton
+ * @version 2020-03-13
  *
  */
 public class Profile {
