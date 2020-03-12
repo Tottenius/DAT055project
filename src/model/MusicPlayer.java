@@ -45,8 +45,8 @@ public class MusicPlayer {
  */
 	private void playSound(final String path) {
 		try {
+			System.out.println(path);
 
-			@SuppressWarnings("resource")
 			final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path));
 			MusicPlayer.clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
@@ -67,17 +67,14 @@ public class MusicPlayer {
 	}
 
 	public void playMusic(final String path) {
-		// precaution
-		if (!path.equals("src/Music/level1.aifc") && !path.equals(null)) {
-			StopMusic();
-			playSound(path);
+		System.out.println(path);
 		
-		} else if (isMusicRunning()) {
+		if (isMusicRunning()) {
 			StopMusic();
-			playSound(path);
+			MusicPlayer.this.playSound(MusicPlayer.this.levelMusic.get(path));
 
 		} else {
-			playSound(path);
+			MusicPlayer.this.playSound(MusicPlayer.this.levelMusic.get(path));
 		}
 	}
 	

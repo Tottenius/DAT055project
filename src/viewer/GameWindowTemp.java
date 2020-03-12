@@ -45,7 +45,7 @@ public class GameWindowTemp extends JFrame {
 	private final GameWindowTemp window = this;
 
 	// What level do read in
-	String nextLevel = "levelewfkjwofkjiewkijef";
+	private String nextLevel = "level1";
 	
 	 private MusicPlayer musicplayer;
 
@@ -61,11 +61,11 @@ public class GameWindowTemp extends JFrame {
 		musicplayer = new MusicPlayer();
 		
 		if (state == STATE.MENU) {	
-			if (musicplayer.isMusicRunning()) {
-				musicplayer.StopMusic();
-				musicplayer.playMusic("menu");
+			if (GameWindowTemp.this.musicplayer.isMusicRunning()) {
+				GameWindowTemp.this.musicplayer.StopMusic();
+				GameWindowTemp.this.musicplayer.playMusic("menu");
 			} else {
-				musicplayer.playMusic("menu");
+				GameWindowTemp.this.musicplayer.playMusic("menu");
 			}		
 			this.menu = new Menu(returnNextLevel());
 			this.add(this.menu);

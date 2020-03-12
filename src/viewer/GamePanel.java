@@ -159,7 +159,7 @@ public class GamePanel extends JPanel {
 
 		// add music
 		this.musicplayer = musicplayer;
-		GamePanel.this.musicplayer.playMusic(GamePanel.this.musicplayer.getLevelMusic(this.CurrentLevel));
+		GamePanel.this.musicplayer.playMusic(this.CurrentLevel);
 
 		startTimer(0, 1000 / 60);
 		StopWatch.start();
@@ -248,7 +248,7 @@ public class GamePanel extends JPanel {
 						GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
 						GameWindowTemp.setStateGame();
 						GamePanel.this.world.startControllers();
-						musicplayer.playMusic(musicplayer.getLevelMusic(GamePanel.this.CurrentLevel));					}
+						musicplayer.playMusic(GamePanel.this.CurrentLevel);					}
 				}
 
 				else if (GameWindowTemp.isGameState()) {
