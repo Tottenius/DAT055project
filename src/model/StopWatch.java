@@ -1,4 +1,4 @@
-package viewer;
+package model;
 
 /**
  * A class that can track time for a task . 

@@ -14,15 +14,15 @@ import Controller.AssetController;
 import Controller.EnemyController;
 import Controller.PlayerController;
 import Controller.SpikeController;
-import assetclasses.AbstractAsset;
-import assetclasses.Empty;
-import assetclasses.Door;
-import assetclasses.Enemy;
-import assetclasses.Player;
-import assetclasses.Spikes;
-import assetclasses.Tile;
-import assetclasses.Treasure;
-import assetclasses.Wall;
+import model.AbstractAsset;
+import model.Empty;
+import model.Door;
+import model.Enemy;
+import model.Player;
+import model.Spikes;
+import model.Tile;
+import model.Treasure;
+import model.Wall;
 
 /**
  * Creates a game world based on the level chosen in the constructor of the class

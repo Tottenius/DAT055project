@@ -5,7 +5,7 @@ import java.net.*;
 /**
  * A client class used for UDP communication. 
  * 
- * @author Group10, Rishabh Mahrsee and MarkShanks 
+ * @author Anton, Rishabh Mahrsee and MarkShanks 
  * @see https://www.geeksforgeeks.org/working-udp-datagramsockets-java/
  *
  */

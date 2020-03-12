@@ -1,4 +1,4 @@
-package viewer;
+package model;
 /**
  * An enum defining the settings for the Game. Also has methods for getting these settings.
  * @author Group 10

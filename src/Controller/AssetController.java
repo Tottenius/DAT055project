@@ -1,8 +1,8 @@
 package Controller;
 
 import java.util.List;
-import assetclasses.AbstractAsset;
-import assetclasses.Empty;
+import model.AbstractAsset;
+import model.Empty;
 import model.ReadInWorld;
 /**
  * An abstract class that is used by other the other controller classes. 

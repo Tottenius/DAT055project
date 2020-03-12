@@ -3,9 +3,9 @@ package Controller;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import assetclasses.AbstractAsset;
-import assetclasses.Enemy;
-import assetclasses.Player;
+import model.AbstractAsset;
+import model.Enemy;
+import model.Player;
 import model.ReadInWorld;
 import viewer.GamePanel;
 import viewer.GameWindowTemp;

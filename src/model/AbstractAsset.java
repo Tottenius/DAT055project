@@ -1,4 +1,4 @@
-package assetclasses;
+package model;
 
 import java.awt.Image;
 import java.awt.Point;
@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import Controller.Direction;
-import viewer.GameSettings;
 
 /**
  * An abstract class utilized by all asset classes. 

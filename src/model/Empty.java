@@ -1,22 +1,17 @@
-package assetclasses;
+package model;
 
 import java.awt.Graphics;
-import java.awt.Image;
 
 import Controller.Direction;
 import viewer.GamePanel;
 /**
- * An class for a wall asset.
+ * An class to make emptiness concrete. Can be used to have empty assets or multible layers of assets.
  * 
  * @author Group 10
  *
  */
-public class Wall extends AbstractAsset {
-
-	private static final String path = "src/assets/wall.png";
-	private static Image image = AssetImageHandler.loadImage(path);
-
-	public Wall(final int position) {
+public class Empty extends AbstractAsset {
+	public Empty(final int position) {
 		super(position);
 	}
 
@@ -37,7 +32,7 @@ public class Wall extends AbstractAsset {
 
 	@Override
 	public boolean canWalkOn() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -47,6 +42,6 @@ public class Wall extends AbstractAsset {
 
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {
-		g.drawImage(image, getCoords().x, getCoords().y, gp);
+		// unused
 	}
 }

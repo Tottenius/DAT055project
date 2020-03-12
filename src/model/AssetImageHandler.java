@@ -1,10 +1,9 @@
-package assetclasses;
+package model;
 
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import viewer.GameSettings;
 
 /**
  * Handles the loading of asset images. 
@@ -20,7 +19,7 @@ public class AssetImageHandler {
 	 * Loads in an image, determined by the path parameter, 
 	 * The method also scales the image the gets loaded in such that all assets are the same size.
 	 * @param path
-	 * @return
+	 * @return	An image
 	 */
 	public static Image loadImage(final String path) {
 		Image img = null;

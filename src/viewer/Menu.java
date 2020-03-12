@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import main.Main;
+import model.GameSettings;
 /**
  * A class for creating a menu.
  * @author Group 10

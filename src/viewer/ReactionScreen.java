@@ -13,6 +13,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import model.GameSettings;
+import model.MusicPlayer;
 /**
  * Class that is a JPanel used for specific events, such as a win or death screen for a game.
  * 

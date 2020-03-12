@@ -1,25 +1,22 @@
-package assetclasses;
+package model;
 
 import java.awt.Graphics;
 import java.awt.Image;
 
 import Controller.Direction;
-import model.ReadInWorld;
 import viewer.GamePanel;
-import viewer.GameWindowTemp;
-
 /**
- * An class for a door asset
+ * A class for a Tile asset.
  * 
  * @author Group 10
  *
  */
-public class Door extends AbstractAsset {
-
-	private static final String path = "src/assets/doordown.png";
+public class Tile extends AbstractAsset {
+	
+	private static final String path = "src/assets/tile.png";
 	private static Image image = AssetImageHandler.loadImage(path);
-
-	public Door(final int position) {
+	
+	public Tile(final int position) {
 		super(position);
 	}
 
@@ -35,19 +32,12 @@ public class Door extends AbstractAsset {
 
 	@Override
 	public boolean intractable() {
-
-		if (Treasure.getOpenedTreasures() >= ReadInWorld.numberOfTresures) {
-			// restart and new level doing
-			GameWindowTemp.setNextLevelState();
-			// player goes to next level!
-			return true;
-		}
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean canWalkOn() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -59,4 +49,5 @@ public class Door extends AbstractAsset {
 	public void paintAsset(final Graphics g, final GamePanel gp) {
 		g.drawImage(image, getCoords().x, getCoords().y, gp);
 	}
+
 }

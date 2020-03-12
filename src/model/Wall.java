@@ -1,4 +1,4 @@
-package assetclasses;
+package model;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -6,17 +6,17 @@ import java.awt.Image;
 import Controller.Direction;
 import viewer.GamePanel;
 /**
- * A class for a Tile asset.
+ * An class for a wall asset.
  * 
  * @author Group 10
  *
  */
-public class Tile extends AbstractAsset {
-	
-	private static final String path = "src/assets/tile.png";
+public class Wall extends AbstractAsset {
+
+	private static final String path = "src/assets/wall.png";
 	private static Image image = AssetImageHandler.loadImage(path);
-	
-	public Tile(final int position) {
+
+	public Wall(final int position) {
 		super(position);
 	}
 
@@ -37,7 +37,7 @@ public class Tile extends AbstractAsset {
 
 	@Override
 	public boolean canWalkOn() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -49,5 +49,4 @@ public class Tile extends AbstractAsset {
 	public void paintAsset(final Graphics g, final GamePanel gp) {
 		g.drawImage(image, getCoords().x, getCoords().y, gp);
 	}
-
 }

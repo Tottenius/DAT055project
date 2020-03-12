@@ -1,6 +1,6 @@
 package Controller;
 
-import viewer.GameSettings;
+import model.GameSettings;
 
 /**
  * Directions that also contains the information how to move in that direction 
