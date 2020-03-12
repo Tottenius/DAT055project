@@ -15,7 +15,6 @@ public class MusicPlayer {
 
 	private static boolean currently_playing = false;
 	private  static Clip clip;
-	private boolean soundEffect = false;
 	// music for each level
 	private  HashMap<String, String> levelMusic = new HashMap<>();
 	
