@@ -14,7 +14,6 @@ import Controller.Direction;
 
 public abstract class AbstractAsset implements Asset {
 
-	private final static int size = GameSettings.getAssetsize();
 	private int position;
 	private Point coords;
 	protected Direction direction;
