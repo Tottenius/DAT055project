@@ -25,8 +25,9 @@ import model.Treasure;
 import model.Wall;
 
 /**
- * Creates a game world based on the level chosen in the constructor of the class
- * 
+ * Creates a game world based on the level chosen in the constructor of the
+ * class
+ *
  * @author Group 10
  * @version 2020-03-06
  *
@@ -65,6 +66,7 @@ public class ReadInWorld {
 		this.levels.put("level10", "src/levels/level10.txt");
 		this.levels.put("saveLevel", "src/levels/saveLevel.txt");
 	}
+
 	/**
 	 * Restarts the current level
 	 */
@@ -96,12 +98,12 @@ public class ReadInWorld {
 
 	// Symbols
 	// private AbstractAsset AbstractAsset;
-/**
- * Creates a world based on the level chosen in the argument
- * @param thisLevel
- * A key for the hashmap containing level information
- * 
- */
+	/**
+	 * Creates a world based on the level chosen in the argument
+	 * 
+	 * @param thisLevel A key for the hashmap containing level information
+	 * 
+	 */
 	public ReadInWorld(final String thisLevel) {
 		numberOfTresures = 0;
 		Treasure.setOpenedTreasures(0);
@@ -174,62 +176,61 @@ public class ReadInWorld {
 				this.posInList++;
 			}
 		}
-		
-		if ( path == "saveLevel") {
+
+		if (path == "saveLevel") {
 			FileInputStream saveGameData = null;
 			String s;
 			try {
 				saveGameData = new FileInputStream("src/levels/saveLevelData.txt");
-			} catch (FileNotFoundException e) {
+			} catch (final FileNotFoundException e) {
 				e.printStackTrace();
-			}       
-			Scanner sc = new Scanner(saveGameData);
-			
-			// Save the save level
-			s = sc.nextLine();
-			currentSavedLevel = s;
-			//Number of attempts
-			attempts = sc.nextInt();
-			// Save the time
-			time = sc.nextLong();
-						
-			while(sc.hasNextLine()) {
-				if(sc.hasNextInt()) {		
-					assets.get(sc.nextInt()).intractable();
-				}
-				else {
-					sc.nextLine();
-				}
-				
 			}
-			sc.close();
+			try (Scanner sc = new Scanner(saveGameData)) {
+
+				// Save the save level
+				s = sc.nextLine();
+				this.currentSavedLevel = s;
+				// Number of attempts
+				this.attempts = sc.nextInt();
+				// Save the time
+				this.time = sc.nextLong();
+
+				while (sc.hasNextLine()) {
+					if (sc.hasNextInt()) {
+						this.assets.get(sc.nextInt()).intractable();
+					} else {
+						sc.nextLine();
+					}
+
+				}
+			}
 		}
-	}			
+	}
 
 	/**
 	 * Saves the current game
-	 * @param s
-	 * The current level
+	 * 
+	 * @param s The current level
 	 */
-	//Save a level to two files one for the positions and one for the data
-	public void saveLevel(String s, long currentTime, int attempts) {
+	// Save a level to two files one for the positions and one for the data
+	public void saveLevel(final String s, final long currentTime, final int attempts) {
 		int pos = 0;
-		//For the level layout
+		// For the level layout
 		String saveLevel = "";
-		StringBuilder saveLevelBuilder = new StringBuilder(assets.size());
+		final StringBuilder saveLevelBuilder = new StringBuilder(this.assets.size());
 		// For the level data
 		String saveLevelData = "";
-		StringBuilder saveLevelDataBuilder = new StringBuilder();
+		final StringBuilder saveLevelDataBuilder = new StringBuilder();
 		// Add level that is saved for music etc
 		saveLevelDataBuilder.append(s);
 		saveLevelDataBuilder.append('\n');
-		//Attempts
+		// Attempts
 		saveLevelDataBuilder.append(attempts);
 		saveLevelDataBuilder.append('\n');
-		//Game time
+		// Game time
 		saveLevelDataBuilder.append(currentTime);
 		saveLevelDataBuilder.append('\n');
-		
+
 		// Empty the old savefiles
 		PrintWriter writerData;
 		PrintWriter writerLevel;
@@ -240,44 +241,38 @@ public class ReadInWorld {
 			writerLevel = new PrintWriter("src/levels/saveLevel.txt");
 			writerLevel.print("");
 			writerLevel.close();
-		} catch (FileNotFoundException e1) {
+		} catch (final FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
 
-		//Save stationary assets at the right places
-		for(AbstractAsset a: assets) {						
-			if(a instanceof Wall) {
+		// Save stationary assets at the right places
+		for (final AbstractAsset a : this.assets) {
+			if (a instanceof Wall) {
 				saveLevelBuilder.append('#');
-			}
-			else if (a instanceof Tile) {
+			} else if (a instanceof Tile) {
 				saveLevelBuilder.append(' ');
-			}
-			else if (a instanceof Spikes) {
+			} else if (a instanceof Spikes) {
 				saveLevelBuilder.append('s');
-			}
-			else if (a instanceof Door) {
+			} else if (a instanceof Door) {
 				saveLevelBuilder.append('d');
-			}
-			else if (a instanceof Treasure) {
+			} else if (a instanceof Treasure) {
 				saveLevelBuilder.append('t');
 				if (((Treasure) a).treasureIsOpen()) {
 					saveLevelDataBuilder.append(pos);
-					saveLevelDataBuilder.append('\n');					
+					saveLevelDataBuilder.append('\n');
 				}
-			}
-			else if ( a instanceof Empty) {
+			} else if (a instanceof Empty) {
 				saveLevelBuilder.append(' ');
 			}
 			pos++;
 		}
 		pos = 0;
-		//Save moving assets at the right places
-		for(AbstractAsset a: movingAssets) {
-			if(a instanceof Enemy) {
+		// Save moving assets at the right places
+		for (final AbstractAsset a : this.movingAssets) {
+			if (a instanceof Enemy) {
 				saveLevelBuilder.deleteCharAt(pos);
 				saveLevelBuilder.insert(pos, 'e');
-			}
-			else if (a.killable()) {
+			} else if (a.killable()) {
 				saveLevelBuilder.deleteCharAt(pos);
 				saveLevelBuilder.insert(pos, 'p');
 			}
@@ -285,17 +280,17 @@ public class ReadInWorld {
 		}
 		saveLevel = saveLevelBuilder.toString();
 		saveLevelData = saveLevelDataBuilder.toString();
-		
-		//Write the level to a file
+
+		// Write the level to a file
 		try (PrintWriter out = new PrintWriter("src/levels/saveLevel.txt")) {
-		    out.println(saveLevel);
-		} catch (FileNotFoundException e) {
+			out.println(saveLevel);
+		} catch (final FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		//Write the data to a file
+		// Write the data to a file
 		try (PrintWriter out = new PrintWriter("src/levels/saveLevelData.txt")) {
-		    out.println(saveLevelData);
-		} catch (FileNotFoundException e) {
+			out.println(saveLevelData);
+		} catch (final FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
@@ -313,59 +308,66 @@ public class ReadInWorld {
 	// Reach assets in controller
 	/**
 	 * A getter for the list of stationary assets
-	 * @return
-	 * Returns the levels stationary assets in an ArrayList
+	 * 
+	 * @return Returns the levels stationary assets in an ArrayList
 	 */
 	public List<AbstractAsset> getAssetList() {
 		return this.assets;
 	}
-	
+
 	/**
-	 * Sets the worlds current stationary assets list to another list containing stationary assets
-	 * @param assetList
-	 * A list of new stationary assets for the world
+	 * Sets the worlds current stationary assets list to another list containing
+	 * stationary assets
+	 * 
+	 * @param assetList A list of new stationary assets for the world
 	 */
 	public void setAssetList(final ArrayList<AbstractAsset> assetList) {
 		this.assets = assetList;
 	}
+
 	/**
 	 * A getter for the list of moving assets
-	 * @return
-	 * Returns the levels moving assets in an ArrayList
+	 * 
+	 * @return Returns the levels moving assets in an ArrayList
 	 */
 	public List<AbstractAsset> getMovingAssets() {
 		return this.movingAssets;
 	}
+
 	/**
-	 * Sets the worlds current moving assets list to another list containing moving assets
-	 * @param movingAssets
-	 *  A list of new moving assets for the world
+	 * Sets the worlds current moving assets list to another list containing moving
+	 * assets
+	 * 
+	 * @param movingAssets A list of new moving assets for the world
 	 */
 	public void setMovingAssets(final List<AbstractAsset> movingAssets) {
 		this.movingAssets = movingAssets;
 	}
+
 	/**
 	 * Gets the saved levels level number
-	 * @return
-	 * Returns the saved levels level
+	 * 
+	 * @return Returns the saved levels level
 	 */
 	public String getCurrentSavedLevel() {
-		return currentSavedLevel;
+		return this.currentSavedLevel;
 	}
+
 	/**
 	 * Gives the saved games time
-	 * @return
-	 * Time taken until game was saved
+	 * 
+	 * @return Time taken until game was saved
 	 */
 	public long getTime() {
-		return time;
+		return this.time;
 	}
+
 	/**
 	 * Gives the saved games time
-	 * @return
-	 * Time taken until game was saved
+	 * 
+	 * @return Time taken until game was saved
 	 */
 	public int getAttempts() {
-		return attempts;
+		return this.attempts;
 	}
 }
