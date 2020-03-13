@@ -7,7 +7,7 @@ import model.Player;
 import model.ReadInWorld;
 import model.Spikes;
 import viewer.GamePanel;
-import viewer.GameWindowTemp;
+import viewer.ProgramStateHandeler;
 /**
  * A controller for the Spikes asset
  * 
@@ -41,7 +41,7 @@ public class SpikeController extends AssetController {
 	private TimerTask c = new TimerTask() {
 		@Override
 		public void run() {
-			if (GameWindowTemp.isGameState()) {
+			if (ProgramStateHandeler.isGameState()) {
 				
 				// Om det är en player på. Döda den
 				if (SpikeController.this.movingAssets.get(SpikeController.this.position).killable()) {
@@ -53,7 +53,7 @@ public class SpikeController extends AssetController {
 				}
 				SpikeController.this.spikes.setPosition(SpikeController.this.position);
 
-			} else if (!GameWindowTemp.isGameState()) {
+			} else if (!ProgramStateHandeler.isGameState()) {
 				GamePanel.numberOfControllers--;
 				this.cancel();
 			}

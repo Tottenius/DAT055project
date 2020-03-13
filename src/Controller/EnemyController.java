@@ -8,7 +8,7 @@ import model.Enemy;
 import model.Player;
 import model.ReadInWorld;
 import viewer.GamePanel;
-import viewer.GameWindowTemp;
+import viewer.ProgramStateHandeler;
 /**
  * A controller for the Enemy asset
  * 
@@ -81,11 +81,11 @@ public class EnemyController extends AssetController {
 		@Override
 		public void run() {
 
-			if (GameWindowTemp.isGameState()) {
+			if (ProgramStateHandeler.isGameState()) {
 				moveDirection();
 			}
 
-			else if (!GameWindowTemp.isGameState()) {
+			else if (!ProgramStateHandeler.isGameState()) {
 				GamePanel.numberOfControllers--;
 				this.cancel();
 			}

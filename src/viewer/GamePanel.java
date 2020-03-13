@@ -107,11 +107,11 @@ public class GamePanel extends JPanel {
 	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
 
-		if (GameWindowTemp.isGameState()) {
+		if (ProgramStateHandeler.isGameState()) {
 			initWorld(g);
-		} else if (GameWindowTemp.isDeathScreenState()) {
+		} else if (ProgramStateHandeler.isDeathScreenState()) {
 			initDeathOrWinScreen(g, "src/assets/GameOverScreen.jpg", "bad");
-		} else if (GameWindowTemp.isWinState()) {
+		} else if (ProgramStateHandeler.isWinState()) {
 			final String finishtime = Long.toString(StopWatch.stopTimer());
 			initDeathOrWinScreen(g, "src/assets/WinScreen.png", "It took you " + GamePanel.this.HowManyTries + " tries and " + finishtime + "s" + " to beat the game!");
 		}
@@ -191,23 +191,23 @@ public class GamePanel extends JPanel {
 			@Override
 			public void run() {
 
-				if (GameWindowTemp.isRestartState()) {
+				if (ProgramStateHandeler.isRestartState()) {
 					GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
-					GameWindowTemp.setStateGame();
+					ProgramStateHandeler.setStateGame();
 					GamePanel.this.world.startControllers();
 					// set timer
 					setTimeToCompleteGame();
 					StopWatch.start();
 					GamePanel.this.HowManyTries++;
 				}
-				if(GameWindowTemp.isSaveLevelState()) {
+				if(ProgramStateHandeler.isSaveLevelState()) {
 					setTimeToCompleteGame();
 					GamePanel.this.world.saveLevel(GamePanel.this.CurrentLevel, GamePanel.this.timeToBeatGame, GamePanel.this.HowManyTries);
-					GameWindowTemp.setStateGame();
+					ProgramStateHandeler.setStateGame();
 					StopWatch.start();
 				}
 
-				if (GameWindowTemp.isNextLevelState()) {
+				if (ProgramStateHandeler.isNextLevelState()) {
 
 					// add time it took to beat level!
 					setTimeToCompleteGame();
@@ -224,7 +224,7 @@ public class GamePanel extends JPanel {
 						} catch (final IOException e) {
 							e.printStackTrace();
 						}
-						GameWindowTemp.setWinState();
+						ProgramStateHandeler.setWinState();
 					}
 						
 						
@@ -238,12 +238,12 @@ public class GamePanel extends JPanel {
 						}
 						
 						GamePanel.this.world = new ReadInWorld(GamePanel.this.CurrentLevel);
-						GameWindowTemp.setStateGame();
+						ProgramStateHandeler.setStateGame();
 						GamePanel.this.world.startControllers();
 						musicplayer.playMusic(GamePanel.this.CurrentLevel);					}
 				}
 
-				else if (GameWindowTemp.isGameState()) {
+				else if (ProgramStateHandeler.isGameState()) {
 					if (GamePanel.this.slowTime == true) {
 						timer.cancel();
 						startTimer(0, 1000 / 60);
@@ -254,7 +254,7 @@ public class GamePanel extends JPanel {
 					}
 				}
 
-				else if (GameWindowTemp.isDeathScreenState() || GameWindowTemp.isWinState()) {
+				else if (ProgramStateHandeler.isDeathScreenState() || ProgramStateHandeler.isWinState()) {
 					timer.cancel();
 					startTimer(5000, 100000);
 					repaint();

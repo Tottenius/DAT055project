@@ -5,7 +5,7 @@ import java.awt.Image;
 
 import Controller.Direction;
 import viewer.GamePanel;
-import viewer.GameWindowTemp;
+import viewer.ProgramStateHandeler;
 
 /**
  * An class for a door asset
@@ -37,7 +37,7 @@ public class Door extends AbstractAsset {
 
 		if (Treasure.getOpenedTreasures() >= ReadInWorld.numberOfTresures) {
 			// restart and new level doing
-			GameWindowTemp.setNextLevelState();
+			ProgramStateHandeler.setNextLevelState();
 			// player goes to next level!
 			return true;
 		}

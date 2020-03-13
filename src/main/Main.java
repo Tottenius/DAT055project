@@ -2,7 +2,7 @@ package main;
 
 import javax.swing.SwingUtilities;
 
-import viewer.GameWindowTemp;
+import viewer.ProgramStateHandeler;
 /**
  * The main class for the program.
  * @author anton
@@ -16,7 +16,7 @@ public class Main {
 
 		SwingUtilities.invokeLater(() -> {
 			isRunning = true;
-			new GameWindowTemp("level1");
+			new ProgramStateHandeler("level1");
 		});
 	}
 }

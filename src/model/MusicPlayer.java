@@ -86,9 +86,7 @@ public class MusicPlayer {
 		} else {
 			MusicPlayer.this.playSound(MusicPlayer.this.levelMusic.get(path));
 		}
-	}
-	
-	
+	}	
 	
 /**
  * Stops the currently playing song.

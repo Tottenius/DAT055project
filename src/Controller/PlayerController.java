@@ -7,7 +7,7 @@ import model.AbstractAsset;
 import model.Player;
 import model.ReadInWorld;
 import viewer.GamePanel;
-import viewer.GameWindowTemp;
+import viewer.ProgramStateHandeler;
 /**
  * A controller for the Player asset
  * 
@@ -71,17 +71,17 @@ public class PlayerController extends AssetController {
 		@Override
 		public void run() {
 
-			if (PlayerController.this.player.isAlive() && GameWindowTemp.isGameState() && KeyListenerController.isKeyPressed()) {
+			if (PlayerController.this.player.isAlive() && ProgramStateHandeler.isGameState() && KeyListenerController.isKeyPressed()) {
 				moveDirection();
 				// player.setCoords( position);
 				// PlayerController.this.player.setPrevPos();
 				KeyListenerController.setKeyPressed(false);
 
-			} else if (!GameWindowTemp.isGameState() && !GameWindowTemp.isSaveLevelState()) {
+			} else if (!ProgramStateHandeler.isGameState() && !ProgramStateHandeler.isSaveLevelState()) {
 				GamePanel.numberOfControllers--;
 				this.cancel();
 			} else if (!PlayerController.this.player.isAlive()) {
-				GameWindowTemp.setDeathScreenState();
+				ProgramStateHandeler.setDeathScreenState();
 				GamePanel.numberOfControllers--;
 				this.cancel();
 			}

@@ -17,7 +17,7 @@ import model.MusicPlayer;
  * @version 2020-03-13
  *
  */
-public class GameWindowTemp extends JFrame {
+public class ProgramStateHandeler extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class GameWindowTemp extends JFrame {
 	static JMenuItem m1, m2, m3, m4, m5, m6, m7;
 
 	// local reference to it self
-	private final GameWindowTemp window = this;
+	private final ProgramStateHandeler window = this;
 
 	// What level do read in
 	private String nextLevel = "level1";
@@ -56,17 +56,17 @@ public class GameWindowTemp extends JFrame {
 	}
 
 
-	public GameWindowTemp(final String nextLevel) {
+	public ProgramStateHandeler(final String nextLevel) {
 		
 		this.nextLevel = nextLevel;
 		musicplayer = new MusicPlayer();
 		
 		if (state == STATE.MENU) {	
-			if (GameWindowTemp.this.musicplayer.isMusicRunning()) {
-				GameWindowTemp.this.musicplayer.StopMusic();
-				GameWindowTemp.this.musicplayer.playMusic("menu");
+			if (ProgramStateHandeler.this.musicplayer.isMusicRunning()) {
+				ProgramStateHandeler.this.musicplayer.StopMusic();
+				ProgramStateHandeler.this.musicplayer.playMusic("menu");
 			} else {
-				GameWindowTemp.this.musicplayer.playMusic("menu");
+				ProgramStateHandeler.this.musicplayer.playMusic("menu");
 			}		
 			this.menu = new Menu(returnNextLevel());
 			this.add(this.menu);
@@ -80,7 +80,7 @@ public class GameWindowTemp extends JFrame {
 
 			if (!ProfileName.equals("canceled")) {
 
-				this.add(new GamePanel(returnNextLevel(), ProfileName, GameWindowTemp.this.musicplayer));
+				this.add(new GamePanel(returnNextLevel(), ProfileName, ProgramStateHandeler.this.musicplayer));
 			}
 			// handles if player exists or presses cancel button when inputing profile name
 			else if (ProfileName.equals("canceled")) {
@@ -112,14 +112,14 @@ public class GameWindowTemp extends JFrame {
 		m1.addActionListener(e -> {
 			
 			final Icon guidesicon = new ImageIcon("src/assets/GuidesIcon.jpg");
-			JOptionPane.showMessageDialog(GameWindowTemp.this.window,"For help on getting good at this game, please see: \n https://www.wikihow.com/Become-a-Master-Gamer",
+			JOptionPane.showMessageDialog(ProgramStateHandeler.this.window,"For help on getting good at this game, please see: \n https://www.wikihow.com/Become-a-Master-Gamer",
 					"Guide",JOptionPane.INFORMATION_MESSAGE,guidesicon);
 			
 		});
 		
 		m2.addActionListener(e -> {
 			final Icon supporticon = new ImageIcon("src/assets/SupportIcon.png");
-			JOptionPane.showMessageDialog(GameWindowTemp.this.window,
+			JOptionPane.showMessageDialog(ProgramStateHandeler.this.window,
 					"\n ”Character consists of what you do on the third and fourth tries.” \n -James A. Michener \n \n "
 					+ "“Winners never quit, and quitters never win.” \n -Vince Lombardi \n \n "
 					+ "“It always seems impossible until it’s done.” \n -Nelson Mandela \n \n "
@@ -135,9 +135,9 @@ public class GameWindowTemp extends JFrame {
 		});
 		// Return to the main menu
 		m4.addActionListener(e -> {					
-			GameWindowTemp.setStateMenu();
-			GameWindowTemp.this.window.dispose();
-			new GameWindowTemp("level1");
+			ProgramStateHandeler.setStateMenu();
+			ProgramStateHandeler.this.window.dispose();
+			new ProgramStateHandeler("level1");
 		});
 
 		// Increasing the audio volume
@@ -154,7 +154,7 @@ public class GameWindowTemp extends JFrame {
 		// Decreasing the audio volume
 		m7.addActionListener(e -> {
 			if(isGameState() )
-			GameWindowTemp.setSaveState();
+				ProgramStateHandeler.setSaveState();
 		});
 
 		// add menu items to menu

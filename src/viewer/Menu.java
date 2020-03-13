@@ -109,9 +109,9 @@ public class Menu extends JPanel {
 	private void addButtons() {
 		//For start button
 		this.StartButton.addActionListener(e -> {
-			GameWindowTemp.setStateGame();
+			ProgramStateHandeler.setStateGame();
 			SwingUtilities.getWindowAncestor(Menu.this.menu).dispose();
-			new GameWindowTemp(level);
+			new ProgramStateHandeler(level);
 		});
 		//For leaderboard button
 		this.LeaderboardButton.addActionListener(e -> {
@@ -125,9 +125,9 @@ public class Menu extends JPanel {
 		});
 		// For saved game
 		this.SavedGameButton.addActionListener(e -> {
-			GameWindowTemp.setStateGame();
+			ProgramStateHandeler.setStateGame();
 			SwingUtilities.getWindowAncestor(Menu.this.menu).dispose();
-			new GameWindowTemp("saveLevel");
+			new ProgramStateHandeler("saveLevel");
 		});
 		//For quit button
 		this.QuitButton.addActionListener(e -> {

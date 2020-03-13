@@ -105,15 +105,15 @@ public class ReactionScreen extends JPanel {
 	@SuppressWarnings("unused")
 	private void addButtons() {
 		this.RestartButton.addActionListener(e -> {
-			GameWindowTemp.setStateGame();
+			ProgramStateHandeler.setStateGame();
 
 		});
 
 		this.MenuButton.addActionListener(e -> {
 			ReactionScreen.this.musicplayer.StopMusic();
-			GameWindowTemp.setStateMenu();
+			ProgramStateHandeler.setStateMenu();
 			SwingUtilities.getWindowAncestor(ReactionScreen.this.GameOver).dispose();
-			new GameWindowTemp(null);
+			new ProgramStateHandeler(null);
 		});
 
 		this.QuitButton.addActionListener(e -> {
