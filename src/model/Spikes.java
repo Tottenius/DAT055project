@@ -19,10 +19,10 @@ public class Spikes extends AbstractAsset {
 	private static final String pathUp = "src/assets/spikes.png";
 	private static final String pathDown = "src/assets/tile.png";
 	
-	private static Image imageDown = AssetImageHandler.loadImage(pathDown);
-	private static Image imageUp = AssetImageHandler.loadImage(pathUp);
+	private static final Image imageDown = AssetImageHandler.loadImage(pathDown);
+	private static final Image imageUp = AssetImageHandler.loadImage(pathUp);
 	
-	private static Map<Direction,Image> map = new HashMap<>();
+	private static final Map<Direction,Image> map = new HashMap<>();
 	
 	
 	private boolean up = true;
@@ -61,8 +61,7 @@ public class Spikes extends AbstractAsset {
 	}
 
 	@Override
-	public boolean hasDirections(final Direction d) {
-		return false;
+	public void hasDirections(final Direction d) {
 	}
 /**
  * Update the state of the spike, whether it's up or down.

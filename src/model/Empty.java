@@ -36,9 +36,8 @@ public class Empty extends AbstractAsset {
 	}
 
 	@Override
-	public boolean hasDirections(final Direction d) {
-		return false;
-	}
+	public void hasDirections(final Direction d) {
+    }
 
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {

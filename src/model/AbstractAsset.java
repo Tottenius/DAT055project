@@ -20,9 +20,8 @@ public abstract class AbstractAsset implements Asset {
 
 	/**
 	 * Constructor takes position that will set the class position and coords field.
-	 * 
-	 * @param position
-	 * 
+	 *
+     *
 	 */
 	public AbstractAsset(final int position) {
 		this.setPosition(position);
@@ -40,9 +39,8 @@ public abstract class AbstractAsset implements Asset {
 
 	/**
 	 * Sets the position for the asset
-	 * 
-	 * @param position
-	 */
+	 *
+     */
 	
 	// set the array location for a specified image
 	public void setPosition(final int position) {
@@ -60,9 +58,8 @@ public abstract class AbstractAsset implements Asset {
 
 	/**
 	 * Sets the coordinates given by the parameter for the asset.
-	 * 
-	 * @param coords
-	 */
+	 *
+     */
 	public void setCoords(final Point coords) {
 		this.coords = coords;
 	}

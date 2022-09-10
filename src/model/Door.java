@@ -16,7 +16,7 @@ import viewer.ProgramStateHandeler;
 public class Door extends AbstractAsset {
 
 	private static final String path = "src/assets/doordown.png";
-	private static Image image = AssetImageHandler.loadImage(path);
+	private static final Image image = AssetImageHandler.loadImage(path);
 
 	public Door(final int position) {
 		super(position);
@@ -37,7 +37,7 @@ public class Door extends AbstractAsset {
 
 		if (Treasure.getOpenedTreasures() >= ReadInWorld.numberOfTresures) {
 			// restart and new level doing
-			ProgramStateHandeler.setNextLevelState();
+			ProgramStateHandeler.setState(ProgramStateHandeler.STATE.NextLevel);
 			// player goes to next level!
 			return true;
 		}
@@ -50,8 +50,7 @@ public class Door extends AbstractAsset {
 	}
 
 	@Override
-	public boolean hasDirections(final Direction d) {
-		return false;
+	public void hasDirections(final Direction d) {
 	}
 
 	@Override

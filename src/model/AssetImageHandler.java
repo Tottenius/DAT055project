@@ -18,7 +18,6 @@ public class AssetImageHandler {
 	/**
 	 * Loads in an image, determined by the path parameter, 
 	 * The method also scales the image the gets loaded in such that all assets are the same size.
-	 * @param path
 	 * @return	An image
 	 */
 	public static Image loadImage(final String path) {

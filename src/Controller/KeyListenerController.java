@@ -30,8 +30,7 @@ public static boolean isKeyPressed() {
 }
 /**
 * Sets isKeyPressed to true or false.
-* @param isKeyPressed
-*/
+ */
 public static void setKeyPressed(final boolean isKeyPressed) {
 	KeyListenerController.isKeyPressed = isKeyPressed;
 }
@@ -39,7 +38,6 @@ public static void setKeyPressed(final boolean isKeyPressed) {
 /**
  * Give the direction. 
  *
- * @return The direction.
  */
 
 		@Override

@@ -35,15 +35,15 @@ public class SpikeController extends AssetController {
 		GamePanel.numberOfControllers++;
 	}
 
-	// Vi kör en timer istället för en busy wait
-	private Timer b = new Timer();
+	// Vi kï¿½r en timer istï¿½llet fï¿½r en busy wait
+	private final Timer b = new Timer();
 
-	private TimerTask c = new TimerTask() {
+	private final TimerTask c = new TimerTask() {
 		@Override
 		public void run() {
 			if (ProgramStateHandeler.isGameState()) {
 				
-				// Om det är en player på. Döda den
+				// Om det ï¿½r en player pï¿½. Dï¿½da den
 				if (SpikeController.this.movingAssets.get(SpikeController.this.position).killable()) {
 					((Player) SpikeController.this.movingAssets.get(SpikeController.this.position)).setAlive(false);
 				}

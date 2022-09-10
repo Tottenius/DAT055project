@@ -17,7 +17,6 @@ import viewer.ProgramStateHandeler;
  *
  */
 public class EnemyController extends AssetController {
-	private final Enemy enemy;
 
 	// True is going to the right
 	private boolean goingToTheRight = true;
@@ -31,9 +30,9 @@ public class EnemyController extends AssetController {
  */
 	public EnemyController(final int pos, final ReadInWorld world) {
 		super(pos, world);
-		this.enemy = new Enemy(pos);
-		this.movingAssets.add(pos, this.enemy);
-		// Kör timerTasken b efter 300ms
+		Enemy enemy = new Enemy(pos);
+		this.movingAssets.add(pos, enemy);
+		// Kï¿½r timerTasken b efter 300ms
 		GamePanel.numberOfControllers++;
 		// startController();
 	}
@@ -41,10 +40,10 @@ public class EnemyController extends AssetController {
 	private void moveDirection() {
 		// Right now just player pos
 		final int oldEnemyPos = super.getPosition();
-		int newEnemyPos = 0;
+		int newEnemyPos;
 		final AbstractAsset enemy = this.movingAssets.get(oldEnemyPos);
-		AbstractAsset newEnemyLocationMovingLayer = null;
-		AbstractAsset newEnemyLocationStationaryLayer = null;
+		AbstractAsset newEnemyLocationMovingLayer;
+		AbstractAsset newEnemyLocationStationaryLayer;
 
 		// Going to the right
 		if (this.goingToTheRight) {
@@ -75,9 +74,9 @@ public class EnemyController extends AssetController {
 		}
 	}
 
-	private Timer b = new Timer();
+	private final Timer b = new Timer();
 
-	private TimerTask c = new TimerTask() {
+	private final TimerTask c = new TimerTask() {
 		@Override
 		public void run() {
 

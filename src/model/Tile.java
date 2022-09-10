@@ -14,7 +14,7 @@ import viewer.GamePanel;
 public class Tile extends AbstractAsset {
 	
 	private static final String path = "src/assets/tile.png";
-	private static Image image = AssetImageHandler.loadImage(path);
+	private static final Image image = AssetImageHandler.loadImage(path);
 	
 	public Tile(final int position) {
 		super(position);
@@ -41,8 +41,7 @@ public class Tile extends AbstractAsset {
 	}
 
 	@Override
-	public boolean hasDirections(final Direction d) {
-		return false;
+	public void hasDirections(final Direction d) {
 	}
 
 	@Override

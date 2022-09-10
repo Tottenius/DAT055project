@@ -13,11 +13,6 @@ import viewer.GamePanel;
  */
 public interface Asset {
 
-	/**
-	 * get an image at an specified location in our asset array intractable
-	 * @return Image
-	 */
-	
 	//Image stigetImage();
 
 	// ------------------------------------------------ Asset Attributes ------------------------------------------------ \\
@@ -45,12 +40,10 @@ public interface Asset {
 	/**
 	 * Determines if an asset has multiple graphical states that can be drawn depending on different decided conditions.
 	 */
-	boolean hasDirections(Direction d);
+	void hasDirections(Direction d);
 	
 	/**
 	 * method for painting an asset at a specified panel.
-	 * @param g
-	 * @param gp
 	 */
 	// Animations
 	void paintAsset(Graphics g, GamePanel gp);
