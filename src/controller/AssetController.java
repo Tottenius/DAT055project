@@ -1,0 +1,99 @@
+package controller;
+
+import java.util.List;
+import model.AbstractAsset;
+import model.Empty;
+import model.ReadInWorld;
+/**
+ * An abstract class that is used by other the other controller classes. 
+ * It contains all movement methods and setters and getters for positions of the controllers
+ * 
+ * @author Group 10
+ * @version 2020-03-06
+ *
+ */
+public abstract class AssetController implements ControllerInterface {
+	// Gameboard
+	protected final List<AbstractAsset> assets;// = GamePanel.getWorld().getAssetList();
+	protected final List<AbstractAsset> movingAssets;
+	// Position
+	protected int position;
+/**
+ * Moves the asset, and it's controller to another position by swapping positions of
+ * two assets in the list with movingAssets
+ * @param ourAsset
+ * The asset we want to move
+ * @param assetTargetLocation
+ * The asset that we want to move to
+ */
+	protected void moveAsset( final AbstractAsset ourAsset, final AbstractAsset assetTargetLocation) {
+		// S�tt playerns positon till den nya positionen och ge objectet den nya
+		int oldPos = ourAsset.getPosition();
+		int newPos = assetTargetLocation.getPosition();
+		// positionen
+		this.movingAssets.set(newPos, ourAsset);
+		// S�tt objetet vi r�r oss till p� playerns gamla position och ge det playerns
+		// gamla position
+		this.movingAssets.set(oldPos, assetTargetLocation);
+		// S�tt controllerns position till den nya positionen
+		setPosition(newPos);
+		ourAsset.setPosition(newPos);
+		assetTargetLocation.setPosition(oldPos);
+	}
+	/**
+	 * Kills the asset and replaces it with an empty asset
+	 * @param oldPos
+	 * The current position of the asset that's killed
+	 */
+	protected void dieWhileMovingIntoDanger(final int oldPos) {
+		this.movingAssets.set(oldPos, new Empty(oldPos));
+	}
+	/**
+	 * Kills the target on the new position and replaces it with an Empty asset in the moving assets list
+	 * and then moves ourAsset to that location
+	 * @param newPos
+	 * The new position
+	 * @param ourAsset
+	 * The asset that kills the target at the new position
+	 */
+	protected void killAsset(final int newPos, final AbstractAsset ourAsset) {
+		int oldPos = ourAsset.getPosition();
+		// Den nya positionen
+		this.movingAssets.set(newPos, ourAsset);
+		ourAsset.setPosition(newPos);
+		// Den gamla positionen
+		this.movingAssets.set(oldPos, new Empty(oldPos));
+		setPosition(newPos);
+	}
+
+	/**
+	 * A getter for the position of the controller
+	 * @return 
+	 * Returns the position of the controller
+	 */
+	protected int getPosition() {
+		return this.position;
+	}
+	/**
+	 * A setter for the position of the controller
+	 * @param pos
+	 * Sets the new position of the controller
+	 */
+	protected void setPosition(final int pos) {
+		this.position = pos;
+	}
+	/**
+	 * A basic abstract constructor that contains all common attributes for all controllers
+	 * 
+	 * @param position
+	 * The position of the controller
+	 * @param world
+	 * The world in which the controller is present
+	 */
+	// Constructor
+	public AssetController(final int position, final ReadInWorld world) {
+		this.position = position;
+		this.assets = world.getAssetList();
+		this.movingAssets = world.getMovingAssets();
+	}
+}

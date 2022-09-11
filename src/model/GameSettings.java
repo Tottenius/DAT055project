@@ -11,21 +11,21 @@ public enum GameSettings {
 	private static final int HEIGHT = ASSETSIZE*24;
 	
 	/**
-	 * Gives the the games Width.
+	 * Gives the games Width.
 	 * @return Game width
 	 */
 	public static int getWidth() {
 		return WIDTH;
 	}
 	/**
-	 * Gives the the games Height.
+	 * Gives the games Height.
 	 * @return Game height
 	 */
 	public static int getHeight() {
 		return HEIGHT;
 	}
 /**
- * Gives the the games Assetsize.
+ * Gives the games Assetsize.
  * @return Assetsize
  */
 	public static int getAssetsize() {

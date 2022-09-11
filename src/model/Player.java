@@ -5,11 +5,11 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 
 /**
- * An class for a player asset.
+ * A class for a player asset.
  * 
  * @author Group 10
  *
@@ -21,14 +21,14 @@ public class Player extends AbstractAsset {
 	private static final String left = "src/assets/PlayerLeft.png";
 	private static final String right = "src/assets/PlayerRight.png";
 	
-	private static Image imageDown = AssetImageHandler.loadImage(down);
-	private static Image imageUp = AssetImageHandler.loadImage(up);
-	private static Image imageLeft = AssetImageHandler.loadImage(left);
-	private static Image imageRight = AssetImageHandler.loadImage(right);
+	private static final Image imageDown = AssetImageHandler.loadImage(down);
+	private static final Image imageUp = AssetImageHandler.loadImage(up);
+	private static final Image imageLeft = AssetImageHandler.loadImage(left);
+	private static final Image imageRight = AssetImageHandler.loadImage(right);
 	
 	private Image currentImage = null;
 	
-	private static Map<Direction,Image> map = new HashMap<>();
+	private static final Map<Direction,Image> map = new HashMap<>();
 
 	private boolean alive;
 	public Player(final int position) {
@@ -55,8 +55,7 @@ public class Player extends AbstractAsset {
 	}
 /**
  * Set the state of the player to alive. 
- * 
- * @param alive
+ *
  */
 	public void setAlive(final boolean alive) {
 		this.alive = alive;
@@ -83,10 +82,8 @@ public class Player extends AbstractAsset {
 	}
 
 	@Override
-	public boolean hasDirections(final Direction d) {
-		this.direction = d;
+	public void hasDirections(final Direction d) {
 		currentImage = map.get(d);
-		return true;
 	}
 
 	@Override

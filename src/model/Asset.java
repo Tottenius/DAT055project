@@ -1,29 +1,22 @@
 package model;
 
 import java.awt.Graphics;
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 
 /**
  * An interface for assets. Contains a method for retrieving an image.
- * Also has many diffrent attribute methods that can be giving to different assets to differentiate and classify them. 
+ * Also has many attribute methods that can be giving to different assets to differentiate and classify them.
  * 
  * @author Group 10
  *
  */
 public interface Asset {
 
-	/**
-	 * get an image at an specified location in our asset array intractable
-	 * @return Image
-	 */
-	
-	//Image stigetImage();
-
 	// ------------------------------------------------ Asset Attributes ------------------------------------------------ \\
 	
 	/**
-	 * Whether or not an asset is killable.
+	 * Whether an asset is killable.
 	 */
 	boolean killable();
 
@@ -45,12 +38,10 @@ public interface Asset {
 	/**
 	 * Determines if an asset has multiple graphical states that can be drawn depending on different decided conditions.
 	 */
-	boolean hasDirections(Direction d);
+	void hasDirections(Direction d);
 	
 	/**
 	 * method for painting an asset at a specified panel.
-	 * @param g
-	 * @param gp
 	 */
 	// Animations
 	void paintAsset(Graphics g, GamePanel gp);

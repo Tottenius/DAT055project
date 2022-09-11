@@ -14,9 +14,8 @@ public class StopWatch {
 
 	/**
 	 * This method starts the timer, can also be used to reset the timer
-	 * 
-	 * @return Nothing.
-	 */
+	 *
+     */
 	public static void start() {
 
 		Start_time = System.currentTimeMillis();

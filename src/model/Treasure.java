@@ -5,10 +5,10 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 /**
- * An class for a TreasureChest asset.
+ * A class for a TreasureChest asset.
  * 
  * @author Group 10
  *
@@ -21,10 +21,10 @@ public class Treasure extends AbstractAsset {
 	private final static String ImageOpenedPath = "src/assets/openedtreasure.png";
 	
 	
-	private static Image imageClosed = AssetImageHandler.loadImage(ImageClosedPath);
-	private static Image imageOpened= AssetImageHandler.loadImage(ImageOpenedPath);
+	private static final Image imageClosed = AssetImageHandler.loadImage(ImageClosedPath);
+	private static final Image imageOpened= AssetImageHandler.loadImage(ImageOpenedPath);
 	
-	private static Map<Direction,Image> map = new HashMap<>();
+	private static final Map<Direction,Image> map = new HashMap<>();
 	
 	
 	// Open bool
@@ -45,14 +45,6 @@ public class Treasure extends AbstractAsset {
 	public void openTreasure() {
 		openedTreasures++;
 		this.isOpen = true;
-	}
-
-	public void closeTreasure() {
-		this.isOpen = false;
-	}
-
-	public boolean treasureIsOpen() {
-		return this.isOpen;
 	}
 
 	@Override
@@ -80,8 +72,7 @@ public class Treasure extends AbstractAsset {
 	}
 
 	@Override
-	public boolean hasDirections(final Direction d) {
-		return false;
+	public void hasDirections(final Direction d) {
 	}
 
 	@Override

@@ -3,10 +3,10 @@ package model;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 /**
- * An class for an enemy asset
+ * A class for an enemy asset
  * 
  * @author Group 10
  *
@@ -14,7 +14,7 @@ import viewer.GamePanel;
 public class Enemy extends AbstractAsset {
 
     private static final String path = "src/assets/headcrabMonsterAsset.png";
-    private static Image image = AssetImageHandler.loadImage(path);
+    private static final Image image = AssetImageHandler.loadImage(path);
 
     public Enemy(final int position) {
         super(position);
@@ -41,8 +41,7 @@ public class Enemy extends AbstractAsset {
     }
 
     @Override
-    public boolean hasDirections(final Direction d) {
-        return false;
+    public void hasDirections(final Direction d) {
     }
 
     @Override

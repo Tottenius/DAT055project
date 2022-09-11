@@ -2,10 +2,10 @@ package model;
 
 import java.awt.Graphics;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 /**
- * An class to make emptiness concrete. Can be used to have empty assets or multible layers of assets.
+ * A class to make emptiness concrete. Can be used to have empty assets or multible layers of assets.
  * 
  * @author Group 10
  *
@@ -36,9 +36,8 @@ public class Empty extends AbstractAsset {
 	}
 
 	@Override
-	public boolean hasDirections(final Direction d) {
-		return false;
-	}
+	public void hasDirections(final Direction d) {
+    }
 
 	@Override
 	public void paintAsset(final Graphics g, final GamePanel gp) {

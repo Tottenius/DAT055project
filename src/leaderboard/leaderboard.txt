@@ -1,4 +1,0 @@
-Name: hello 	 Tries: 3 	 Time it took to beat the game: 18s
-Name: dadad 	 Tries: 3 	 Time it took to beat the game: 21s
-Name: fawf 	 Tries: 2 	 Time it took to beat the game: 65s
-Name: Tor 	 Tries: 3 	 Time it took to beat the game: 205s
