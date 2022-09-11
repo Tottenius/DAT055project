@@ -10,14 +10,9 @@ import viewer.ProgramStateHandeler;
  * @author anton
  */
 public class Main {
-    public static boolean isRunning;
-    @SuppressWarnings("unused")
     public static void main(final String[] args) {
 
-        SwingUtilities.invokeLater(() -> {
-            isRunning = true;
-            new ProgramStateHandeler("level1");
-        });
+        SwingUtilities.invokeLater(() -> new ProgramStateHandeler("level1"));
     }
 }
 

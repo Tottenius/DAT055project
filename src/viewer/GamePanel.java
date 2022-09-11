@@ -9,7 +9,7 @@ import java.util.TimerTask;
 import java.util.Timer;
 import javax.swing.JPanel;
 
-import Controller.KeyListenerController;
+import controller.KeyListenerController;
 import model.AbstractAsset;
 import model.GameSettings;
 import model.ReadInWorld;
@@ -27,8 +27,6 @@ public class GamePanel extends JPanel {
     public static volatile int numberOfControllers = 0;
     // This window
     final GamePanel gamePanel = this;
-    // Level read
-    public static boolean levelRead = false;
     // Read in level
     private ReadInWorld world;
     // Window size
@@ -39,19 +37,13 @@ public class GamePanel extends JPanel {
     // Serial
     @Serial
     private static final long serialVersionUID = 1L;
-    // general counter for different purposes
-    int counter = 0;
-    // list with assets
-    public List<AbstractAsset> assets;
     // Starting position
     private final Point pos = new Point(0, 0);
     // Current level
     String CurrentLevel;
 
     private boolean slowTime = false;
-    private long timeToBeatGame;
-    private static String profileName = "";
-    private int HowManyTries;
+    private final int HowManyTries;
 
 
     private void initWorld(final Graphics g) {
@@ -109,10 +101,9 @@ public class GamePanel extends JPanel {
     /**
      * Constructor for the GamePanel class. Sets the currentLevel that shall be loaded in and the Profile name for the session.
      */
-    public GamePanel(final String CurrentLevel, final String profileName) {
+    public GamePanel(final String CurrentLevel) {
 
         this.HowManyTries = 1;
-        GamePanel.profileName = profileName;
 
         // read in and build level
         this.CurrentLevel = CurrentLevel;
@@ -185,5 +176,13 @@ public class GamePanel extends JPanel {
                 }
             }
         }, firstTime, period);
+    }
+
+    public static synchronized void incrementNumberOfControllers() {
+        numberOfControllers++;
+    }
+
+    public static synchronized void decrementNumberOfControllers() {
+        numberOfControllers--;
     }
 }

@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.util.List;
 import model.AbstractAsset;
@@ -18,12 +18,8 @@ public abstract class AssetController implements ControllerInterface {
 	protected final List<AbstractAsset> movingAssets;
 	// Position
 	protected int position;
-	// Direction
-	protected Direction direction;
-	// world
-	protected final ReadInWorld world;
 /**
- * Moves the asset and it's controller to another position by swapping positions of 
+ * Moves the asset, and it's controller to another position by swapping positions of
  * two assets in the list with movingAssets
  * @param ourAsset
  * The asset we want to move
@@ -45,7 +41,7 @@ public abstract class AssetController implements ControllerInterface {
 		assetTargetLocation.setPosition(oldPos);
 	}
 	/**
-	 * Kills the the asset and replaces it with an empty asset
+	 * Kills the asset and replaces it with an empty asset
 	 * @param oldPos
 	 * The current position of the asset that's killed
 	 */
@@ -69,17 +65,7 @@ public abstract class AssetController implements ControllerInterface {
 		this.movingAssets.set(oldPos, new Empty(oldPos));
 		setPosition(newPos);
 	}
-	/**
-	 * Changes the asset at a position in the non moving asset's list 
-	 * @param pos
-	 * The position where we change the asset
-	 * @param newAsset
-	 * The new asset we want on that position
-	 */
-	protected void changeAsset(final int pos, final AbstractAsset newAsset) {
-		this.assets.set(pos, newAsset);
-		newAsset.setPosition(pos);
-	}
+
 	/**
 	 * A getter for the position of the controller
 	 * @return 
@@ -107,7 +93,6 @@ public abstract class AssetController implements ControllerInterface {
 	// Constructor
 	public AssetController(final int position, final ReadInWorld world) {
 		this.position = position;
-		this.world = world;
 		this.assets = world.getAssetList();
 		this.movingAssets = world.getMovingAssets();
 	}

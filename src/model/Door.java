@@ -3,12 +3,12 @@ package model;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 import viewer.ProgramStateHandeler;
 
 /**
- * An class for a door asset
+ * A class for a door asset
  * 
  * @author Group 10
  *

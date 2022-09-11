@@ -1,8 +1,7 @@
-package Controller;
+package controller;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import Controller.Direction;
 
 /**
  * Class that utilizes keylistener for handeling keyinputs.

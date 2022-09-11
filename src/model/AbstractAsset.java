@@ -1,7 +1,7 @@
 package model;
 
 import java.awt.Point;
-import Controller.Direction;
+import lombok.Getter;
 
 /**
  * An abstract class utilized by all asset classes. 
@@ -13,10 +13,10 @@ import Controller.Direction;
  */
 
 public abstract class AbstractAsset implements Asset {
-
+	@Getter
 	private int position;
+	@Getter
 	private Point coords;
-	protected Direction direction;
 
 	/**
 	 * Constructor takes position that will set the class position and coords field.
@@ -26,15 +26,6 @@ public abstract class AbstractAsset implements Asset {
 	public AbstractAsset(final int position) {
 		this.setPosition(position);
 		this.setCoords();
-	}
-	
-	/**
-	 * Get the array location for a specified image
-	 * 
-	 * @return the position for the asset
-	 */
-	public int getPosition() {
-		return this.position;
 	}
 
 	/**
@@ -48,21 +39,7 @@ public abstract class AbstractAsset implements Asset {
 		this.coords = new Point(position * GameSettings.getAssetsize() % GameSettings.getWidth(),
 				position * GameSettings.getAssetsize() / GameSettings.getWidth() * GameSettings.getAssetsize());
 	}
-/**
- * 
- * @return the coordinates for the asset
- */
-	public Point getCoords() {
-		return this.coords;
-	}
 
-	/**
-	 * Sets the coordinates given by the parameter for the asset.
-	 *
-     */
-	public void setCoords(final Point coords) {
-		this.coords = coords;
-	}
 
 	/**
 	 * Set the coords from the assets position.

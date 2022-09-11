@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 /**
  * An interface for all controllers
  * @author Group 10

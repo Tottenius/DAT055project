@@ -3,10 +3,10 @@ package model;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 /**
- * An class for an enemy asset
+ * A class for an enemy asset
  * 
  * @author Group 10
  *

@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.util.Timer;
 
@@ -31,7 +31,7 @@ public class PlayerController extends AssetController {
         super(pos, world);
         this.player = new Player(pos);
         this.movingAssets.add(pos, this.player);
-        GamePanel.numberOfControllers++;
+        GamePanel.incrementNumberOfControllers();
     }
 
     private void moveDirection() {
@@ -78,7 +78,7 @@ public class PlayerController extends AssetController {
 
             } else if (!PlayerController.this.player.isAlive()) {
                 ProgramStateHandeler.setState(ProgramStateHandeler.STATE.DEAD);
-                GamePanel.numberOfControllers--;
+                GamePanel.decrementNumberOfControllers();
                 this.cancel();
             }
         }

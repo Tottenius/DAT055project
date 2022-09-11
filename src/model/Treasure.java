@@ -5,10 +5,10 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 /**
- * An class for a TreasureChest asset.
+ * A class for a TreasureChest asset.
  * 
  * @author Group 10
  *
@@ -45,14 +45,6 @@ public class Treasure extends AbstractAsset {
 	public void openTreasure() {
 		openedTreasures++;
 		this.isOpen = true;
-	}
-
-	public void closeTreasure() {
-		this.isOpen = false;
-	}
-
-	public boolean treasureIsOpen() {
-		return this.isOpen;
 	}
 
 	@Override

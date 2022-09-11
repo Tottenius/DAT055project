@@ -5,7 +5,7 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 
 /**

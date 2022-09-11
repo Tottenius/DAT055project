@@ -2,10 +2,10 @@ package model;
 
 import java.awt.Graphics;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 /**
- * An class to make emptiness concrete. Can be used to have empty assets or multible layers of assets.
+ * A class to make emptiness concrete. Can be used to have empty assets or multible layers of assets.
  * 
  * @author Group 10
  *

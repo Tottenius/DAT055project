@@ -106,7 +106,6 @@ public class Menu extends JPanel {
 
         //For quit button
         this.QuitButton.addActionListener(e -> {
-            Main.isRunning = false;
             System.exit(0);
         });
 

@@ -5,11 +5,11 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 
 /**
- * An class for a player asset.
+ * A class for a player asset.
  * 
  * @author Group 10
  *
@@ -83,7 +83,6 @@ public class Player extends AbstractAsset {
 
 	@Override
 	public void hasDirections(final Direction d) {
-		this.direction = d;
 		currentImage = map.get(d);
 	}
 

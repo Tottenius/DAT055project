@@ -45,7 +45,6 @@ public class ReactionScreen extends JPanel {
     /**
      * Draws the graphical part of the JPanel, can read in an image and or draw a string of text that can be visualized on the screen.
      *
-     * @param
      */
     public void render(final Graphics g) {
 

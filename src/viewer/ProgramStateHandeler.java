@@ -36,7 +36,7 @@ public class ProgramStateHandeler extends JFrame {
 
     private final JMenu jmenu = new JMenu("Help");
 
-    static JMenuItem m1, m2, m3, m4;
+    static JMenuItem m1, m2, m4;
 
     private final ProgramStateHandeler window = this;
 
@@ -52,7 +52,7 @@ public class ProgramStateHandeler extends JFrame {
             menu = new Menu(getCurrentLevel());
             this.add(menu);
         } else if (state == STATE.GAME) {
-            this.add(new GamePanel(getCurrentLevel(), "Hello"));
+            this.add(new GamePanel(getCurrentLevel()));
         }
 
         // Adding menubar
@@ -148,12 +148,4 @@ public class ProgramStateHandeler extends JFrame {
         return state == STATE.GAME;
     }
 
-    /**
-     * Check whether the state is NextLevelState.
-     *
-     * @return true if state is NextLevelState.
-     */
-    public static boolean isNextLevelState() {
-        return state == STATE.NextLevel;
-    }
 }

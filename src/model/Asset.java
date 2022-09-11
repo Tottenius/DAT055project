@@ -1,24 +1,22 @@
 package model;
 
 import java.awt.Graphics;
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 
 /**
  * An interface for assets. Contains a method for retrieving an image.
- * Also has many diffrent attribute methods that can be giving to different assets to differentiate and classify them. 
+ * Also has many attribute methods that can be giving to different assets to differentiate and classify them.
  * 
  * @author Group 10
  *
  */
 public interface Asset {
 
-	//Image stigetImage();
-
 	// ------------------------------------------------ Asset Attributes ------------------------------------------------ \\
 	
 	/**
-	 * Whether or not an asset is killable.
+	 * Whether an asset is killable.
 	 */
 	boolean killable();
 

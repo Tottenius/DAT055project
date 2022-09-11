@@ -3,7 +3,7 @@ package model;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import Controller.Direction;
+import controller.Direction;
 import viewer.GamePanel;
 /**
  * A class for a Tile asset.
